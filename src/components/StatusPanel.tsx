@@ -57,7 +57,7 @@ export function StatusPanel({ assessment: a, todayOverride, todayInvalid, trips 
         </time>
         {todayOverride ? " (from the today parameter)" : ""}.
       </p>
-      <p className="sr-only" data-testid="today-override">{todayOverride ? "yes" : "no"}</p>
+      <p hidden aria-hidden="true" data-testid="today-override">{todayOverride ? "yes" : "no"}</p>
 
       {todayInvalid ? (
         <p data-testid="today-error" role="alert" className="rounded-xl bg-warn-wash p-3 text-sm text-warn">
@@ -86,8 +86,8 @@ export function StatusPanel({ assessment: a, todayOverride, todayInvalid, trips 
               hint={a.latestExit ? longDate(a.latestExit) : "Not allowed to stay"}
               wide
             />
-            <Tile label="In the Schengen area on this date" testId="present-status" value={a.present ? "in" : "out"} />
-            <Tile label="Overstay on this date" testId="overstay-status" value={a.overstay ? "overstay" : "ok"} />
+            <Tile label="In the Schengen area on this date" testId="present-status" value={a.present ? "Inside" : "Outside"} />
+            <Tile label="Overstay on this date" testId="overstay-status" value={a.overstay ? "Overstay" : "No overstay"} />
           </dl>
         </div>
       </div>

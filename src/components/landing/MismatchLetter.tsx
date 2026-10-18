@@ -13,14 +13,14 @@ const LETTER = [
   "Under Article 52 of Regulation (EU) 2017/2226 I request",
   "rectification of my Entry/Exit System record.",
   "My exit on 30 June was not recorded. My passport stamps",
-  "show 56 days used, leaving 34 — not the 90 shown.",
+  "show 56 days used, leaving 34 — not the 90 used it shows.",
   "Please correct the record within the legal time limit.",
 ];
 
 const STEPS = [
-  ["01", "Your count", "Rebuilt from your own trips: 34 days left."],
-  ["02", "The border's count", "The EES record says 90. Someone is wrong."],
-  ["03", "The reason", "A missing exit on 30 June explains the gap."],
+  ["01", "Your count", "Rebuilt from your own trips: 56 used, 34 left."],
+  ["02", "The border's count", "The EES record says 90 used, 0 left. Someone is wrong."],
+  ["03", "The reason", "A missing exit on 30 June explains the 34-day gap."],
   ["04", "The fix", "A rectification request, written for you."],
 ];
 
@@ -41,11 +41,11 @@ export default function MismatchLetter() {
         scrollTrigger: { trigger: q(".ml-stage")[0], start: "top top+=72", end: "+=1600", pin: true, scrub: 0.6, anticipatePin: 1 },
       });
       const step = (i: number) => {
-        tl.to(q(".ml-step"), { opacity: 0.45, duration: 0.2 }, `s${i}`)
+        tl.to(q(".ml-step"), { opacity: 0.75, duration: 0.2 }, `s${i}`)
           .to(q(".ml-step")[i], { opacity: 1, duration: 0.2 }, `s${i}`)
           .to(q(".ml-bar"), { scaleY: (i + 1) / 4, duration: 0.4 }, `s${i}`);
       };
-      tl.set(q(".ml-step"), { opacity: 0.45 }).set(q(".ml-bar"), { scaleY: 0 });
+      tl.set(q(".ml-step"), { opacity: 0.75 }).set(q(".ml-bar"), { scaleY: 0 });
       step(0);
       tl.from(q(".ml-ours"), { y: 40, opacity: 0, duration: 0.6 }, "s0");
       step(1);
@@ -79,25 +79,27 @@ export default function MismatchLetter() {
                 </li>
               ))}
             </ol>
-            <p className="mt-4 text-lg text-ink-hushed lg:hidden">Two travellers, same trips: one was told 34 days, the other 90. Ninety shows you which number is right and why.</p>
+            <p className="mt-4 text-lg text-ink-hushed lg:hidden">Same trips, two counts: you used 56 days, the EES says 90. Ninety shows you which number is right and why.</p>
           </div>
           <div className="grid items-start gap-6 lg:col-span-8 lg:grid-cols-2">
             <div className="grain relative rounded-3xl bg-paper-warm p-6 md:p-8">
               <div className="grid grid-cols-2 gap-4">
                 <div className="ml-ours card-soft p-5">
                   <p className="text-xs text-ink-hushed">Ninety</p>
-                  <p className="mt-1 font-display text-5xl font-semibold tnum">34</p>
-                  <p className="text-sm text-ink-hushed">days left</p>
+                  <p className="mt-1 font-display text-5xl font-semibold tnum">56</p>
+                  <p className="text-sm text-ink-hushed">days used</p>
+                  <p className="mt-2 text-xs font-medium text-ok">34 left</p>
                 </div>
                 <div className="ml-ees rounded-3xl bg-spring-wash p-5">
                   <p className="flex items-center gap-1 text-xs text-ink-hushed"><Landmark size={12} aria-hidden /> EES record</p>
                   <p className="mt-1 font-display text-5xl font-semibold tnum">90</p>
-                  <p className="text-sm text-ink-hushed">days left</p>
+                  <p className="text-sm text-ink-hushed">days used</p>
+                  <p className="mt-2 text-xs font-medium text-risk">0 left</p>
                 </div>
               </div>
               <div className="ml-alert mt-4 flex items-start gap-3 rounded-2xl bg-risk-wash p-4 text-sm">
                 <TriangleAlert size={18} className="mt-0.5 shrink-0 text-risk" aria-hidden />
-                <span><strong className="text-risk">56 days apart.</strong> Likely: your exit on 30 June wasn&apos;t recorded.</span>
+                <span><strong className="text-risk">34 days apart.</strong> Likely: your exit on 30 June wasn&apos;t recorded.</span>
               </div>
             </div>
             <div className="ml-letter relative overflow-hidden rounded-2xl bg-paper shadow-pop">

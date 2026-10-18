@@ -86,7 +86,7 @@ export default function Hero() {
             <FlightPath width={420} height={160} color="#17332D" duration={1.8} className="pointer-events-none absolute -left-10 top-[30%] z-0 hidden w-[120%] -rotate-12 sm:block" />
             <motion.div style={{ y: phoneY }} className="relative z-10"><PhoneDemo /></motion.div>
             <FloatCard className="left-[-18%] top-[-2%]" delay={0.6} float={0} depth={1.2} p={p}>
-              <span className="h-2 w-2 rounded-full bg-risk" /> <span>EES says <b className="tnum">90 days</b></span>
+              <span className="h-2 w-2 rounded-full bg-risk" /> <span>EES says <b className="tnum">90 used</b></span>
             </FloatCard>
             <FloatCard className="right-[-10%] top-[46%]" delay={1.0} float={1} depth={0.8} p={p}>
               <FileText size={14} /> <span>Letter ready</span>

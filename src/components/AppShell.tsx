@@ -81,6 +81,10 @@ export function AppShell() {
             className="focus-ring hidden h-11 shrink-0 items-center gap-2 rounded-full bg-paper px-4 text-sm font-medium shadow-card hover:shadow-lift sm:inline-flex press">
             <Scale className="size-4" aria-hidden="true" /> Calculator parity
           </Link>
+          <nav aria-label="Tools" className="hidden shrink-0 gap-2 sm:flex">
+            <Link href="/ees" data-testid="nav-ees" className="press focus-ring inline-flex h-11 items-center rounded-full bg-paper px-4 text-sm font-medium shadow-card">EES check</Link>
+            <Link href="/letter" data-testid="nav-letter" className="press focus-ring inline-flex h-11 items-center rounded-full bg-paper px-4 text-sm font-medium shadow-card">Article 52 letter</Link>
+          </nav>
         </header>
 
         {!ready ? (
@@ -118,6 +122,10 @@ export function AppShell() {
 
         <p className="mt-10 text-xs text-ink-hushed sm:hidden">
           <Link href="/parity" className="underline underline-offset-4">Calculator parity</Link>
+          {" · "}
+          <Link href="/ees" className="underline underline-offset-4">EES check</Link>
+          {" · "}
+          <Link href="/letter" className="underline underline-offset-4">Article 52 letter</Link>
         </p>
         <footer className="mt-6 text-xs text-ink-hushed">
           Matches the European Commission&apos;s short-stay calculator. Not an official decision. Trips are stored only in this browser.

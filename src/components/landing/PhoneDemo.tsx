@@ -138,7 +138,7 @@ export function PhoneDemo() {
                   <div className="rounded-xl bg-white/10 py-1.5"><div className="font-display text-xl font-semibold">90</div><div className="text-[10px] opacity-70">EES says used</div></div>
                   <div className="rounded-xl bg-solar py-1.5 text-ink"><div className="font-display text-xl font-semibold">56</div><div className="text-[10px] opacity-70">You actually used</div></div>
                 </div>
-                <div className="mt-2 text-[11px] opacity-80">Correction letter ready · Art. 52</div>
+                <div className="mt-2 text-[11px] opacity-80">34-day gap · Art. 52 letter ready</div>
               </motion.div>
             )}
           </AnimatePresence>
