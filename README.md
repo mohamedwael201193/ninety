@@ -1,53 +1,98 @@
 # Ninety
 
-How many Schengen days do you really have left?
+**How many Schengen days do you really have left — and does the border agree?**
 
-Ninety rebuilds the short-stay count — **90 days in any 180-day period** — from the trips you enter. The entry day and the exit day both count. It tells you how many days are already used, how many are left on a given date, the latest legal exit for a planned trip, and whether a stay has gone over 90.
+Ninety counts your Schengen short-stay days from your own trips, checks that count against the EU Entry/Exit System (EES), and when the two disagree, drafts the correction request the law gives you a right to send.
 
-It is aimed at travellers who are not EU residents and who need the same figure a border check uses, including when an official record looks wrong. `/ees` compares that count with an Entry/Exit System days-used figure and, when supplied, its entry and exit records. `/letter` drafts a request to rectify those data under Article 52 of Regulation (EU) 2017/2226.
+**Live:** https://ninety-coral.vercel.app
 
-This is a helping tool only. It does not grant a right to stay. The same limit is stated by the European Commission for its own calculator.
+---
 
-## Live app
+## The 90/180 rule
 
-https://ninety-coral.vercel.app
+A non-EU traveller may stay in the Schengen area for **at most 90 days in any rolling 180-day period**. On any date you look back 180 days (that day included) and count every day you were present. Entry day and exit day both count.
 
-Pull requests deploy a Vercel preview. Open `/?today=YYYY-MM-DD` to pin “today” so a check does not depend on the calendar. Trip dates are typed as `YYYY-MM-DD`.
+Ninety rebuilds that count from the trips you enter and tells you:
 
-## How to run
+- days used and days left on any date,
+- the latest legal exit for a stay in progress,
+- whether a **planned trip** fits, and if not, how many days it overruns,
+- exactly when and by how much a past stay went over 90.
+
+Trips are typed as `YYYY-MM-DD` (other formats such as `MM/DD/YYYY` are rejected with a clear message), overlapping trips are flagged, and everything is stored only in your browser — no account, no server.
+
+## EES reconciliation (`/ees`)
+
+The Entry/Exit System now records every crossing and shows a days-used figure. When an exit is not recorded, that figure can be badly wrong — and it is the border's number, not yours, that decides whether you are let in.
+
+Enter the EES figure (and, if you have them, the EES entry/exit records — plain `ENTRY EXIT` lines or `Entry …` / `Exit …` lines). Ninety:
+
+- shows both counts side by side and the gap between them,
+- names the likely cause (missing exit, missing entry, exit dates that disagree, or an EES figure that contradicts its own records),
+- lists the exact days that differ, grouped into ranges.
+
+## The Article 52 letter (`/letter`)
+
+Article 52 of Regulation (EU) 2017/2226 lets you ask the competent authority of any Member State to rectify, complete or erase your EES data. Ninety drafts that request in your own words — first person, with your details, the two counts and the exact differing days — and cites the reply deadlines in Article 52(1)–(4). Copy it or download it as a PDF (accented names included), then review, sign and send it yourself.
+
+## Parity with the European Commission calculator — 14/14 (`/parity`)
+
+A day-count tool is only useful if it gives the official answer. `/parity` fetches the European Commission's own short-stay calculator script **live**, runs 14 fixed scenarios through both it and Ninety's engine, and shows the result for each one: Ninety's count, the Commission calculator's count, and whether they match. The scenarios cover the Commission manual's worked examples plus edge cases — exactly 90 days, day 91, re-entry after a full 90, same-day stays and turnarounds, and a date just after a clock change.
+
+Current result: **14/14 match**. If the Commission script cannot be loaded, the page says "couldn't verify" rather than claiming a match.
+
+## Tested with TestSprite
+
+`testsprite_tests/` holds a 10-test end-to-end suite that TestSprite runs in the cloud against the Vercel deployment:
+
+- example trips give the expected days used; adding, editing, and reloading trips,
+- an exit before entry is rejected,
+- deleting a trip can be undone,
+- a planned trip gets a verdict,
+- the EES comparison reports the gap,
+- the Article 52 letter is drafted,
+- the parity page shows 14/14 with all 14 rows in the table.
+
+It catches real bugs, not just happy paths:
+
+- **The parity table:** the parity page used to show only a bare score. It was rebuilt as a table of every scenario with both counts and the match, and the suite now fails if the score is not 14/14 or the table does not have all 14 rows.
+- **The pinned story blocking the planned-trip button:** after adding trips, the pinned scroll section on the home page had measured its position before the page grew, and at 1280 px wide it sat over the "Check planned trip" button so the click never landed. TestSprite's run failed on it; the section now re-measures whenever the page height changes.
+- **The undo toast** disappeared before a real user (or a test) could press Undo; it now stays until dismissed.
+
+## Run it locally
+
+Requires Node.js 20+.
 
 ```bash
 npm install
-npm test
-npm run dev
+npm run dev        # http://localhost:3000
 ```
 
-`npm run build` produces the production build Vercel deploys. Trips stay in `localStorage` in the browser (`ninety.trips.v1`). There is no database and no account.
+Open `/?today=YYYY-MM-DD` to pin "today" so results do not depend on the calendar.
 
-## The 90/180 rules
+```bash
+npm test           # unit tests (engine, parity against the live Commission script, EES, letter)
+npx tsc --noEmit   # type check
+npm run lint       # eslint
+npm run build      # production build
+```
 
-The engine follows the European Commission’s short-stay calculator and its user manual:
+Run the TestSprite suite with the CLI:
 
-- Calculator (public JavaScript): https://ec.europa.eu/assets/home/visa-calculator/calculator.htm
-- User manual: https://ec.europa.eu/assets/home/visa-calculator/docs/short_stay_schengen_calculator_user_manual_en.pdf
+```bash
+npm i -g @testsprite/testsprite-cli
+export TESTSPRITE_API_KEY=...   # never commit it
+testsprite test run --all --project <project-id> --wait
+```
 
-Confirmed from that script (`daysBetween`, `leggInndager`, `Beregn2`, `BeregnControl`, `BeregnVisa`) and from the manual’s worked examples:
+## Stack
 
-- The date of entry is the first day of stay and the date of exit is the last day. Both count.
-- A calendar day covered twice (including leaving and re-entering on the same day) counts once.
-- For every day of stay, look back over the 180 calendar days ending that day, inclusive. The total presence in that window must not exceed 90.
-- Days are calendar dates. The engine does not convert a trip through a local timezone, so a daylight-saving change cannot add or drop a day.
+Next.js 15 (App Router), React 19, Tailwind CSS v4, framer-motion, GSAP ScrollTrigger and Lenis for motion, react-hook-form + zod for forms, pdf-lib for the letter, Vitest for tests. Deployed on Vercel.
 
-`/parity` loads the Commission page, runs the published script on a fixed set of scenarios, and compares it with Ninety. The page shows `N/N match` when every scenario agrees, and lists mismatches when they do not. If the reference cannot be loaded or executed, the page says **couldn't verify** and does not claim a match.
+## Disclaimer
 
-The calculator, and Ninety, do not apply a visa sticker that authorises fewer than 90 days, and they do not apply bilateral visa-waiver extensions under Article 20(2) of the Convention implementing the Schengen Agreement. Stays in Cyprus, Ireland, and the United Kingdom are outside the Schengen area and should not be entered. Stays in Iceland, Liechtenstein, Norway, and Switzerland do count.
+Ninety is a helping tool. It is not legal advice, it is not affiliated with the European Union, and its result is not a decision by a border authority.
 
-## Test suite
+---
 
-### Unit tests
-
-`npm test` covers the date arithmetic and the 90/180 engine (both endpoint days, the rolling 180-day window, days used, days left, the latest legal exit, overstay, an open trip closed on the reference day, and a planned trip), trip storage parsing, a live parity run against the Commission script on the fixed scenarios, EES reconciliation (figure-only gaps, a likely missing exit, a likely missing entry, disagreeing exit dates, and a figure that does not match the EES records), and the Article 52 letter, including accented names read back from the PDF. The parity test fails if the reference cannot be loaded rather than reporting a match.
-
-### TestSprite
-
-Placeholder. The TestSprite 3.0 suite is not generated yet. This section will say what that suite covers once it is created against the live app and attached to this repository’s pull requests.
+Built by **devmo**.
