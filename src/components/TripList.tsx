@@ -1,11 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Pencil, Plane, Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { stayLength } from "@/lib/schengen/engine";
 import type { IsoDate } from "@/lib/schengen/dates";
 import type { Trip } from "@/lib/trips";
 import { longDate } from "./dashboard/format";
+import { EmptyArt } from "./fx/EmptyArt";
 
 type TripListProps = {
   trips: Trip[];
@@ -19,18 +20,19 @@ type TripListProps = {
 export function TripList({ trips, today, onEdit, onDelete, onAdd, onExample }: TripListProps) {
   if (trips.length === 0) {
     return (
-      <div data-testid="trip-empty" className="rounded-3xl border border-dashed border-line p-8 text-center">
-        <Plane className="mx-auto size-8 text-ink-faint" aria-hidden="true" />
-        <p className="mt-3 font-display text-xl font-medium">No trips yet.</p>
-        <p className="mt-1 text-sm text-ink-hushed">Add your first trip — or try an example.</p>
-        <div className="mt-5 flex flex-col justify-center gap-2 sm:flex-row">
+      <div data-testid="trip-empty" className="card-soft relative overflow-hidden p-8 text-center">
+        <div aria-hidden className="mesh pointer-events-none absolute inset-0 opacity-60" />
+        <div className="relative"><EmptyArt /></div>
+        <p className="relative mt-3 font-display text-xl font-medium">No trips yet.</p>
+        <p className="relative mt-1 text-sm text-ink-hushed">Add your first trip — or try an example.</p>
+        <div className="relative mt-5 flex flex-col justify-center gap-2 sm:flex-row">
           {onAdd ? (
-            <button type="button" onClick={onAdd} className="focus-ring h-12 rounded-full bg-solar px-6 font-medium hover:bg-solar-deep">
+            <button type="button" onClick={onAdd} className="press focus-ring h-12 rounded-full bg-solar px-6 font-medium hover:bg-solar-deep">
               Add a trip
             </button>
           ) : null}
           {onExample ? (
-            <button type="button" data-testid="trip-example" onClick={onExample} className="focus-ring h-12 rounded-full px-5 hover:bg-paper-sunk">
+            <button type="button" data-testid="trip-example" onClick={onExample} className="press focus-ring h-12 rounded-full bg-white/70 px-5 shadow-card hover:bg-paper-sunk">
               Try an example
             </button>
           ) : null}
@@ -42,7 +44,7 @@ export function TripList({ trips, today, onEdit, onDelete, onAdd, onExample }: T
   const ordered = [...trips].sort((a, b) => a.entry.localeCompare(b.entry) || a.id.localeCompare(b.id));
 
   return (
-    <ul data-testid="trip-list" className="divide-y divide-line-soft overflow-hidden rounded-3xl bg-paper shadow-card">
+    <ul data-testid="trip-list" className="divide-y divide-line-soft overflow-hidden card-soft">
       <AnimatePresence initial={false}>
         {ordered.map((trip) => {
           const length = stayLength(trip, today);
@@ -56,7 +58,7 @@ export function TripList({ trips, today, onEdit, onDelete, onAdd, onExample }: T
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, x: -12, transition: { duration: 0.2 } }}
               transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center gap-3 px-5 py-4"
+              className="flex items-center gap-3 px-5 py-4 transition-colors hover:bg-paper-warm/70"
             >
               <div className="min-w-0 flex-1">
                 <p className="font-mono text-sm tabular-nums">

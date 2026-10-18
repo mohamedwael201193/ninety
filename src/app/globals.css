@@ -79,3 +79,55 @@ body {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* ---------- premium layer ---------- */
+html.lenis-on { scroll-behavior: auto; }
+html.lenis-on body { overscroll-behavior: none; }
+.mesh {
+  background:
+    radial-gradient(40% 50% at 82% 18%, rgba(228,242,34,.42), transparent 70%),
+    radial-gradient(35% 45% at 95% 70%, rgba(86,131,210,.20), transparent 70%),
+    radial-gradient(30% 40% at 60% 95%, rgba(23,51,45,.10), transparent 70%);
+}
+.grain::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .07; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.grid-fade {
+  background-image: linear-gradient(rgba(12,10,8,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(12,10,8,.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(60% 60% at 50% 40%, #000 30%, transparent 80%);
+}
+.spotlight { --o: 0; opacity: var(--o); transition: opacity 400ms var(--ease-out);
+  background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(228,242,34,.22), transparent 60%); }
+
+/* buttons: lift + light sweep */
+.btn, .press { position: relative; overflow: hidden; isolation: isolate;
+  transition: background 200ms var(--ease-out), transform 240ms var(--ease-out), box-shadow 240ms var(--ease-out); }
+.btn::before, .press::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%);
+  transform: translateX(-120%); transition: transform 700ms var(--ease-out); }
+.btn:hover::before, .press:hover::before { transform: translateX(120%); }
+.btn:hover, .press:hover { transform: translateY(-1px); }
+.btn-primary:hover { box-shadow: 0 10px 24px -10px rgba(160,170,0,.7), inset 0 -2px 0 rgba(12,10,8,.08); }
+.btn-dark:hover { box-shadow: 0 10px 24px -10px rgba(12,10,8,.6); }
+.btn:active, .press:active { transform: translateY(0) scale(.98); transition-duration: 90ms; }
+
+/* cards: soft depth + hover lift */
+.card-soft { background: #fff; border-radius: 1.5rem;
+  box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 0 0 1px rgba(26,25,25,.07), 0 2px 4px -2px rgba(12,10,8,.06), 0 18px 40px -24px rgba(12,10,8,.22);
+  transition: transform 320ms var(--ease-out), box-shadow 320ms var(--ease-out); }
+.card-hover:hover { transform: translateY(-2px);
+  box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 0 0 1px rgba(26,25,25,.09), 0 4px 8px -4px rgba(12,10,8,.08), 0 28px 56px -28px rgba(12,10,8,.3); }
+
+/* skeleton shimmer */
+.skeleton { position: relative; overflow: hidden; background: var(--color-paper-sunk); }
+.skeleton::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); animation: shimmer 1.4s infinite; }
+@keyframes shimmer { to { transform: translateX(100%); } }
+
+/* empty art */
+.ea-arc { stroke-dashoffset: 0; animation: dash 6s linear infinite; }
+.ea-plane { animation: bob 3s ease-in-out infinite; transform-origin: 175px 52px; }
+@keyframes dash { to { stroke-dashoffset: -64; } }
+@keyframes bob { 50% { transform: translateY(-3px); } }

@@ -38,7 +38,7 @@ export function StatusPanel({ assessment: a, todayOverride, todayInvalid, trips 
       aria-labelledby="days-left-heading"
       data-testid="status-panel"
       data-tone={tone}
-      className="space-y-6 rounded-3xl bg-paper p-6 shadow-card md:p-8"
+      className="space-y-6 card-soft card-hover p-6 md:p-8"
     >
       <div className="flex items-center justify-between gap-3">
         <h2 id="days-left-heading" className="font-mono text-xs tracking-[0.08em] text-ink-hushed uppercase">

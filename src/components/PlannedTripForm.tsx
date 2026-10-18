@@ -38,7 +38,7 @@ export function PlannedTripForm({ history, today }: PlannedTripFormProps) {
   const banner = v?.tone === "ok" ? "bg-ok-wash text-ok" : v?.tone === "risk" ? "bg-risk-wash text-risk" : "bg-warn-wash text-warn";
 
   return (
-    <section aria-labelledby="planned-heading" className="space-y-5 rounded-3xl bg-paper p-6 shadow-card md:p-8">
+    <section aria-labelledby="planned-heading" className="space-y-5 card-soft card-hover p-6 md:p-8">
       <div>
         <h2 id="planned-heading" className="font-display text-2xl font-medium tracking-[-0.015em]">Planned trip</h2>
         <p className="text-sm text-ink-hushed">Will a future trip fit? Enter the dates you plan to travel.</p>

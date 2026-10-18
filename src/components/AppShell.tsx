@@ -78,35 +78,41 @@ export function AppShell() {
             </p>
           </div>
           <Link href="/parity" data-testid="nav-parity"
-            className="focus-ring hidden h-11 shrink-0 items-center gap-2 rounded-full bg-paper px-4 text-sm font-medium shadow-card hover:shadow-lift sm:inline-flex">
+            className="focus-ring hidden h-11 shrink-0 items-center gap-2 rounded-full bg-paper px-4 text-sm font-medium shadow-card hover:shadow-lift sm:inline-flex press">
             <Scale className="size-4" aria-hidden="true" /> Calculator parity
           </Link>
         </header>
 
         {!ready ? (
           <div aria-busy="true" className="grid gap-6 lg:grid-cols-[1fr_400px]">
-            <div className="h-[420px] animate-pulse rounded-3xl bg-paper-sunk" />
-            <div className="h-[240px] animate-pulse rounded-3xl bg-paper-sunk" />
+            <div className="space-y-6">
+              <div className="skeleton h-[420px] rounded-3xl" />
+              <div className="skeleton h-[220px] rounded-3xl" />
+            </div>
+            <div className="space-y-3">
+              <div className="skeleton h-11 w-40 rounded-full" />
+              <div className="skeleton h-[240px] rounded-3xl" />
+            </div>
             <p className="sr-only">Loading trips…</p>
           </div>
         ) : (
           <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:items-start">
-            <div className="lg:col-start-1 lg:row-start-1">
+            <div className="contents lg:col-start-1 lg:row-start-1 lg:block lg:space-y-6">
               <StatusPanel assessment={assessment} todayOverride={todayOverride} todayInvalid={todayInvalid} trips={trips} />
+              <div className="order-3 lg:order-none"><PlannedTripForm history={trips} today={today} /></div>
             </div>
 
-            <section aria-labelledby="trips-heading" className="space-y-3 lg:sticky lg:top-20 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-start">
+            <section aria-labelledby="trips-heading" className="order-2 space-y-3 lg:order-none lg:sticky lg:top-20 lg:col-start-2 lg:row-start-1 lg:self-start">
               <div className="flex items-center justify-between">
                 <h2 id="trips-heading" className="font-display text-2xl font-medium tracking-[-0.015em]">Trips</h2>
                 <button type="button" data-testid="trip-add" onClick={openAdd}
-                  className="focus-ring inline-flex h-11 items-center gap-1.5 rounded-full bg-solar px-4 text-sm font-medium hover:bg-solar-deep active:scale-[.98]">
+                  className="press focus-ring inline-flex h-11 items-center gap-1.5 rounded-full bg-solar px-4 text-sm font-medium hover:bg-solar-deep active:scale-[.98]">
                   <Plus className="size-4" aria-hidden="true" /> Add trip
                 </button>
               </div>
               <TripList trips={trips} today={today} onEdit={setEditing} onDelete={deleteTrip} onAdd={openAdd} onExample={loadExample} />
             </section>
 
-            <div className="lg:col-start-1 lg:row-start-2"><PlannedTripForm history={trips} today={today} /></div>
           </div>
         )}
 
@@ -121,7 +127,7 @@ export function AppShell() {
       {ready ? (
         <div className="fixed inset-x-0 bottom-0 z-40 flex h-16 items-center justify-between bg-ink px-5 text-paper md:hidden">
           <span className="tabular-nums"><b className="font-display text-xl">{assessment.daysLeft}</b> days left</span>
-          <button type="button" onClick={openAdd} className="focus-ring h-11 rounded-full bg-solar px-4 text-sm font-medium text-ink">
+          <button type="button" onClick={openAdd} className="press focus-ring h-11 rounded-full bg-solar px-4 text-sm font-medium text-ink">
             Add trip
           </button>
         </div>

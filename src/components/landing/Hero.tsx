@@ -1,30 +1,57 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import { useRef } from "react";
+import { Spotlight } from "../fx/Spotlight";
 import { ArrowRight, FileText, Lock, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { EASE, Words } from "./motion";
 import FlightPath from "./FlightPath";
 import { PhoneDemo } from "./PhoneDemo";
 
-function FloatCard({ children, className, delay, float, solar }: { children: React.ReactNode; className: string; delay: number; float: number; solar?: boolean }) {
+type Pointer = { mx: MotionValue<number>; my: MotionValue<number>; scrollY: MotionValue<number> };
+
+function FloatCard({ children, className, delay, float, solar, depth, p }: { children: React.ReactNode; className: string; delay: number; float: number; solar?: boolean; depth: number; p: Pointer }) {
+  const x = useTransform(p.mx, (v) => v * depth * 18);
+  const yMouse = useTransform(p.my, (v) => v * depth * 14);
+  const yScroll = useTransform(p.scrollY, [0, 600], [0, -depth * 90]);
+  const y = useTransform([yMouse, yScroll], ([a, b]: number[]) => a + b);
   return (
-    <motion.div
-      aria-hidden
-      initial={{ y: 8, scale: 0.96 }}
-      animate={{ y: [0, -6, 0], scale: 1 }}
-      transition={{ y: { duration: 4 + float, repeat: Infinity, ease: "easeInOut", delay }, scale: { duration: 0.5, ease: EASE, delay } }}
-      className={`absolute z-20 hidden items-center gap-2 rounded-2xl px-3.5 py-2.5 text-sm shadow-lift sm:flex ${solar ? "bg-solar text-ink" : "bg-paper text-ink"} ${className}`}
-    >
-      {children}
+    <motion.div aria-hidden style={{ x, y }} className={`absolute z-20 hidden sm:block ${className}`}>
+      <motion.div
+        initial={{ y: 8, scale: 0.96 }}
+        animate={{ y: [0, -6, 0], scale: 1 }}
+        transition={{ y: { duration: 4 + float, repeat: Infinity, ease: "easeInOut", delay }, scale: { duration: 0.5, ease: EASE, delay } }}
+        className={`flex items-center gap-2 rounded-2xl px-3.5 py-2.5 text-sm backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,.8)_inset,0_0_0_1px_rgba(26,25,25,.08),0_20px_40px_-18px_rgba(12,10,8,.35)] ${solar ? "bg-solar text-ink" : "bg-white/85 text-ink"}`}
+      >
+        {children}
+      </motion.div>
     </motion.div>
   );
 }
 
 export default function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
+  const mx = useSpring(rawX, { stiffness: 60, damping: 20 });
+  const my = useSpring(rawY, { stiffness: 60, damping: 20 });
+  const { scrollY: sy } = useScroll();
+  const still = useMotionValue(0);
+  const p: Pointer = { mx, my, scrollY: reduce ? still : sy };
+  const phoneY = useTransform(p.scrollY, [0, 600], [0, -30]);
+  function onMove(e: React.PointerEvent) {
+    if (reduce || e.pointerType !== "mouse") return;
+    const r = e.currentTarget.getBoundingClientRect();
+    rawX.set((e.clientX - r.left) / r.width - 0.5);
+    rawY.set((e.clientY - r.top) / r.height - 0.5);
+  }
   return (
-    <section className="relative overflow-hidden">
-      <div aria-hidden className="pointer-events-none absolute -right-40 top-10 h-[640px] w-[640px] rounded-full bg-solar-wash blur-3xl opacity-70" />
+    <section ref={ref} onPointerMove={onMove} className="grain relative overflow-hidden">
+      <div aria-hidden className="mesh pointer-events-none absolute inset-0" />
+      <div aria-hidden className="grid-fade pointer-events-none absolute inset-0" />
+      <Spotlight />
       <div className="relative mx-auto grid max-w-page items-center gap-x-14 gap-y-8 px-5 pb-20 pt-10 md:px-8 md:pt-24 lg:grid-cols-12">
         <div className="lg:col-span-7 lg:row-start-1">
           <motion.p initial={{ y: 6 }} animate={{ y: 0 }} transition={{ duration: 0.6, ease: EASE }}
@@ -57,14 +84,14 @@ export default function Hero() {
         <motion.div className="row-start-2 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1" initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}>
           <div className="relative mx-auto max-w-[460px] py-6 lg:scale-[1.1]">
             <FlightPath width={420} height={160} color="#17332D" duration={1.8} className="pointer-events-none absolute -left-10 top-[30%] z-0 hidden w-[120%] -rotate-12 sm:block" />
-            <div className="relative z-10"><PhoneDemo /></div>
-            <FloatCard className="left-[-6%] top-[14%]" delay={0.6} float={0}>
+            <motion.div style={{ y: phoneY }} className="relative z-10"><PhoneDemo /></motion.div>
+            <FloatCard className="left-[-18%] top-[-2%]" delay={0.6} float={0} depth={1.2} p={p}>
               <span className="h-2 w-2 rounded-full bg-risk" /> <span>EES says <b className="tnum">90 days</b></span>
             </FloatCard>
-            <FloatCard className="right-[-8%] top-[46%]" delay={1.0} float={1}>
+            <FloatCard className="right-[-10%] top-[46%]" delay={1.0} float={1} depth={0.8} p={p}>
               <FileText size={14} /> <span>Letter ready</span>
             </FloatCard>
-            <FloatCard className="bottom-[10%] left-[-4%]" delay={1.4} float={2} solar>
+            <FloatCard className="bottom-[10%] left-[-10%]" delay={1.4} float={2} solar depth={1.6} p={p}>
               <span className="font-display text-base font-semibold tnum">34</span> <span>days left</span>
             </FloatCard>
           </div>
