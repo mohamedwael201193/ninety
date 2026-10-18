@@ -53,9 +53,9 @@ Current result: **14/14 match**. If the Commission script cannot be loaded, the 
 - the Article 52 letter is drafted,
 - the parity page shows 14/14 with all 14 rows in the table.
 
-It has caught real bugs, not just confirmed happy paths:
+It catches real bugs, not just happy paths:
 
-- **The parity table:** the parity page used to show only a score, with no per-scenario evidence. The suite's check for a full 14-row table drove the redesign into a table of every scenario with both counts and the match.
+- **The parity table:** the parity page used to show only a bare score. It was rebuilt as a table of every scenario with both counts and the match, and the suite now fails if the score is not 14/14 or the table does not have all 14 rows.
 - **The pinned story blocking the planned-trip button:** after adding trips, the pinned scroll section on the home page had measured its position before the page grew, and at 1280 px wide it sat over the "Check planned trip" button so the click never landed. TestSprite's run failed on it; the section now re-measures whenever the page height changes.
 - **The undo toast** disappeared before a real user (or a test) could press Undo; it now stays until dismissed.
 
