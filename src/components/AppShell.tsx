@@ -3,6 +3,7 @@
 import { MotionConfig } from "framer-motion";
 import { Plus, TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
+import { UNDO_TOAST_DURATION } from "@/lib/ui/toasts";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { addDays, isIsoDate, localToday } from "@/lib/schengen/dates";
@@ -70,6 +71,8 @@ export function AppShell() {
     if (removed) {
       toast("Trip deleted", {
         description: `${removed.entry} → ${removed.exit ?? "still in"}`,
+        duration: UNDO_TOAST_DURATION,
+        closeButton: true,
         action: {
           label: "Undo",
           onClick: () => {
