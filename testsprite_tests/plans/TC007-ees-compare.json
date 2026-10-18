@@ -1,0 +1,32 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "EES comparison flags a gap",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to the app home page"
+    },
+    {
+      "type": "action",
+      "description": "Click 'Try an example' (data-testid=trip-example)"
+    },
+    {
+      "type": "action",
+      "description": "Click the EES link in the navigation (data-testid=nav-ees)"
+    },
+    {
+      "type": "action",
+      "description": "Enter 90 in the EES days used field (data-testid=ees-days-used)"
+    },
+    {
+      "type": "action",
+      "description": "Click compare (data-testid=ees-compare)"
+    },
+    {
+      "type": "assertion",
+      "description": "The traveller days (data-testid=ees-traveller-days) show 64 and a difference (data-testid=ees-difference) of 26 days is reported"
+    }
+  ]
+}

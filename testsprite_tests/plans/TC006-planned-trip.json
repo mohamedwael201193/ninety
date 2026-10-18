@@ -1,0 +1,28 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Planned trip check gives a verdict",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to the app home page"
+    },
+    {
+      "type": "action",
+      "description": "Click 'Try an example' (data-testid=trip-example)"
+    },
+    {
+      "type": "action",
+      "description": "In the planned trip form (data-testid=planned-form) enter planned entry 2026-12-01 and planned exit 2026-12-10"
+    },
+    {
+      "type": "action",
+      "description": "Click check (data-testid=planned-check)"
+    },
+    {
+      "type": "assertion",
+      "description": "A planned trip result (data-testid=planned-result) is shown stating whether the trip fits within the 90/180 rule"
+    }
+  ]
+}

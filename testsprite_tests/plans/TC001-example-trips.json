@@ -1,0 +1,24 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Example trips give 64 days used",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to the app home page"
+    },
+    {
+      "type": "action",
+      "description": "Scroll to the trip list and click 'Try an example' (data-testid=trip-example)"
+    },
+    {
+      "type": "assertion",
+      "description": "The trip list (data-testid=trip-list) shows at least one trip row (data-testid=trip-row)"
+    },
+    {
+      "type": "assertion",
+      "description": "The status panel (data-testid=status-panel) shows 64 days used out of 90"
+    }
+  ]
+}

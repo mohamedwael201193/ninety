@@ -1,0 +1,36 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Article 52 correction letter is drafted",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to the app home page"
+    },
+    {
+      "type": "action",
+      "description": "Click 'Try an example' (data-testid=trip-example)"
+    },
+    {
+      "type": "action",
+      "description": "Click the Letter link in the navigation (data-testid=nav-letter)"
+    },
+    {
+      "type": "action",
+      "description": "Fill Full name 'Jane Traveller', Date of birth 1990-05-04, Country of nationality 'Egypt', Travel document number 'A1234567', Email 'jane@example.com', Member State 'France', EES days used 90"
+    },
+    {
+      "type": "action",
+      "description": "Click 'Draft letter' (data-testid=letter-generate)"
+    },
+    {
+      "type": "assertion",
+      "description": "The letter text (data-testid=letter-text) is shown, written in the first person, and mentions Article 52 of Regulation (EU) 2017/2226"
+    },
+    {
+      "type": "assertion",
+      "description": "A download button (data-testid=letter-download) is visible"
+    }
+  ]
+}
