@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/hooks/useReducedMotionSafe";
 import { useMemo } from "react";
 import { closeStays, type StayInput } from "@/lib/schengen/engine";
 import { addDays, parseIso, type IsoDate } from "@/lib/schengen/dates";

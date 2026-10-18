@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { isIsoDate } from "@/lib/schengen/dates";
+import { dateFormatError, isIsoDate } from "@/lib/schengen/dates";
 import type { Trip } from "@/lib/trips";
 import { DateField } from "./dashboard/DateField";
 
@@ -18,12 +18,12 @@ const schema = z
   .object({ entry: z.string(), exit: z.string(), open: z.boolean() })
   .superRefine((v, ctx) => {
     if (!isIsoDate(v.entry)) {
-      ctx.addIssue({ code: "custom", path: ["entry"], message: "Enter an entry date." });
+      ctx.addIssue({ code: "custom", path: ["entry"], message: dateFormatError(v.entry) ?? "Enter an entry date." });
       return;
     }
     if (v.open) return;
     if (!isIsoDate(v.exit)) {
-      ctx.addIssue({ code: "custom", path: ["exit"], message: "Enter an exit date, or mark the trip as still in the Schengen area." });
+      ctx.addIssue({ code: "custom", path: ["exit"], message: dateFormatError(v.exit) ?? "Enter an exit date, or mark the trip as still in the Schengen area." });
       return;
     }
     if (v.exit < v.entry) ctx.addIssue({ code: "custom", path: ["exit"], message: "The exit date is before the entry date." });

@@ -47,7 +47,8 @@ describe("buildCorrectionLetter", () => {
     expect(letter.text).toContain("14 days");
     expect(letter.text).toContain("10 days");
     expect(letter.text).toContain("2024-06-11");
-    expect(letter.text).toContain("Likely missing exit");
+    expect(letter.text).toContain("one of my exits from the Schengen area was not recorded");
+    expect(letter.text).not.toContain("Likely missing exit");
     expect(letter.paragraphs[0]).toBe(letter.title);
     expect(letter.text).toBe(letter.paragraphs.join("\n\n"));
   });

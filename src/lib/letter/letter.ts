@@ -14,7 +14,7 @@
 
 import { days } from "../plural";
 import { isIsoDate, type IsoDate } from "../schengen/dates";
-import type { DayDifference, Reconciliation } from "../ees/reconcile";
+import { groupDifferences, type DayDifference, type Reconciliation } from "../ees/reconcile";
 
 export type LetterIdentity = {
   fullName: string;
@@ -57,9 +57,9 @@ function required(value: string, label: string): string {
 }
 
 function listDays(differences: DayDifference[], side: DayDifference["side"]): string {
-  const dates = differences.filter((difference) => difference.side === side).map((difference) => difference.date);
-  if (dates.length === 0) return "no days.";
-  return dates.join(", ");
+  const ranges = groupDifferences(differences.filter((difference) => difference.side === side));
+  if (ranges.length === 0) return "no days.";
+  return `${ranges.map((r) => (r.from === r.to ? r.from : `${r.from} to ${r.to} (${days(r.count)})`)).join(", ")}.`;
 }
 
 function dayLines(r: Reconciliation): string[] {
@@ -74,6 +74,15 @@ function dayLines(r: Reconciliation): string[] {
     `Days counted by the EES and not by my record: ${listDays(r.differences, "ees-only")}`,
     `Days in my record and not counted by the EES: ${listDays(r.differences, "traveller-only")}`,
   ];
+}
+
+function reasonLines(r: Reconciliation): string[] {
+  const lines: string[] = [];
+  if (r.codes.includes("likely-missing-exit")) lines.push("I believe one of my exits from the Schengen area was not recorded, so the EES counts days on which I was not present.");
+  if (r.codes.includes("likely-missing-entry")) lines.push("I believe one of my entries into the Schengen area was not recorded.");
+  if (r.codes.includes("exit-dates-disagree")) lines.push("The exit dates recorded in the EES do not match the dates on which I actually left.");
+  if (r.codes.includes("ees-figure-inconsistent")) lines.push("The days-used figure shown to me does not match the EES entry and exit records themselves.");
+  return lines;
 }
 
 export function buildCorrectionLetter(identity: LetterIdentity, reconciliation: Reconciliation): CorrectionLetter {
@@ -92,12 +101,12 @@ export function buildCorrectionLetter(identity: LetterIdentity, reconciliation: 
     `I, ${fullName}, born on ${identity.dateOfBirth}, a national of ${countryOf(nationality)}, holder of travel document ${documentNumber}, request rectification and completion of my personal data in the Entry/Exit System (EES).`,
     "Under Article 52(1) of Regulation (EU) 2017/2226, a request relating to the rights in Articles 15 to 18 of Regulation (EU) 2016/679 may be addressed to the competent authority of any Member State, and the Member State responsible or the Member State to which the request is made shall reply within 45 days of receipt. Under Article 52(2) and (3), the accuracy of the data and the lawfulness of their processing are to be checked, normally within 30 days, and data that are factually inaccurate, incomplete or recorded unlawfully are to be rectified, completed or erased, with written confirmation to me without delay. If the authority does not agree, Article 52(4) requires an administrative decision explaining in writing why.",
     `On ${reconciliation.on}, the EES states that I had used ${days(reconciliation.eesDaysUsed)} in the 180-day period starting ${reconciliation.windowStart}. The entry and exit dates I hold show ${days(reconciliation.travellerDaysUsed)} in that same period.`,
-    reconciliation.explanation,
+    ...reasonLines(reconciliation),
     ...dayLines(reconciliation),
     "I ask you to rectify the entry and exit data and the days-used figure so that they match the dates in this request, and to confirm the action in writing.",
     `Please reply to ${email}.`,
+    "Yours faithfully,",
     `${fullName}`,
-    "This draft was prepared for me to review, sign and submit. It is not a decision by a border authority.",
   ];
 
   return {

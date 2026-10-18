@@ -3,7 +3,8 @@
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Download, FileText, PenLine } from "lucide-react";
+import { ArrowRight, Copy, Download, FileText, PenLine } from "lucide-react";
+import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
 import { isIsoDate, localToday } from "@/lib/schengen/dates";
 import { parseEesRecords, reconcile } from "@/lib/ees/reconcile";
@@ -32,6 +33,16 @@ export function LetterPanel() {
   useEffect(() => {
     setReady(true);
   }, []);
+
+  async function copyLetter() {
+    if (!letter) return;
+    try {
+      await navigator.clipboard.writeText(letter.text);
+      toast.success("Letter copied to the clipboard.");
+    } catch {
+      toast.error("Couldn't copy. Select the text and copy it manually.");
+    }
+  }
 
   function generate(event: FormEvent) {
     event.preventDefault();
@@ -117,7 +128,7 @@ export function LetterPanel() {
             <div className="sm:col-span-2">
               <FieldBlock id="letter-records" label="EES entry and exit records (optional)" hint="One per line: an entry date, or an entry and an exit date.">
                 <textarea id="letter-records" data-testid="letter-records" value={recordsText} onChange={(event) => setRecordsText(event.target.value)}
-                  rows={4} className="field !h-auto py-3 font-mono text-sm" placeholder="2024-06-01" />
+                  rows={4} className="field !h-auto py-3 font-mono text-sm" placeholder="2026-06-01" />
               </FieldBlock>
             </div>
           </fieldset>
@@ -137,7 +148,10 @@ export function LetterPanel() {
               <pre data-testid="letter-text" className="max-h-[70vh] overflow-auto whitespace-pre-wrap p-6 font-sans text-[15px] leading-7 md:p-8">{letter.text}</pre>
               <div className="flex flex-col gap-3 border-t border-line-soft bg-paper-warm p-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-xs text-ink-hushed">Review, sign and send it yourself. Not a decision by a border authority.</p>
-                <button type="button" data-testid="letter-download" onClick={download} className="btn btn-primary h-11 shrink-0"><Download size={16} aria-hidden /> Download PDF</button>
+                <div className="flex shrink-0 gap-2">
+                  <button type="button" data-testid="letter-copy" onClick={copyLetter} className="btn btn-ghost h-11"><Copy size={16} aria-hidden /> Copy</button>
+                  <button type="button" data-testid="letter-download" onClick={download} className="btn btn-primary h-11"><Download size={16} aria-hidden /> Download PDF</button>
+                </div>
               </div>
             </motion.section>
           ) : (

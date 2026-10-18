@@ -21,5 +21,10 @@ describe("parity report", () => {
     expect(report.score).toBe(`${report.total}/${report.total}`);
     expect(report.matched).toBe(report.total);
     expect(report.total).toBeGreaterThan(0);
+    expect(report.rows).toHaveLength(report.total);
+    for (const row of report.rows ?? []) {
+      expect(row.match).toBe(true);
+      expect(row.ours).toBe(row.theirs);
+    }
   }, 60_000);
 });

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/hooks/useReducedMotionSafe";
 import type { Tone } from "./format";
 import { NumberTicker } from "../fx/NumberTicker";
 

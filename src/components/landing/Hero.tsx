@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import { motion, useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import { useReducedMotion } from "@/hooks/useReducedMotionSafe";
 import { useRef } from "react";
 import { Spotlight } from "../fx/Spotlight";
 import { ArrowRight, FileText, Lock, ShieldCheck } from "lucide-react";
@@ -81,7 +82,7 @@ export default function Hero() {
             <li className="flex items-center gap-1.5"><Lock size={16} /> No account · data stays in your browser</li>
           </motion.ul>
         </div>
-        <motion.div className="row-start-2 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1" initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}>
+        <motion.div className="row-start-3 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1" initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}>
           <div className="relative mx-auto max-w-[460px] py-6 lg:scale-[1.1]">
             <FlightPath width={420} height={160} color="#17332D" duration={1.8} className="pointer-events-none absolute -left-10 top-[30%] z-0 hidden w-[120%] -rotate-12 sm:block" />
             <motion.div style={{ y: phoneY }} className="relative z-10"><PhoneDemo /></motion.div>

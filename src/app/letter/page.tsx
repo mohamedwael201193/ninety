@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { LetterPanel } from "@/components/LetterPanel";
+
+export const metadata: Metadata = { title: "Article 52 correction letter" };
 
 export default function LetterPage() {
   return (

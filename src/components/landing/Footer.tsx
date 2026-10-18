@@ -15,8 +15,8 @@ export default function Footer() {
         <div className="text-sm">
           <p className="eyebrow !text-paper/60">Product</p>
           <ul className="mt-3 space-y-2">
-            <li><a href="#check" className="hover:text-paper">Check my days</a></li>
-            <li><a href="#planned-heading" className="hover:text-paper">Plan a trip</a></li>
+            <li><Link href="/#check" className="hover:text-paper">Check my days</Link></li>
+            <li><Link href="/#planned-heading" className="hover:text-paper">Plan a trip</Link></li>
             <li><Link href="/parity" className="hover:text-paper">Calculator parity</Link></li>
           </ul>
         </div>

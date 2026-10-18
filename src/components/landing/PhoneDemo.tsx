@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, animate, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, animate, motion } from "framer-motion";
+import { useReducedMotion } from "@/hooks/useReducedMotionSafe";
 import { CircleAlert, CircleCheck, MousePointer2, Plane, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { DaysRing } from "../DaysRing";
@@ -18,9 +19,10 @@ const STEPS_MS = [900, 1500, 600, 700, 2200, 2600];
 
 export function PhoneDemo() {
   const reduce = useReducedMotion();
-  const [step, setStep] = useState(0);
+  // First paint shows the finished state (34 days left), then the loop replays.
+  const [step, setStep] = useState(5);
   const [typed, setTyped] = useState("");
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(34);
 
   useEffect(() => {
     if (reduce) { setStep(5); setCount(34); setTyped(""); return; }
@@ -31,7 +33,7 @@ export function PhoneDemo() {
       const next = s === STEPS_MS.length - 1 ? 0 : s + 1;
       timer = window.setTimeout(() => { s = next; run(); }, STEPS_MS[s]);
     };
-    run();
+    timer = window.setTimeout(run, STEPS_MS[STEPS_MS.length - 1]);
     return () => window.clearTimeout(timer);
   }, [reduce]);
 

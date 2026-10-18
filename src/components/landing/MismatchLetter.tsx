@@ -38,7 +38,7 @@ export default function MismatchLetter() {
       const q = gsap.utils.selector(root);
       const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
-        scrollTrigger: { trigger: q(".ml-stage")[0], start: "top top+=72", end: "+=1600", pin: true, scrub: 0.6, anticipatePin: 1 },
+        scrollTrigger: { trigger: q(".ml-stage")[0], start: "top top+=64", end: "+=1600", pin: true, scrub: 0.6, anticipatePin: 1 },
       });
       const step = (i: number) => {
         tl.to(q(".ml-step"), { opacity: 0.75, duration: 0.2 }, `s${i}`)
@@ -47,23 +47,23 @@ export default function MismatchLetter() {
       };
       tl.set(q(".ml-step"), { opacity: 0.75 }).set(q(".ml-bar"), { scaleY: 0 });
       step(0);
-      tl.fromTo(q(".ml-ours"), { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "s0");
+      tl.fromTo(q(".ml-ours"), { y: 24 }, { y: 0, duration: 0.6 }, "s0");
       step(1);
-      tl.from(q(".ml-ees"), { x: 60, opacity: 0, rotate: 4, duration: 0.6 }, "s1");
+      tl.from(q(".ml-ees"), { x: 24, rotate: 2, duration: 0.6 }, "s1");
       step(2);
-      tl.from(q(".ml-alert"), { scale: 0.85, opacity: 0, duration: 0.5, ease: "back.out(2)" }, "s2")
+      tl.from(q(".ml-alert"), { scale: 0.94, duration: 0.5, ease: "back.out(2)" }, "s2")
         .to(q(".ml-ees"), { boxShadow: "0 0 0 2px #C2361F", duration: 0.3 }, "s2");
       step(3);
-      tl.from(q(".ml-letter"), { y: 50, opacity: 0, duration: 0.5 }, "s3")
-        .from(q(".ml-line"), { opacity: 0.08, duration: 0.35, stagger: 0.25, ease: "none" }, "s3+=0.3")
+      tl.from(q(".ml-letter"), { y: 24, duration: 0.5 }, "s3")
+        .from(q(".ml-line"), { opacity: 0.35, duration: 0.35, stagger: 0.25, ease: "none" }, "s3+=0.3")
         .from(q(".ml-seal"), { scale: 0, rotate: -40, duration: 0.4, ease: "back.out(2.4)" }, ">");
     });
     return () => mm.revert();
   }, { scope: root });
 
   return (
-    <section ref={root} id="mismatch" className="relative bg-paper py-24 md:py-32">
-      <div className="ml-stage mx-auto max-w-page px-5 md:px-8">
+    <section ref={root} id="mismatch" className="relative scroll-mt-20 bg-paper py-24 md:py-32">
+      <div className="ml-stage mx-auto max-w-page px-5 pt-0 md:px-8 lg:pt-10">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-4">
             <p className="eyebrow">EES mismatch</p>

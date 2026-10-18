@@ -9,7 +9,7 @@
  */
 
 import { days } from "../plural";
-import { formatIso, isIsoDate, parseIso, type IsoDate } from "../schengen/dates";
+import { dateFormatError, formatIso, isIsoDate, parseIso, type IsoDate } from "../schengen/dates";
 import { closeStays, daysUsedOn, type StayInput } from "../schengen/engine";
 
 export type EesRecord = {
@@ -104,22 +104,64 @@ function dayRanges(dates: IsoDate[]): string {
 
 const pluralDays = days;
 
+const LABEL = /^(entry|exit|entered|exited|in|out)[:]?$/i;
+
+function badDate(label: string, token: string): string {
+  return dateFormatError(token) ? `${label}: ${dateFormatError(token)}` : `${label} should contain YYYY-MM-DD dates.`;
+}
+
+/**
+ * One record per line: `ENTRY [EXIT]`, or labelled lines such as
+ * `Entry 2026-06-01` followed by `Exit 2026-06-10` (also on one line).
+ */
 export function parseEesRecords(text: string): { records: EesRecord[]; errors: string[] } {
   const records: EesRecord[] = [];
   const errors: string[] = [];
   text.split(/\r?\n/).forEach((line, index) => {
-    const trimmed = line.trim();
+    const trimmed = line.trim().replace(/[,;|]/g, " ").replace(/\s+(→|->|–|—|to)\s+/gi, " ");
     if (!trimmed) return;
-    const parts = trimmed.split(/\s+/);
     const label = `Line ${index + 1}`;
+    const raw = trimmed.split(/\s+/);
+    if (raw.some((token) => LABEL.test(token))) {
+      for (let i = 0; i < raw.length; i += 1) {
+        const word = raw[i].replace(/:$/, "").toLowerCase();
+        if (!LABEL.test(raw[i])) {
+          errors.push(`${label} should look like "Entry 2026-06-01" or "Exit 2026-06-10".`);
+          return;
+        }
+        const token = raw[i + 1] ?? "";
+        i += 1;
+        if (!isIsoDate(token)) {
+          errors.push(badDate(label, token));
+          return;
+        }
+        const isExit = word === "exit" || word === "exited" || word === "out";
+        if (!isExit) {
+          records.push({ entry: token, exit: null });
+          continue;
+        }
+        const open = records[records.length - 1];
+        if (!open || open.exit !== null) {
+          errors.push(`${label} has an exit with no entry before it.`);
+          return;
+        }
+        if (token < open.entry) {
+          errors.push(`${label} ends before it starts.`);
+          return;
+        }
+        open.exit = token;
+      }
+      return;
+    }
+    const parts = raw;
     if (parts.length === 1) {
-      if (!isIsoDate(parts[0])) errors.push(`${label} is not a YYYY-MM-DD entry date.`);
+      if (!isIsoDate(parts[0])) errors.push(dateFormatError(parts[0]) ? badDate(label, parts[0]) : `${label} is not a YYYY-MM-DD entry date.`);
       else records.push({ entry: parts[0], exit: null });
       return;
     }
     if (parts.length === 2) {
       if (!isIsoDate(parts[0]) || !isIsoDate(parts[1])) {
-        errors.push(`${label} should contain YYYY-MM-DD dates.`);
+        errors.push(badDate(label, isIsoDate(parts[0]) ? parts[1] : parts[0]));
         return;
       }
       if (parts[1] < parts[0]) {
@@ -268,4 +310,22 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
     explanation,
     errors,
   };
+}
+
+export type DifferenceRange = { from: IsoDate; to: IsoDate; side: DayDifference["side"]; count: number };
+
+/** Collapse consecutive differing days on the same side into ranges. */
+export function groupDifferences(differences: DayDifference[]): DifferenceRange[] {
+  const sortedDiffs = [...differences].sort((a, b) => (a.side === b.side ? a.date.localeCompare(b.date) : a.side.localeCompare(b.side)));
+  const ranges: DifferenceRange[] = [];
+  for (const diff of sortedDiffs) {
+    const last = ranges[ranges.length - 1];
+    if (last && last.side === diff.side && parseIso(diff.date) === parseIso(last.to) + 1) {
+      last.to = diff.date;
+      last.count += 1;
+    } else {
+      ranges.push({ from: diff.date, to: diff.date, side: diff.side, count: 1 });
+    }
+  }
+  return ranges.sort((a, b) => a.from.localeCompare(b.from));
 }

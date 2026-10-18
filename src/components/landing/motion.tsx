@@ -1,6 +1,7 @@
 "use client";
 
-import { animate, motion, useInView, useReducedMotion } from "framer-motion";
+import { animate, motion, useInView } from "framer-motion";
+import { useReducedMotion } from "@/hooks/useReducedMotionSafe";
 import { useEffect, useRef, useState } from "react";
 
 export const EASE = [0.16, 1, 0.3, 1] as const;

@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { EesPanel } from "@/components/EesPanel";
+
+export const metadata: Metadata = { title: "EES check — compare your days with the border's count" };
 
 export default function EesPage() {
   return (

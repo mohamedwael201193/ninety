@@ -1,13 +1,13 @@
 "use client";
 
 import { MotionConfig } from "framer-motion";
-import { Plus, Scale } from "lucide-react";
+import { Plus, TriangleAlert } from "lucide-react";
+import { toast } from "sonner";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
 import { addDays, isIsoDate, localToday } from "@/lib/schengen/dates";
 import { evaluate } from "@/lib/schengen/engine";
-import { loadTrips, saveTrips, type Trip } from "@/lib/trips";
+import { findOverlaps, loadTrips, saveTrips, type Trip } from "@/lib/trips";
 import { Sheet } from "./dashboard/Sheet";
 import { PlannedTripForm } from "./PlannedTripForm";
 import { StatusPanel } from "./StatusPanel";
@@ -55,12 +55,33 @@ export function AppShell() {
     setEditing(null);
   }
   function saveTrip(trip: Trip) {
-    persist(trips.some((t) => t.id === trip.id) ? trips.map((t) => (t.id === trip.id ? trip : t)) : [...trips, trip]);
+    const next = trips.some((t) => t.id === trip.id) ? trips.map((t) => (t.id === trip.id ? trip : t)) : [...trips, trip];
+    persist(next);
     close();
+    if (findOverlaps(next, today).some(([a, b]) => a.id === trip.id || b.id === trip.id)) {
+      toast.warning("This trip overlaps another trip. Overlapping days are only counted once — check the dates.");
+    }
   }
   function deleteTrip(id: string) {
+    const removed = trips.find((t) => t.id === id);
+    const index = trips.findIndex((t) => t.id === id);
     persist(trips.filter((t) => t.id !== id));
     if (editing && editing.id === id) close();
+    if (removed) {
+      toast("Trip deleted", {
+        description: `${removed.entry} → ${removed.exit ?? "still in"}`,
+        action: {
+          label: "Undo",
+          onClick: () => {
+            const current = loadTrips(window.localStorage);
+            if (current.some((t) => t.id === removed.id)) return;
+            const restored = [...current];
+            restored.splice(Math.min(index, restored.length), 0, removed);
+            persist(restored);
+          },
+        },
+      });
+    }
   }
   function loadExample() {
     persist([
@@ -70,34 +91,25 @@ export function AppShell() {
     ]);
   }
 
+  const overlaps = useMemo(() => findOverlaps(trips, today), [trips, today]);
   const assessment = useMemo(() => evaluate(trips, today, today), [trips, today]);
 
   return (
     <MotionConfig reducedMotion="user">
       <main
         id="calculator"
+        tabIndex={-1}
         data-testid={ready ? "app-ready" : "trips-loading"}
         className="mx-auto min-h-dvh max-w-[1200px] bg-paper-warm px-5 pt-6 pb-28 md:px-8 md:pb-12"
       >
-        <header className="mb-8 flex items-start justify-between gap-4">
-          <div className="space-y-2">
-            <p className="font-mono text-xs tracking-[0.08em] text-ink-hushed uppercase">Ninety</p>
-            <h2 className="font-display text-3xl leading-[1.05] font-medium tracking-[-0.03em] md:text-5xl">
-              How many Schengen days do I really have left?
-            </h2>
-            <p className="max-w-[640px] text-ink-hushed">
-              Rebuilds the 90 days / 180-day count from your trips. Entry day and exit day both count.
-              This is a helping tool only; it is not a decision by a border authority.
-            </p>
-          </div>
-          <Link href="/parity" data-testid="nav-parity"
-            className="focus-ring hidden h-11 shrink-0 items-center gap-2 rounded-full bg-paper px-4 text-sm font-medium shadow-card hover:shadow-lift sm:inline-flex press">
-            <Scale className="size-4" aria-hidden="true" /> Calculator parity
-          </Link>
-          <nav aria-label="Tools" className="hidden shrink-0 gap-2 sm:flex">
-            <Link href="/ees" data-testid="nav-ees" className="press focus-ring inline-flex h-11 items-center rounded-full bg-paper px-4 text-sm font-medium shadow-card">EES check</Link>
-            <Link href="/letter" data-testid="nav-letter" className="press focus-ring inline-flex h-11 items-center rounded-full bg-paper px-4 text-sm font-medium shadow-card">Article 52 letter</Link>
-          </nav>
+        <header className="mb-8 space-y-2">
+          <h2 className="font-display text-3xl leading-[1.05] font-medium tracking-[-0.03em] md:text-5xl">
+            How many Schengen days do I really have left?
+          </h2>
+          <p className="max-w-[640px] text-ink-hushed">
+            Rebuilds the 90 days / 180-day count from your trips. Entry day and exit day both count.
+            This is a helping tool only; it is not a decision by a border authority.
+          </p>
         </header>
 
         {!ready ? (
@@ -127,19 +139,22 @@ export function AppShell() {
                   <Plus className="size-4" aria-hidden="true" /> Add trip
                 </button>
               </div>
+              {overlaps.length > 0 ? (
+                <p data-testid="trip-overlap-warning" role="alert" className="flex items-start gap-2 rounded-2xl bg-warn-wash p-3 text-sm text-warn">
+                  <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+                  <span>
+                    {overlaps.length === 1 ? "Two trips overlap" : `${overlaps.length} pairs of trips overlap`}:{" "}
+                    {overlaps.map(([a, b]) => `${a.entry} and ${b.entry}`).join("; ")}. Overlapping days count once; fix the dates if this is a typo.
+                  </span>
+                </p>
+              ) : null}
               <TripList trips={trips} today={today} onEdit={setEditing} onDelete={deleteTrip} onAdd={openAdd} onExample={loadExample} />
             </section>
 
           </div>
         )}
 
-        <p className="mt-10 text-xs text-ink-hushed sm:hidden">
-          <Link href="/parity" className="underline underline-offset-4">Calculator parity</Link>
-          {" · "}
-          <Link href="/ees" className="underline underline-offset-4">EES check</Link>
-          {" · "}
-          <Link href="/letter" className="underline underline-offset-4">Article 52 letter</Link>
-        </p>
+
         <footer className="mt-6 text-xs text-ink-hushed">
           Matches the European Commission&apos;s short-stay calculator. Not an official decision. Trips are stored only in this browser.
         </footer>

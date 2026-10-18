@@ -15,9 +15,9 @@ export default function Nav() {
         <div className="hidden items-center gap-8 text-sm text-ink-hushed md:flex">
           <Link href="/#check" className="hover:text-ink">Check</Link>
           <Link href="/#planned-heading" className="hover:text-ink">Plan</Link>
-          <Link href="/ees" className="hover:text-ink">EES check</Link>
-          <Link href="/letter" className="hover:text-ink">Letter</Link>
-          <Link href="/parity" className="hover:text-ink">Parity</Link>
+          <Link href="/ees" data-testid="nav-ees" className="hover:text-ink">EES check</Link>
+          <Link href="/letter" data-testid="nav-letter" className="hover:text-ink">Letter</Link>
+          <Link href="/parity" data-testid="nav-parity" className="hover:text-ink">Parity</Link>
         </div>
         <Link href="/#check" className="btn btn-primary !min-h-9 px-4 text-sm">Check my days</Link>
       </nav>

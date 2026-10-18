@@ -8,7 +8,19 @@ export type ParityMismatch = {
   detail: string;
 };
 
+export type ParityRow = {
+  scenario: string;
+  on: IsoDate;
+  stays: number;
+  /** Ninety's result: days left, or overstay days when an overstay exists. */
+  ours: string;
+  /** The Commission calculator's result in the same unit. */
+  theirs: string;
+  match: boolean;
+};
+
 export type ParityReport = {
+  rows?: ParityRow[];
   status: "match" | "mismatch" | "couldn't verify";
   /** `matched/total` when the reference ran. Empty when it did not. */
   score: string;
@@ -131,12 +143,34 @@ export function compareScenario(
   return problems;
 }
 
+export function summarise(
+  scenario: { stays: StayInput[]; on: IsoDate },
+  control: string[],
+  planning: string[],
+): { ours: string; theirs: string } {
+  const assessment = evaluate(scenario.stays, scenario.on);
+  if (assessment.overstays.length > 0) {
+    const ours = assessment.overstays.reduce((sum, span) => sum + span.days, 0);
+    const reported = parseOverstays(control);
+    const theirs = reported.reduce((sum, span) => sum + span.days, 0);
+    return { ours: `${ours} overstay`, theirs: reported.length ? `${theirs} overstay` : "none" };
+  }
+  const planningMatch = firstMatch(planning, PLANNING_DAYS);
+  return {
+    ours: `${assessment.daysLeft} left`,
+    theirs: planningMatch ? `${Number(planningMatch[1])} left` : control.some((l) => l.includes(REFUSED)) ? "0 left" : "none",
+  };
+}
+
 export function parityFromHtml(html: string, source: string): ParityReport {
   const mismatches: ParityMismatch[] = [];
+  const rows: ParityRow[] = [];
   try {
     for (const scenario of PARITY_SCENARIOS) {
       const result = runCommissionScenario(html, scenario.stays, scenario.on);
       const problems = compareScenario(scenario, result.control, result.planning);
+      const summary = summarise(scenario, result.control, result.planning);
+      rows.push({ scenario: scenario.id, on: scenario.on, stays: scenario.stays.length, ...summary, match: problems.length === 0 });
       if (problems.length > 0) {
         mismatches.push({ scenario: scenario.id, detail: problems.join(" ") });
       }
@@ -156,6 +190,7 @@ export function parityFromHtml(html: string, source: string): ParityReport {
     matched,
     total,
     mismatches,
+    rows,
     source,
   };
 }

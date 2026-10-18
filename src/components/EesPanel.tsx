@@ -6,9 +6,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, CircleCheck, Landmark, TriangleAlert, UserRound } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { isIsoDate, localToday } from "@/lib/schengen/dates";
-import { parseEesRecords, reconcile, type MismatchCode, type Reconciliation } from "@/lib/ees/reconcile";
+import { groupDifferences, parseEesRecords, reconcile, type MismatchCode, type Reconciliation } from "@/lib/ees/reconcile";
 import { days } from "@/lib/plural";
 import { loadTrips } from "@/lib/trips";
+import { evaluate } from "@/lib/schengen/engine";
 import { NumberTicker } from "./fx/NumberTicker";
 import { FieldBlock, ToolShell } from "./tools/ToolShell";
 
@@ -32,9 +33,13 @@ export function EesPanel() {
   const [result, setResult] = useState<Reconciliation | null>(null);
   const [formError, setFormError] = useState("");
 
+  const [savedDays, setSavedDays] = useState<{ trips: number; used: number } | null>(null);
+
   useEffect(() => {
+    const trips = loadTrips(window.localStorage);
+    setSavedDays({ trips: trips.length, used: trips.length ? evaluate(trips, today, today).daysUsed : 0 });
     setReady(true);
-  }, []);
+  }, [today]);
 
   function compare(event: FormEvent) {
     event.preventDefault();
@@ -87,9 +92,9 @@ export function EesPanel() {
             <input id="ees-days-used" data-testid="ees-days-used" inputMode="numeric" value={daysUsed}
               onChange={(event) => setDaysUsed(event.target.value)} className="field font-display text-lg" placeholder="e.g. 90" />
           </FieldBlock>
-          <FieldBlock id="ees-records" label="EES entry and exit records (optional)" hint="One per line: an entry date, or an entry date and an exit date.">
+          <FieldBlock id="ees-records" label="EES entry and exit records (optional)" hint="YYYY-MM-DD. One per line: an entry date, an entry and an exit date, or Entry/Exit lines.">
             <textarea id="ees-records" data-testid="ees-records" value={recordsText} onChange={(event) => setRecordsText(event.target.value)}
-              rows={5} className="field !h-auto py-3 font-mono text-sm" placeholder={"2024-06-01 2024-06-10\n2024-07-02"} />
+              rows={5} className="field !h-auto py-3 font-mono text-sm" placeholder={"2026-06-01 2026-06-10\nEntry 2026-07-02\nExit 2026-07-09"} />
           </FieldBlock>
           {formError ? <p data-testid="ees-error" role="alert" className="rounded-2xl bg-risk-wash p-3 text-sm text-risk">{formError}</p> : null}
           <button type="submit" data-testid="ees-compare" className="btn btn-dark h-12 w-full">
@@ -120,8 +125,9 @@ export function EesPanel() {
                   {matched ? <CircleCheck size={18} className="mt-0.5 shrink-0" aria-hidden /> : <TriangleAlert size={18} className="mt-0.5 shrink-0 text-risk" aria-hidden />}
                   <div>
                     <p className={`font-medium ${matched ? "" : "text-risk"}`}>
-                      {result.figureGap === 0 ? "No gap in the figure." : `${days(Math.abs(result.figureGap))} apart — the EES counts ${result.figureGap > 0 ? "more" : "fewer"}.`}
-                      <span className="sr-only">EES figure gap: <span data-testid="ees-figure-gap">{result.figureGap}</span></span>
+                      <span data-testid="ees-figure-gap" data-gap={result.figureGap}>
+                        {result.figureGap === 0 ? "No gap in the figure." : `${days(Math.abs(result.figureGap))} apart — the EES counts ${result.figureGap > 0 ? "more" : "fewer"}.`}
+                      </span>
                     </p>
                     <ul data-testid="ees-codes" data-codes={result.codes.join(" ")} className="mt-2 flex flex-wrap gap-1.5">
                       {result.codes.length === 0 ? <li className="rounded-pill bg-paper px-2.5 py-0.5 text-xs text-ink">No findings</li> : null}
@@ -139,10 +145,10 @@ export function EesPanel() {
                         {result.eesRecordDaysUsed === null && result.figureGap !== 0 ? "Add the EES records to list the exact days." : "No individual days differ."}
                       </li>
                     ) : null}
-                    {result.differences.map((difference) => (
-                      <li key={`${difference.date}-${difference.side}`} data-testid="ees-difference"
-                        className={`rounded-xl px-3 py-1.5 font-mono text-xs ${difference.side === "ees-only" ? "bg-spring-wash" : "bg-solar-wash"}`}>
-                        {difference.date} · {difference.side === "ees-only" ? "EES only" : "your trips only"}
+                    {groupDifferences(result.differences).map((range) => (
+                      <li key={`${range.from}-${range.side}`} data-testid="ees-difference" data-from={range.from} data-to={range.to} data-count={range.count}
+                        className={`rounded-xl px-3 py-1.5 font-mono text-xs ${range.side === "ees-only" ? "bg-spring-wash" : "bg-solar-wash"}`}>
+                        {range.from === range.to ? range.from : `${range.from} → ${range.to}`} · {days(range.count)} · {range.side === "ees-only" ? "EES only" : "your trips only"}
                       </li>
                     ))}
                   </ul>
@@ -155,13 +161,17 @@ export function EesPanel() {
               <motion.div key="empty" className="card-soft relative grid min-h-[360px] place-items-center overflow-hidden p-8 text-center">
                 <div aria-hidden className="mesh pointer-events-none absolute inset-0 opacity-70" />
                 <div className="relative">
-                  <div className="mx-auto flex w-fit items-center gap-3" aria-hidden>
-                    <span className="grid h-20 w-20 place-items-center rounded-3xl bg-paper font-display text-3xl font-semibold shadow-lift">56</span>
-                    <span className="font-mono text-xs text-ink-hushed">vs</span>
-                    <span className="grid h-20 w-20 place-items-center rounded-3xl bg-spring-wash font-display text-3xl font-semibold shadow-lift">90</span>
-                  </div>
-                  <p className="mt-6 font-display text-xl font-medium">Your comparison appears here.</p>
-                  <p className="mt-1 text-sm text-ink-hushed">Enter the EES figure and press Compare.</p>
+                  {savedDays && savedDays.trips > 0 ? (
+                    <div data-testid="ees-empty-count" className="mx-auto flex w-fit items-center gap-3">
+                      <span className="grid h-20 w-20 place-items-center rounded-3xl bg-paper font-display text-3xl font-semibold shadow-lift tnum">{savedDays.used}</span>
+                      <span className="font-mono text-xs text-ink-hushed">vs</span>
+                      <span aria-hidden className="grid h-20 w-20 place-items-center rounded-3xl border-2 border-dashed border-line font-display text-3xl font-semibold text-ink-faint">?</span>
+                    </div>
+                  ) : (
+                    <div data-testid="ees-empty-neutral" aria-hidden className="mx-auto grid h-20 w-20 place-items-center rounded-3xl bg-paper shadow-lift"><Landmark size={28} /></div>
+                  )}
+                  <p className="mt-6 font-display text-xl font-medium">{savedDays && savedDays.trips > 0 ? `Your trips: ${days(savedDays.used)} used. Your comparison appears here.` : "Your comparison appears here."}</p>
+                  <p className="mt-1 text-sm text-ink-hushed">{savedDays && savedDays.trips === 0 ? "No trips saved in this browser yet. Add them on the calculator, then enter the EES figure." : "Enter the EES figure and press Compare."}</p>
                 </div>
               </motion.div>
             )}

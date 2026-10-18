@@ -1,5 +1,6 @@
 "use client";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/hooks/useReducedMotionSafe";
 import { EASE } from "./motion";
 /** Dashed arc drawn on scroll with a plane/arrowhead travelling along it. */
 export default function FlightPath({ width = 520, height = 160, color = "currentColor", duration = 1.6, className }:
