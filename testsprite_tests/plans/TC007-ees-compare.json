@@ -6,7 +6,7 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Navigate to the app home page"
+      "description": "Navigate to the app home page (environment base URL)"
     },
     {
       "type": "action",
@@ -26,7 +26,7 @@
     },
     {
       "type": "assertion",
-      "description": "The traveller days (data-testid=ees-traveller-days) show 64 and a difference (data-testid=ees-difference) of 26 days is reported"
+      "description": "The traveller days (data-testid=ees-traveller-days) show 64 and the figure gap (data-testid=ees-figure-gap) says the counts are 26 days apart"
     }
   ]
 }

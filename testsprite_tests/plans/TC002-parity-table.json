@@ -6,7 +6,7 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Navigate to the app home page"
+      "description": "Navigate to the app home page (environment base URL)"
     },
     {
       "type": "action",

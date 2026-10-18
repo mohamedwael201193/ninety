@@ -6,7 +6,7 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Navigate to the app home page"
+      "description": "Navigate to the app home page (environment base URL)"
     },
     {
       "type": "action",
@@ -18,7 +18,7 @@
     },
     {
       "type": "action",
-      "description": "Fill Full name 'Jane Traveller', Date of birth 1990-05-04, Country of nationality 'Egypt', Travel document number 'A1234567', Email 'jane@example.com', Member State 'France', EES days used 90"
+      "description": "Fill Full name 'Jane Traveller' (data-testid=letter-name), Date of birth 1990-05-04 (letter-birth), Country of nationality 'Egypt' (letter-nationality), Travel document number 'A1234567' (letter-document), Email 'jane@example.com' (letter-email), Member State 'France' (letter-member-state), and EES days used 90 (letter-ees-days)"
     },
     {
       "type": "action",
