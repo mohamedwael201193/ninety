@@ -55,7 +55,7 @@ export default function MismatchLetter() {
         .to(q(".ml-ees"), { boxShadow: "0 0 0 2px #C2361F", duration: 0.3 }, "s2");
       step(3);
       tl.from(q(".ml-letter"), { y: 50, opacity: 0, duration: 0.5 }, "s3")
-        .from(q(".ml-line"), { clipPath: "inset(0 100% 0 0)", duration: 0.35, stagger: 0.25, ease: "none" }, "s3+=0.3")
+        .from(q(".ml-line"), { opacity: 0.08, duration: 0.35, stagger: 0.25, ease: "none" }, "s3+=0.3")
         .from(q(".ml-seal"), { scale: 0, rotate: -40, duration: 0.4, ease: "back.out(2.4)" }, ">");
     });
     return () => mm.revert();
