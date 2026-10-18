@@ -4,7 +4,7 @@ How many Schengen days do you really have left?
 
 Ninety rebuilds the short-stay count — **90 days in any 180-day period** — from the trips you enter. The entry day and the exit day both count. It tells you how many days are already used, how many are left on a given date, the latest legal exit for a planned trip, and whether a stay has gone over 90.
 
-It is aimed at travellers who are not EU residents and who need the same figure a border check uses, including when an official record looks wrong. Comparing that count with the EU Entry/Exit System, and drafting an Article 52 correction request under Regulation (EU) 2017/2226, is not in this version.
+It is aimed at travellers who are not EU residents and who need the same figure a border check uses, including when an official record looks wrong. `/ees` compares that count with an Entry/Exit System days-used figure and, when supplied, its entry and exit records. `/letter` drafts a request to rectify those data under Article 52 of Regulation (EU) 2017/2226.
 
 This is a helping tool only. It does not grant a right to stay. The same limit is stated by the European Commission for its own calculator.
 
@@ -46,7 +46,7 @@ The calculator, and Ninety, do not apply a visa sticker that authorises fewer th
 
 ### Unit tests
 
-`npm test` covers the date arithmetic and the 90/180 engine (both endpoint days, the rolling 180-day window, days used, days left, the latest legal exit, overstay, an open trip closed on the reference day, and a planned trip), trip storage parsing, and a live parity run against the Commission script on the fixed scenarios. The parity test fails if the reference cannot be loaded rather than reporting a match.
+`npm test` covers the date arithmetic and the 90/180 engine (both endpoint days, the rolling 180-day window, days used, days left, the latest legal exit, overstay, an open trip closed on the reference day, and a planned trip), trip storage parsing, a live parity run against the Commission script on the fixed scenarios, EES reconciliation (figure-only gaps, a likely missing exit, a likely missing entry, disagreeing exit dates, and a figure that does not match the EES records), and the Article 52 letter, including accented names read back from the PDF. The parity test fails if the reference cannot be loaded rather than reporting a match.
 
 ### TestSprite
 

@@ -65,6 +65,14 @@ export function AppShell() {
           <Link href="/parity" data-testid="nav-parity">
             Calculator parity
           </Link>
+          {" · "}
+          <Link href="/ees" data-testid="nav-ees">
+            EES reconciliation
+          </Link>
+          {" · "}
+          <Link href="/letter" data-testid="nav-letter">
+            Article 52 letter
+          </Link>
         </p>
       </header>
 
