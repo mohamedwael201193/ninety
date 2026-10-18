@@ -1,0 +1,32 @@
+/* Tailwind v4 tokens (repo uses Tailwind 4, no tailwind.config). Import from globals.css after `@import "tailwindcss";` */
+@theme {
+  --color-ink: #0c0a08;
+  --color-ink-soft: #1a1919;
+  --color-ink-hushed: rgba(12, 10, 8, 0.6);
+  --color-ink-faint: rgba(12, 10, 8, 0.4);
+  --color-paper: #ffffff;
+  --color-paper-warm: #f7f5f2;
+  --color-paper-sunk: #efece8;
+  --color-line: #d2cecb;
+  --color-line-soft: rgba(26, 25, 25, 0.1);
+  --color-solar: #e4f222;
+  --color-solar-deep: #c9d60f;
+  --color-solar-wash: #f7fbc8;
+  --color-smolder: #17332d;
+  --color-spring: #5683d2;
+  --color-spring-wash: #e6edf9;
+  --color-ok: #1e7f4f;
+  --color-ok-wash: #e3f3ea;
+  --color-warn: #b86e00;
+  --color-warn-wash: #fff1d6;
+  --color-risk: #c2361f;
+  --color-risk-wash: #fbe6e1;
+  --shadow-card: 0 1px 0 rgba(12, 10, 8, 0.04), 0 0 0 1px rgba(26, 25, 25, 0.1);
+  --shadow-lift: 0 12px 32px -12px rgba(12, 10, 8, 0.18), 0 0 0 1px rgba(26, 25, 25, 0.1);
+  --shadow-pop: 0 24px 64px -24px rgba(12, 10, 8, 0.28), 0 0 0 1px rgba(26, 25, 25, 0.08);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.focus-ring:focus-visible { outline: none; box-shadow: 0 0 0 3px #fff, 0 0 0 5px #0c0a08; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
