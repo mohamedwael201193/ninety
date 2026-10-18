@@ -47,7 +47,7 @@ export default function MismatchLetter() {
       };
       tl.set(q(".ml-step"), { opacity: 0.75 }).set(q(".ml-bar"), { scaleY: 0 });
       step(0);
-      tl.from(q(".ml-ours"), { y: 40, opacity: 0, duration: 0.6 }, "s0");
+      tl.fromTo(q(".ml-ours"), { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, "s0");
       step(1);
       tl.from(q(".ml-ees"), { x: 60, opacity: 0, rotate: 4, duration: 0.6 }, "s1");
       step(2);
@@ -84,7 +84,7 @@ export default function MismatchLetter() {
           <div className="grid items-start gap-6 lg:col-span-8 lg:grid-cols-2">
             <div className="grain relative rounded-3xl bg-paper-warm p-6 md:p-8">
               <div className="grid grid-cols-2 gap-4">
-                <div className="ml-ours card-soft p-5">
+                <div className="ml-ours card-soft p-5 !transition-none">
                   <p className="text-xs text-ink-hushed">Ninety</p>
                   <p className="mt-1 font-display text-5xl font-semibold tnum">56</p>
                   <p className="text-sm text-ink-hushed">days used</p>
