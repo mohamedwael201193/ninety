@@ -58,7 +58,23 @@ export default function MismatchLetter() {
         .from(q(".ml-line"), { opacity: 0.35, duration: 0.35, stagger: 0.25, ease: "none" }, "s3+=0.3")
         .from(q(".ml-seal"), { scale: 0, rotate: -40, duration: 0.4, ease: "back.out(2.4)" }, ">");
     });
-    return () => mm.revert();
+    // Content above (the dashboard) changes height as trips load or are added.
+    // Re-measure so the pinned stage never sits over the dashboard.
+    let frame = 0;
+    let lastHeight = document.body.scrollHeight;
+    const ro = new ResizeObserver(() => {
+      const height = document.body.scrollHeight;
+      if (height === lastHeight) return;
+      lastHeight = height;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+    ro.observe(document.body);
+    return () => {
+      ro.disconnect();
+      cancelAnimationFrame(frame);
+      mm.revert();
+    };
   }, { scope: root });
 
   return (
