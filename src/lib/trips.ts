@@ -46,3 +46,17 @@ export function loadTrips(storage: Pick<Storage, "getItem"> | null): Trip[] {
 export function saveTrips(storage: Pick<Storage, "setItem">, trips: Trip[]): void {
   storage.setItem(TRIP_STORAGE_KEY, serializeTrips(trips));
 }
+
+/** Pairs of trips whose date ranges share at least one day (open trips run to `today`). */
+export function findOverlaps(trips: Trip[], today: string): Array<[Trip, Trip]> {
+  const pairs: Array<[Trip, Trip]> = [];
+  const end = (trip: Trip) => trip.exit ?? (today > trip.entry ? today : trip.entry);
+  const ordered = [...trips].sort((a, b) => a.entry.localeCompare(b.entry));
+  for (let i = 0; i < ordered.length; i += 1) {
+    for (let j = i + 1; j < ordered.length; j += 1) {
+      if (ordered[j].entry > end(ordered[i])) break;
+      pairs.push([ordered[i], ordered[j]]);
+    }
+  }
+  return pairs;
+}
