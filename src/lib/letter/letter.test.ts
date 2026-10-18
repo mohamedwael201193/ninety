@@ -44,8 +44,8 @@ describe("buildCorrectionLetter", () => {
     expect(letter.text).toContain("España");
     expect(letter.text).toContain("République française");
     expect(letter.text).toContain("Article 52 of Regulation (EU) 2017/2226");
-    expect(letter.text).toContain("14 day(s)");
-    expect(letter.text).toContain("10 day(s)");
+    expect(letter.text).toContain("14 days");
+    expect(letter.text).toContain("10 days");
     expect(letter.text).toContain("2024-06-11");
     expect(letter.text).toContain("Likely missing exit");
     expect(letter.paragraphs[0]).toBe(letter.title);
@@ -64,8 +64,31 @@ describe("buildCorrectionLetter without EES records", () => {
     const reconciliation = reconcile([{ entry: "2024-06-01", exit: "2024-06-10" }], { daysUsed: 15, on: "2024-06-14" });
     const letter = buildCorrectionLetter(identity, reconciliation);
     expect(letter.text).not.toMatch(/\bNone\b/);
-    expect(letter.text).toContain("differ by 5 day(s)");
-    expect(letter.text).toContain("5 day(s) more");
+    expect(letter.text).toContain("differ by 5 days");
+    expect(letter.text).toContain("5 days more");
+  });
+});
+
+describe("letter wording", () => {
+  const recon = () => reconcile([{ entry: "2024-06-14", exit: "2024-06-14" }], { daysUsed: 2, on: "2024-06-14" });
+  it("turns a demonym into the country", () => {
+    const text = buildCorrectionLetter({ ...identity, nationality: "Egyptian" }, recon()).text;
+    expect(text).toContain("a national of Egypt,");
+    expect(text).not.toContain("of Egyptian");
+  });
+  it("keeps a country as typed", () => {
+    expect(buildCorrectionLetter({ ...identity, nationality: "Egypt" }, recon()).text).toContain("a national of Egypt,");
+  });
+  it("uses singular and plural day counts and never day(s)", () => {
+    const text = buildCorrectionLetter(identity, recon()).text;
+    expect(text).toContain("used 2 days");
+    expect(text).toContain("show 1 day ");
+    expect(text).toContain("differ by 1 day:");
+    expect(text).not.toContain("day(s)");
+  });
+  it("cites the Article 52(1) 45-day reply duty for the responsible or receiving Member State", () => {
+    const text = buildCorrectionLetter(identity, recon()).text;
+    expect(text).toContain("Member State responsible or the Member State to which the request is made shall reply within 45 days of receipt");
   });
 });
 

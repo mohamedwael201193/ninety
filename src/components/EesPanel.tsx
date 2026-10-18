@@ -7,6 +7,7 @@ import { ArrowRight, CircleCheck, Landmark, TriangleAlert, UserRound } from "luc
 import { useSearchParams } from "next/navigation";
 import { isIsoDate, localToday } from "@/lib/schengen/dates";
 import { parseEesRecords, reconcile, type MismatchCode, type Reconciliation } from "@/lib/ees/reconcile";
+import { days } from "@/lib/plural";
 import { loadTrips } from "@/lib/trips";
 import { NumberTicker } from "./fx/NumberTicker";
 import { FieldBlock, ToolShell } from "./tools/ToolShell";
@@ -119,7 +120,7 @@ export function EesPanel() {
                   {matched ? <CircleCheck size={18} className="mt-0.5 shrink-0" aria-hidden /> : <TriangleAlert size={18} className="mt-0.5 shrink-0 text-risk" aria-hidden />}
                   <div>
                     <p className={`font-medium ${matched ? "" : "text-risk"}`}>
-                      {result.figureGap === 0 ? "No gap in the figure." : `${Math.abs(result.figureGap)} day(s) apart — the EES counts ${result.figureGap > 0 ? "more" : "fewer"}.`}
+                      {result.figureGap === 0 ? "No gap in the figure." : `${days(Math.abs(result.figureGap))} apart — the EES counts ${result.figureGap > 0 ? "more" : "fewer"}.`}
                       <span className="sr-only">EES figure gap: <span data-testid="ees-figure-gap">{result.figureGap}</span></span>
                     </p>
                     <ul data-testid="ees-codes" data-codes={result.codes.join(" ")} className="mt-2 flex flex-wrap gap-1.5">

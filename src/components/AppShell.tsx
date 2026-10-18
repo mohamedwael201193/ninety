@@ -32,6 +32,19 @@ export function AppShell() {
     setReady(true);
   }, []);
 
+  // The mobile summary bar belongs to the dashboard only: show it while the
+  // dashboard (#check, or this component's own main on other routes) fills the
+  // middle of the screen; hide it above and once the user scrolls past.
+  const [barVisible, setBarVisible] = useState(false);
+  useEffect(() => {
+    if (!ready) return;
+    const target = document.getElementById("check") ?? document.getElementById("calculator");
+    if (!target) return;
+    const io = new IntersectionObserver(([entry]) => setBarVisible(entry.isIntersecting), { rootMargin: "-40% 0px -40% 0px" });
+    io.observe(target);
+    return () => io.disconnect();
+  }, [ready]);
+
   function persist(next: Trip[]) {
     setTrips(next);
     saveTrips(window.localStorage, next);
@@ -132,8 +145,8 @@ export function AppShell() {
         </footer>
       </main>
 
-      {ready ? (
-        <div className="fixed inset-x-0 bottom-0 z-40 flex h-16 items-center justify-between bg-ink px-5 text-paper md:hidden">
+      {ready && barVisible ? (
+        <div data-testid="mobile-days-bar" className="fixed inset-x-0 bottom-0 z-40 flex h-16 items-center justify-between bg-ink px-5 text-paper md:hidden">
           <span className="tabular-nums"><b className="font-display text-xl">{assessment.daysLeft}</b> days left</span>
           <button type="button" onClick={openAdd} className="press focus-ring h-11 rounded-full bg-solar px-4 text-sm font-medium text-ink">
             Add trip

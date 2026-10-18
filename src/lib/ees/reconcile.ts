@@ -8,6 +8,7 @@
  * missing exit inflates the days-used figure.
  */
 
+import { days } from "../plural";
 import { formatIso, isIsoDate, parseIso, type IsoDate } from "../schengen/dates";
 import { closeStays, daysUsedOn, type StayInput } from "../schengen/engine";
 
@@ -101,9 +102,7 @@ function dayRanges(dates: IsoDate[]): string {
   return ranges.join(", ");
 }
 
-function pluralDays(count: number): string {
-  return `${count} day${count === 1 ? "" : "s"}`;
-}
+const pluralDays = days;
 
 export function parseEesRecords(text: string): { records: EesRecord[]; errors: string[] } {
   const records: EesRecord[] = [];

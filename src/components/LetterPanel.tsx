@@ -105,7 +105,7 @@ export function LetterPanel() {
             <legend className="sr-only">Identity</legend>
             <div className="sm:col-span-2"><Field id="letter-name" label="Full name" value={fullName} onChange={setFullName} autoComplete="name" /></div>
             <Field id="letter-birth" label="Date of birth" value={dateOfBirth} onChange={setDateOfBirth} placeholder="YYYY-MM-DD" autoComplete="bday" />
-            <Field id="letter-nationality" label="Nationality" value={nationality} onChange={setNationality} />
+            <Field id="letter-nationality" label="Country of nationality" value={nationality} onChange={setNationality} placeholder="e.g. Egypt" />
             <Field id="letter-document" label="Travel document number" value={documentNumber} onChange={setDocumentNumber} />
             <Field id="letter-email" label="Email" value={email} onChange={setEmail} autoComplete="email" />
           </fieldset>
