@@ -1,0 +1,32 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Deleting a trip can be undone",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to the app home page (environment base URL)"
+    },
+    {
+      "type": "action",
+      "description": "Click 'Try an example' (data-testid=trip-example)"
+    },
+    {
+      "type": "action",
+      "description": "Note the number of trip rows, then click delete (data-testid=trip-delete) on the first trip row"
+    },
+    {
+      "type": "assertion",
+      "description": "The trip list has one fewer row"
+    },
+    {
+      "type": "action",
+      "description": "Click 'Undo' in the 'Trip deleted' notification at the bottom of the page (it stays until dismissed)"
+    },
+    {
+      "type": "assertion",
+      "description": "The trip list is back to the original number of rows"
+    }
+  ]
+}
