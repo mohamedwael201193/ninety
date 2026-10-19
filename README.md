@@ -43,15 +43,19 @@ Current result: **14/14 match**. If the Commission script cannot be loaded, the 
 
 ## Tested with TestSprite
 
-`testsprite_tests/` holds a 10-test end-to-end suite that TestSprite runs in the cloud against the Vercel deployment:
+`testsprite_tests/plans/` holds the 11-test end-to-end suite that TestSprite runs in the cloud against the Vercel deployment. Every plan starts at `/?today=2026-10-19&fresh=1`, which pins the date and clears saved trips, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
 
-- example trips give the expected days used; adding, editing, and reloading trips,
-- an exit before entry is rejected,
-- deleting a trip can be undone,
-- a planned trip gets a verdict,
-- the EES comparison reports the gap,
-- the Article 52 letter is drafted,
-- the parity page shows 14/14 with all 14 rows in the table.
+- the example trips give 64 days used and 26 left (TS01),
+- the parity page shows 14/14 with all 14 rows matching (TS02),
+- adding 2026-09-01 → 2026-09-10 gives 10 used and 80 left (TS03),
+- an exit before entry is rejected with its message and nothing is saved (TS04),
+- deleting a trip and pressing Undo brings back the same dates and 64 days (TS05),
+- a legal planned trip fits (TS06),
+- the EES comparison reports a 26-day gap and `figure-differs` (TS07),
+- the Article 52 letter states both counts and the 45-day reply (TS08),
+- an `MM/DD/YYYY` date is rejected (TC009), an edited trip is recounted (TC010), and trips survive a reload (TC011).
+
+`testsprite_tests/test-ids.json` maps each plan file to its TestSprite test id.
 
 It catches real bugs, not just happy paths:
 

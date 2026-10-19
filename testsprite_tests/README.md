@@ -4,19 +4,23 @@ Frontend end-to-end tests for Ninety. TestSprite runs them in its cloud browser 
 
 ## Test cases
 
+Every plan starts at `/?today=2026-10-19&fresh=1`: the date is pinned and saved trips are cleared.
+
 | Plan | What it proves |
 | --- | --- |
-| `TC001-example-trips.json` | "Try an example" loads trips and the status panel shows the expected days used |
-| `TC002-parity-table.json` | `/parity` reads 14/14 against the live Commission calculator, with all 14 rows |
-| `TC003-add-trip.json` | Adding a trip updates days used |
-| `TC004-invalid-trip.json` | An exit before entry is rejected and nothing is saved |
-| `TC005-delete-undo.json` | Deleting a trip can be undone from the toast |
-| `TC006-planned-trip.json` | A planned trip gets a fits / does-not-fit verdict |
-| `TC007-ees-compare.json` | `/ees` reports the gap between your count and the EES figure |
-| `TC008-letter.json` | `/letter` drafts a first-person Article 52 request with a PDF download |
-| `TC009-date-format.json` | A `MM/DD/YYYY` date is rejected with a message asking for `YYYY-MM-DD` |
+| `TS01-example-trips.json` | Example trips: 3 rows, 64 used, 26 left |
+| `TS02-parity-table.json` | `/parity` reads 14/14, 14 rows all matching |
+| `TS03-add-trip.json` | 2026-09-01 → 2026-09-10 gives 10 used, 80 left |
+| `TS04-reversed-dates.json` | Exit before entry: specific error, no row saved |
+| `TS05-delete-undo.json` | Delete then Undo restores the same dates and 64 days |
+| `TS06-legal-plan.json` | A legal planned trip fits |
+| `TS07-ees-gap.json` | `/ees` reports a 26-day gap and `figure-differs` |
+| `TS08-letter.json` | `/letter` states both counts, Article 52 and the 45-day reply |
+| `TC009-date-format.json` | `MM/DD/YYYY` is rejected with a YYYY-MM-DD message |
+| `TC010-edit-trip.json` | Editing a trip recounts 3 → 10 days |
+| `TC011-reload.json` | Trips and the count survive a reload |
 
-Two more cases (edit a trip, trips persist after reload) were generated in the TestSprite project, for 11 tests in total. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass.
+These 11 plans are the whole suite. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
 
 ## Writing plans
 

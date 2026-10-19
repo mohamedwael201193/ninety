@@ -1,0 +1,32 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Exit before entry is rejected with a specific message",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-10-19&fresh=1 (pins today to 2026-10-19 and clears saved trips in storage key ninety.trips.v1)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add)"
+    },
+    {
+      "type": "action",
+      "description": "Enter entry date 2026-09-10 (data-testid=trip-entry) and exit date 2026-09-01 (data-testid=trip-exit)"
+    },
+    {
+      "type": "action",
+      "description": "Click save (data-testid=trip-save)"
+    },
+    {
+      "type": "assertion",
+      "description": "The trip form shows an error saying the exit date is before the entry date (the trip ends before it starts)"
+    },
+    {
+      "type": "assertion",
+      "description": "No trip row (data-testid=trip-row) exists on the page"
+    }
+  ]
+}
