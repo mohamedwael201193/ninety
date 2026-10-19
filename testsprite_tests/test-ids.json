@@ -5,9 +5,12 @@
   "TS04-reversed-dates": "12214dbd-f926-45b4-b94b-4ff234bef57e",
   "TS05-delete-undo": "42f9aceb-cb5b-4bca-8498-3e28dacfadcd",
   "TS06-legal-plan": "58a96778-71b8-4ac8-ac7b-f1e6fbe8e928",
-  "TS07-ees-gap": "90923207-6ed5-4c0f-bc8e-2c22701c6d6b",
+  "TS07-ees-gap": "499945d4-1c23-4fef-9825-7d3ba3d28b89",
   "TS08-letter": "31dba9a5-5ac6-473b-9517-b6064cdc2ac8",
   "TC009-date-format": "c1707e85-ebb8-4959-b1fe-ded27d391ef2",
   "TC010-edit-trip": "30074ac3-db4d-4ae1-8b43-a06298f40593",
-  "TC011-reload": "21ab60a0-f7b5-4a9b-84f3-aa4cf3e1d541"
+  "TC011-reload": "21ab60a0-f7b5-4a9b-84f3-aa4cf3e1d541",
+  "TS09-open-stay-false-fit": "2f9ce70d-082b-4c87-8bfc-f6784cd19b37",
+  "TS10-open-stay-boundary": "28757a0f-893c-4453-a5dc-27b7a57863fb",
+  "TS26-same-day-reentry": "7c648056-0c53-4a39-bf66-ef5550edbd0e"
 }
