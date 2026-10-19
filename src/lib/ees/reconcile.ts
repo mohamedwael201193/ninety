@@ -40,7 +40,9 @@ export type MismatchCode =
   | "likely-missing-exit"
   | "likely-missing-entry"
   | "exit-dates-disagree"
-  | "ees-figure-inconsistent";
+  | "ees-figure-inconsistent"
+  /** Stays that began before EES_CUTOFF explain the gap; the EES tool is working as published. */
+  | "ees-ignores-pre-cutoff-stay";
 
 export type Reconciliation = {
   on: IsoDate;
@@ -55,9 +57,21 @@ export type Reconciliation = {
   codes: MismatchCode[];
   explanation: string;
   errors: string[];
+  /** Trip days in the window that the EES ignores because their stay began before EES_CUTOFF. */
+  preCutoffDays: IsoDate[];
+  /** Trip days the EES is expected to count (travellerDaysUsed minus preCutoffDays). */
+  eesComparableDaysUsed: number;
 };
 
 const WINDOW_BACK = 179;
+
+/**
+ * The EES counts only stays from the start of full operation. The official
+ * days-used figure ignores any stay that began before this date, so days from
+ * such stays are not EES mismatches. The cutoff applies when the reference
+ * date is on or after it.
+ */
+export const EES_CUTOFF: IsoDate = "2026-04-10";
 
 function windowPresence(stays: StayInput[], on: IsoDate): {
   dates: Set<IsoDate>;
@@ -176,6 +190,11 @@ export function parseEesRecords(text: string): { records: EesRecord[]; errors: s
   return { records, errors };
 }
 
+/** True when the only finding is the EES cutoff: nothing in the EES needs correcting. */
+export function explainedByCutoff(codes: MismatchCode[]): boolean {
+  return codes.length === 1 && codes[0] === "ees-ignores-pre-cutoff-stay";
+}
+
 export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
   const on = claim.on;
   const errors: string[] = [];
@@ -194,6 +213,8 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
       differences: [],
       codes: [],
       explanation: "The reference date is not a valid calendar date.",
+      preCutoffDays: [],
+      eesComparableDaysUsed: 0,
       errors: [...errors, "The reference date is not a valid calendar date."],
     };
   }
@@ -201,6 +222,21 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
 
   const traveller = windowPresence(trips, on);
   errors.push(...traveller.errors);
+
+  const cutoffApplies = parseIso(on) >= parseIso(EES_CUTOFF);
+  const preCutoff = new Set<IsoDate>();
+  if (cutoffApplies) {
+    const { stays } = closeStays(trips, on);
+    for (const stay of stays) {
+      if (parseIso(stay.entry) >= parseIso(EES_CUTOFF)) continue;
+      for (let day = parseIso(stay.entry); day <= parseIso(stay.exit); day += 1) {
+        const date = formatIso(day);
+        if (traveller.dates.has(date)) preCutoff.add(date);
+      }
+    }
+  }
+  const comparableDates = new Set([...traveller.dates].filter((date) => !preCutoff.has(date)));
+  const comparableDaysUsed = traveller.daysUsed - preCutoff.size;
 
   let eesDates = new Set<IsoDate>();
   let eesRecordDaysUsed: number | null = null;
@@ -211,8 +247,8 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
     errors.push(...fromRecords.errors.map((error) => error.replace(/^Trip/, "EES record")));
   }
 
-  const travellerOnly = sorted([...traveller.dates].filter((date) => !eesDates.has(date)));
-  const eesOnly = sorted([...eesDates].filter((date) => !traveller.dates.has(date)));
+  const travellerOnly = sorted([...comparableDates].filter((date) => !eesDates.has(date)));
+  const eesOnly = sorted([...eesDates].filter((date) => !comparableDates.has(date)));
   const differences: DayDifference[] = [
     ...travellerOnly.map((date) => ({ date, side: "traveller-only" as const })),
     ...eesOnly.map((date) => ({ date, side: "ees-only" as const })),
@@ -279,16 +315,25 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
     }
   }
 
-  if (figureValid && claim.daysUsed !== traveller.daysUsed) {
+  let cutoffNote = "";
+  if (preCutoff.size > 0) {
+    cutoffNote =
+      `${pluralDays(preCutoff.size)} (${dayRanges(sorted([...preCutoff]))}) belong to stays that began before ${EES_CUTOFF}. The EES does not count stays that began before it started full operation, so these days are not treated as mismatches and are not a reason to ask for a correction. A border officer applying the 90/180 rule may still count them.`;
+  }
+
+  if (figureValid && claim.daysUsed !== comparableDaysUsed) {
     codes.unshift("figure-differs");
   }
 
-  if (codes.length === 0 && figureValid && errors.length === 0) codes.push("match");
+  if (preCutoff.size > 0) codes.push("ees-ignores-pre-cutoff-stay");
+  else if (codes.length === 0 && figureValid && errors.length === 0) codes.push("match");
 
   const head = `Compared on ${on}, over the 180-day period ${windowStart} to ${on}. The trips count ${pluralDays(traveller.daysUsed)}. The EES states ${figureValid ? pluralDays(claim.daysUsed) : "an unusable figure"}.`;
   let explanation = head;
-  if (!claim.records && figureValid && claim.daysUsed !== traveller.daysUsed) {
+  if (!claim.records && figureValid && claim.daysUsed !== comparableDaysUsed) {
     explanation += " No entry/exit records were provided, so the days that differ cannot be listed.";
+  } else if (!claim.records && explainedByCutoff(codes)) {
+    explanation += " No entry/exit records were provided. Leaving out the stays the EES does not count, the stated figure matches the trips.";
   } else if (!claim.records && codes.includes("match")) {
     explanation += " No entry/exit records were provided. The stated figure matches the trips.";
   } else if (notes.length > 0) {
@@ -296,6 +341,7 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
   } else if (codes.includes("match") && claim.records) {
     explanation += " The EES records and the stated figure match the trips.";
   }
+  if (cutoffNote) explanation += ` ${cutoffNote}`;
   if (errors.length > 0) explanation += ` ${errors.join(" ")}`;
 
   return {
@@ -303,12 +349,14 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
     windowStart,
     travellerDaysUsed: traveller.daysUsed,
     eesDaysUsed: claim.daysUsed,
-    figureGap: figureValid ? claim.daysUsed - traveller.daysUsed : 0,
+    figureGap: figureValid ? claim.daysUsed - comparableDaysUsed : 0,
     eesRecordDaysUsed,
     differences: claim.records ? differences : [],
     codes,
     explanation,
     errors,
+    preCutoffDays: sorted([...preCutoff]),
+    eesComparableDaysUsed: comparableDaysUsed,
   };
 }
 
