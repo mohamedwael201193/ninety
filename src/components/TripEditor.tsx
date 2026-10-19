@@ -15,7 +15,7 @@ type TripEditorProps = {
 
 // Same rules and messages as PR #1's hand-written validation.
 const schema = z
-  .object({ entry: z.string(), exit: z.string(), open: z.boolean() })
+  .object({ entry: z.string(), exit: z.string().catch(""), open: z.boolean() })
   .superRefine((v, ctx) => {
     if (!isIsoDate(v.entry)) {
       ctx.addIssue({ code: "custom", path: ["entry"], message: dateFormatError(v.entry) ?? "Enter an entry date." });
@@ -51,10 +51,10 @@ export function TripEditor({ initial, onSave, onCancel }: TripEditorProps) {
           id="trip-exit"
           testId="trip-exit"
           label="Left"
-          disabled={open}
+          aria-disabled={open || undefined}
           error={errors.exit ? "" : undefined} aria-describedby="trip-form-error"
+          readOnly={open}
           {...register("exit")}
-          {...(open ? { value: "" } : {})}
         />
       </div>
       <label htmlFor="trip-open" className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl bg-paper-warm px-4 text-sm">
@@ -71,7 +71,7 @@ export function TripEditor({ initial, onSave, onCancel }: TripEditorProps) {
         </button>
         <button type="submit" data-testid="trip-save"
           className="focus-ring h-12 rounded-full bg-solar px-6 font-medium text-ink transition-[background,transform] duration-200 hover:bg-solar-deep active:scale-[.98]">
-          {initial ? "Save trip" : "Add trip"}
+          {initial ? "Save changes" : "Save trip"}
         </button>
       </div>
     </form>
