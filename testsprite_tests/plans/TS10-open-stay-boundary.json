@@ -1,0 +1,28 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Open stay: exit on day 90 fits, day 91 does not",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?scenario=open-stay (loads a demo history: one open stay that began on 2026-10-01, read on 2026-10-19; the banner data-testid=scenario-banner is shown)"
+    },
+    {
+      "type": "action",
+      "description": "In the planned trip form (data-testid=planned-form) enter planned entry 2026-12-01 and planned exit 2026-12-29, then click check (data-testid=planned-check)"
+    },
+    {
+      "type": "assertion",
+      "description": "The planned trip result (data-testid=planned-result) starts with 'Fits'"
+    },
+    {
+      "type": "action",
+      "description": "Change the planned exit to 2026-12-30 and click check (data-testid=planned-check) again"
+    },
+    {
+      "type": "assertion",
+      "description": "The planned trip result (data-testid=planned-result) says 'Does not fit'"
+    }
+  ]
+}

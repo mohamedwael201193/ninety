@@ -80,6 +80,11 @@ export type PlannedTripCheck = {
   daysUsedOnEntry: number;
   overstay: boolean;
   errors: string[];
+  /**
+   * True when a stay with no exit was treated as continuous presence from its
+   * entry up to the planned entry, because nothing says the traveller left.
+   */
+  assumedContinuousPresence: boolean;
 };
 
 const MAX_FORWARD_DAYS = 120;
@@ -251,12 +256,21 @@ export function checkPlannedTrip(
       daysUsedOnEntry: 0,
       overstay: false,
       errors: ["Enter a valid entry date and exit date."],
+      assumedContinuousPresence: false,
     };
   }
   if (exitNumber < entryNumber) {
     errors.push("The planned exit is before the planned entry.");
   }
-  const atEntry = evaluate(history, plan.entry, today);
+  // A stay with no exit means the traveller is still inside. Until an exit is
+  // recorded, the safe reading is that they stay inside up to the planned
+  // entry, so the plan continues that stay instead of starting after a gap.
+  const todayNumber = parseIso(today);
+  const openStay = entryNumber > todayNumber && history.some((stay) => stay.exit === null);
+  const assumed = openStay
+    ? history.map((stay) => (stay.exit === null && parseIso(stay.entry) <= todayNumber ? { entry: stay.entry, exit: addDays(plan.entry, -1) } : stay))
+    : history;
+  const atEntry = evaluate(assumed, plan.entry, today);
   const plannedDays = exitNumber >= entryNumber ? daysInclusive(plan.entry, plan.exit) : 0;
   const fits =
     errors.length === 0 &&
@@ -271,6 +285,7 @@ export function checkPlannedTrip(
     daysUsedOnEntry: atEntry.daysUsed,
     overstay: atEntry.overstay,
     errors: [...errors, ...atEntry.errors],
+    assumedContinuousPresence: openStay,
   };
 }
 
