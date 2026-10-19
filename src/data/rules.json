@@ -197,12 +197,17 @@
       {
         "file": "src/lib/ees/reconcile.test.ts",
         "name": "still flags a real gap in stays after the cutoff"
+      },
+      {
+        "file": "src/lib/ees/cutoff-explainer.test.ts",
+        "name": "uses the reconciler's own figures"
       }
     ],
     "parity": [],
     "testsprite": [
       "TS30",
-      "TS31"
+      "TS31",
+      "TS38"
     ]
   },
   {

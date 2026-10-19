@@ -74,7 +74,7 @@ The home page has six worked histories (open stay, 88 of 90, overstay, same-day 
 
 ## Tested with TestSprite
 
-`testsprite_tests/plans/` holds the end-to-end suite (**29 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
+`testsprite_tests/plans/` holds the end-to-end suite (**30 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
 
 | Id | Proves |
 |---|---|
@@ -107,6 +107,7 @@ The home page has six worked histories (open stay, 88 of 90, overstay, same-day 
 | TS35 | 'Use latest exit' turns a 105-day plan into a 46-day plan that fits |
 | TS36 | `/proof` lists the 12 rules, each with its engine, parity and TestSprite tests |
 | TS37 | The scenario gallery opens each history it describes, with its guard badges |
+| TS38 | The /ees cutoff card explains 10 April 2026 and its example compares 10 of 30 days |
 
 `testsprite_tests/test-ids.json` maps each plan to its TestSprite test id. New plans are added to the cloud suite with `npm run tests:add -- <plan.json>`, which records the id.
 

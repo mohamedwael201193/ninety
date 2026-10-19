@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T15:48:31.738Z",
+  "generatedAt": "2026-10-19T15:55:06.728Z",
   "source": "src/data/rules.json + testsprite test result",
   "rules": [
     {
@@ -345,6 +345,10 @@
         {
           "file": "src/lib/ees/reconcile.test.ts",
           "name": "still flags a real gap in stays after the cutoff"
+        },
+        {
+          "file": "src/lib/ees/cutoff-explainer.test.ts",
+          "name": "uses the reconciler's own figures"
         }
       ],
       "parity": [],
@@ -357,6 +361,12 @@
         },
         {
           "id": "TS31",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        },
+        {
+          "id": "TS38",
           "plan": null,
           "testId": null,
           "latest": null
