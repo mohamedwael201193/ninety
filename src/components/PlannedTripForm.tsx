@@ -28,10 +28,11 @@ export function PlannedTripForm({ history, today }: PlannedTripFormProps) {
     const c = checkPlannedTrip(history, today, { entry, exit });
     const plan = { entry, exit };
     if (c.errors.length > 0) return setV({ tone: "error", text: c.errors.join(" ") });
+    const note = c.assumedContinuousPresence ? " This assumes you stay in the Schengen area until the planned entry, because your current stay has no exit date." : "";
     if (c.fits) return setV({ tone: "ok", plan, latestExit: c.latestExit,
-      text: `Fits. ${c.plannedDays} days, from ${entry} to ${exit}. Latest legal exit is ${c.latestExit}.` });
+      text: `Fits. ${c.plannedDays} days, from ${entry} to ${exit}. Latest legal exit is ${c.latestExit}.${note}` });
     if (c.latestExit) return setV({ tone: "risk", plan, latestExit: c.latestExit,
-      text: `Does not fit. Latest legal exit for an entry on ${entry} is ${c.latestExit}. This plan is ${c.plannedDays} days.` });
+      text: `Does not fit. Latest legal exit for an entry on ${entry} is ${c.latestExit}. This plan is ${c.plannedDays} days.${note}` });
     setV({ tone: "risk", plan, latestExit: null, text: `Does not fit. A stay starting on ${entry} would not be authorised.` });
   }
 
