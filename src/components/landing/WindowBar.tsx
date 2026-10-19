@@ -20,7 +20,7 @@ export default function WindowBar() {
       <div role="img" aria-label="180-day window: 56 days used across two trips, 34 days left." className="grid h-10 gap-px overflow-hidden rounded-lg" style={{ gridTemplateColumns: "repeat(180, 1fr)" }}>
         {Array.from({ length: 180 }, (_, i) => <Cell key={i} i={i} progress={scrollYProgress} />)}
       </div>
-      <div className="mt-2 flex justify-between text-xs text-ink-hushed tnum"><span>180 days ago</span><span>Today</span></div>
+      <div className="mt-2 flex justify-between text-xs text-ink-hushed tnum"><span>180 days ago</span><span className="inline-flex items-center gap-1.5"><i className="inline-block size-2 rounded-[2px] bg-solar" aria-hidden="true" />Today</span></div>
     </div>
   );
 }
