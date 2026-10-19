@@ -21,6 +21,18 @@ Ninety rebuilds that count from the trips you enter and tells you:
 
 Trips are typed as `YYYY-MM-DD` (other formats such as `MM/DD/YYYY` are rejected with a clear message), overlapping trips are flagged, and everything is stored only in your browser — no account, no server.
 
+## Scenario links
+
+Any named demo history opens with one link, without touching your saved trips (edits to a demo are not saved):
+
+| Link | History | Read on |
+|---|---|---|
+| `/?scenario=open-stay` | In the Schengen area since 2026-10-01, no exit yet | 2026-10-19 |
+| `/?scenario=near-limit` | 2026-05-01 → 06-15 and 2026-08-20 → 09-30: 88 of 90 days used | 2026-10-19 |
+| `/?scenario=overstay` | 2026-06-01 → 09-15: a 107-day stay | 2026-10-19 |
+
+`?today=YYYY-MM-DD` still overrides the date. The scenarios live in `src/lib/scenarios.ts`, with tests.
+
 ## EES reconciliation (`/ees`)
 
 The Entry/Exit System now records every crossing and shows a days-used figure. When an exit is not recorded, that figure can be badly wrong — and it is the border's number, not yours, that decides whether you are let in.
