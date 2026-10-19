@@ -1,0 +1,28 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Trips persist after reloading the page",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-10-19&fresh=1 (pins today to 2026-10-19 and clears saved trips in storage key ninety.trips.v1)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add), enter entry 2026-09-01 and exit 2026-09-10 (data-testid=trip-entry, trip-exit) and click save (data-testid=trip-save)"
+    },
+    {
+      "type": "assertion",
+      "description": "The status panel (data-testid=status-panel) shows 10 days used"
+    },
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-10-19 (without fresh=1, so saved trips are kept)"
+    },
+    {
+      "type": "assertion",
+      "description": "Exactly one trip row (data-testid=trip-row) for 2026-09-01 to 2026-09-10 is shown and the status panel still shows 10 days used"
+    }
+  ]
+}

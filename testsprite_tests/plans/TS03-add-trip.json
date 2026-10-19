@@ -1,0 +1,32 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Add a trip manually: 2026-09-01 to 2026-09-10 is 10 days used",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-10-19&fresh=1 (pins today to 2026-10-19 and clears saved trips in storage key ninety.trips.v1)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add) to open the trip sheet"
+    },
+    {
+      "type": "action",
+      "description": "Enter entry date 2026-09-01 (data-testid=trip-entry) and exit date 2026-09-10 (data-testid=trip-exit)"
+    },
+    {
+      "type": "action",
+      "description": "Click save (data-testid=trip-save)"
+    },
+    {
+      "type": "assertion",
+      "description": "Exactly one trip row (data-testid=trip-row) appears, for 2026-09-01 to 2026-09-10"
+    },
+    {
+      "type": "assertion",
+      "description": "The status panel (data-testid=status-panel) shows 10 days used out of 90 and 80 days left"
+    }
+  ]
+}

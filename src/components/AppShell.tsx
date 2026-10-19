@@ -8,7 +8,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { addDays, isIsoDate, localToday } from "@/lib/schengen/dates";
 import { evaluate } from "@/lib/schengen/engine";
-import { findOverlaps, loadTrips, saveTrips, type Trip } from "@/lib/trips";
+import { TRIP_STORAGE_KEY, findOverlaps, loadTrips, saveTrips, type Trip } from "@/lib/trips";
 import { Sheet } from "./dashboard/Sheet";
 import { PlannedTripForm } from "./PlannedTripForm";
 import { StatusPanel } from "./StatusPanel";
@@ -28,10 +28,13 @@ export function AppShell() {
   const [editing, setEditing] = useState<Trip | null | undefined>(undefined);
   const [formKey, setFormKey] = useState(0);
 
+  const fresh = params.get("fresh") === "1";
   useEffect(() => {
+    // ?fresh=1 starts from an empty trip list (used by the test suite for a clean slate).
+    if (fresh) window.localStorage.removeItem(TRIP_STORAGE_KEY);
     setTrips(loadTrips(window.localStorage));
     setReady(true);
-  }, []);
+  }, [fresh]);
 
   // The mobile summary bar belongs to the dashboard only: show it while the
   // dashboard (#check, or this component's own main on other routes) fills the

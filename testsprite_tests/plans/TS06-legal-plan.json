@@ -1,12 +1,12 @@
 {
   "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
   "type": "frontend",
-  "name": "Planned trip check gives a verdict",
-  "priority": "p1",
+  "name": "A legal planned trip fits",
+  "priority": "p0",
   "planSteps": [
     {
       "type": "action",
-      "description": "Navigate to the app home page"
+      "description": "Navigate to /?today=2026-10-19&fresh=1 (pins today to 2026-10-19 and clears saved trips in storage key ninety.trips.v1)"
     },
     {
       "type": "action",
@@ -22,7 +22,7 @@
     },
     {
       "type": "assertion",
-      "description": "A planned trip result (data-testid=planned-result) is shown stating whether the trip fits within the 90/180 rule"
+      "description": "The planned trip result (data-testid=planned-result) says the trip fits (not 'Does not fit')"
     }
   ]
 }
