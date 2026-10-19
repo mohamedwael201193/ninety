@@ -1,0 +1,32 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "EES: an earlier exit is not called a missing entry",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2024-06-14&fresh=1 (pins today and clears saved trips)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add), enter entry 2024-06-01 (data-testid=trip-entry) and exit 2024-06-10 (data-testid=trip-exit), and click save (data-testid=trip-save)"
+    },
+    {
+      "type": "action",
+      "description": "Navigate to /ees?today=2024-06-14"
+    },
+    {
+      "type": "action",
+      "description": "Enter 8 in the EES days used field (data-testid=ees-days-used), enter '2024-06-01 2024-06-08' in the EES records field (data-testid=ees-records), and click compare (data-testid=ees-compare)"
+    },
+    {
+      "type": "assertion",
+      "description": "The findings list (data-testid=ees-codes) has data-codes exactly 'figure-differs exit-dates-disagree'"
+    },
+    {
+      "type": "assertion",
+      "description": "The explanation (data-testid=ees-explanation) does not contain 'Likely missing entry'"
+    }
+  ]
+}

@@ -288,12 +288,18 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
     if (explained.size > 0) codes.push("likely-missing-exit");
 
     const exitNotes: string[] = [];
+    // Days after an earlier EES exit, up to the traveller's later exit. The
+    // entry is recorded, so these days are an exit disagreement, not a missing entry.
+    const earlierExitDays = new Set<IsoDate>();
     for (const record of claim.records) {
       if (record.exit === null) continue;
       const sameEntry = trips.filter((item) => item.entry === record.entry && item.exit !== null);
       // Two trips can share an entry date; only flag when none of them ends where the EES record ends.
       if (sameEntry.some((item) => item.exit === record.exit)) continue;
       const trip = sameEntry[0];
+      if (trip && trip.exit !== null && trip.exit > record.exit) {
+        for (let day = parseIso(record.exit) + 1; day <= parseIso(trip.exit); day += 1) earlierExitDays.add(formatIso(day));
+      }
       if (trip && trip.exit !== record.exit) {
         exitNotes.push(
           `Exit dates disagree for the entry on ${record.entry}: trips end on ${trip.exit}, the EES ends on ${record.exit}.`,
@@ -305,10 +311,11 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
       notes.push(...exitNotes);
     }
 
-    if (travellerOnly.length > 0) {
+    const missingEntryDays = travellerOnly.filter((date) => !earlierExitDays.has(date));
+    if (missingEntryDays.length > 0) {
       codes.push("likely-missing-entry");
       notes.push(
-        `Likely missing entry. These days are in the trips and not in the EES records: ${dayRanges(travellerOnly)}.`,
+        `Likely missing entry. These days are in the trips and not in the EES records: ${dayRanges(missingEntryDays)}.`,
       );
     }
 
