@@ -127,11 +127,12 @@ export function PhoneDemo() {
             {mismatch && (
               <motion.div
                 aria-hidden
-                initial={{ opacity: 0, y: -16, scale: 0.96 }}
+                initial={{ opacity: 0, y: 16, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10 }}
+                exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.45, ease: EASE }}
-                className="absolute inset-x-4 top-11 z-30 rounded-2xl bg-ink p-3 text-paper shadow-pop"
+                // Docked to the bottom of the screen like a sheet, so it never covers the phone's header or counter.
+                className="absolute inset-x-4 bottom-4 z-30 rounded-2xl bg-ink p-3 text-paper shadow-pop"
               >
                 <div className="flex items-center gap-2 text-[12px] font-medium">
                   <CircleAlert size={14} className="text-solar" /> EES count disagrees
