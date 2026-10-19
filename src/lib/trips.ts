@@ -27,7 +27,8 @@ export function parseTrips(raw: string | null): Trip[] {
       trips.push({ id: record.id, entry: record.entry, exit: null });
       continue;
     }
-    if (typeof record.exit === "string" && isIsoDate(record.exit)) {
+    // A stored exit before its entry cannot come from the form; skip it like the engine does.
+    if (typeof record.exit === "string" && isIsoDate(record.exit) && record.exit >= record.entry) {
       trips.push({ id: record.id, entry: record.entry, exit: record.exit });
     }
   }
