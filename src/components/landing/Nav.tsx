@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { SectionLink } from "./SectionLink";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Nav() {
@@ -13,13 +14,13 @@ export default function Nav() {
           ninety<span className="h-2.5 w-2.5 rounded-full bg-solar" aria-hidden />
         </Link>
         <div className="hidden items-center gap-8 text-sm text-ink-hushed md:flex">
-          <Link href="/#check" className="hover:text-ink">Check</Link>
-          <Link href="/#planned-heading" className="hover:text-ink">Plan</Link>
+          <SectionLink hash="#check" className="hover:text-ink">Check</SectionLink>
+          <SectionLink hash="#planned-heading" className="hover:text-ink">Plan</SectionLink>
           <Link href="/ees" data-testid="nav-ees" className="hover:text-ink">EES check</Link>
           <Link href="/letter" data-testid="nav-letter" className="hover:text-ink">Letter</Link>
           <Link href="/parity" data-testid="nav-parity" className="hover:text-ink">Parity</Link>
         </div>
-        <Link href="/#check" className="btn btn-primary !min-h-9 px-4 text-sm">Check my days</Link>
+        <SectionLink hash="#check" className="btn btn-primary !min-h-9 px-4 text-sm">Check my days</SectionLink>
       </nav>
     </motion.header>
   );

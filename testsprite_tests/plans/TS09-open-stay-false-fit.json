@@ -6,7 +6,7 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Navigate to /?scenario=open-stay (loads a demo history: one open stay that began on 2026-10-01, read on 2026-10-19; the banner data-testid=scenario-banner is shown)"
+      "description": "Navigate to /?scenario=open-stay (loads a demo history: one open stay that began on 2026-10-01, read on 2026-10-19; the banner data-testid=scenario-banner is shown). Stay on this page: scroll to the planned trip form instead of using the navigation links"
     },
     {
       "type": "assertion",
