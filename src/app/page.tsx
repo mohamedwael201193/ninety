@@ -5,10 +5,13 @@ import Footer from "@/components/landing/Footer";
 import Hero from "@/components/landing/Hero";
 import MismatchLetter from "@/components/landing/MismatchLetter";
 import Nav from "@/components/landing/Nav";
+import { SmoothScroll } from "@/components/fx/SmoothScroll";
 
 export default function HomePage() {
   return (
     <>
+      {/* Smooth scroll belongs to the landing story only; the tool pages keep native scrolling. */}
+      <SmoothScroll />
       <Nav />
       <Hero />
       <CountBand />
