@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    # Nightly: the differential fuzzer with a fresh seed.
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Lint, types, unit, property and fuzz tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npx tsc --noEmit
+      - name: Vitest (unit, property, differential fuzz)
+        run: npx vitest run
+        env:
+          FUZZ_RUNS: ${{ github.event_name == 'schedule' && '3000' || '500' }}
+          FUZZ_SEED: ${{ github.event_name == 'schedule' && github.run_id || '20261019' }}
