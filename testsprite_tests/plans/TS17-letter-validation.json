@@ -1,0 +1,36 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Letter: missing fields are named, and no letter is drafted",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /letter?today=2026-10-19"
+    },
+    {
+      "type": "action",
+      "description": "Fill only Full name 'Jane Traveller' (data-testid=letter-name) and leave every other field empty"
+    },
+    {
+      "type": "action",
+      "description": "Click 'Draft letter' (data-testid=letter-generate)"
+    },
+    {
+      "type": "assertion",
+      "description": "The form message (data-testid=letter-error) reads 'Fix the 6 highlighted fields to draft the letter.'"
+    },
+    {
+      "type": "assertion",
+      "description": "Under the travel document field, the message (data-testid=letter-document-error) reads 'Enter your travel document number.'"
+    },
+    {
+      "type": "assertion",
+      "description": "Under the EES days used field, the message (data-testid=letter-ees-days-error) reads 'Enter the days-used figure the EES shows.'"
+    },
+    {
+      "type": "assertion",
+      "description": "No letter text (data-testid=letter-text) is shown and there is no message under the full name field (data-testid=letter-name-error)"
+    }
+  ]
+}

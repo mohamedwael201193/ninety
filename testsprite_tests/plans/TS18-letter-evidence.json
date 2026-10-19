@@ -1,0 +1,36 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Letter from a demo scenario states the three figures",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?scenario=near-limit (demo history read on 2026-10-19; banner data-testid=scenario-banner)"
+    },
+    {
+      "type": "action",
+      "description": "Click 'Letter' in the top navigation (data-testid=nav-letter). Do not type a URL"
+    },
+    {
+      "type": "action",
+      "description": "Fill Full name 'Jane Traveller' (data-testid=letter-name), Date of birth 1990-05-04 (letter-birth), Country of nationality 'Egypt' (letter-nationality), Travel document number 'A1234567' (letter-document), Email 'jane@example.com' (letter-email), Member State 'France' (letter-member-state), and EES days used 90 (letter-ees-days)"
+    },
+    {
+      "type": "action",
+      "description": "Click 'Draft letter' (data-testid=letter-generate)"
+    },
+    {
+      "type": "assertion",
+      "description": "The evidence table shows Your dates 88 (data-testid=letter-evidence-ours), EES figure 90 (letter-evidence-ees) and Difference 2 (letter-evidence-gap)"
+    },
+    {
+      "type": "assertion",
+      "description": "The letter text (data-testid=letter-text) contains 'In figures: my dates 88 days; EES 90 days; difference 2 days, the EES counting more.'"
+    },
+    {
+      "type": "assertion",
+      "description": "The page shows the demo scenario banner (data-testid=scenario-banner)"
+    }
+  ]
+}
