@@ -1,7 +1,7 @@
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-  esbuild: { jsx: "automatic" },
+  oxc: { jsx: { runtime: "automatic" } },
   resolve: { alias: { "@": new URL("./src", import.meta.url).pathname } },
   test: {
     environment: "node",
