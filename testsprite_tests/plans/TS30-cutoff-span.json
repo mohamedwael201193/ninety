@@ -1,0 +1,36 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "EES: a stay that began before 10 April 2026 is left out",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-05-01&fresh=1"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add), enter entry 2026-04-01 and exit 2026-04-20 (data-testid=trip-entry, trip-exit), and click save (data-testid=trip-save)"
+    },
+    {
+      "type": "assertion",
+      "description": "Days used (data-testid=days-used) shows 20"
+    },
+    {
+      "type": "action",
+      "description": "Navigate to /ees?today=2026-05-01"
+    },
+    {
+      "type": "action",
+      "description": "Enter 0 in the EES days used field (data-testid=ees-days-used) and click compare (data-testid=ees-compare)"
+    },
+    {
+      "type": "assertion",
+      "description": "The findings list (data-testid=ees-codes) has data-codes exactly 'ees-ignores-pre-cutoff-stay' and shows 'EES leaves out pre-10 April 2026 stays'"
+    },
+    {
+      "type": "assertion",
+      "description": "The cutoff note (data-testid=ees-cutoff-note) has data-days 20 and says 0 days are comparable with the EES"
+    }
+  ]
+}

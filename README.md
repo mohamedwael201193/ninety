@@ -66,7 +66,7 @@ Current result: **14/14 match**. If the Commission script cannot be loaded, the 
 
 ## Tested with TestSprite
 
-`testsprite_tests/plans/` holds the **14-test** end-to-end suite that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
+`testsprite_tests/plans/` holds the end-to-end suite (**21 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
 
 | Id | Proves |
 |---|---|
@@ -84,8 +84,15 @@ Current result: **14/14 match**. If the Commission script cannot be loaded, the 
 | TC010 | Editing a trip recounts it (3 → 10 days) |
 | TC011 | Trips and the count survive a reload |
 | TS26 | A same-day exit and re-entry counts the day once |
+| TS16 | A demo scenario carries to `/ees` through the nav with the same 88 days |
+| TS17 | Letter: each missing field gets its own message, no letter is drafted |
+| TS18 | Letter from a scenario shows 88 / 90 / 2 and states them in the text |
+| TS13 | EES: an earlier EES exit is an exit disagreement, not a missing entry |
+| TS14 | EES: a missing exit is found and its 4 days listed as one range |
+| TS30 | EES: a stay that began before 10 April 2026 is left out (20 days, 0 comparable) |
+| TS31 | EES: only the post-cutoff stay is compared (20 left out, 10 comparable) |
 
-`testsprite_tests/test-ids.json` maps each plan to its TestSprite test id. Plans for further tests (TS13–TS15) are in the folder and are added to the cloud suite in later pull requests.
+`testsprite_tests/test-ids.json` maps each plan to its TestSprite test id. New plans are added to the cloud suite with `npm run tests:add -- <plan.json>`, which records the id.
 
 Below the TestSprite suite, every pull request also runs lint, types, and the unit, property and fuzz tests in GitHub Actions (`.github/workflows/ci.yml`).
 
