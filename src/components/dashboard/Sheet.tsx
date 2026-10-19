@@ -2,12 +2,28 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 
-/** Bottom sheet on mobile, centered dialog on md+. Esc / backdrop close, focus restored on close. */
+const FOCUSABLE = "button,input,select,textarea,[href],[tabindex]:not([tabindex='-1'])";
+
+/** Bottom sheet on mobile, centered dialog on md+. Esc / backdrop close, focus moves in on open and back on close, page behind is inert. */
 export function Sheet({ open, title, onClose, children }: { open: boolean; title: string; onClose: () => void; children: ReactNode }) {
   const panel = useRef<HTMLDivElement>(null);
   const returnTo = useRef<HTMLElement | null>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  // While the sheet is open, the rest of the page is inert, so a screen reader
+  // cannot wander into the content behind the overlay.
+  useEffect(() => {
+    if (!open) return;
+    const layer = document.getElementById("sheet-layer");
+    // The attribute (not the property) so it also works where `inert` is not reflected.
+    const others = [...document.body.children].filter((el) => el !== layer && !el.hasAttribute("inert"));
+    others.forEach((el) => el.setAttribute("inert", ""));
+    return () => others.forEach((el) => el.removeAttribute("inert"));
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -15,7 +31,7 @@ export function Sheet({ open, title, onClose, children }: { open: boolean; title
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "Tab" && panel.current) {
-        const f = panel.current.querySelectorAll<HTMLElement>("button,input,[href],[tabindex]:not([tabindex='-1'])");
+        const f = panel.current.querySelectorAll<HTMLElement>(FOCUSABLE);
         const list = [...f].filter((el) => !el.hasAttribute("disabled"));
         if (!list.length) return;
         const first = list[0], last = list[list.length - 1];
@@ -24,15 +40,23 @@ export function Sheet({ open, title, onClose, children }: { open: boolean; title
       }
     };
     document.addEventListener("keydown", onKey);
+    // Move focus into the dialog: the first field if there is one, else the close button.
+    const frame = requestAnimationFrame(() => {
+      const fields = panel.current?.querySelectorAll<HTMLElement>("input,select,textarea");
+      (fields?.[0] ?? panel.current?.querySelector<HTMLElement>(FOCUSABLE))?.focus();
+    });
     document.body.style.overflow = "hidden";
     return () => {
+      cancelAnimationFrame(frame);
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
       returnTo.current?.focus?.();
     };
   }, [open, onClose]);
 
-  return (
+  if (!mounted) return null;
+  return createPortal(
+    <div id="sheet-layer">
     <AnimatePresence>
       {open ? (
         <div className="fixed inset-0 z-50 flex items-end justify-center md:items-center">
@@ -60,5 +84,7 @@ export function Sheet({ open, title, onClose, children }: { open: boolean; title
         </div>
       ) : null}
     </AnimatePresence>
+    </div>,
+    document.body,
   );
 }

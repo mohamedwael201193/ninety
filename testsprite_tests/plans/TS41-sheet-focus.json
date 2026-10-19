@@ -1,0 +1,32 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Trip sheet takes focus, makes the page inert, and gives it back",
+  "priority": "p2",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-10-19&fresh=1"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add)"
+    },
+    {
+      "type": "assertion",
+      "description": "The trip sheet dialog (data-testid=trip-sheet) is open and the keyboard focus is in its entry date field (data-testid=trip-entry)"
+    },
+    {
+      "type": "assertion",
+      "description": "The calculator section (id=calculator) is inside an element that has the inert attribute, and the dialog itself is not"
+    },
+    {
+      "type": "action",
+      "description": "Press Escape"
+    },
+    {
+      "type": "assertion",
+      "description": "The trip sheet is closed, no element on the page has the inert attribute, and the add trip button (data-testid=trip-add) has keyboard focus again"
+    }
+  ]
+}
