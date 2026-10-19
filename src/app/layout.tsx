@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Inter_Tight } from "next/font/google";
+import localFont from "next/font/local";
 import { Providers } from "@/components/Providers";
 import { SkipLink } from "@/components/SkipLink";
 import "./globals.css";
 
-const display = Inter_Tight({ subsets: ["latin"], weight: ["500", "600"], variable: "--font-display-face", display: "swap" });
-const sans = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-sans-face", display: "swap" });
-const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono-face", display: "swap" });
+// Self-hosted (OFL), so the build never depends on fetching from Google Fonts.
+const display = localFont({ src: [{ path: "./fonts/inter-tight-latin-500-normal.woff2", weight: "500", style: "normal" }, { path: "./fonts/inter-tight-latin-600-normal.woff2", weight: "600", style: "normal" }], variable: "--font-display-face", display: "swap" });
+const sans = localFont({ src: [{ path: "./fonts/ibm-plex-sans-latin-400-normal.woff2", weight: "400", style: "normal" }, { path: "./fonts/ibm-plex-sans-latin-500-normal.woff2", weight: "500", style: "normal" }, { path: "./fonts/ibm-plex-sans-latin-600-normal.woff2", weight: "600", style: "normal" }], variable: "--font-sans-face", display: "swap" });
+const mono = localFont({ src: [{ path: "./fonts/ibm-plex-mono-latin-400-normal.woff2", weight: "400", style: "normal" }, { path: "./fonts/ibm-plex-mono-latin-500-normal.woff2", weight: "500", style: "normal" }], variable: "--font-mono-face", display: "swap" });
 
 export const metadata: Metadata = {
   title: { default: "Ninety — Schengen days left", template: "%s · Ninety" },
