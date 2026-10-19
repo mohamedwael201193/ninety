@@ -1,5 +1,6 @@
 "use client";
 
+import { ScrollRegion } from "./ScrollRegion";
 import { useEffect, useState } from "react";
 import { CircleCheck, CircleX, ExternalLink } from "lucide-react";
 import type { ParityReport, ParityRow } from "@/lib/schengen/parity";
@@ -98,7 +99,7 @@ export function ParityPanel() {
         ) : null}
 
         <div className="card-soft overflow-hidden">
-          <div className="overflow-x-auto">
+          <ScrollRegion label="Parity table">
             <table data-testid="parity-table" className="w-full min-w-[620px] text-left text-sm">
               <caption className="sr-only">Ninety and the Commission calculator, scenario by scenario</caption>
               <thead className="bg-paper-sunk">
@@ -120,7 +121,7 @@ export function ParityPanel() {
                 {tableRows(rows)}
               </tbody>
             </table>
-          </div>
+          </ScrollRegion>
         </div>
 
         {report && report.mismatches.length > 0 ? (

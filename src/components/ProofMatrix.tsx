@@ -1,3 +1,4 @@
+import { ScrollRegion } from "./ScrollRegion";
 import Link from "next/link";
 import proof from "@/data/proof.json";
 import { label } from "@/lib/schengen/scenario-names";
@@ -31,7 +32,7 @@ export function ProofMatrix() {
         {" "}<span data-testid="proof-summary">{proof.rules.length} rules · {passed}/{total} TestSprite references passing on their latest run.</span>
         {" "}History of every run: <a className="underline underline-offset-4" href={`${REPO}/blob/main/LOOP.md`}>LOOP.md</a>.
       </p>
-      <div className="card-soft overflow-x-auto">
+      <ScrollRegion label="Rule-to-test matrix" className="card-soft">
         <table data-testid="proof-table" className="w-full min-w-[860px] text-left text-sm">
           <thead className="text-xs text-ink-hushed">
             <tr><th className="px-5 py-3">Rule</th><th className="px-5 py-3">Engine tests</th><th className="px-5 py-3">Commission parity</th><th className="px-5 py-3">TestSprite</th></tr>
@@ -61,7 +62,7 @@ export function ProofMatrix() {
             ))}
           </tbody>
         </table>
-      </div>
+      </ScrollRegion>
     </ToolShell>
   );
 }
