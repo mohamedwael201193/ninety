@@ -1,0 +1,26 @@
+name: Commission drift
+
+on:
+  schedule:
+    # Nightly: has the European Commission's calculator page changed since we stored it?
+    - cron: "41 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  drift:
+    name: Live Commission page matches the stored hash and gives 14/14
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx vitest run src/lib/schengen/parity.test.ts
+        env:
+          PARITY_LIVE: "1"
