@@ -28,14 +28,9 @@ function ParityTableRow({ row, number }: { row: ParityRow; number: number }) {
   );
 }
 
-/** Rows numbered from 1, as shown in the first column. */
-function tableRows(rows: ParityRow[]) {
-  const out = [];
-  for (let number = 1; number < rows.length; number += 1) {
-    const row = rows[number];
-    out.push(<ParityTableRow key={row.scenario} row={row} number={number} />);
-  }
-  return out;
+/** Every scenario gets a row; the displayed number is 1-based, the index is not. */
+export function tableRows(rows: ParityRow[]) {
+  return rows.map((row, index) => <ParityTableRow key={row.scenario} row={row} number={index + 1} />);
 }
 
 export function ParityPanel() {
