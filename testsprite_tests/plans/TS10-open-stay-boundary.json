@@ -10,7 +10,23 @@
     },
     {
       "type": "action",
-      "description": "Click the add trip button (data-testid=trip-add), enter entry date 2026-10-01 (data-testid=trip-entry), tick 'I'm still in the Schengen area' (data-testid=trip-open) and click save (data-testid=trip-save)"
+      "description": "Click the add trip button in the trips header (data-testid=trip-add) to open the trip sheet"
+    },
+    {
+      "type": "action",
+      "description": "In the trip sheet, type 2026-10-01 into the entry date field (data-testid=trip-entry)"
+    },
+    {
+      "type": "action",
+      "description": "Tick the checkbox 'I'm still in the Schengen area' (data-testid=trip-open). The exit date field (data-testid=trip-exit) becomes disabled; leave it empty"
+    },
+    {
+      "type": "action",
+      "description": "Click the 'Save trip' button inside the trip sheet form (data-testid=trip-save). Do not click the header button data-testid=trip-add again"
+    },
+    {
+      "type": "assertion",
+      "description": "Exactly one trip row (data-testid=trip-row) appears, with entry 2026-10-01 and exit shown as 'still there' (data-testid=trip-exit-display)"
     },
     {
       "type": "action",
