@@ -2,12 +2,40 @@
 
 import { useEffect, useState } from "react";
 import { CircleCheck, CircleX, ExternalLink } from "lucide-react";
-import type { ParityReport } from "@/lib/schengen/parity";
+import type { ParityReport, ParityRow } from "@/lib/schengen/parity";
 import { ToolShell } from "./tools/ToolShell";
 
 function label(id: string): string {
   const text = id.replace(/-/g, " ");
   return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function ParityTableRow({ row, number }: { row: ParityRow; number: number }) {
+  return (
+    <tr data-testid="parity-row" data-match={row.match} className="border-t border-line-soft transition-colors hover:bg-paper-warm">
+      <td className="px-5 py-3 font-mono text-xs text-ink-hushed tnum">{String(number).padStart(2, "0")}</td>
+      <td className="px-5 py-3 font-medium">{label(row.scenario)}<span className="ml-2 text-xs font-normal text-ink-hushed">{row.stays} {row.stays === 1 ? "stay" : "stays"}</span></td>
+      <td className="px-5 py-3 font-mono text-xs tnum">{row.on}</td>
+      <td className="px-5 py-3 text-right font-mono tnum">{row.ours}</td>
+      <td className="px-5 py-3 text-right font-mono tnum">{row.theirs}</td>
+      <td className="px-5 py-3 text-right">
+        <span className={`inline-flex items-center gap-1 rounded-pill px-2.5 py-0.5 text-xs font-medium ${row.match ? "bg-ok-wash text-ok" : "bg-risk-wash text-risk"}`}>
+          {row.match ? <CircleCheck size={12} aria-hidden /> : <CircleX size={12} aria-hidden />}
+          {row.match ? "Match" : "Differs"}
+        </span>
+      </td>
+    </tr>
+  );
+}
+
+/** Rows numbered from 1, as shown in the first column. */
+function tableRows(rows: ParityRow[]) {
+  const out = [];
+  for (let number = 1; number < rows.length; number += 1) {
+    const row = rows[number];
+    out.push(<ParityTableRow key={row.scenario} row={row} number={number} />);
+  }
+  return out;
 }
 
 export function ParityPanel() {
@@ -95,21 +123,7 @@ export function ParityPanel() {
                       <tr key={i} className="border-t border-line-soft"><td colSpan={6} className="px-5 py-3"><div className="skeleton h-5 rounded-lg" /></td></tr>
                     ))
                   : null}
-                {rows.map((row, index) => (
-                  <tr key={row.scenario} data-testid="parity-row" data-match={row.match} className="border-t border-line-soft transition-colors hover:bg-paper-warm">
-                    <td className="px-5 py-3 font-mono text-xs text-ink-hushed tnum">{String(index + 1).padStart(2, "0")}</td>
-                    <td className="px-5 py-3 font-medium">{label(row.scenario)}<span className="ml-2 text-xs font-normal text-ink-hushed">{row.stays} {row.stays === 1 ? "stay" : "stays"}</span></td>
-                    <td className="px-5 py-3 font-mono text-xs tnum">{row.on}</td>
-                    <td className="px-5 py-3 text-right font-mono tnum">{row.ours}</td>
-                    <td className="px-5 py-3 text-right font-mono tnum">{row.theirs}</td>
-                    <td className="px-5 py-3 text-right">
-                      <span className={`inline-flex items-center gap-1 rounded-pill px-2.5 py-0.5 text-xs font-medium ${row.match ? "bg-ok-wash text-ok" : "bg-risk-wash text-risk"}`}>
-                        {row.match ? <CircleCheck size={12} aria-hidden /> : <CircleX size={12} aria-hidden />}
-                        {row.match ? "Match" : "Differs"}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
+                {tableRows(rows)}
               </tbody>
             </table>
           </div>
