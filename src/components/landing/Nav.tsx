@@ -20,6 +20,7 @@ export default function Nav() {
           <CarryLink href="/ees" data-testid="nav-ees" className="hover:text-ink">EES check</CarryLink>
           <CarryLink href="/letter" data-testid="nav-letter" className="hover:text-ink">Letter</CarryLink>
           <Link href="/parity" data-testid="nav-parity" className="hover:text-ink">Parity</Link>
+          <Link href="/proof" data-testid="nav-proof" className="hover:text-ink">Proof</Link>
         </div>
         <SectionLink hash="#check" className="btn btn-primary !min-h-9 px-4 text-sm">Check my days</SectionLink>
       </nav>

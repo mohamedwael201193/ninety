@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+/**
+ * Writes src/data/proof.json: for each rule in src/data/rules.json, the TestSprite
+ * test id and its latest cloud result (`testsprite test result <id> --output json`,
+ * a read that runs nothing). The /proof page renders this file and shows when it was made.
+ *
+ *   TESTSPRITE_API_KEY=... node scripts/proof-matrix.mjs
+ */
+import { execFileSync } from "node:child_process";
+import { readFileSync, writeFileSync } from "node:fs";
+
+const BIN = process.env.TESTSPRITE_BIN ?? "testsprite";
+const rules = JSON.parse(readFileSync("src/data/rules.json", "utf8"));
+const ids = JSON.parse(readFileSync("testsprite_tests/test-ids.json", "utf8"));
+const byShort = Object.fromEntries(Object.entries(ids).map(([plan, id]) => [plan.split("-")[0], { plan, id }]));
+
+const cache = new Map();
+function latest(id) {
+  if (!cache.has(id)) {
+    const r = JSON.parse(execFileSync(BIN, ["test", "result", id, "--output", "json"], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }));
+    cache.set(id, { verdict: r.verdict ?? r.executionStatus ?? "unknown", at: r.startedAt ?? null, environment: r.environment?.name ?? null, runId: r.runIdIfAvailable ?? r.runId ?? null });
+  }
+  return cache.get(id);
+}
+
+const out = {
+  generatedAt: new Date().toISOString(),
+  source: "src/data/rules.json + testsprite test result",
+  rules: rules.map((rule) => ({
+    ...rule,
+    testsprite: rule.testsprite.map((short) => {
+      const t = byShort[short];
+      return t ? { id: short, plan: t.plan, testId: t.id, latest: latest(t.id) } : { id: short, plan: null, testId: null, latest: null };
+    }),
+  })),
+};
+writeFileSync("src/data/proof.json", JSON.stringify(out, null, 2) + "\n");
+const n = out.rules.flatMap((r) => r.testsprite).length;
+console.log(`${out.rules.length} rules, ${n} TestSprite references, generated ${out.generatedAt}`);

@@ -1,0 +1,442 @@
+{
+  "generatedAt": "2026-10-19T15:48:31.738Z",
+  "source": "src/data/rules.json + testsprite test result",
+  "rules": [
+    {
+      "id": "R1",
+      "rule": "At most 90 days in any rolling 180-day period",
+      "basis": "Regulation (EU) 2016/399 (Schengen Borders Code), Art. 6(1)",
+      "unit": [
+        {
+          "file": "src/lib/schengen/engine.test.ts",
+          "name": "treats the 90th day as legal and the 91st as an overstay"
+        },
+        {
+          "file": "src/lib/schengen/properties.test.ts",
+          "name": "days used equals a brute-force count of distinct days in the 180-day window"
+        }
+      ],
+      "parity": [
+        "exact-90-days",
+        "day-91-overstay",
+        "manual-last-day-29-aug-2024"
+      ],
+      "testsprite": [
+        {
+          "id": "TS01",
+          "plan": "TS01-example-trips",
+          "testId": "673e2df9-f5fd-47b0-b1c3-759c462db1b8",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "d00fec2b-3ec0-44be-9994-0b11ef24e85a"
+          }
+        },
+        {
+          "id": "TS03",
+          "plan": "TS03-add-trip",
+          "testId": "b6981077-60ba-4847-b769-719dd19ebc2c",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "a51cfc15-a9a5-49bb-a28a-cf1b712d2659"
+          }
+        }
+      ]
+    },
+    {
+      "id": "R2",
+      "rule": "The entry day and the exit day both count",
+      "basis": "Commission user manual for the short-stay calculator",
+      "unit": [
+        {
+          "file": "src/lib/schengen/engine.test.ts",
+          "name": "counts both the entry day and the exit day"
+        }
+      ],
+      "parity": [
+        "same-day-stay",
+        "day-after-spring-dst"
+      ],
+      "testsprite": [
+        {
+          "id": "TS03",
+          "plan": "TS03-add-trip",
+          "testId": "b6981077-60ba-4847-b769-719dd19ebc2c",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "a51cfc15-a9a5-49bb-a28a-cf1b712d2659"
+          }
+        },
+        {
+          "id": "TC010",
+          "plan": "TC010-edit-trip",
+          "testId": "30074ac3-db4d-4ae1-8b43-a06298f40593",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "a467690f-ff2d-42cc-b7fc-f269b8c87c5f"
+          }
+        }
+      ]
+    },
+    {
+      "id": "R3",
+      "rule": "A same-day exit and re-entry counts that day once",
+      "basis": "Commission calculator behaviour",
+      "unit": [
+        {
+          "file": "src/lib/schengen/engine.test.ts",
+          "name": "counts a same-day exit and re-entry once"
+        }
+      ],
+      "parity": [
+        "same-day-turnaround"
+      ],
+      "testsprite": [
+        {
+          "id": "TS26",
+          "plan": "TS26-same-day-reentry",
+          "testId": "7c648056-0c53-4a39-bf66-ef5550edbd0e",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "383c6ed7-5b37-45d7-994d-032356be800c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "R4",
+      "rule": "The 180-day window rolls: old days drop out",
+      "basis": "Regulation (EU) 2016/399 (Schengen Borders Code), Art. 6(1)",
+      "unit": [
+        {
+          "file": "src/lib/schengen/engine.test.ts",
+          "name": "drops a presence day on the 180th day before the control date and keeps the 179th"
+        },
+        {
+          "file": "src/lib/schengen/engine.test.ts",
+          "name": "allows 90 days again once the earlier stay has fallen out of the window"
+        }
+      ],
+      "parity": [
+        "reentry-after-full-90",
+        "manual-14-jun-2024"
+      ],
+      "testsprite": [
+        {
+          "id": "TS34",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        }
+      ]
+    },
+    {
+      "id": "R5",
+      "rule": "An overstay is named with its exact days and window",
+      "basis": "Commission calculator, control mode",
+      "unit": [
+        {
+          "file": "src/lib/schengen/engine.test.ts",
+          "name": "describes a longer overstay the way the calculator does"
+        },
+        {
+          "file": "src/lib/schengen/properties.test.ts",
+          "name": "an overstay is reported exactly when a day of stay has more than 90 days in its window"
+        }
+      ],
+      "parity": [
+        "overstay-through-15-apr",
+        "entry-refused-next-day"
+      ],
+      "testsprite": [
+        {
+          "id": "TS27",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        }
+      ]
+    },
+    {
+      "id": "R6",
+      "rule": "A stay still in progress counts through today, with a latest legal exit",
+      "basis": "Commission calculator, planning mode",
+      "unit": [
+        {
+          "file": "src/lib/schengen/engine.test.ts",
+          "name": "closes an open trip on the reference day and does not extend it into a later plan"
+        }
+      ],
+      "parity": [],
+      "testsprite": [
+        {
+          "id": "TS28",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        },
+        {
+          "id": "TS09",
+          "plan": "TS09-open-stay-false-fit",
+          "testId": "2f9ce70d-082b-4c87-8bfc-f6784cd19b37",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "013cc68d-9936-4b0c-b54b-5850f2d5c0af"
+          }
+        }
+      ]
+    },
+    {
+      "id": "R7",
+      "rule": "A planned trip fits only up to its latest legal exit",
+      "basis": "Commission calculator, planning mode",
+      "unit": [
+        {
+          "file": "src/lib/schengen/engine.test.ts",
+          "name": "accepts a planned exit on the latest legal day and rejects the day after"
+        },
+        {
+          "file": "src/lib/schengen/properties.test.ts",
+          "name": "staying until the latest legal exit is legal, and one day more is not"
+        }
+      ],
+      "parity": [
+        "manual-entry-19-jun-2024",
+        "manual-entry-7-aug-2024"
+      ],
+      "testsprite": [
+        {
+          "id": "TS06",
+          "plan": "TS06-legal-plan",
+          "testId": "58a96778-71b8-4ac8-ac7b-f1e6fbe8e928",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "23eb6043-c57e-43b5-aca5-e945e1c8bb95"
+          }
+        },
+        {
+          "id": "TS10",
+          "plan": "TS10-open-stay-boundary",
+          "testId": "28757a0f-893c-4453-a5dc-27b7a57863fb",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "67467575-f876-462d-b968-5e6708faabe9"
+          }
+        },
+        {
+          "id": "TS35",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        }
+      ]
+    },
+    {
+      "id": "R8",
+      "rule": "Dates are YYYY-MM-DD; reversed or missing dates are refused",
+      "basis": "Input rule",
+      "unit": [
+        {
+          "file": "src/lib/schengen/engine.test.ts",
+          "name": "rejects impossible dates"
+        },
+        {
+          "file": "src/lib/schengen/engine.test.ts",
+          "name": "rejects a planned exit before entry"
+        }
+      ],
+      "parity": [],
+      "testsprite": [
+        {
+          "id": "TS04",
+          "plan": "TS04-reversed-dates",
+          "testId": "12214dbd-f926-45b4-b94b-4ff234bef57e",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "2495c35c-a54c-43b1-a298-535d9a51df60"
+          }
+        },
+        {
+          "id": "TC009",
+          "plan": "TC009-date-format",
+          "testId": "c1707e85-ebb8-4959-b1fe-ded27d391ef2",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "2a5dc514-9e3c-477a-b50b-f98b4a3dd2f1"
+          }
+        },
+        {
+          "id": "TS29",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        }
+      ]
+    },
+    {
+      "id": "R9",
+      "rule": "EES: a gap is explained (missing exit, missing entry, exit dates disagree)",
+      "basis": "Regulation (EU) 2017/2226 (EES)",
+      "unit": [
+        {
+          "file": "src/lib/ees/reconcile.test.ts",
+          "name": "explains a likely missing exit as the days after the traveller left"
+        },
+        {
+          "file": "src/lib/ees/reconcile.test.ts",
+          "name": "is an exit disagreement, not a missing entry"
+        }
+      ],
+      "parity": [],
+      "testsprite": [
+        {
+          "id": "TS07",
+          "plan": "TS07-ees-gap",
+          "testId": "499945d4-1c23-4fef-9825-7d3ba3d28b89",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "ec6f1924-57f0-4825-b3d6-cdc80b7ff053"
+          }
+        },
+        {
+          "id": "TS13",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        },
+        {
+          "id": "TS14",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        }
+      ]
+    },
+    {
+      "id": "R10",
+      "rule": "EES: stays that began before 10 April 2026 are not compared",
+      "basis": "End of the EES progressive start, 10 April 2026",
+      "unit": [
+        {
+          "file": "src/lib/ees/reconcile.test.ts",
+          "name": "drops the whole pre-cutoff stay, including days after 10 April (judging-day case)"
+        },
+        {
+          "file": "src/lib/ees/reconcile.test.ts",
+          "name": "still flags a real gap in stays after the cutoff"
+        }
+      ],
+      "parity": [],
+      "testsprite": [
+        {
+          "id": "TS30",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        },
+        {
+          "id": "TS31",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "rule": "The correction request cites Article 52(1)–(5) and its deadlines",
+      "basis": "Regulation (EU) 2017/2226, Art. 52",
+      "unit": [
+        {
+          "file": "src/lib/letter/letter.test.ts",
+          "name": "states 52(1)–52(5) separately and accurately"
+        },
+        {
+          "file": "src/lib/letter/letter.test.ts",
+          "name": "cites the Article 52(1) 45-day reply duty for the responsible or receiving Member State"
+        }
+      ],
+      "parity": [],
+      "testsprite": [
+        {
+          "id": "TS08",
+          "plan": "TS08-letter",
+          "testId": "31dba9a5-5ac6-473b-9517-b6064cdc2ac8",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "e7c4e946-e8eb-4c76-a0ea-22cacc176bb1"
+          }
+        },
+        {
+          "id": "TS15",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        },
+        {
+          "id": "TS17",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        },
+        {
+          "id": "TS18",
+          "plan": null,
+          "testId": null,
+          "latest": null
+        }
+      ]
+    },
+    {
+      "id": "R12",
+      "rule": "The count agrees with the European Commission's own calculator",
+      "basis": "Commission short-stay calculator",
+      "unit": [
+        {
+          "file": "src/lib/schengen/parity.test.ts",
+          "name": "matches the stored Commission calculator on all 14 scenarios"
+        }
+      ],
+      "parity": [
+        "no-previous-stay",
+        "calculator-example-kom-1-1"
+      ],
+      "testsprite": [
+        {
+          "id": "TS02",
+          "plan": "TS02-parity-table",
+          "testId": "e8a03848-8e35-4692-8476-4be7c8ff37e0",
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-19T05:17:48.731Z",
+            "environment": "github-pr-39",
+            "runId": "7835a28c-3d3f-4445-8ea2-90a881d3114b"
+          }
+        }
+      ]
+    }
+  ]
+}
