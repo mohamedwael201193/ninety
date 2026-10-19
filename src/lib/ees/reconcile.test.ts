@@ -212,3 +212,11 @@ describe("EES cutoff (stays that began before 10 April 2026)", () => {
     expect(result.codes).toEqual(["match"]);
   });
 });
+
+describe("trips that share an entry date", () => {
+  it("does not report disagreeing exits when the records copy the trips", () => {
+    const trips = [{ entry: "2027-04-04", exit: "2027-04-04" }, { entry: "2027-04-04", exit: "2027-04-05" }];
+    const result = reconcile(trips, { daysUsed: 2, on: "2027-04-05", records: trips });
+    expect(result.codes).toEqual(["match"]);
+  });
+});

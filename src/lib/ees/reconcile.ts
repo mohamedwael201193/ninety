@@ -283,7 +283,10 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
     const exitNotes: string[] = [];
     for (const record of claim.records) {
       if (record.exit === null) continue;
-      const trip = trips.find((item) => item.entry === record.entry && item.exit !== null);
+      const sameEntry = trips.filter((item) => item.entry === record.entry && item.exit !== null);
+      // Two trips can share an entry date; only flag when none of them ends where the EES record ends.
+      if (sameEntry.some((item) => item.exit === record.exit)) continue;
+      const trip = sameEntry[0];
       if (trip && trip.exit !== record.exit) {
         exitNotes.push(
           `Exit dates disagree for the entry on ${record.entry}: trips end on ${trip.exit}, the EES ends on ${record.exit}.`,
