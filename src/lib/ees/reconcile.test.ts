@@ -132,3 +132,11 @@ describe("reconcile", () => {
     expect(result.errors[0]).toContain("whole number");
   });
 });
+
+describe("trips that share an entry date", () => {
+  it("does not report disagreeing exits when the records copy the trips", () => {
+    const trips = [{ entry: "2027-04-04", exit: "2027-04-04" }, { entry: "2027-04-04", exit: "2027-04-05" }];
+    const result = reconcile(trips, { daysUsed: 2, on: "2027-04-05", records: trips });
+    expect(result.codes).toEqual(["match"]);
+  });
+});
