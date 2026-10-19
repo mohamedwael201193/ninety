@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SectionLink } from "./SectionLink";
 
 export default function Footer() {
   return (
@@ -15,8 +16,8 @@ export default function Footer() {
         <div className="text-sm">
           <p className="eyebrow !text-paper/60">Product</p>
           <ul className="mt-3 space-y-2">
-            <li><Link href="/#check" className="hover:text-paper">Check my days</Link></li>
-            <li><Link href="/#planned-heading" className="hover:text-paper">Plan a trip</Link></li>
+            <li><SectionLink hash="#check" className="hover:text-paper">Check my days</SectionLink></li>
+            <li><SectionLink hash="#planned-heading" className="hover:text-paper">Plan a trip</SectionLink></li>
             <li><Link href="/parity" className="hover:text-paper">Calculator parity</Link></li>
           </ul>
         </div>
