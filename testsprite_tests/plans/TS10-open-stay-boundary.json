@@ -6,27 +6,7 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Navigate to /?today=2026-10-19&fresh=1 (pins today to 2026-10-19 and clears saved trips in storage key ninety.trips.v1)"
-    },
-    {
-      "type": "action",
-      "description": "Click the add trip button in the trips header (data-testid=trip-add) to open the trip sheet"
-    },
-    {
-      "type": "action",
-      "description": "In the trip sheet, type 2026-10-01 into the entry date field (data-testid=trip-entry)"
-    },
-    {
-      "type": "action",
-      "description": "Tick the checkbox 'I'm still in the Schengen area' (data-testid=trip-open). The exit date field (data-testid=trip-exit) becomes disabled; leave it empty"
-    },
-    {
-      "type": "action",
-      "description": "Click the 'Save trip' button inside the trip sheet form (data-testid=trip-save). Do not click the header button data-testid=trip-add again"
-    },
-    {
-      "type": "assertion",
-      "description": "Exactly one trip row (data-testid=trip-row) appears, with entry 2026-10-01 and exit shown as 'still there' (data-testid=trip-exit-display)"
+      "description": "Navigate to /?scenario=open-stay (loads a demo history: one open stay that began on 2026-10-01, read on 2026-10-19; the banner data-testid=scenario-banner is shown)"
     },
     {
       "type": "action",
