@@ -228,3 +228,37 @@ describe("cutoff with overlapping trips", () => {
     expect(r.preCutoffDays).toEqual(["2026-04-09"]);
   });
 });
+
+describe("same-day re-entry on or after the EES cutoff", () => {
+  it("counts a re-entry on the exit day as a new, comparable visit", () => {
+    const trips = [
+      { entry: "2026-03-20", exit: "2026-04-15" },
+      { entry: "2026-04-15", exit: "2026-04-20" },
+    ];
+    const result = reconcile(trips, {
+      daysUsed: 6,
+      on: "2026-05-01",
+      records: [{ entry: "2026-04-15", exit: "2026-04-20" }],
+    });
+    // 20 Mar - 14 Apr belong only to the pre-cutoff stay; 15 Apr is the first day of the new visit.
+    expect(result.preCutoffDays).toHaveLength(26);
+    expect(result.preCutoffDays).not.toContain("2026-04-15");
+    expect(result.eesComparableDaysUsed).toBe(6);
+    expect(result.differences).toEqual([]);
+    expect(result.figureGap).toBe(0);
+    expect(result.codes).toEqual(["ees-ignores-pre-cutoff-stay"]);
+  });
+
+  it("treats a re-entry on the cutoff day itself as a new visit", () => {
+    const result = reconcile(
+      [
+        { entry: "2026-04-01", exit: "2026-04-10" },
+        { entry: "2026-04-10", exit: "2026-04-12" },
+      ],
+      { daysUsed: 3, on: "2026-05-01", records: [{ entry: "2026-04-10", exit: "2026-04-12" }] },
+    );
+    expect(result.preCutoffDays).toHaveLength(9);
+    expect(result.eesComparableDaysUsed).toBe(3);
+    expect(result.figureGap).toBe(0);
+  });
+});
