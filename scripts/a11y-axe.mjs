@@ -15,6 +15,7 @@ const PAGES = [
   "/letter?scenario=near-limit",
   "/parity",
   "/proof",
+  "/no-such-page",
 ];
 
 // Desktop and a phone width: the nav and several layouts change below 768 px.

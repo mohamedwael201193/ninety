@@ -1,4 +1,4 @@
-# Automated accessibility check: axe-core in Chrome on six pages at desktop and phone width.
+# Automated accessibility check: axe-core in Chrome on seven pages (six plus the 404) at desktop and phone width.
 # It measures only the WCAG 2.0/2.1 A and AA rules axe can test automatically, on each
 # page's first rendered state with reduced motion. It does not cover screen-reader use,
 # keyboard flows or states reached after interaction. Fails on serious or critical
@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   axe:
-    name: axe-core, 6 pages × desktop and phone
+    name: axe-core, 7 pages × desktop and phone
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
