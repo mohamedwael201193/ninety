@@ -14,7 +14,7 @@
 
 import { days } from "../plural";
 import { isIsoDate, type IsoDate } from "../schengen/dates";
-import { groupDifferences, type DayDifference, type Reconciliation } from "../ees/reconcile";
+import { EES_CUTOFF, explainedByCutoff, groupDifferences, type DayDifference, type Reconciliation } from "../ees/reconcile";
 
 export type LetterIdentity = {
   fullName: string;
@@ -93,6 +93,12 @@ export function buildCorrectionLetter(identity: LetterIdentity, reconciliation: 
   const memberState = required(identity.memberState, "Member State");
   if (!isIsoDate(identity.dateOfBirth)) throw new Error("Date of birth must be a YYYY-MM-DD date.");
 
+  if (explainedByCutoff(reconciliation.codes)) {
+    throw new Error(
+      `No correction to request: the gap comes from stays that began before ${EES_CUTOFF}, which the EES does not count. A border officer applying the 90/180 rule may still count those days.`,
+    );
+  }
+
   const title = "Request for rectification of Entry/Exit System data under Article 52 of Regulation (EU) 2017/2226";
   const addressee = `To the competent authority of ${memberState}`;
   const paragraphs = [
@@ -100,7 +106,7 @@ export function buildCorrectionLetter(identity: LetterIdentity, reconciliation: 
     addressee,
     `I, ${fullName}, born on ${identity.dateOfBirth}, a national of ${countryOf(nationality)}, holder of travel document ${documentNumber}, request rectification and completion of my personal data in the Entry/Exit System (EES).`,
     "Under Article 52(1) of Regulation (EU) 2017/2226, a request relating to the rights in Articles 15 to 18 of Regulation (EU) 2016/679 may be addressed to the competent authority of any Member State, and the Member State responsible or the Member State to which the request is made shall reply within 45 days of receipt. Under Article 52(2) and (3), the accuracy of the data and the lawfulness of their processing are to be checked, normally within 30 days, and data that are factually inaccurate, incomplete or recorded unlawfully are to be rectified, completed or erased, with written confirmation to me without delay. If the authority does not agree, Article 52(4) requires an administrative decision explaining in writing why.",
-    `On ${reconciliation.on}, the EES states that I had used ${days(reconciliation.eesDaysUsed)} in the 180-day period starting ${reconciliation.windowStart}. The entry and exit dates I hold show ${days(reconciliation.travellerDaysUsed)} in that same period.`,
+    `On ${reconciliation.on}, the EES states that I had used ${days(reconciliation.eesDaysUsed)} in the 180-day period starting ${reconciliation.windowStart}. The entry and exit dates I hold show ${days(reconciliation.travellerDaysUsed)} in that same period.${reconciliation.preCutoffDays.length > 0 ? ` Of these, ${days(reconciliation.preCutoffDays.length)} belong to stays that began before ${EES_CUTOFF}, which the EES does not count; this request does not concern them, and compares the remaining ${days(reconciliation.eesComparableDaysUsed)}.` : ""}`,
     ...reasonLines(reconciliation),
     ...dayLines(reconciliation),
     "I ask you to rectify the entry and exit data and the days-used figure so that they match the dates in this request, and to confirm the action in writing.",

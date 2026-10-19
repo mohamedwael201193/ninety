@@ -40,7 +40,9 @@ export type MismatchCode =
   | "likely-missing-exit"
   | "likely-missing-entry"
   | "exit-dates-disagree"
-  | "ees-figure-inconsistent";
+  | "ees-figure-inconsistent"
+  /** Stays that began before EES_CUTOFF explain the gap; the EES tool is working as published. */
+  | "ees-ignores-pre-cutoff-stay";
 
 export type Reconciliation = {
   on: IsoDate;
@@ -188,6 +190,11 @@ export function parseEesRecords(text: string): { records: EesRecord[]; errors: s
   return { records, errors };
 }
 
+/** True when the only finding is the EES cutoff: nothing in the EES needs correcting. */
+export function explainedByCutoff(codes: MismatchCode[]): boolean {
+  return codes.length === 1 && codes[0] === "ees-ignores-pre-cutoff-stay";
+}
+
 export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
   const on = claim.on;
   const errors: string[] = [];
@@ -311,19 +318,22 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
   let cutoffNote = "";
   if (preCutoff.size > 0) {
     cutoffNote =
-      `${pluralDays(preCutoff.size)} (${dayRanges(sorted([...preCutoff]))}) belong to stays that began before ${EES_CUTOFF}. The EES does not count stays that began before it started full operation, so these days are not treated as mismatches. They still count under the 90/180 rule.`;
+      `${pluralDays(preCutoff.size)} (${dayRanges(sorted([...preCutoff]))}) belong to stays that began before ${EES_CUTOFF}. The EES does not count stays that began before it started full operation, so these days are not treated as mismatches and are not a reason to ask for a correction. A border officer applying the 90/180 rule may still count them.`;
   }
 
   if (figureValid && claim.daysUsed !== comparableDaysUsed) {
     codes.unshift("figure-differs");
   }
 
-  if (codes.length === 0 && figureValid && errors.length === 0) codes.push("match");
+  if (preCutoff.size > 0) codes.push("ees-ignores-pre-cutoff-stay");
+  else if (codes.length === 0 && figureValid && errors.length === 0) codes.push("match");
 
   const head = `Compared on ${on}, over the 180-day period ${windowStart} to ${on}. The trips count ${pluralDays(traveller.daysUsed)}. The EES states ${figureValid ? pluralDays(claim.daysUsed) : "an unusable figure"}.`;
   let explanation = head;
   if (!claim.records && figureValid && claim.daysUsed !== comparableDaysUsed) {
     explanation += " No entry/exit records were provided, so the days that differ cannot be listed.";
+  } else if (!claim.records && explainedByCutoff(codes)) {
+    explanation += " No entry/exit records were provided. Leaving out the stays the EES does not count, the stated figure matches the trips.";
   } else if (!claim.records && codes.includes("match")) {
     explanation += " No entry/exit records were provided. The stated figure matches the trips.";
   } else if (notes.length > 0) {

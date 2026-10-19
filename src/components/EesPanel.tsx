@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, CircleCheck, Info, Landmark, TriangleAlert, UserRound } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { isIsoDate, localToday } from "@/lib/schengen/dates";
-import { EES_CUTOFF, groupDifferences, parseEesRecords, reconcile, type MismatchCode, type Reconciliation } from "@/lib/ees/reconcile";
+import { EES_CUTOFF, explainedByCutoff, groupDifferences, parseEesRecords, reconcile, type MismatchCode, type Reconciliation } from "@/lib/ees/reconcile";
 import { days } from "@/lib/plural";
 import { loadTrips } from "@/lib/trips";
 import { evaluate } from "@/lib/schengen/engine";
@@ -20,6 +20,7 @@ const CODE_LABEL: Record<MismatchCode, string> = {
   "likely-missing-entry": "Likely missing entry",
   "exit-dates-disagree": "Exit dates disagree",
   "ees-figure-inconsistent": "EES figure contradicts its own records",
+  "ees-ignores-pre-cutoff-stay": "EES leaves out pre-10 April 2026 stays",
 };
 
 export function EesPanel() {
@@ -65,7 +66,7 @@ export function EesPanel() {
     );
   }
 
-  const matched = result?.codes.includes("match");
+  const matched = result ? result.codes.includes("match") || explainedByCutoff(result.codes) : false;
 
   return (
     <ToolShell
@@ -139,7 +140,7 @@ export function EesPanel() {
                   <div data-testid="ees-cutoff-note" data-days={result.preCutoffDays.length} className="flex items-start gap-3 rounded-2xl bg-paper-warm p-4 text-sm">
                     <Info size={18} className="mt-0.5 shrink-0 text-ink-hushed" aria-hidden />
                     <p>
-                      {days(result.preCutoffDays.length)} of your trips are from stays that began before {EES_CUTOFF}. The EES does not count those stays, so they are left out of this comparison. They still count toward your 90/180 limit: {days(result.eesComparableDaysUsed)} are comparable with the EES.
+                      {days(result.preCutoffDays.length)} of your trips are from stays that began before {EES_CUTOFF}. The EES does not count those stays, so they are left out of this comparison. They are not an EES error, but a border officer applying the 90/180 rule may still count them. {days(result.eesComparableDaysUsed)} are comparable with the EES.
                     </p>
                   </div>
                 ) : null}
@@ -184,7 +185,7 @@ export function EesPanel() {
               </motion.div>
             )}
           </AnimatePresence>
-          {!result || result.codes.includes("match") ? (
+          {!result || matched ? (
             <p className="mt-4 text-sm text-ink-hushed">Need the letter anyway? <Link href="/letter" data-testid="nav-letter" className="font-medium text-ink underline underline-offset-4">Article 52 letter</Link></p>
           ) : null}
         </div>
