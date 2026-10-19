@@ -1,9 +1,9 @@
 "use client";
 
-import { AnimatePresence, animate, motion } from "framer-motion";
+import { AnimatePresence, animate, motion, useInView } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useReducedMotionSafe";
 import { CircleAlert, CircleCheck, MousePointer2, Plane, Plus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DaysRing } from "../DaysRing";
 import { EASE } from "./motion";
 
@@ -15,7 +15,9 @@ const TYPED = "18 Aug – 13 Sep";
 
 // step: 0 one trip, 1 typing, 2 tap, 3 second trip added, 4 ring filled, 5 hold
 // 5: EES mismatch card flash
-const STEPS_MS = [900, 1500, 600, 700, 2200, 2600];
+const STEPS_MS = [900, 1500, 600, 700, 1800, 3600];
+// How long the finished first paint (card included) holds before the loop starts.
+const FIRST_HOLD_MS = 4000;
 
 export function PhoneDemo() {
   const reduce = useReducedMotion();
@@ -23,9 +25,12 @@ export function PhoneDemo() {
   const [step, setStep] = useState(5);
   const [typed, setTyped] = useState("");
   const [count, setCount] = useState(34);
+  const rootRef = useRef<HTMLDivElement>(null);
+  // Only run the loop while the phone is on screen, so a visitor never lands mid-loop with the card hidden.
+  const inView = useInView(rootRef, { amount: 0.4 });
 
   useEffect(() => {
-    if (reduce) { setStep(5); setCount(34); setTyped(""); return; }
+    if (reduce || !inView) { setStep(5); setCount(34); setTyped(""); return; }
     let s = 0;
     let timer: number;
     const run = () => {
@@ -33,9 +38,9 @@ export function PhoneDemo() {
       const next = s === STEPS_MS.length - 1 ? 0 : s + 1;
       timer = window.setTimeout(() => { s = next; run(); }, STEPS_MS[s]);
     };
-    timer = window.setTimeout(run, STEPS_MS[STEPS_MS.length - 1]);
+    timer = window.setTimeout(run, FIRST_HOLD_MS);
     return () => window.clearTimeout(timer);
-  }, [reduce]);
+  }, [reduce, inView]);
 
   useEffect(() => {
     if (reduce) return;
@@ -57,7 +62,7 @@ export function PhoneDemo() {
   const mismatch = step === 5;
 
   return (
-    <div className="relative mx-auto w-[300px] sm:w-[320px]" role="img" aria-label="Ninety app preview: two trips added, 34 of 90 days left, safe.">
+    <div ref={rootRef} className="relative mx-auto w-[300px] sm:w-[320px]" role="img" aria-label="Ninety app preview: two trips added, 34 of 90 days left, safe.">
       <div className="rounded-[3rem] bg-ink p-3 shadow-pop">
         <div className="relative h-[620px] overflow-hidden rounded-[2.4rem] bg-paper-warm">
           <div className="absolute left-1/2 top-2.5 z-10 h-6 w-24 -translate-x-1/2 rounded-pill bg-ink" />
@@ -123,10 +128,12 @@ export function PhoneDemo() {
             </ul>
           </div>
 
-          <AnimatePresence>
+          {/* initial={false}: the card is in the server HTML at full opacity, so it shows even before hydration. */}
+          <AnimatePresence initial={false}>
             {mismatch && (
               <motion.div
                 aria-hidden
+                data-testid="hero-ees-card"
                 initial={{ opacity: 0, y: 16, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10 }}
