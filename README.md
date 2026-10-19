@@ -79,7 +79,7 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
-Open `/?today=YYYY-MM-DD` to pin "today" so results do not depend on the calendar.
+Open `/?today=YYYY-MM-DD` to pin "today" so results do not depend on the calendar. Add `fresh=1` to start with no saved trips.
 
 ```bash
 npm test           # unit tests (engine, parity against the live Commission script, EES, letter)
