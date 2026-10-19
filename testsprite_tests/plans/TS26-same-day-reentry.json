@@ -22,7 +22,15 @@
     },
     {
       "type": "assertion",
+      "description": "Days left (data-testid=days-left) is 90 and the latest legal exit (data-testid=latest-exit) is 2027-01-16: the May days leave the 180-day window before a stay starting today reaches day 90"
+    },
+    {
+      "type": "assertion",
       "description": "The overlap warning (data-testid=trip-overlap-warning) is visible"
+    },
+    {
+      "type": "assertion",
+      "description": "Exactly 2 trip rows (data-testid=trip-row) are listed"
     }
   ]
 }

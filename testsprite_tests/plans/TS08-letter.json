@@ -34,6 +34,10 @@
     },
     {
       "type": "assertion",
+      "description": "The letter text contains 'Jane Traveller', 'A1234567' and 'France'"
+    },
+    {
+      "type": "assertion",
       "description": "A download button (data-testid=letter-download) is visible"
     }
   ]
