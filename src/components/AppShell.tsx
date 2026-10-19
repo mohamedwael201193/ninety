@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { MotionConfig } from "framer-motion";
 import { Plus, TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
@@ -14,10 +15,12 @@ import { PlannedTripForm } from "./PlannedTripForm";
 import { StatusPanel } from "./StatusPanel";
 import { TripEditor } from "./TripEditor";
 import { TripList } from "./TripList";
+import { scenarioById, scenarioTrips } from "@/lib/scenarios";
 
 export function AppShell() {
   const params = useSearchParams();
-  const rawToday = params.get("today");
+  const scenario = scenarioById(params.get("scenario"));
+  const rawToday = params.get("today") ?? scenario?.on ?? null;
   const todayInvalid = rawToday !== null && !isIsoDate(rawToday);
   const today = rawToday && isIsoDate(rawToday) ? rawToday : localToday();
   const todayOverride = rawToday !== null && isIsoDate(rawToday);
@@ -32,9 +35,10 @@ export function AppShell() {
   useEffect(() => {
     // ?fresh=1 starts from an empty trip list (used by the test suite for a clean slate).
     if (fresh) window.localStorage.removeItem(TRIP_STORAGE_KEY);
-    setTrips(loadTrips(window.localStorage));
+    // ?scenario=<id> shows a named demo history without touching saved trips.
+    setTrips(scenario ? scenarioTrips(scenario) : loadTrips(window.localStorage));
     setReady(true);
-  }, [fresh]);
+  }, [fresh, scenario]);
 
   // The mobile summary bar belongs to the dashboard only: show it while the
   // dashboard (#check, or this component's own main on other routes) fills the
@@ -51,7 +55,8 @@ export function AppShell() {
 
   function persist(next: Trip[]) {
     setTrips(next);
-    saveTrips(window.localStorage, next);
+    // A demo scenario stays a demo: edits to it are not saved over the user's own trips.
+    if (!scenario) saveTrips(window.localStorage, next);
   }
   const close = useCallback(() => setEditing(undefined), []);
   function openAdd() {
@@ -117,6 +122,13 @@ export function AppShell() {
             This is a helping tool only; it is not a decision by a border authority.
           </p>
         </header>
+
+        {ready && scenario ? (
+          <p data-testid="scenario-banner" data-scenario={scenario.id} className="mb-6 rounded-2xl bg-paper p-4 text-sm text-ink-hushed">
+            Demo scenario: <b className="text-ink">{scenario.title}</b>, read on {scenario.on}. Your saved trips are not changed.{" "}
+            <Link href="/" className="font-medium text-ink underline underline-offset-4">Back to my trips</Link>
+          </p>
+        ) : null}
 
         {!ready ? (
           <div aria-busy="true" className="grid gap-6 lg:grid-cols-[1fr_400px]">
