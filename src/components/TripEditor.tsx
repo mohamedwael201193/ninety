@@ -31,18 +31,34 @@ const schema = z
 type Values = z.infer<typeof schema>;
 
 export function TripEditor({ initial, onSave, onCancel }: TripEditorProps) {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<Values>({
+  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<Values>({
     resolver: zodResolver(schema),
     defaultValues: { entry: initial?.entry ?? "", exit: initial?.exit ?? "", open: initial ? initial.exit === null : false },
   });
   const open = watch("open");
+  function syncFromDom(form: HTMLFormElement) {
+    const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement | null;
+    const entry = field("entry");
+    const exit = field("exit");
+    const openBox = field("open");
+    const isOpen = openBox ? openBox.checked : false;
+    if (entry) setValue("entry", entry.value.trim(), { shouldDirty: true });
+    if (openBox) setValue("open", isOpen, { shouldDirty: true });
+    // An open stay ignores the exit field, whatever is typed in it.
+    setValue("exit", isOpen ? "" : (exit?.value ?? "").trim(), { shouldDirty: true });
+  }
   const firstError = errors.entry?.message ?? errors.exit?.message;
 
   return (
     <form
       data-testid="trip-form"
       noValidate
-      onSubmit={handleSubmit((v) => onSave({ id: initial?.id ?? crypto.randomUUID(), entry: v.entry, exit: v.open ? null : v.exit }))}
+      onSubmit={(event) => {
+        // Read what is actually in the fields. A value set without a change
+        // event (autofill, scripted input) would otherwise be missed.
+        syncFromDom(event.currentTarget);
+        return handleSubmit((v) => onSave({ id: initial?.id ?? crypto.randomUUID(), entry: v.entry, exit: v.open ? null : v.exit }))(event);
+      }}
       className="space-y-4"
     >
       <div className="grid gap-4 sm:grid-cols-2">
