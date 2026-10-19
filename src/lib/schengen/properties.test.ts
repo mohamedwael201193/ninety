@@ -5,7 +5,7 @@
 import fc from "fast-check";
 import { describe, expect, it } from "vitest";
 import { addDays, formatIso, parseIso, type IsoDate } from "./dates";
-import { evaluate, type StayInput } from "./engine";
+import { checkPlannedTrip, evaluate, type StayInput } from "./engine";
 import { reconcile } from "../ees/reconcile";
 
 const BASE = parseIso("2026-04-10");
@@ -119,6 +119,23 @@ describe("EES reconciliation invariants (random histories)", () => {
         expect(r.codes.includes("figure-differs")).toBe(r.figureGap !== 0);
       }),
       { numRuns: RUNS },
+    );
+  });
+});
+
+describe("open stay invariants (random histories)", () => {
+  it("a plan during an open stay fits only if the same dates as one closed stay are legal", () => {
+    fc.assert(
+      fc.property(fc.integer({ min: 0, max: 60 }), fc.integer({ min: 1, max: 60 }), fc.integer({ min: 1, max: 90 }), (inside, gap, length) => {
+        const today = "2026-10-19";
+        const entry = formatIso(parseIso(today) - inside);
+        const planEntry = formatIso(parseIso(today) + gap);
+        const planExit = formatIso(parseIso(planEntry) + length - 1);
+        const check = checkPlannedTrip([{ entry, exit: null }], today, { entry: planEntry, exit: planExit });
+        const asOne = evaluate([{ entry, exit: planExit }], planExit);
+        expect(check.fits).toBe(asOne.daysUsed <= 90);
+      }),
+      { numRuns: 1250 },
     );
   });
 });
