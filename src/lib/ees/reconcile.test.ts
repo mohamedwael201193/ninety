@@ -220,3 +220,11 @@ describe("trips that share an entry date", () => {
     expect(result.codes).toEqual(["match"]);
   });
 });
+
+describe("cutoff with overlapping trips", () => {
+  it("keeps a day comparable when a post-cutoff trip also covers it", () => {
+    const r = reconcile([{ entry: "2026-04-10", exit: "2026-04-10" }, { entry: "2026-04-09", exit: "2026-04-10" }], { daysUsed: 1, on: "2026-04-10" });
+    expect(r.eesComparableDaysUsed).toBe(1);
+    expect(r.preCutoffDays).toEqual(["2026-04-09"]);
+  });
+});

@@ -227,11 +227,18 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
   const preCutoff = new Set<IsoDate>();
   if (cutoffApplies) {
     const { stays } = closeStays(trips, on);
+    // A day that a stay starting on or after the cutoff also covers (overlapping
+    // trips) is one the EES does count, so it stays comparable.
+    const counted = new Set<IsoDate>();
+    for (const stay of stays) {
+      if (parseIso(stay.entry) < parseIso(EES_CUTOFF)) continue;
+      for (let day = parseIso(stay.entry); day <= parseIso(stay.exit); day += 1) counted.add(formatIso(day));
+    }
     for (const stay of stays) {
       if (parseIso(stay.entry) >= parseIso(EES_CUTOFF)) continue;
       for (let day = parseIso(stay.entry); day <= parseIso(stay.exit); day += 1) {
         const date = formatIso(day);
-        if (traveller.dates.has(date)) preCutoff.add(date);
+        if (traveller.dates.has(date) && !counted.has(date)) preCutoff.add(date);
       }
     }
   }
