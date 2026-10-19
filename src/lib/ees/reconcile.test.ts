@@ -132,3 +132,47 @@ describe("reconcile", () => {
     expect(result.errors[0]).toContain("whole number");
   });
 });
+
+describe("EES cutoff (stays that began before 10 April 2026)", () => {
+  it("does not flag days from a stay that began before the cutoff", () => {
+    const trips = [
+      { entry: "2026-03-20", exit: "2026-04-15" },
+      { entry: "2026-05-01", exit: "2026-05-10" },
+    ];
+    const result = reconcile(trips, {
+      daysUsed: 10,
+      on: "2026-05-20",
+      records: [{ entry: "2026-05-01", exit: "2026-05-10" }],
+    });
+    expect(result.travellerDaysUsed).toBe(37);
+    expect(result.eesComparableDaysUsed).toBe(10);
+    expect(result.preCutoffDays).toHaveLength(27);
+    expect(result.preCutoffDays[0]).toBe("2026-03-20");
+    expect(result.differences).toEqual([]);
+    expect(result.figureGap).toBe(0);
+    expect(result.codes).toEqual(["match"]);
+    expect(result.explanation).toContain("before 2026-04-10");
+  });
+
+  it("still flags a real gap in stays after the cutoff", () => {
+    const result = reconcile([{ entry: "2026-03-01", exit: "2026-03-05" }, { entry: "2026-05-01", exit: "2026-05-10" }], {
+      daysUsed: 14,
+      on: "2026-05-20",
+    });
+    expect(result.eesComparableDaysUsed).toBe(10);
+    expect(result.figureGap).toBe(4);
+    expect(result.codes).toContain("figure-differs");
+  });
+
+  it("counts a stay that begins on the cutoff day", () => {
+    const result = reconcile([{ entry: "2026-04-10", exit: "2026-04-12" }], { daysUsed: 3, on: "2026-04-20" });
+    expect(result.preCutoffDays).toEqual([]);
+    expect(result.codes).toEqual(["match"]);
+  });
+
+  it("does not apply before the cutoff date", () => {
+    const result = reconcile([{ entry: "2026-03-01", exit: "2026-03-05" }], { daysUsed: 5, on: "2026-04-01" });
+    expect(result.preCutoffDays).toEqual([]);
+    expect(result.codes).toEqual(["match"]);
+  });
+});

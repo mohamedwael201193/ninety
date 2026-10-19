@@ -3,10 +3,10 @@
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, CircleCheck, Landmark, TriangleAlert, UserRound } from "lucide-react";
+import { ArrowRight, CircleCheck, Info, Landmark, TriangleAlert, UserRound } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { isIsoDate, localToday } from "@/lib/schengen/dates";
-import { groupDifferences, parseEesRecords, reconcile, type MismatchCode, type Reconciliation } from "@/lib/ees/reconcile";
+import { EES_CUTOFF, groupDifferences, parseEesRecords, reconcile, type MismatchCode, type Reconciliation } from "@/lib/ees/reconcile";
 import { days } from "@/lib/plural";
 import { loadTrips } from "@/lib/trips";
 import { evaluate } from "@/lib/schengen/engine";
@@ -135,6 +135,14 @@ export function EesPanel() {
                     </ul>
                   </div>
                 </div>
+                {result.preCutoffDays.length > 0 ? (
+                  <div data-testid="ees-cutoff-note" data-days={result.preCutoffDays.length} className="flex items-start gap-3 rounded-2xl bg-paper-warm p-4 text-sm">
+                    <Info size={18} className="mt-0.5 shrink-0 text-ink-hushed" aria-hidden />
+                    <p>
+                      {days(result.preCutoffDays.length)} of your trips are from stays that began before {EES_CUTOFF}. The EES does not count those stays, so they are left out of this comparison. They still count toward your 90/180 limit: {days(result.eesComparableDaysUsed)} are comparable with the EES.
+                    </p>
+                  </div>
+                ) : null}
                 <div className="card-soft p-6">
                   <p className="eyebrow">What happened</p>
                   <p data-testid="ees-explanation" className="mt-2 leading-7">{result.explanation}</p>
