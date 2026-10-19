@@ -16,7 +16,7 @@ Frontend end-to-end tests for Ninety. TestSprite runs them in its cloud browser 
 | `TC008-letter.json` | `/letter` drafts a first-person Article 52 request with a PDF download |
 | `TC009-date-format.json` | A `MM/DD/YYYY` date is rejected with a message asking for `YYYY-MM-DD` |
 
-Two more cases (edit a trip, trips persist after reload) were generated in the TestSprite project.
+Two more cases (edit a trip, trips persist after reload) were generated in the TestSprite project, for 11 tests in total. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass.
 
 ## Writing plans
 
