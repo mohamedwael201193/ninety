@@ -5,6 +5,7 @@ import Footer from "@/components/landing/Footer";
 import Hero from "@/components/landing/Hero";
 import MismatchLetter from "@/components/landing/MismatchLetter";
 import Nav from "@/components/landing/Nav";
+import ScenarioGallery from "@/components/landing/ScenarioGallery";
 import { SmoothScroll } from "@/components/fx/SmoothScroll";
 
 export default function HomePage() {
@@ -20,6 +21,7 @@ export default function HomePage() {
           <AppShell />
         </Suspense>
       </section>
+      <ScenarioGallery />
       <MismatchLetter />
       <Footer />
     </>
