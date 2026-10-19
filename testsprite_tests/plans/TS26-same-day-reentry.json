@@ -22,7 +22,15 @@
     },
     {
       "type": "assertion",
+      "description": "Days left (data-testid=days-left) is 78"
+    },
+    {
+      "type": "assertion",
       "description": "The overlap warning (data-testid=trip-overlap-warning) is visible"
+    },
+    {
+      "type": "assertion",
+      "description": "Exactly 2 trip rows (data-testid=trip-row) are listed"
     }
   ]
 }
