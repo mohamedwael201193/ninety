@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { CoverageNote } from "./CoverageNote";
 import { MotionConfig } from "framer-motion";
 import { Plus, TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
@@ -121,6 +122,7 @@ export function AppShell() {
             Rebuilds the 90 days / 180-day count from your trips. Entry day and exit day both count.
             This is a helping tool only; it is not a decision by a border authority.
           </p>
+          <CoverageNote className="mt-4 max-w-[640px]" />
         </header>
 
         {ready && scenario ? (

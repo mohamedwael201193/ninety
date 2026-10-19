@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { CoverageNote } from "../CoverageNote";
 import Nav from "../landing/Nav";
 import Footer from "../landing/Footer";
 import { Spotlight } from "../fx/Spotlight";
@@ -25,7 +26,7 @@ export function ToolShell({ eyebrow, title, intro, children, testId }: { eyebrow
             <motion.div initial={{ y: 12 }} animate={{ y: 0 }} transition={{ duration: 0.7, ease: EASE, delay: 0.12 }} className="mt-5 max-w-2xl text-lg text-ink-hushed">{intro}</motion.div>
           </div>
         </header>
-        <div className="mx-auto max-w-page px-5 py-10 md:px-8 md:py-14">{children}</div>
+        <div className="mx-auto max-w-page px-5 py-10 md:px-8 md:py-14">{children}<CoverageNote className="mt-10" /></div>
       </main>
       <Footer />
     </>
