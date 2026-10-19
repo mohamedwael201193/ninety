@@ -12,13 +12,21 @@ export default function Footer() {
           <p className="mt-4 max-w-sm text-sm">
             Ninety is not legal advice and is not affiliated with the European Union. Your trips stay in your browser.
           </p>
+          <p className="mt-4 text-sm">
+            Built by devmo · MIT licence ·{" "}
+            <a data-testid="footer-source" className="underline underline-offset-4 hover:text-paper" href="https://github.com/mohamedwael201193/ninety">Source on GitHub</a>
+          </p>
         </div>
         <div className="text-sm">
           <p className="eyebrow !text-paper/60">Product</p>
           <ul className="mt-3 space-y-2">
             <li><SectionLink hash="#check" className="hover:text-paper">Check my days</SectionLink></li>
             <li><SectionLink hash="#planned-heading" className="hover:text-paper">Plan a trip</SectionLink></li>
+            <li><SectionLink hash="#scenarios" className="hover:text-paper">Try a history</SectionLink></li>
+            <li><Link href="/ees" data-testid="footer-ees" className="hover:text-paper">EES check</Link></li>
+            <li><Link href="/letter" data-testid="footer-letter" className="hover:text-paper">Article 52 letter</Link></li>
             <li><Link href="/parity" className="hover:text-paper">Calculator parity</Link></li>
+            <li><Link href="/proof" data-testid="footer-proof" className="hover:text-paper">Proof</Link></li>
           </ul>
         </div>
         <div className="text-sm">
