@@ -78,6 +78,8 @@ Current result: **14/14 match**. If the Commission script cannot be loaded, the 
 
 Below the TestSprite suite, every pull request also runs lint, types, and the unit, property and fuzz tests in GitHub Actions (`.github/workflows/ci.yml`).
 
+**From the CLI, outside pull requests.** `.github/workflows/testsprite-cli.yml` runs the same cloud suite with the TestSprite CLI against a URL you choose (production by default), waits for every verdict, writes a JUnit report (uploaded as an artifact), adds a pass/fail table and the credit balance before and after to the job summary, and annotates failures. It starts from Actions → "TestSprite CLI" → Run workflow, or nightly only when the repository variable `TESTSPRITE_NIGHTLY` is `true`, because each run bills every test. It never runs on push or pull request; a unit test (`src/lib/ci/workflows.test.ts`) fails if that changes. It needs the `TESTSPRITE_API_KEY` repository secret.
+
 Bugs the suite caught that unit tests did not:
 
 - **The pinned story blocking the planned-trip button:** at 1280 px the pinned scroll section measured its position before the page grew and sat over "Check planned trip", so the click never landed. It now re-measures when the page height changes.

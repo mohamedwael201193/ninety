@@ -1,0 +1,96 @@
+# TestSprite CLI run of the whole cloud suite, outside pull requests.
+#
+# The merge gate is the TestSprite GitHub App, which runs the suite against each
+# PR's Vercel preview. This workflow is the second path: the same tests, started
+# from the CLI, against a URL you choose (production by default), with a JUnit
+# report and a job summary. It catches what a PR cannot: production drift and
+# a calendar that has moved on.
+#
+# Cost: every run bills each test in the project (0.5 credits per test at the
+# time of writing), so it never runs on push or pull_request.
+#   - Manual: Actions → "TestSprite CLI" → Run workflow.
+#   - Nightly: only when the repository variable TESTSPRITE_NIGHTLY is "true".
+# Needs the repository secret TESTSPRITE_API_KEY.
+name: TestSprite CLI
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: "Site to test"
+        default: "https://ninety-coral.vercel.app"
+        required: true
+      filter:
+        description: "Only tests whose name contains this (blank = all)"
+        default: ""
+        required: false
+  schedule:
+    - cron: "29 2 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: testsprite-cli
+  cancel-in-progress: false
+
+env:
+  TESTSPRITE_PROJECT_ID: bd039118-0c25-4707-b018-b25619a37fce
+  TESTSPRITE_CLI: "@testsprite/testsprite-cli@0.14.0"
+
+jobs:
+  suite:
+    name: TestSprite suite via CLI
+    if: ${{ github.event_name == 'workflow_dispatch' || vars.TESTSPRITE_NIGHTLY == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check the API key is set
+        env:
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+        run: |
+          if [ -z "$TESTSPRITE_API_KEY" ]; then
+            echo "::error::Add the TESTSPRITE_API_KEY repository secret to run this workflow."
+            exit 1
+          fi
+      - name: Credits before
+        env:
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+        run: npx -y "$TESTSPRITE_CLI" credits | tee credits-before.txt
+      - name: Run the suite and wait for verdicts
+        env:
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+          TARGET_URL: ${{ inputs.target_url || 'https://ninety-coral.vercel.app' }}
+          FILTER: ${{ inputs.filter }}
+        run: |
+          args=(test run --all --project "$TESTSPRITE_PROJECT_ID" --target-url "$TARGET_URL"
+                --wait --timeout 900 --gh-output
+                --report junit --report-file testsprite-junit.xml
+                --report-suite-name "ninety:$TARGET_URL"
+                --summary-file testsprite-summary.json)
+          if [ -n "$FILTER" ]; then args+=(--filter "$FILTER"); fi
+          npx -y "$TESTSPRITE_CLI" "${args[@]}"
+      - name: Credits after
+        if: always()
+        env:
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+        run: |
+          {
+            echo "### TestSprite credits"
+            echo '```'
+            echo "before:"; cat credits-before.txt 2>/dev/null || echo "(not read)"
+            echo "after:"; npx -y "$TESTSPRITE_CLI" credits || echo "(not read)"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload JUnit report and summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testsprite-cli-${{ github.run_id }}
+          path: |
+            testsprite-junit.xml
+            testsprite-summary.json
+          if-no-files-found: warn
