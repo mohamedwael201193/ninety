@@ -90,6 +90,7 @@ export function buildCorrectionLetter(identity: LetterIdentity, reconciliation: 
   const nationality = required(identity.nationality, "Nationality");
   const documentNumber = required(identity.documentNumber, "Travel document number");
   const email = required(identity.email, "Email");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Email must be a full address, for example jane@example.com.");
   const memberState = required(identity.memberState, "Member State");
   if (!isIsoDate(identity.dateOfBirth)) throw new Error("Date of birth must be a YYYY-MM-DD date.");
 
