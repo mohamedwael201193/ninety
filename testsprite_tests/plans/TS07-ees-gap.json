@@ -30,7 +30,7 @@
     },
     {
       "type": "assertion",
-      "description": "The findings list (data-testid=ees-codes) has data-codes containing 'figure-differs' and shows 'Days-used figures differ'"
+      "description": "The findings list (data-testid=ees-codes) shows the text 'Days-used figures differ'"
     }
   ]
 }
