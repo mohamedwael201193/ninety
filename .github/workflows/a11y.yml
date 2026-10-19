@@ -1,0 +1,42 @@
+# Automated accessibility check: axe-core in Chrome on six pages at desktop and phone width.
+# It measures only the WCAG 2.0/2.1 A and AA rules axe can test automatically, on each
+# page's first rendered state with reduced motion. It does not cover screen-reader use,
+# keyboard flows or states reached after interaction. Fails on serious or critical
+# violations; the per-page table goes to the job summary and the full JSON is uploaded.
+name: Accessibility (axe)
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  axe:
+    name: axe-core, 6 pages × desktop and phone
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Start the production server
+        run: |
+          npx next start -p 3000 > server.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf http://localhost:3000/ > /dev/null && exit 0; sleep 1; done
+          cat server.log; exit 1
+      - name: Run axe (Chrome is preinstalled on ubuntu runners)
+        run: npm run a11y -- http://localhost:3000
+      - name: Upload the axe report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: axe-report-${{ github.run_id }}
+          path: axe-report.json
+          if-no-files-found: warn

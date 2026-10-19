@@ -123,6 +123,12 @@ Bugs the suite caught that unit tests did not:
 - **The undo toast** disappeared before a user (or a test) could press Undo; it now stays until dismissed.
 - **The nav dropped the scenario:** "Check" linked to `/#check` without `?scenario=`, so an opened demo lost its history (TS10 went red; fixed in #20).
 
+## Accessibility (automated, axe)
+
+`.github/workflows/a11y.yml` builds the app, starts it, and runs axe-core in Chrome on six pages (the calculator fresh and with a scenario, `/ees`, `/letter`, `/parity`, `/proof`) at 1280 px and 390 px with reduced motion. It fails on any serious or critical violation of the WCAG 2.0/2.1 A and AA rules axe can test, and writes the per-page counts to the job summary. Running it before this workflow was added found three real problems, each fixed in its own pull request: low contrast of the ok, warn and faint text colours, invalid markup in the status figures list, and wide tables that keyboard users could not scroll on a phone.
+
+What it does not measure: anything axe cannot test automatically, screen-reader announcements, keyboard flows, and states reached only after interaction. Run it locally with `npm run build && npx next start -p 3000` and `npm run a11y`.
+
 ## The gate, and its history
 
 Every pull request into `main` runs the TestSprite V3 suite against that PR's preview deployment, and `TestSprite V3` is a **required** status check: a failing run shows "Merging is blocked". The record of how we got there, including what did not work:
