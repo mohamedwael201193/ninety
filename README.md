@@ -59,6 +59,13 @@ It catches real bugs, not just happy paths:
 - **The pinned story blocking the planned-trip button:** after adding trips, the pinned scroll section on the home page had measured its position before the page grew, and at 1280 px wide it sat over the "Check planned trip" button so the click never landed. TestSprite's run failed on it; the section now re-measures whenever the page height changes.
 - **The undo toast** disappeared before a real user (or a test) could press Undo; it now stays until dismissed.
 
+## CI in action
+
+Every pull request into `main` runs the 11-test TestSprite V3 suite against that PR's Vercel preview deployment. The TestSprite check is required by branch protection, so a failing run blocks the merge.
+
+- **PR #8 — fail, fix, green.** A refactor of the parity table made the row loop start at index 1, which silently dropped the first scenario. TestSprite went red at 9/11 and the merge was blocked. The fix (6f48b55, then 04527b4) restored the loop and added a unit test for the row count; the next run was 11/11 and the PR merged.
+- **PR #7 — a passing run.** Adds a date-format test and the test index; the suite ran 11/11 on the preview before merge.
+
 ## Run it locally
 
 Requires Node.js 20+.
