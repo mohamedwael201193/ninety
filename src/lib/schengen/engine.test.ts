@@ -213,3 +213,22 @@ describe("90/180 engine", () => {
     expect(result.errors.length).toBeGreaterThan(0);
   });
 });
+
+describe("planned trip while a stay is still open", () => {
+  const open = [{ entry: "2026-10-01", exit: null }];
+  const today = "2026-10-19";
+
+  it("treats the traveller as present until the plan and refuses a plan past day 90", () => {
+    const check = checkPlannedTrip(open, today, { entry: "2026-12-01", exit: "2027-01-15" });
+    expect(check.fits).toBe(false);
+    expect(check.latestExit).toBe("2026-12-29");
+    const asOneStay = evaluate([{ entry: "2026-10-01", exit: "2027-01-15" }], "2027-01-15");
+    expect(asOneStay.overstays[0]?.from).toBe("2026-12-30");
+  });
+
+  it("gives the same latest exit as the status panel, and the boundary is day 90", () => {
+    expect(evaluate(open, today, today).latestExit).toBe("2026-12-29");
+    expect(checkPlannedTrip(open, today, { entry: "2026-12-01", exit: "2026-12-29" }).fits).toBe(true);
+    expect(checkPlannedTrip(open, today, { entry: "2026-12-01", exit: "2026-12-30" }).fits).toBe(false);
+  });
+});

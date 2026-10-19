@@ -1,0 +1,32 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Open stay: a plan past day 90 does not fit",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-10-19&fresh=1 (pins today to 2026-10-19 and clears saved trips in storage key ninety.trips.v1)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add), enter entry date 2026-10-01 (data-testid=trip-entry), tick 'I'm still in the Schengen area' (data-testid=trip-open) and click save (data-testid=trip-save)"
+    },
+    {
+      "type": "assertion",
+      "description": "The status panel latest legal exit (data-testid=latest-exit) shows 2026-12-29"
+    },
+    {
+      "type": "action",
+      "description": "In the planned trip form (data-testid=planned-form) enter planned entry 2026-12-01 and planned exit 2027-01-15, then click check (data-testid=planned-check)"
+    },
+    {
+      "type": "assertion",
+      "description": "The planned trip result (data-testid=planned-result) says 'Does not fit'"
+    },
+    {
+      "type": "assertion",
+      "description": "The planned trip result names 2026-12-29 as the latest legal exit, the same date as the status panel (data-testid=latest-exit)"
+    }
+  ]
+}
