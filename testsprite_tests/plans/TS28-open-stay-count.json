@@ -1,0 +1,24 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Open stay: counted through today",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?scenario=open-stay (demo history: in the Schengen area since 2026-10-01, no exit, read on 2026-10-19)"
+    },
+    {
+      "type": "assertion",
+      "description": "Days used (data-testid=days-used) shows 19 and days left (data-testid=days-left) shows 71"
+    },
+    {
+      "type": "assertion",
+      "description": "The presence tile (data-testid=present-status) reads 'Inside'"
+    },
+    {
+      "type": "assertion",
+      "description": "The latest legal exit (data-testid=latest-exit) is 2026-12-29"
+    }
+  ]
+}

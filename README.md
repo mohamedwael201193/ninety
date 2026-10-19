@@ -66,7 +66,7 @@ Current result: **14/14 match**. If the Commission script cannot be loaded, the 
 
 ## Tested with TestSprite
 
-`testsprite_tests/plans/` holds the end-to-end suite (**21 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
+`testsprite_tests/plans/` holds the end-to-end suite (**27 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
 
 | Id | Proves |
 |---|---|
@@ -91,6 +91,12 @@ Current result: **14/14 match**. If the Commission script cannot be loaded, the 
 | TS14 | EES: a missing exit is found and its 4 days listed as one range |
 | TS30 | EES: a stay that began before 10 April 2026 is left out (20 days, 0 comparable) |
 | TS31 | EES: only the post-cutoff stay is compared (20 left out, 10 comparable) |
+| TS15 | The letter states Article 52(1)–(5) accurately |
+| TS27 | Overstay scenario: 107 used, overstay 2026-08-30 to 2026-09-15 (17 days) |
+| TS28 | Open stay counted through today: 19 used, 71 left, latest exit 2026-12-29 |
+| TS29 | A trip without an entry date is rejected and not saved |
+| TS34 | A later date drops old days: 30 used on 2026-10-19, 11 on 2026-11-15 |
+| TS35 | 'Use latest exit' turns a 105-day plan into a 46-day plan that fits |
 
 `testsprite_tests/test-ids.json` maps each plan to its TestSprite test id. New plans are added to the cloud suite with `npm run tests:add -- <plan.json>`, which records the id.
 
