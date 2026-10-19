@@ -111,11 +111,11 @@ describe("EES reconciliation invariants (random histories)", () => {
     );
   });
 
-  it("the figure gap is the EES figure minus the trips' count", () => {
+  it("the figure gap is the EES figure minus the trips' comparable count", () => {
     fc.assert(
       fc.property(history, day, fc.integer({ min: 0, max: 180 }), (trips, on, figure) => {
         const r = reconcile(trips, { daysUsed: figure, on });
-        expect(r.figureGap).toBe(figure - r.travellerDaysUsed);
+        expect(r.figureGap).toBe(figure - r.eesComparableDaysUsed);
         expect(r.codes.includes("figure-differs")).toBe(r.figureGap !== 0);
       }),
       { numRuns: RUNS },
