@@ -126,7 +126,7 @@ export function LetterPanel() {
         <form onSubmit={generate} className="card-soft space-y-6 p-6 md:p-8">
           <div className="flex items-center justify-between gap-3">
             <h2 className="font-display text-2xl font-medium tracking-tight">Your details</h2>
-            <span className="rounded-pill bg-paper-sunk px-3 py-1 font-mono text-xs text-ink-hushed">on <span data-testid="letter-on">{today}</span></span>
+            <span className="rounded-pill bg-paper-sunk px-3 py-1 font-mono text-xs text-ink-hushed">on <span data-testid="letter-on">{ready ? today : "…"}</span></span>
           </div>
           <fieldset className="grid gap-4 sm:grid-cols-2">
             <legend className="sr-only">Identity</legend>
