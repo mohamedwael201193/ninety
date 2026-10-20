@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T08:42:50.571Z",
+  "generatedAt": "2026-10-20T08:50:23.980Z",
   "source": "src/data/rules.json + testsprite test result",
   "rules": [
     {
@@ -28,9 +28,9 @@
           "testId": "673e2df9-f5fd-47b0-b1c3-759c462db1b8",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "853b1365-8101-4a55-baed-75f4c6950585"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "2ff0ecf9-206c-4d43-8f03-6a829ac1f3d1"
           }
         },
         {
@@ -39,9 +39,9 @@
           "testId": "b6981077-60ba-4847-b769-719dd19ebc2c",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "51d6b4be-d2c4-4381-b9c2-0527d77e316f"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "1bf86e8e-8ee9-4bdd-a979-40cbcab86905"
           }
         }
       ]
@@ -67,9 +67,9 @@
           "testId": "b6981077-60ba-4847-b769-719dd19ebc2c",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "51d6b4be-d2c4-4381-b9c2-0527d77e316f"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "1bf86e8e-8ee9-4bdd-a979-40cbcab86905"
           }
         },
         {
@@ -78,9 +78,9 @@
           "testId": "30074ac3-db4d-4ae1-8b43-a06298f40593",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "06e477fa-53be-4cc8-901e-0589477e9ac9"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "926d2a1c-3cbc-4acc-8877-9a04c2077e62"
           }
         }
       ]
@@ -105,9 +105,9 @@
           "testId": "7c648056-0c53-4a39-bf66-ef5550edbd0e",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "994f2a0c-5570-4791-aa6d-621ce734a9cf"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "fae3c468-4bda-499c-99cb-665b7ba918a1"
           }
         }
       ]
@@ -124,6 +124,10 @@
         {
           "file": "src/lib/schengen/engine.test.ts",
           "name": "allows 90 days again once the earlier stay has fallen out of the window"
+        },
+        {
+          "file": "src/lib/schengen/engine.test.ts",
+          "name": "a leap-day stay leaves the window exactly 180 days later"
         }
       ],
       "parity": [
@@ -137,10 +141,16 @@
           "testId": "776ff74c-96dd-489a-9918-5b747a90881a",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "e7ed06ca-3797-4ad2-8068-c4d37e31d3c6"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "ccddbd20-e5ee-444b-8661-99b560050c18"
           }
+        },
+        {
+          "id": "TS42",
+          "plan": "TS42-leap-day",
+          "testId": "0e997467-fa2a-488c-bb30-60de02358bef",
+          "latest": null
         }
       ]
     },
@@ -169,9 +179,9 @@
           "testId": "bd74af2c-d5e2-428d-a230-774035f1d3cd",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "ed5fcfbf-62d8-4b69-bebe-3103379e9831"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "4f326125-8f9f-436f-a6c4-f6aabe004e31"
           }
         }
       ]
@@ -194,9 +204,9 @@
           "testId": "b7111eb6-e02e-4f8d-84d1-48ae45d96fc4",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "fd06f199-e23c-435a-86e3-2afc24e7bef4"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "72c906c9-e98f-45c0-bd8f-3644daa5d438"
           }
         },
         {
@@ -205,9 +215,9 @@
           "testId": "2f9ce70d-082b-4c87-8bfc-f6784cd19b37",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "9989f1c2-f85e-4fba-bc98-d7d51124ac74"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "0a91c671-dc9b-4e43-bcdb-d26119900656"
           }
         }
       ]
@@ -237,9 +247,9 @@
           "testId": "58a96778-71b8-4ac8-ac7b-f1e6fbe8e928",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "7c6c5f8d-3fd4-407f-861e-37274024afd6"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "77d0c881-5c8b-488e-b7c4-7d456f754035"
           }
         },
         {
@@ -248,9 +258,9 @@
           "testId": "28757a0f-893c-4453-a5dc-27b7a57863fb",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "8b7d72f3-3884-4dc5-b2e2-291a70eac592"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "79bed733-8e86-4a9e-a552-ad9f1ff7de68"
           }
         },
         {
@@ -259,9 +269,9 @@
           "testId": "53b512df-b3aa-4fe9-864d-7bac3f35e073",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "3e279f17-593a-4b59-b5b5-e4b785116fa3"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "d08ba10f-633d-458b-8513-40f4e75128e3"
           }
         }
       ]
@@ -278,6 +288,10 @@
         {
           "file": "src/lib/schengen/engine.test.ts",
           "name": "rejects a planned exit before entry"
+        },
+        {
+          "file": "src/lib/schengen/dates.test.ts",
+          "name": "say the date does not exist rather than that it is missing"
         }
       ],
       "parity": [],
@@ -288,9 +302,9 @@
           "testId": "12214dbd-f926-45b4-b94b-4ff234bef57e",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "8a45541d-cc1e-4028-874d-e2d1fc22753c"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "b9ce10bc-4c71-44c5-b62b-3bfee46ffd53"
           }
         },
         {
@@ -299,9 +313,9 @@
           "testId": "c1707e85-ebb8-4959-b1fe-ded27d391ef2",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "e6209dd6-7930-4451-8517-fbce28f50e82"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "92827f85-0ac2-41e0-acce-6b124fc5edc9"
           }
         },
         {
@@ -310,10 +324,16 @@
           "testId": "15a89a56-88c3-4a0e-837f-658b434b344b",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "5bfdb88b-98d8-4291-8f7a-ff710f660e62"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "f65915f2-60d0-455e-8630-800fa5e4fa0e"
           }
+        },
+        {
+          "id": "TS21",
+          "plan": "TS21-impossible-date",
+          "testId": "991cf8e1-0d68-4102-8e7b-6045d37c1ee0",
+          "latest": null
         }
       ]
     },
@@ -339,9 +359,9 @@
           "testId": "499945d4-1c23-4fef-9825-7d3ba3d28b89",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "4935b2ae-fd15-422b-be21-8021fa88dbcc"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "b88f037b-bedd-4509-9301-fa1cc7e03a16"
           }
         },
         {
@@ -350,9 +370,9 @@
           "testId": "4104729a-a309-4574-8327-f6c8d3abf6a1",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "1a907c9a-52f7-43fe-8d5e-4b4dbd08c38e"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "43075a65-3553-43b4-8a7a-ecde2c4c0b54"
           }
         },
         {
@@ -361,9 +381,9 @@
           "testId": "54c989a8-c318-4942-8a74-5a56f295b6a9",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "0fb80da5-5263-4275-a68c-59140af1ca62"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "32558cd8-b214-418e-8f7c-987fcd6bdc0a"
           }
         }
       ]
@@ -394,9 +414,9 @@
           "testId": "0ccbb8d5-1faf-4a64-abda-6678468e083c",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "029149cc-c414-4d22-b457-dda474d0e92f"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "15872866-060c-43fe-8a2b-d5e13bdd7acc"
           }
         },
         {
@@ -405,9 +425,9 @@
           "testId": "3bbe3d45-67b3-469a-ae15-9e5650eb6aa4",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "5fed686e-681a-4ba9-b9f6-7a5f001a9250"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "6c9aeb5a-9b5f-4852-ac1a-a52fe5a652e9"
           }
         },
         {
@@ -416,9 +436,9 @@
           "testId": "93e462af-d768-4713-8634-8952f2258b72",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "6c0e6e21-5049-42c6-bf54-48c7d280b33e"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "d01c1633-077e-4d43-8707-fb7f95fe6aed"
           }
         }
       ]
@@ -445,9 +465,9 @@
           "testId": "31dba9a5-5ac6-473b-9517-b6064cdc2ac8",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "794852bc-222a-4808-b612-759aae43e5e7"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "4614e7c5-5e6c-467c-ad3e-96366341d455"
           }
         },
         {
@@ -456,9 +476,9 @@
           "testId": "3ceb95d5-9096-431f-9463-7b09eedcf065",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "615fdce0-4c8d-45cf-8d4c-664dae5d7c1c"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "6db7d285-bc19-42f8-b072-23333988e366"
           }
         },
         {
@@ -467,9 +487,9 @@
           "testId": "131f6bcd-36db-44bf-9cb5-14fd3769a1d1",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "a00f3e97-2b3b-4e71-8e42-164fa86107b6"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "1fe4b87f-042f-4803-94fe-2e60b7d7d0b8"
           }
         },
         {
@@ -478,9 +498,9 @@
           "testId": "c3525f00-6e6f-44e8-a3c2-92049a297106",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "6568c20b-6ffa-4fe1-a11f-d463dbe348e9"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "37e8e896-8ebe-43ae-9de2-3bd3ab5830db"
           }
         }
       ]
@@ -506,15 +526,15 @@
           "testId": "e8a03848-8e35-4692-8476-4be7c8ff37e0",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:35:18.965Z",
-            "environment": "github-pr-53",
-            "runId": "6cd1782d-8c7e-406f-9df5-b7dde6ede334"
+            "at": "2026-10-20T08:44:37.881Z",
+            "environment": "github-pr-54",
+            "runId": "0784b16e-6e0d-4057-8a56-45958ce1ef04"
           }
         }
       ]
     }
   ],
   "environments": [
-    "github-pr-53"
+    "github-pr-54"
   ]
 }

@@ -18,7 +18,10 @@ const cache = new Map();
 function latest(id) {
   if (!cache.has(id)) {
     const r = JSON.parse(execFileSync(BIN, ["test", "result", id, "--output", "json"], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }));
-    cache.set(id, { verdict: r.verdict ?? r.executionStatus ?? "unknown", at: r.startedAt ?? null, environment: r.environment?.name ?? null, runId: r.runIdIfAvailable ?? r.runId ?? null });
+    // A test that has never run reports a non-terminal state such as "ready": record it as not run (null),
+    // so the page neither counts it as passing nor as failing.
+    const ran = r.startedAt && ["passed", "failed", "blocked"].includes(r.verdict);
+    cache.set(id, !ran ? null : { verdict: r.verdict ?? r.executionStatus ?? "unknown", at: r.startedAt ?? null, environment: r.environment?.name ?? null, runId: r.runIdIfAvailable ?? r.runId ?? null });
   }
   return cache.get(id);
 }
