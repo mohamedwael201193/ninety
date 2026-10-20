@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T21:02:47.108Z",
+  "generatedAt": "2026-10-20T22:27:31.710Z",
   "source": "GitHub API + src/data/loop.json",
   "iterations": [
     {
@@ -1883,6 +1883,73 @@
         }
       ],
       "redThenGreen": false,
+      "stoppedThenGreen": false
+    },
+    {
+      "n": 55,
+      "pr": 57,
+      "title": "TestSprite: 8 plans for review bugs, red first (TS45–TS52), then the fixes",
+      "mergedAt": "2026-10-20T22:24:30Z",
+      "mergeCommit": "396d6d9690b6d6cbddc21a4ceba854a6d633fbff",
+      "checks": [
+        {
+          "sha": "78ee487ff8e33740cbec59465e7ca97237787757",
+          "message": "test(testsprite): TS45-TS52 plans for review bugs (bugs present, red on purpose)",
+          "state": "failure",
+          "at": "2026-10-20T21:59:21Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/c454e890-8648-4e1b-a723-dadde8f7a5c2",
+          "description": "34/43 passed · 8 failed · 1 blocked"
+        },
+        {
+          "sha": "dae00815749666ebcdce147abd640bb47e260eac",
+          "message": "parity: 412 scenarios against the vendored Commission script, 399/400 accepted inputs match on every printed field",
+          "state": "failure",
+          "at": "2026-10-20T22:05:16Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b7193abb-d3f1-4e7c-ad94-18f2f642a791",
+          "description": "42/43 passed · 1 failed"
+        },
+        {
+          "sha": "1963cc1923403756491778893cea9e960dd2c32b",
+          "message": "parity: when the server cannot load the live Commission page as the calculator, use the hash-checked stored copy and say so (caught by TestSprite TS02 on PR #57 and production)",
+          "state": "success",
+          "at": "2026-10-20T22:12:10Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/0036443d-b4c7-413f-99ee-88a00a001036",
+          "description": "All 43 tests passed"
+        }
+      ],
+      "executions": [
+        {
+          "start": "2026-10-20T21:56:39.790Z",
+          "passed": 34,
+          "tests": 43,
+          "failed": [
+            "TS02",
+            "TS45",
+            "TS46",
+            "TS47",
+            "TS48",
+            "TS49",
+            "TS50",
+            "TS51",
+            "TS52"
+          ]
+        },
+        {
+          "start": "2026-10-20T22:02:54.561Z",
+          "passed": 42,
+          "tests": 43,
+          "failed": [
+            "TS02"
+          ]
+        },
+        {
+          "start": "2026-10-20T22:09:41.423Z",
+          "passed": 43,
+          "tests": 43,
+          "failed": []
+        }
+      ],
+      "redThenGreen": true,
       "stoppedThenGreen": false
     }
   ]

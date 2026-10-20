@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-20T20:57:52.702Z",
+  "generatedAt": "2026-10-20T22:26:47.474Z",
   "source": "testsprite test result --history",
-  "runs": 1539,
+  "runs": 1668,
   "executions": [
     {
       "pr": null,
@@ -1084,6 +1084,82 @@
       "tests": 35,
       "passed": 35,
       "failed": []
+    },
+    {
+      "pr": 57,
+      "env": "github-pr-57",
+      "start": "2026-10-20T21:56:39.790Z",
+      "tests": 43,
+      "passed": 34,
+      "failed": [
+        {
+          "test": "TS02",
+          "runId": "863840fe-fd3f-413c-ac58-03e0fee2efbe",
+          "failureKind": null
+        },
+        {
+          "test": "TS45",
+          "runId": "1be72d1b-b76c-42b6-a674-c65d064ec2e3",
+          "failureKind": "assertion"
+        },
+        {
+          "test": "TS46",
+          "runId": "27191636-e251-487a-9ac4-538b6eea3110",
+          "failureKind": "unknown"
+        },
+        {
+          "test": "TS47",
+          "runId": "b23abe92-8721-48e5-9825-86c391b71783",
+          "failureKind": "unknown"
+        },
+        {
+          "test": "TS48",
+          "runId": "60415ced-b22d-4575-8fb6-8c114c63b092",
+          "failureKind": "assertion"
+        },
+        {
+          "test": "TS49",
+          "runId": "72f77103-049b-4a93-914c-5b2c305cdf8c",
+          "failureKind": "assertion"
+        },
+        {
+          "test": "TS50",
+          "runId": "9a8f26f0-f57d-4975-b772-8d6428f552dc",
+          "failureKind": "unknown"
+        },
+        {
+          "test": "TS51",
+          "runId": "328f6eb4-920e-4bc5-81d0-7d85bf169383",
+          "failureKind": "assertion"
+        },
+        {
+          "test": "TS52",
+          "runId": "a972952e-85c9-45bb-99ee-c4e61afb58cf",
+          "failureKind": "unknown"
+        }
+      ]
+    },
+    {
+      "pr": 57,
+      "env": "github-pr-57",
+      "start": "2026-10-20T22:02:54.561Z",
+      "tests": 43,
+      "passed": 42,
+      "failed": [
+        {
+          "test": "TS02",
+          "runId": "4b0e86f1-86f2-4d8e-831f-70b1f038095f",
+          "failureKind": "unknown"
+        }
+      ]
+    },
+    {
+      "pr": 57,
+      "env": "github-pr-57",
+      "start": "2026-10-20T22:09:41.423Z",
+      "tests": 43,
+      "passed": 43,
+      "failed": []
     }
   ],
   "loops": [
@@ -1479,6 +1555,71 @@
         "start": "2026-10-20T11:56:33.238Z",
         "tests": 35,
         "passed": 35,
+        "failed": []
+      }
+    },
+    {
+      "pr": 57,
+      "red": {
+        "pr": 57,
+        "env": "github-pr-57",
+        "start": "2026-10-20T21:56:39.790Z",
+        "tests": 43,
+        "passed": 34,
+        "failed": [
+          {
+            "test": "TS02",
+            "runId": "863840fe-fd3f-413c-ac58-03e0fee2efbe",
+            "failureKind": null
+          },
+          {
+            "test": "TS45",
+            "runId": "1be72d1b-b76c-42b6-a674-c65d064ec2e3",
+            "failureKind": "assertion"
+          },
+          {
+            "test": "TS46",
+            "runId": "27191636-e251-487a-9ac4-538b6eea3110",
+            "failureKind": "unknown"
+          },
+          {
+            "test": "TS47",
+            "runId": "b23abe92-8721-48e5-9825-86c391b71783",
+            "failureKind": "unknown"
+          },
+          {
+            "test": "TS48",
+            "runId": "60415ced-b22d-4575-8fb6-8c114c63b092",
+            "failureKind": "assertion"
+          },
+          {
+            "test": "TS49",
+            "runId": "72f77103-049b-4a93-914c-5b2c305cdf8c",
+            "failureKind": "assertion"
+          },
+          {
+            "test": "TS50",
+            "runId": "9a8f26f0-f57d-4975-b772-8d6428f552dc",
+            "failureKind": "unknown"
+          },
+          {
+            "test": "TS51",
+            "runId": "328f6eb4-920e-4bc5-81d0-7d85bf169383",
+            "failureKind": "assertion"
+          },
+          {
+            "test": "TS52",
+            "runId": "a972952e-85c9-45bb-99ee-c4e61afb58cf",
+            "failureKind": "unknown"
+          }
+        ]
+      },
+      "green": {
+        "pr": 57,
+        "env": "github-pr-57",
+        "start": "2026-10-20T22:09:41.423Z",
+        "tests": 43,
+        "passed": 43,
         "failed": []
       }
     }

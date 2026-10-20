@@ -1,8 +1,10 @@
 # The loop, iteration by iteration
 
-Generated 2026-10-20T21:02:47.113Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
+Generated 2026-10-20T22:27:31.713Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
 
-54 iterations, 10 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
+Screenshots of the runs and the merge gate: [docs/evidence/testsprite](docs/evidence/testsprite/README.md).
+
+55 iterations, 11 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
 
 ## Iteration 1: [#1](https://github.com/mohamedwael201193/ninety/pull/1) Add the Ninety 90/180 foundation
 
@@ -476,3 +478,15 @@ Merged 2026-10-20 15:33 UTC as [`c23e7c0`](https://github.com/mohamedwael201193/
 | Commit | TestSprite V3 | Execution |
 |---|---|---|
 | [`43d4ad0`](https://github.com/mohamedwael201193/ninety/commit/43d4ad0c11f034aee7aae6cfcffc849f4d7c049b) README: 35 TestSprite tests, 35/35 on the latest run, bugs fixed in #3 | success: All 35 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/7159e613-a019-4680-9f36-a934cf3c8aa5) |
+
+## Iteration 55: [#57](https://github.com/mohamedwael201193/ninety/pull/57) TestSprite: 8 plans for review bugs, red first (TS45–TS52), then the fixes (red, then green)
+
+Merged 2026-10-20 22:24 UTC as [`396d6d9`](https://github.com/mohamedwael201193/ninety/commit/396d6d9690b6d6cbddc21a4ceba854a6d633fbff).
+
+| Commit | TestSprite V3 | Execution |
+|---|---|---|
+| [`78ee487`](https://github.com/mohamedwael201193/ninety/commit/78ee487ff8e33740cbec59465e7ca97237787757) test(testsprite): TS45-TS52 plans for review bugs (bugs present, red o | failure: 34/43 passed · 8 failed · 1 blocked | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/c454e890-8648-4e1b-a723-dadde8f7a5c2) |
+| [`dae0081`](https://github.com/mohamedwael201193/ninety/commit/dae00815749666ebcdce147abd640bb47e260eac) parity: 412 scenarios against the vendored Commission script, 399/400  | failure: 42/43 passed · 1 failed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b7193abb-d3f1-4e7c-ad94-18f2f642a791) |
+| [`1963cc1`](https://github.com/mohamedwael201193/ninety/commit/1963cc1923403756491778893cea9e960dd2c32b) parity: when the server cannot load the live Commission page as the ca | success: All 43 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/0036443d-b4c7-413f-99ee-88a00a001036) |
+
+Run history: 2026-10-20T21:56Z 34/43 (failed TS02, TS45, TS46, TS47, TS48, TS49, TS50, TS51, TS52) → 2026-10-20T22:02Z 42/43 (failed TS02) → 2026-10-20T22:09Z 43/43.

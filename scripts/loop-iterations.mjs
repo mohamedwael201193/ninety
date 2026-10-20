@@ -75,6 +75,8 @@ const lines = [
   "",
   `Generated ${new Date().toISOString()} by \`scripts/loop-iterations.mjs\`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (\`src/data/loop.json\`, see [LOOP.md](LOOP.md)). Do not edit by hand.`,
   "",
+  "Screenshots of the runs and the merge gate: [docs/evidence/testsprite](docs/evidence/testsprite/README.md).",
+  "",
   `${iterations.length} iterations, ${iterations.filter((i) => i.redThenGreen).length} of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed). ${iterations.filter((i) => i.stoppedThenGreen).length} more had a run that could not start or was blocked before a green run; those are not counted as catches.`,
   "",
 ];
