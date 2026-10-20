@@ -6,16 +6,17 @@ Ninety counts your Schengen short-stay days from your own trips, checks that cou
 
 **Live:** https://ninety-coral.vercel.app
 
-**Receipts** (as of `main` at `1f24bc3`, each one checkable in this repo):
+**Receipts** (as of `main` at `fbf4b64`, each one checkable in this repo):
 
 | | |
 |---|---|
 | **14/14** | scenarios match the European Commission's own calculator, run from a stored, hashed copy on every PR ([`parity.test.ts`](src/lib/schengen/parity.test.ts)) and live every night ([`drift.yml`](.github/workflows/drift.yml)) |
 | **500 / 3,000** | random travel histories through Ninety and the Commission calculator per PR / per night, 0 disagreements ([`differential.fuzz.test.ts`](src/lib/schengen/differential.fuzz.test.ts), [`ci.yml`](.github/workflows/ci.yml)) |
-| **17** | TestSprite cloud tests on every PR preview, `TestSprite V3` a required check ([`test-ids.json`](testsprite_tests/test-ids.json)) |
-| **143** | Vitest unit, property and fuzz tests on every PR (`npm test`) |
-| **42** | pull requests merged into `main` |
-| **5** | real bugs caught red by TestSprite and fixed to green in the PR (#8, #14, #39, #41 twice; see below and [`docs/evidence`](docs/evidence/EVIDENCE_INDEX.md)) |
+| **35** | TestSprite cloud tests on every PR preview, `TestSprite V3` a required check ([`test-ids.json`](testsprite_tests/test-ids.json), plans in [`testsprite_tests/plans`](testsprite_tests/plans)) |
+| **35/35** | passed on the latest run, PR #55 at `815cc79` (2026-10-20; [portal report PDF](docs/evidence/portal-2026-10-20/testsprite-report-35of35-2026-10-20.pdf), [run map](docs/evidence/portal-2026-10-20/run-map-35of35.webp)) |
+| **235** | Vitest unit, property and fuzz tests on every PR (`npm test`) |
+| **53** | pull requests merged into `main` |
+| **6** | real bugs caught red by TestSprite and fixed to green in the PR (#8, #14, #39, #41 twice, #55); 9 more found by unit, fuzz and axe tests in #40–#54, each fixed test-first (see [Bugs fixed in #39–#55](#bugs-fixed-in-39-55) and [`docs/evidence`](docs/evidence/EVIDENCE_INDEX.md)) |
 
 ---
 
@@ -127,6 +128,25 @@ Bugs the suite caught that unit tests did not:
 - **The pinned story blocking the planned-trip button:** at 1280 px the pinned scroll section measured its position before the page grew and sat over "Check planned trip", so the click never landed. It now re-measures when the page height changes.
 - **The undo toast** disappeared before a user (or a test) could press Undo; it now stays until dismissed.
 - **The nav dropped the scenario:** "Check" linked to `/#check` without `?scenario=`, so an opened demo lost its history (TS10 went red; fixed in #20).
+
+### Bugs fixed in #39–#55
+
+Each one was fixed with a failing test first, then the fix, in the same pull request.
+
+Caught by TestSprite on the PR preview:
+
+- **#39** A demo scenario was lost on the way to `/ees` and `/letter` (TS16 written first, red, then green).
+- **#41** Reloading a page opened with `?fresh=1` wiped the saved trips again (TC011); the parameter is now removed from the address after the first load. In the same PR the evidence table's "Difference" cell was read as blank and became plain text cells (TS18).
+- **#55** After closing the trip sheet with Escape, keyboard focus fell to the page body instead of returning to "Add trip" (TS41 red, 34/35). The entry field's autofocus took focus before the sheet recorded its opener; the sheet now tracks the opener itself. The final run was 35/35.
+
+Caught by unit, property, fuzz or axe tests:
+
+- **#40** A corrupt EES row could hide a real match (differential fuzzer against the Commission calculator).
+- **#43** The landing band showed 0/0 on `/?scenario=demo` at first paint; it now shows the real figure from the start.
+- **#45** A stored trip whose exit is before its entry corrupted the count; such trips are now skipped.
+- **#49** Three axe findings: low-contrast ok/warn/faint text, invalid markup in the status list, and `aria-describedby` pointing at messages that did not exist.
+- **#50** On phones the planned-trip verdict scrolled under the sticky bottom bar.
+- **#54** "Check" and "Plan" dropped `?scenario=`, and `/proof` counted tests that had never run as failing (13/26); it now counts only tests that ran.
 
 ## Accessibility (automated, axe)
 

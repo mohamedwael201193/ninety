@@ -1,0 +1,33 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-g-readme
+
+ ❯ src/components/landing/Nav.test.tsx (6 tests | 1 failed) 165ms
+     × re-checks the edge fade when the row is resized (rotation, resize), not only on load 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/landing/Nav.test.tsx > Nav > re-checks the edge fade when the row is resized (rotation, resize), not only on load
+AssertionError: expected 'true' to be 'false' // Object.is equality
+
+Expected: "false"
+Received: "true"
+
+ ❯ src/components/landing/Nav.test.tsx:68:30
+     66|     cw.mockReturnValue(700);
+     67|     act(() => callbacks.forEach((cb) => cb([], {} as ResizeObserver)));
+     68|     expect(row.dataset.more).toBe("false");
+       |                              ^
+     69|     globalThis.ResizeObserver = prev; sw.mockRestore(); cw.mockRestore…
+     70|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  18:26:11
+   Duration  2.49s (transform 111ms, setup 32ms, import 763ms, tests 165ms, environment 1.25s)
+
