@@ -18,7 +18,7 @@ Ninety counts your Schengen short-stay days from your own trips, checks that cou
 | **43** | TestSprite cloud tests on every PR preview (TS45–TS52 added for bugs found in code review), `TestSprite V3` a required check ([`test-ids.json`](testsprite_tests/test-ids.json), plans in [`testsprite_tests/plans`](testsprite_tests/plans)) |
 | **43/43** | passed on the latest run, PR #57 at `1963cc1` (status "All 43 tests passed", 2026-10-21; [screenshots](docs/evidence/testsprite/README.md)). The previous full run, 35/35 on PR #56: [portal report PDF](docs/evidence/portal-2026-10-20/testsprite-report-35of35-2026-10-20.pdf) |
 | **7 + 8** | 7 real app bugs TestSprite found first on a PR preview (6 fixed before merging, and TS02 on #57, which also failed on production); 8 more bugs from code review that TestSprite failed red, then passed after the fix, on #57 ([What TestSprite caught](#what-testsprite-caught)) |
-| **347** | Vitest unit, property and fuzz tests on every PR, all passing (3 more run only against the live Commission page) (`npm test`) |
+| **355** | Vitest unit, property and fuzz tests on every PR, all passing (3 more run only against the live Commission page) (`npm test`) |
 | **3** | public API endpoints with an [OpenAPI 3.1 document](https://ninety-coral.vercel.app/api/openapi.json) (copy in [`docs/openapi.json`](docs/openapi.json), kept equal by a test), and the same three as MCP tools: over streamable HTTP at `/api/mcp` and as a stdio [server](packages/ninety-mcp), both tested with the official MCP client |
 | **55** | pull requests merged into `main` |
 
@@ -102,6 +102,52 @@ Input is checked field by field (`400` names the path, for example `trips.0.entr
 ## Scenario gallery
 
 The home page has six worked histories (open stay, 88 of 90, overstay, same-day re-entry, a stay before the EES cutoff, and a mixed one). Each card's figures are computed by the engine at build time, opens its history with `?scenario=` without touching saved trips, and names the TestSprite tests that check that same history ("guarded by TS27"). A unit test fails if a card names a plan that does not exist.
+
+## TestSprite backend tests (API and MCP)
+
+A second TestSprite project, "Ninety API" (backend, `790eba05`), holds 28 Python tests against production. They cover:
+- the three REST endpoints, `/api/mcp` and `/api/parity`;
+- leap days, the 90/91-day and 180/181-day edges, same-day re-entry and open stays;
+- duplicates and 60 trips, the 200-trip and 64 KB limits, malformed JSON, Content-Type variants;
+- the 1900–2199 date range, the UTC default date;
+- JSON-RPC errors, notifications and batches, CORS, HEAD and 405.
+
+Expected values come from the vendored Commission calculator (the outputs are recorded in each test's comment) or from the spec (Art. 6(1) Schengen Borders Code, OpenAPI, JSON-RPC 2.0, MCP 2025-06-18, RFC 9110), never from Ninety's own answers. One exception is recorded in BE14: with 60 one-day trips, the Commission script gives a figure that a day-by-day count of the rule does not support. The same trips minus the first 10 give the day-by-day answer, so BE14 uses the day-by-day count.
+
+The GitHub App runs only the frontend project, so these tests run from the CLI (`testsprite test run --all --project 790eba05-abdb-41c5-ae1a-4b2b0131b438 --no-auto-heal`), at 0.2 credits each. Ids: [`backend-ids.json`](testsprite_tests/backend-ids.json).
+
+**Result, first run, 2026-10-21: 27/28 passed. BE28 found a real bug.** `/api/mcp` answered a request whose `id` was not a string or a number (for example `true`) with an error that had no `id` member. JSON-RPC 2.0 section 5 requires `"id": null` there. The fix is in `src/lib/api/mcp-http.ts`, with `mcp-id.test.ts` (5 tests, red before the fix). Every other test passed on its first run, so they found no other bug.
+
+| Test | Checks |
+|---|---|
+| [`BE01-openapi-document`](testsprite_tests/backend/BE01-openapi-document.py) | OpenAPI document lists the 3 endpoints and their statuses |
+| [`BE02-mcp-tools-list`](testsprite_tests/backend/BE02-mcp-tools-list.py) | MCP tools/list returns the 3 tools; an unknown protocol version gets 400 |
+| [`BE03-check-overstay`](testsprite_tests/backend/BE03-check-overstay.py) | Check: 1 Jan to 15 Apr 2024 is 106 days, a 16-day overstay from 31 Mar |
+| [`BE04-check-bad-input`](testsprite_tests/backend/BE04-check-bad-input.py) | Check: an impossible date, an unknown key and text/plain are refused |
+| [`BE05-parity-14-of-14`](testsprite_tests/backend/BE05-parity-14-of-14.py) | Parity API: 14/14 match, from the live page or the named stored copy |
+| [`BE06-leap-day-29-feb`](testsprite_tests/backend/BE06-leap-day-29-feb.py) | Leap year: 1 to 29 Feb 2024 is 29 days; Commission: 61 days left, stay until 2024-04-30 |
+| [`BE07-leap-day-leaves-window`](testsprite_tests/backend/BE07-leap-day-leaves-window.py) | 29 Feb 2024 counts on 26 Aug 2024 (day 180) and is gone on 27 Aug |
+| [`BE08-exactly-90-days`](testsprite_tests/backend/BE08-exactly-90-days.py) | Exactly 90 days: no overstay, 0 left, last legal day is the day itself |
+| [`BE09-day-91-overstay`](testsprite_tests/backend/BE09-day-91-overstay.py) | Day 91 is a 1-day overstay on 31 Mar 2024 |
+| [`BE10-window-edge-180-181`](testsprite_tests/backend/BE10-window-edge-180-181.py) | After 90 days: refused on day 180 after entry, next legal entry 29 Jun, 90 days on 29 Jun |
+| [`BE11-same-day-reentry`](testsprite_tests/backend/BE11-same-day-reentry.py) | Same-day exit and re-entry counts the day once: 20 days, 70 left |
+| [`BE12-open-stay`](testsprite_tests/backend/BE12-open-stay.py) | An open stay counts through the date: 10 days, 80 left, until 29 May |
+| [`BE13-duplicate-and-overlap`](testsprite_tests/backend/BE13-duplicate-and-overlap.py) | Duplicate and overlapping trips count each day once |
+| [`BE14-sixty-trips`](testsprite_tests/backend/BE14-sixty-trips.py) | 60 one-day trips, 3 days apart: 60 days used, 30 left |
+| [`BE15-trip-limit-200`](testsprite_tests/backend/BE15-trip-limit-200.py) | 200 trips are accepted; 201 are refused with 400 (maxItems 200) |
+| [`BE16-body-size-413`](testsprite_tests/backend/BE16-body-size-413.py) | Body limit is 64 KB of bytes: just under passes the size check, just over is 413 |
+| [`BE17-malformed-json`](testsprite_tests/backend/BE17-malformed-json.py) | Malformed JSON bodies are a 400 JSON error, never a 500 |
+| [`BE18-content-type-variants`](testsprite_tests/backend/BE18-content-type-variants.py) | Content-Type: application/json with charset and any case is accepted; others are 415 |
+| [`BE19-date-range`](testsprite_tests/backend/BE19-date-range.py) | Dates 1900-2199 are counted (2100 is not a leap year); 1899 and 2200 are 400 |
+| [`BE20-default-date-utc`](testsprite_tests/backend/BE20-default-date-utc.py) | Without 'on', the count is for today in UTC (spec) |
+| [`BE21-exit-before-entry-422`](testsprite_tests/backend/BE21-exit-before-entry-422.py) | An exit before its entry is 422 (valid shape, cannot be counted) |
+| [`BE22-planned-trip-boundary`](testsprite_tests/backend/BE22-planned-trip-boundary.py) | Planned trip: 61 days after 29 Feb fit, 62 do not (Commission: up to 61) |
+| [`BE23-parity-vs-check`](testsprite_tests/backend/BE23-parity-vs-check.py) | Check agrees with the Commission figures that /api/parity reports |
+| [`BE24-mcp-jsonrpc-errors`](testsprite_tests/backend/BE24-mcp-jsonrpc-errors.py) | MCP JSON-RPC errors: unknown method -32601, parse error -32700, invalid request -32600 |
+| [`BE25-mcp-notification-batch-size`](testsprite_tests/backend/BE25-mcp-notification-batch-size.py) | MCP: a notification gets 202 with no body; a batch is refused; an oversized body is 413 |
+| [`BE26-mcp-tool-call-oracle`](testsprite_tests/backend/BE26-mcp-tool-call-oracle.py) | MCP schengen_check on the Commission's 106-day example gives the 16-day overstay |
+| [`BE27-cors-options-head`](testsprite_tests/backend/BE27-cors-options-head.py) | CORS preflight, HEAD and wrong methods follow HTTP |
+| [`BE28-mcp-error-always-has-id`](testsprite_tests/backend/BE28-mcp-error-always-has-id.py) | MCP: an error for an invalid request id still carries "id": null (JSON-RPC 2.0 section 5) |
 
 ## Proof (`/proof`)
 

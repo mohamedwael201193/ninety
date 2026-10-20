@@ -47,3 +47,7 @@ The run-by-run record is in [`LOOP-ITERATIONS.md`](../../../LOOP-ITERATIONS.md).
 | ![](ts-insights.png) | The project's Insights page. **The banner at the top is stale:** "2 tests failed in the latest run" (two open-stay tests from earlier history) and "Install GitHub Action", although the GitHub trigger is installed and the latest run is 43/43. The trend tiles (100% pass rate, 43 of 43 that ran) and "41 tests" in the coverage donut are what the portal showed at the time; the cloud suite has 43 tests. |
 
 One screenshot was left out: the GitHub Checks tab, which showed only Vercel's details pane and nothing about TestSprite.
+
+## Backend tests (CLI, no screenshots)
+
+There are 28 TestSprite backend tests in the "Ninety API" project. The first run was 27/28: BE28 caught a real bug, `/api/mcp` errors without an `id` member. After the fix, BE28 passed on its re-run. Run ids and results are in the main README's backend section. There are no portal screenshots for these yet.

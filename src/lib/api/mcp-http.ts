@@ -13,11 +13,15 @@ const err = (id: Msg["id"], code: number, message: string) => ({ jsonrpc: "2.0",
 
 /** One JSON-RPC message in, the reply out (null for a notification, which gets 202). */
 export function rpc(msg: Msg, inBatch = false): object | null {
-  if (!msg || typeof msg !== "object" || msg.jsonrpc !== "2.0" || typeof msg.method !== "string") return err(msg?.id, -32600, "Invalid Request");
+  // JSON-RPC 2.0 section 5: every error response carries "id"; when the request id cannot be used
+  // (not a string or a number), it is null. Found by TestSprite BE28 on production, 2026-10-21.
+  const rawId = msg && typeof msg === "object" ? msg.id : undefined;
+  const safeId = typeof rawId === "string" || typeof rawId === "number" ? rawId : null;
+  if (!msg || typeof msg !== "object" || msg.jsonrpc !== "2.0" || typeof msg.method !== "string") return err(safeId, -32600, "Invalid Request");
   if (msg.id === undefined) return null;
   // MCP 2025-06-18 base protocol: unlike JSON-RPC, a request id MUST be a string or a number, never null.
+  if (typeof msg.id !== "string" && typeof msg.id !== "number") return err(null, -32600, "Request id must be a string or a number.");
   if (msg.params !== undefined && (msg.params === null || typeof msg.params !== "object")) return err(msg.id, -32602, "params must be an object");
-  if (typeof msg.id !== "string" && typeof msg.id !== "number") return { jsonrpc: "2.0", error: { code: -32600, message: "Request id must be a string or a number." } };
   // MCP 2025-03-26 lifecycle: initialize MUST NOT be part of a batch.
   if (inBatch && msg.method === "initialize") return err(msg.id, -32600, "initialize must not be sent in a batch");
   switch (msg.method) {
