@@ -176,7 +176,7 @@ export function LetterPanel() {
                   </tr>
                 </tbody>
               </table>
-              <pre data-testid="letter-text" className="max-h-[70vh] overflow-auto whitespace-pre-wrap p-6 font-sans text-[15px] leading-7 md:p-8">{letter.text}</pre>
+              <pre data-testid="letter-text" data-lenis-prevent className="max-h-[70vh] overflow-auto whitespace-pre-wrap p-6 font-sans text-[15px] leading-7 md:p-8">{letter.text}</pre>
               <div className="flex flex-col gap-3 border-t border-line-soft bg-paper-warm p-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-xs text-ink-hushed">Review, sign and send it yourself. Not a decision by a border authority.</p>
                 <div className="flex shrink-0 gap-2">
