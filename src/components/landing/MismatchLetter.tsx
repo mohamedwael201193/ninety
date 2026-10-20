@@ -84,6 +84,7 @@ export default function MismatchLetter() {
           <div className="lg:col-span-4">
             <p className="eyebrow">EES mismatch</p>
             <h2 className="mt-4 font-display text-4xl font-medium leading-[1.05] tracking-tight md:text-5xl">Spot the border&apos;s mistake. Send the fix in one tap.</h2>
+            <p data-testid="mismatch-example-note" className="mt-3 text-sm text-ink-hushed">Worked example with the sample trips above: 56 days by your trips, 90 by the EES.</p>
             <ol className="relative mt-10 hidden space-y-6 pl-6 lg:block">
               <span aria-hidden className="absolute left-0 top-1 h-full w-px bg-line-soft" />
               <span aria-hidden className="ml-bar absolute left-0 top-1 h-full w-px origin-top bg-ink" />

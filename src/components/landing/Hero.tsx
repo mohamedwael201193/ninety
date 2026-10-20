@@ -85,7 +85,10 @@ export default function Hero() {
         <motion.div className="row-start-3 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1" initial={{ y: 24 }} animate={{ y: 0 }} transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}>
           <div className="relative mx-auto max-w-[460px] py-6 lg:scale-[1.1]">
             <FlightPath width={420} height={160} color="#17332D" duration={1.8} className="pointer-events-none absolute -left-10 top-[30%] z-0 hidden w-[120%] -rotate-12 sm:block" />
-            <motion.div style={{ y: phoneY }} className="relative z-10"><PhoneDemo /></motion.div>
+            <motion.div style={{ y: phoneY }} className="relative z-10">
+              <PhoneDemo />
+              <p data-testid="hero-illustration-note" className="mt-4 text-center text-xs text-ink-hushed">Illustration with example trips, not your data. Your own count is below.</p>
+            </motion.div>
             <FloatCard className="left-[-18%] top-[-2%]" delay={0.6} float={0} depth={1.2} p={p}>
               <span className="h-2 w-2 rounded-full bg-risk" /> <span>EES says <b className="tnum">90 used</b></span>
             </FloatCard>

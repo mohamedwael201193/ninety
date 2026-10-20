@@ -1,0 +1,36 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-landing
+
+ ❯ src/lib/ui/fresh.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/ui/fresh.test.ts [ src/lib/ui/fresh.test.ts ]
+Error: Failed to resolve import "./fresh" from "src/lib/ui/fresh.test.ts". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /workspace/wt-landing/src/lib/ui/fresh.test.ts:3:29
+  1  |  // @vitest-environment jsdom
+  2  |  import { describe, expect, it } from "vitest";
+  3  |  import { consumeFresh } from "./fresh";
+     |                                ^
+  4  |  import { TRIP_STORAGE_KEY } from "@/lib/trips";
+  5  |  describe("?fresh=1", () => {
+ ❯ TransformPluginContext._formatLog ../ninety-repo/node_modules/vite/dist/node/chunks/node.js:8766:39
+ ❯ TransformPluginContext.error ../ninety-repo/node_modules/vite/dist/node/chunks/node.js:8763:14
+ ❯ normalizeUrl ../ninety-repo/node_modules/vite/dist/node/chunks/node.js:26632:18
+ ❯ ../ninety-repo/node_modules/vite/dist/node/chunks/node.js:26702:30
+ ❯ TransformPluginContext.transform ../ninety-repo/node_modules/vite/dist/node/chunks/node.js:26668:4
+ ❯ EnvironmentPluginContainer.transform ../ninety-repo/node_modules/vite/dist/node/chunks/node.js:8545:14
+ ❯ loadAndTransform ../ninety-repo/node_modules/vite/dist/node/chunks/node.js:20184:26
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  09:26:51
+   Duration  663ms (transform 17ms, setup 24ms, import 0ms, tests 0ms, environment 379ms)
+

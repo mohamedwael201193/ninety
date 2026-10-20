@@ -24,10 +24,12 @@ export function DaysRing({ daysLeft, daysUsed, tone }: { daysLeft: number; daysU
           transition={{ pathLength: { duration: reduce ? 0 : 0.9, ease: [0.16, 1, 0.3, 1] }, stroke: { duration: 0.32 } }}
         />
       </svg>
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
+      {/* Inset to the ring's inner edge so long labels (e.g. 107/90) never touch the stroke. */}
+      <div className="absolute inset-[18%] flex flex-col items-center justify-center text-center">
         <NumberTicker value={daysLeft} className="font-display text-[5.5rem] leading-none font-semibold tracking-[-0.045em] md:text-[7rem]" />
-        <span className="mt-1 font-mono text-xs tracking-[0.08em] text-ink-hushed uppercase">
-          days left · {daysUsed}/90 used
+        <span className="mt-1 flex flex-col items-center font-mono text-[11px] leading-tight tracking-[0.08em] text-ink-hushed uppercase md:text-xs">
+          <span>days left</span>
+          <span className={daysUsed > 90 ? "text-risk" : undefined}>{daysUsed}/90 used</span>
         </span>
       </div>
     </div>

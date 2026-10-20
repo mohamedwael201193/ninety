@@ -14,15 +14,19 @@
     },
     {
       "type": "assertion",
-      "description": "The trip list (data-testid=trip-list) shows exactly 3 trip rows (data-testid=trip-row)"
+      "description": "The trip list (data-testid=trip-list) shows exactly 3 trip rows (data-testid=trip-row), for 2026-05-22 to 2026-06-10, 2026-07-21 to 2026-08-18 and 2026-09-29 to 2026-10-13"
     },
     {
       "type": "assertion",
-      "description": "The status panel (data-testid=status-panel) shows 64 days used out of 90"
+      "description": "Days used (data-testid=days-used) shows 64"
     },
     {
       "type": "assertion",
-      "description": "The status panel shows 26 days left"
+      "description": "Days left (data-testid=days-left) shows 26"
+    },
+    {
+      "type": "assertion",
+      "description": "The overstay tile (data-testid=overstay-status) reads 'No overstay' and the presence tile (data-testid=present-status) reads 'Outside'"
     }
   ]
 }

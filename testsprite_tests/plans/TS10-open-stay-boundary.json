@@ -14,7 +14,7 @@
     },
     {
       "type": "assertion",
-      "description": "The planned trip result (data-testid=planned-result) starts with 'Fits'"
+      "description": "The planned trip result (data-testid=planned-result) starts with 'Fits.' and names 2026-12-29 as the latest legal exit"
     },
     {
       "type": "action",
@@ -22,7 +22,7 @@
     },
     {
       "type": "assertion",
-      "description": "The planned trip result (data-testid=planned-result) says 'Does not fit'"
+      "description": "The planned trip result (data-testid=planned-result) starts with 'Does not fit' and names 2026-12-29 as the latest legal exit; only one result is shown"
     }
   ]
 }

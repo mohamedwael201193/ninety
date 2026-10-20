@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { consumeFresh } from "@/lib/ui/fresh";
+import { CoverageNote } from "./CoverageNote";
 import { MotionConfig } from "framer-motion";
 import { Plus, TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
@@ -9,7 +11,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { addDays, isIsoDate, localToday } from "@/lib/schengen/dates";
 import { evaluate } from "@/lib/schengen/engine";
-import { TRIP_STORAGE_KEY, findOverlaps, loadTrips, saveTrips, type Trip } from "@/lib/trips";
+import { findOverlaps, loadTrips, saveTrips, type Trip } from "@/lib/trips";
 import { Sheet } from "./dashboard/Sheet";
 import { PlannedTripForm } from "./PlannedTripForm";
 import { StatusPanel } from "./StatusPanel";
@@ -34,7 +36,7 @@ export function AppShell() {
   const fresh = params.get("fresh") === "1";
   useEffect(() => {
     // ?fresh=1 starts from an empty trip list (used by the test suite for a clean slate).
-    if (fresh) window.localStorage.removeItem(TRIP_STORAGE_KEY);
+    if (fresh) consumeFresh(window);
     // ?scenario=<id> shows a named demo history without touching saved trips.
     setTrips(scenario ? scenarioTrips(scenario) : loadTrips(window.localStorage));
     setReady(true);
@@ -121,6 +123,7 @@ export function AppShell() {
             Rebuilds the 90 days / 180-day count from your trips. Entry day and exit day both count.
             This is a helping tool only; it is not a decision by a border authority.
           </p>
+          <CoverageNote className="mt-4 max-w-[640px]" />
         </header>
 
         {ready && scenario ? (
