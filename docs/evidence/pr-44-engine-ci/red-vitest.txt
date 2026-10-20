@@ -1,0 +1,36 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-p1
+
+ ❯ src/lib/ci/vercel.test.ts (2 tests | 1 failed) 8ms
+     × never skips a preview build: TestSprite V3 tests every PR preview 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/ci/vercel.test.ts > vercel.json ignoreCommand > never skips a preview build: TestSprite V3 tests every PR preview
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/lib/ci/vercel.test.ts:10:77
+      8|   // preview URL served "Deployment was cancelled" and TestSprite V3 c…
+      9|   it("never skips a preview build: TestSprite V3 tests every PR previe…
+     10|     expect(ignoreCommand.startsWith('[ "$VERCEL_ENV" = "production" ] …
+       |                                                                             ^
+     11|   });
+     12|   it("still skips production builds of CI/docs-only commits", () => {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  10:30:02
+   Duration  217ms (transform 27ms, setup 26ms, import 14ms, tests 8ms, environment 0ms)
+
