@@ -1,0 +1,63 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-band
+
+ ❯ src/components/landing/CountUp.inview.test.tsx (1 test | 1 failed) 1231ms
+     × never drops below the real value once shown (no 0 flash on scroll-in) 1229ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/landing/CountUp.inview.test.tsx > CountUp on screen > never drops below the real value once shown (no 0 flash on scroll-in)
+AssertionError: expected [ '88', '11', '20', '27', '34', …(22) ] to deeply equal [ '88' ]
+
+- Expected
++ Received
+
+  [
+    "88",
++   "11",
++   "20",
++   "27",
++   "34",
++   "41",
++   "47",
++   "51",
++   "56",
++   "59",
++   "63",
++   "66",
++   "69",
++   "71",
++   "73",
++   "75",
++   "76",
++   "78",
++   "79",
++   "80",
++   "81",
++   "82",
++   "83",
++   "84",
++   "85",
++   "86",
++   "87",
+  ]
+
+ ❯ src/components/landing/CountUp.inview.test.tsx:22:23
+     20|     await new Promise((r) => setTimeout(r, 1200));
+     21|     mo.disconnect();
+     22|     expect([...seen]).toEqual(["88"]);
+       |                       ^
+     23|   });
+     24| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  10:14:06
+   Duration  2.12s (transform 54ms, setup 23ms, import 291ms, tests 1.23s, environment 350ms)
+
