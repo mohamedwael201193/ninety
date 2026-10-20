@@ -286,3 +286,16 @@ describe("an earlier EES exit", () => {
     expect(result.explanation).not.toMatch(/missing entry[^.]*2024-06-09/);
   });
 });
+
+describe("a bad trip row next to valid ones", () => {
+  it("still matches when the valid trips agree with the EES, and keeps the error visible", () => {
+    const result = reconcile(
+      [{ entry: "2024-06-10", exit: "2024-06-01" }, { entry: "2024-07-01", exit: "2024-07-10" }],
+      { daysUsed: 10, on: "2024-07-20" },
+    );
+    expect(result.travellerDaysUsed).toBe(10);
+    expect(result.codes).toContain("match");
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.explanation).toContain("ends before it starts");
+  });
+});

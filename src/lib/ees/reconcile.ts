@@ -343,7 +343,7 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
   }
 
   if (preCutoff.size > 0) codes.push("ees-ignores-pre-cutoff-stay");
-  else if (codes.length === 0 && figureValid && errors.length === 0) codes.push("match");
+  else if (codes.length === 0 && figureValid) codes.push("match");
 
   const head = `Compared on ${on}, over the 180-day period ${windowStart} to ${on}. The trips count ${pluralDays(traveller.daysUsed)}. The EES states ${figureValid ? pluralDays(claim.daysUsed) : "an unusable figure"}.`;
   let explanation = head;
