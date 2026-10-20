@@ -18,7 +18,7 @@
     },
     {
       "type": "action",
-      "description": "Navigate to /?today=2026-10-19 exactly. Do NOT open any URL containing fresh=1 again after saving: fresh=1 deletes saved trips by design, and this test checks that they survive a reload"
+      "description": "Refresh the current page with the browser's reload (page.reload / F5). Do NOT type or navigate to any URL: the address no longer contains fresh=1 after the first load, and opening a fresh=1 URL again deletes saved trips by design"
     },
     {
       "type": "assertion",

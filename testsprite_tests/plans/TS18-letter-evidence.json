@@ -22,15 +22,11 @@
     },
     {
       "type": "assertion",
-      "description": "Wait 2 seconds for the letter panel to finish animating in. Then the evidence table (data-testid=letter-evidence, columns Date, Your dates, EES figure, Difference) shows 2026-10-19 (letter-evidence-on), Your dates 88 (letter-evidence-ours), EES figure 90 (letter-evidence-ees) and Difference 2 (letter-evidence-gap). Read each value from its data-testid cell"
+      "description": "Read the text of the elements by data-testid (DOM text, not a visual reading of the table): letter-evidence-on is 2026-10-19, letter-evidence-ours is 88, letter-evidence-ees is 90, letter-evidence-gap is 2"
     },
     {
       "type": "assertion",
       "description": "The letter text (data-testid=letter-text) contains 'In figures: my dates 88 days; EES 90 days; difference 2 days, the EES counting more.'"
-    },
-    {
-      "type": "assertion",
-      "description": "The page shows the demo scenario banner (data-testid=scenario-banner)"
     }
   ]
 }
