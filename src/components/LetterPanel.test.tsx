@@ -51,4 +51,26 @@ describe("LetterPanel", () => {
     expect(text).toContain("show 88 days in that same period");
     expect(text).toContain("In figures: my dates 88 days; EES 90 days; difference 2 days, the EES counting more.");
   });
+
+  it("names the evidence as an accessible table: date, your dates, EES figure, difference", () => {
+    window.localStorage.clear();
+    query = "scenario=near-limit";
+    render(<LetterPanel />);
+    for (const [id, v] of [["letter-name", "Jane Traveller"], ["letter-birth", "1990-05-04"], ["letter-nationality", "Egypt"], ["letter-document", "A1234567"], ["letter-email", "jane@example.com"], ["letter-member-state", "France"], ["letter-ees-days", "90"]]) type(id, v);
+    fireEvent.click(screen.getByTestId("letter-generate"));
+    const table = screen.getByRole("table", { name: /evidence/i });
+    const headers = Array.from(table.querySelectorAll("th[scope=col]")).map((th) => th.textContent);
+    expect(headers).toEqual(["Date", "Your dates", "EES figure", "Difference"]);
+    const cells = Array.from(table.querySelectorAll("tbody tr > *")).map((c) => c.textContent);
+    expect(cells).toEqual(["2026-10-19", "88", "90", "2"]);
+    expect(table.querySelector("tbody th[scope=row]")?.textContent).toBe("2026-10-19");
+  });
+
+  it("?scenario=demo opens the landing demo history, as on /ees", () => {
+    window.localStorage.clear();
+    query = "scenario=demo";
+    render(<LetterPanel />);
+    expect(screen.getByTestId("scenario-banner").getAttribute("data-scenario")).toBe("near-limit");
+    expect(screen.getByTestId("letter-on").textContent).toBe("2026-10-19");
+  });
 });
