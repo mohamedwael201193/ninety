@@ -53,3 +53,16 @@ describe("EesPanel reference date", () => {
     expect((await screen.findByTestId("ees-on")).textContent).toBe("2026-10-19");
   });
 });
+
+describe("EesPanel cutoff card", () => {
+  it("states the rule with both worked examples, and the mixed scenario compares only the later stay", async () => {
+    window.localStorage.clear();
+    query = "scenario=cutoff-mixed";
+    render(<EesPanel />);
+    expect(screen.getByTestId("cutoff-rule").textContent).toContain("10 April 2026");
+    const examples = screen.getAllByTestId("cutoff-example");
+    expect(examples.map((e) => [e.querySelector('[data-testid="cutoff-left-out"]')?.textContent, e.querySelector('[data-testid="cutoff-compared"]')?.textContent])).toEqual([["20", "0"], ["20", "10"]]);
+    expect(await compareWith("10")).toContain("30");
+    expect(document.body.textContent).toContain("10 days are comparable with the EES");
+  });
+});

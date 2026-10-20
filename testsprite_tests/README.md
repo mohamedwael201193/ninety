@@ -37,6 +37,7 @@ Every plan pins the date with `?today=2026-10-19` and starts either with `fresh=
 | `TS35-use-latest-exit.json` | 'Use latest exit' turns a 105-day plan into a 46-day plan that fits |
 | `TS36-proof-matrix.json` | /proof lists the 12 rules, each with its engine, parity and TestSprite tests |
 | `TS37-scenario-gallery.json` | The six gallery cards show engine figures and guard badges, and open their history in the calculator or the EES check |
+| `TS38-cutoff-card.json` | The /ees cutoff card states the 10 April 2026 rule, its figures match the reconciler, and its example loads and compares |
 
 Every plan listed here is in the cloud suite; `test-ids.json` maps each to its TestSprite id. New plans are added with `node scripts/add-cloud-tests.mjs <plan.json>`. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
 

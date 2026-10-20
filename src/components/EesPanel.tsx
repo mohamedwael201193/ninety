@@ -10,6 +10,7 @@ import { days } from "@/lib/plural";
 import { loadTrips } from "@/lib/trips";
 import { scenarioById, scenarioTrips } from "@/lib/scenarios";
 import { CarryLink } from "./CarryLink";
+import { CutoffExplainer } from "./CutoffExplainer";
 import { ScenarioBanner } from "./ScenarioBanner";
 import { evaluate } from "@/lib/schengen/engine";
 import { NumberTicker } from "./fx/NumberTicker";
@@ -202,6 +203,7 @@ export function EesPanel() {
           ) : null}
         </div>
       </div>
+      <CutoffExplainer />
     </ToolShell>
   );
 }

@@ -1,0 +1,36 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Cutoff card explains 10 April 2026 and loads its example",
+  "priority": "p2",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /ees?today=2026-10-19&fresh=1 and scroll to the card titled 'Why stays before 2026-04-10 are not compared' (data-testid=cutoff-explainer)"
+    },
+    {
+      "type": "assertion",
+      "description": "The rule text (data-testid=cutoff-rule) mentions 10 April 2026 and says days from earlier stays are not an EES error"
+    },
+    {
+      "type": "assertion",
+      "description": "The card shows two examples (data-testid=cutoff-example): the first reads 20 days left out and 0 compared, the second 20 days left out and 10 compared"
+    },
+    {
+      "type": "action",
+      "description": "In the second example ('1 to 20 March and 15 to 24 April 2026, EES says 10') click 'Load this history'"
+    },
+    {
+      "type": "assertion",
+      "description": "The URL contains scenario=cutoff-mixed, the scenario banner is shown and the date chip (data-testid=ees-on) reads 2026-05-01"
+    },
+    {
+      "type": "action",
+      "description": "Enter 10 in the EES days used field (data-testid=ees-days-used) and click compare (data-testid=ees-compare)"
+    },
+    {
+      "type": "assertion",
+      "description": "Your trips shows 30 days used, the findings list (data-testid=ees-codes) has data-codes exactly 'ees-ignores-pre-cutoff-stay', and the cutoff note (data-testid=ees-cutoff-note) has data-days 20 and says 10 days are comparable with the EES"
+    }
+  ]
+}
