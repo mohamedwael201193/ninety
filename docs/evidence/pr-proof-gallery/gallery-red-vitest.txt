@@ -1,0 +1,31 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-g-proof
+
+ ❯ src/lib/ui/gallery-model.test.ts (3 tests | 1 failed) 8ms
+     × explains a card whose used and left do not add up to 90 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/ui/gallery-model.test.ts > scenario gallery cards > explains a card whose used and left do not add up to 90
+AssertionError: expected undefined to be '90 left, not 78: the 12 days already …' // Object.is equality
+
+- Expected:
+"90 left, not 78: the 12 days already used drop out of the 180-day window by 2026-11-08, before a stay starting on 2026-10-19 would reach day 79, so that stay can last 90 days."
+
++ Received:
+undefined
+
+ ❯ src/lib/ui/gallery-model.test.ts:23:40
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  11:14:09
+   Duration  254ms (transform 53ms, setup 22ms, import 49ms, tests 8ms, environment 0ms)
+

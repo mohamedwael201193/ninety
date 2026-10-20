@@ -26,6 +26,7 @@ export default function ScenarioGallery() {
                 <span><strong data-testid="scenario-card-left" className="font-display text-3xl font-semibold">{card.left}</strong> <span className="text-sm text-ink-hushed">left</span></span>
                 {card.overstayDays > 0 ? <span className="text-sm font-medium text-risk">{card.overstayDays} days over</span> : null}
               </p>
+              {card.leftNote ? <p data-testid="scenario-card-left-note" className="mt-2 text-xs text-ink-hushed">{card.leftNote}</p> : null}
               <p className="mt-3 flex-1 text-sm text-ink-hushed">{card.shows}</p>
               <ul className="mt-4 flex flex-wrap gap-2" aria-label="Guarded by TestSprite tests">
                 {card.guardedBy.map((ts) => (

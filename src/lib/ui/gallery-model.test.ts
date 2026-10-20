@@ -22,5 +22,6 @@ describe("scenario gallery cards", () => {
     expect(cards["same-day"].left).toBe(90);
     expect(cards["same-day"].leftNote).toBe("90 left, not 78: the 12 days already used drop out of the 180-day window by 2026-11-08, before a stay starting on 2026-10-19 would reach day 79, so that stay can last 90 days.");
     expect(cards["near-limit"].leftNote).toBeNull();
+    expect(cards.overstay.leftNote).toBeNull();
   });
 });
