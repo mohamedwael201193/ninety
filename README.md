@@ -74,7 +74,7 @@ The home page has six worked histories (open stay, 88 of 90, overstay, same-day 
 
 ## Tested with TestSprite
 
-`testsprite_tests/plans/` holds the end-to-end suite (**30 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
+`testsprite_tests/plans/` holds the end-to-end suite (**31 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
 
 | Id | Proves |
 |---|---|
@@ -108,6 +108,7 @@ The home page has six worked histories (open stay, 88 of 90, overstay, same-day 
 | TS36 | `/proof` lists the 12 rules, each with its engine, parity and TestSprite tests |
 | TS37 | The scenario gallery opens each history it describes, with its guard badges |
 | TS38 | The /ees cutoff card explains 10 April 2026 and its example compares 10 of 30 days |
+| TS40 | An unknown address shows the 404 page with a way back to every page |
 
 `testsprite_tests/test-ids.json` maps each plan to its TestSprite test id. New plans are added to the cloud suite with `npm run tests:add -- <plan.json>`, which records the id.
 
@@ -122,6 +123,12 @@ Bugs the suite caught that unit tests did not:
 - **The pinned story blocking the planned-trip button:** at 1280 px the pinned scroll section measured its position before the page grew and sat over "Check planned trip", so the click never landed. It now re-measures when the page height changes.
 - **The undo toast** disappeared before a user (or a test) could press Undo; it now stays until dismissed.
 - **The nav dropped the scenario:** "Check" linked to `/#check` without `?scenario=`, so an opened demo lost its history (TS10 went red; fixed in #20).
+
+## Accessibility (automated, axe)
+
+`.github/workflows/a11y.yml` builds the app, starts it, and runs axe-core in Chrome on seven pages (the calculator fresh and with a scenario, `/ees`, `/letter`, `/parity`, `/proof`, and the 404 page) at 1280 px and 390 px with reduced motion. It fails on any serious or critical violation of the WCAG 2.0/2.1 A and AA rules axe can test, and writes the per-page counts to the job summary. Running it before this workflow was added found three real problems, each fixed in its own pull request: low contrast of the ok, warn and faint text colours, invalid markup in the status figures list, and wide tables that keyboard users could not scroll on a phone.
+
+What it does not measure: anything axe cannot test automatically, screen-reader announcements, keyboard flows, and states reached only after interaction. Run it locally with `npm run build && npx next start -p 3000` and `npm run a11y`.
 
 ## The gate, and its history
 

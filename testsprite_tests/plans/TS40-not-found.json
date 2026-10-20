@@ -1,0 +1,28 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Unknown address: 404 page leads back to every page",
+  "priority": "p2",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /schengen-calculator-old (a path that does not exist)"
+    },
+    {
+      "type": "assertion",
+      "description": "The 404 page (data-testid=not-found) shows the heading 'This page is outside the window.' and the sentence 'Your trips are still saved in this browser.', and the main navigation (data-testid=nav-links) is shown above it"
+    },
+    {
+      "type": "assertion",
+      "description": "The page offers five links: Check my days, EES check, Article 52 letter, Parity and Proof (data-testid=not-found-check, not-found-ees, not-found-letter, not-found-parity, not-found-proof)"
+    },
+    {
+      "type": "action",
+      "description": "Click 'EES check' (data-testid=not-found-ees)"
+    },
+    {
+      "type": "assertion",
+      "description": "The EES page is shown with the EES days used field (data-testid=ees-days-used) visible"
+    }
+  ]
+}

@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "loop:proof": "node scripts/loop-proof.mjs",
     "proof:matrix": "node scripts/proof-matrix.mjs",
-    "tests:add": "node scripts/add-cloud-tests.mjs"
+    "tests:add": "node scripts/add-cloud-tests.mjs",
+    "a11y": "node scripts/a11y-axe.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -37,11 +38,13 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "axe-core": "^4.14.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.28",
     "fast-check": "^4.10.2",
     "jsdom": "^25.0.1",
     "pdfjs-dist": "^6.4.299",
+    "playwright-core": "^1.64.1",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.12"
