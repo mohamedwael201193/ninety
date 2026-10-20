@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { PARITY_SCENARIOS } from "@/lib/schengen/scenarios";
-import { RULES } from "./rules";
+import { RULES, proofSummary } from "./rules";
 
 const shortIds = new Set(readdirSync("testsprite_tests/plans").map((f) => f.split("-")[0]));
 
@@ -29,5 +29,13 @@ describe("rule-to-test matrix", () => {
     const used = new Set(RULES.flatMap((r) => r.parity));
     const missing = PARITY_SCENARIOS.map((s) => s.id).filter((id) => !used.has(id));
     expect(missing).toEqual([]);
+  });
+
+  it("summarises only the TestSprite tests that have a latest run, and names the rest", () => {
+    const rules = [
+      { testsprite: [{ id: "TS01", latest: { verdict: "passed" } }, { id: "TS02", latest: { verdict: "failed" } }] },
+      { testsprite: [{ id: "TS01", latest: { verdict: "passed" } }, { id: "TS30", latest: null }] },
+    ];
+    expect(proofSummary(rules)).toEqual({ tests: 3, ran: 2, passed: 1, notRun: ["TS30"] });
   });
 });
