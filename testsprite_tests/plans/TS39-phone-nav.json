@@ -1,0 +1,36 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Phone width: every page is reachable from the navigation",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Set the browser viewport to 390 x 844 pixels (phone width)"
+    },
+    {
+      "type": "action",
+      "description": "Navigate to /?scenario=near-limit"
+    },
+    {
+      "type": "assertion",
+      "description": "The navigation links row (data-testid=nav-links) is visible without opening any menu and contains the links EES check, Letter, Parity and Proof"
+    },
+    {
+      "type": "action",
+      "description": "Click the EES check link (data-testid=nav-ees)"
+    },
+    {
+      "type": "assertion",
+      "description": "The URL is /ees?scenario=near-limit, the EES days used field (data-testid=ees-days-used) is visible, and the EES check link has aria-current='page'"
+    },
+    {
+      "type": "action",
+      "description": "Click the Proof link (data-testid=nav-proof); scroll the links row sideways first if it is not in view"
+    },
+    {
+      "type": "assertion",
+      "description": "The /proof page shows the rule table (data-testid=proof-table)"
+    }
+  ]
+}
