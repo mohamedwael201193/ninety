@@ -21,6 +21,9 @@ export function LetterPanel() {
   const params = useSearchParams();
   // ?scenario=<id> compares the named demo history (the one shown on /), not the saved trips.
   const scenario = scenarioById(params.get("scenario"));
+  // The one-click demo (?scenario=demo) also fills the EES side, so the evidence table shows after
+  // the visitor adds their own details. Named scenarios leave every field empty.
+  const demo = params.get("scenario") === "demo";
   const rawToday = params.get("today") ?? scenario?.on ?? null;
   const currentTrips = () => (scenario ? scenarioTrips(scenario) : loadTrips(window.localStorage));
   const today = rawToday && isIsoDate(rawToday) ? rawToday : localToday();
@@ -30,8 +33,8 @@ export function LetterPanel() {
   const [nationality, setNationality] = useState("");
   const [documentNumber, setDocumentNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [memberState, setMemberState] = useState("");
-  const [daysUsed, setDaysUsed] = useState("");
+  const [memberState, setMemberState] = useState(demo ? "France" : "");
+  const [daysUsed, setDaysUsed] = useState(demo ? "90" : "");
   const [recordsText, setRecordsText] = useState("");
   const [letter, setLetter] = useState<CorrectionLetter | null>(null);
   const [error, setError] = useState("");

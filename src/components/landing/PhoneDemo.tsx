@@ -19,6 +19,11 @@ const STEPS_MS = [900, 1500, 600, 700, 1800, 3600];
 // How long the finished first paint (card included) holds before the loop starts.
 const FIRST_HOLD_MS = 4000;
 
+/** The ring's figure: a dash while the trips are still being added, the running count once it fills. */
+export function phoneFigure(filled: boolean, count: number): string {
+  return filled ? String(count) : "–";
+}
+
 export function PhoneDemo() {
   const reduce = useReducedMotion();
   // First paint shows the finished state (34 days left), then the loop replays.
@@ -75,14 +80,14 @@ export function PhoneDemo() {
             </div>
             <div className="mt-4 flex justify-center">
               <DaysRing left={filled ? 34 : 0} size={180} stroke={12}>
-                <span className="font-display text-6xl font-semibold leading-none tracking-tight tnum">{count}</span>
+                <span className="font-display text-6xl font-semibold leading-none tracking-tight tnum">{phoneFigure(filled, count)}</span>
                 <span className="mt-1 text-[11px] text-ink-hushed">of 90 days left</span>
               </DaysRing>
             </div>
             <div className="mt-3 flex justify-center">
               <motion.span
                 animate={{ opacity: filled ? 1 : 0, y: filled ? 0 : 6 }}
-                transition={{ duration: 0.4, ease: EASE, delay: filled ? 0.8 : 0 }}
+                transition={filled ? { duration: 0.4, ease: EASE, delay: 0.8 } : { duration: 0 }}
                 className="inline-flex items-center gap-1 rounded-pill bg-ok-wash px-2.5 py-1 text-[11px] font-medium text-ok"
               >
                 <CircleCheck size={12} /> Safe · 34 days left

@@ -1,0 +1,49 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt
+
+ ❯ src/components/landing/PhoneDemo.test.tsx (1 test | 1 failed) 4ms
+     × never shows a 0 count beside the Safe badge: a dash until the count runs 3ms
+ ❯ src/components/LetterPanel.test.tsx (6 tests | 1 failed) 285ms
+     × ?scenario=demo prefills the EES side (Member State France, 90 days) so the table shows on one click 18ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/LetterPanel.test.tsx > LetterPanel > ?scenario=demo prefills the EES side (Member State France, 90 days) so the table shows on one click
+AssertionError: expected '' to be 'France' // Object.is equality
+
+- Expected
++ Received
+
+- France
+
+ ❯ src/components/LetterPanel.test.tsx:82:83
+     80|     query = "scenario=demo";
+     81|     render(<LetterPanel />);
+     82|     expect((screen.getByTestId("letter-member-state") as HTMLInputElem…
+       |                                                                                   ^
+     83|     expect((screen.getByTestId("letter-ees-days") as HTMLInputElement)…
+     84|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/components/landing/PhoneDemo.test.tsx > PhoneDemo figure > never shows a 0 count beside the Safe badge: a dash until the count runs
+TypeError: phoneFigure is not a function
+ ❯ src/components/landing/PhoneDemo.test.tsx:7:12
+      5| describe("PhoneDemo figure", () => {
+      6|   it("never shows a 0 count beside the Safe badge: a dash until the co…
+      7|     expect(phoneFigure(false, 0)).toBe("–");
+       |            ^
+      8|     expect(phoneFigure(true, 12)).toBe("12");
+      9|     expect(phoneFigure(true, 34)).toBe("34");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  2 failed | 5 passed (7)
+   Start at  09:44:41
+   Duration  1.32s (transform 185ms, setup 33ms, import 847ms, tests 289ms, environment 682ms)
+

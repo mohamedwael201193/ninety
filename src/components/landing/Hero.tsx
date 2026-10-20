@@ -87,7 +87,7 @@ export default function Hero() {
             <FlightPath width={420} height={160} color="#17332D" duration={1.8} className="pointer-events-none absolute -left-10 top-[30%] z-0 hidden w-[120%] -rotate-12 sm:block" />
             <motion.div style={{ y: phoneY }} className="relative z-10">
               <PhoneDemo />
-              <p data-testid="hero-illustration-note" className="mt-4 text-center text-xs text-ink-hushed">Illustration with example trips, not your data. Your own count is below.</p>
+              <p data-testid="hero-illustration-note" className="mt-4 text-center text-xs text-ink-hushed">Illustration with two sample trips (56 used, 34 left), not your data. &ldquo;Try an example&rdquo; in the calculator below loads a different, longer history.</p>
             </motion.div>
             <FloatCard className="left-[-18%] top-[-2%]" delay={0.6} float={0} depth={1.2} p={p}>
               <span className="h-2 w-2 rounded-full bg-risk" /> <span>EES says <b className="tnum">90 used</b></span>
