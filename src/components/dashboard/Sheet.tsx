@@ -5,6 +5,15 @@ import { X } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 
+// Who opened the sheet: the last element focused outside the sheet layer. Tracked with focusin
+// rather than read when the sheet opens, because an autoFocus field inside the sheet takes focus
+// during React's commit, before any effect runs. Module level so a remounted sheet keeps it too.
+let opener: HTMLElement | null = null;
+const trackOpener = (e: FocusEvent) => {
+  const t = e.target as HTMLElement | null;
+  if (t && t !== document.body && !t.closest?.("#sheet-layer")) opener = t;
+};
+
 const FOCUSABLE = "button,input,select,textarea,[href],[tabindex]:not([tabindex='-1'])";
 
 /** Bottom sheet on mobile, centered dialog on md+. Esc / backdrop close, focus moves in on open and back on close, page behind is inert. */
@@ -16,7 +25,13 @@ export function Sheet({ open, title, onClose, children }: { open: boolean; title
   const closeRef = useRef(onClose);
   useEffect(() => { closeRef.current = onClose; }, [onClose]);
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    const a = document.activeElement as HTMLElement | null;
+    if (!opener && a && a !== document.body && !a.closest("#sheet-layer")) opener = a;
+    document.addEventListener("focusin", trackOpener, true);
+    return () => document.removeEventListener("focusin", trackOpener, true);
+  }, []);
 
   // While the sheet is open, the rest of the page is inert, so a screen reader
   // cannot wander into the content behind the overlay.
@@ -31,7 +46,7 @@ export function Sheet({ open, title, onClose, children }: { open: boolean; title
 
   useEffect(() => {
     if (!open) return;
-    returnTo.current = document.activeElement as HTMLElement | null;
+    returnTo.current = opener;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeRef.current();
       if (e.key === "Tab" && panel.current) {

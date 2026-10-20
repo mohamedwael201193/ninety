@@ -1,0 +1,68 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-g-sheet
+
+ ❯ src/components/dashboard/Sheet.test.tsx (5 tests | 2 failed) 491ms
+     × still returns focus to the original opener, not to a field inside the sheet (TS41 in Chrome) 36ms
+     × returns focus to the opener, not to the autofocused field (TS41 in Chrome) 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/dashboard/Sheet.test.tsx > Sheet remounted while open > still returns focus to the original opener, not to a field inside the sheet (TS41 in Chrome)
+AssertionError: expected <input id="entry2"></input> to be <button type="button"></button> // Object.is equality
+
+- Expected
++ Received
+
+- <button
+-   type="button"
+- >
+-   Add trip
+- </button>
++ <input
++   id="entry2"
++ />
+
+ ❯ src/components/dashboard/Sheet.test.tsx:109:36
+    107|     fireEvent.keyDown(document, { key: "Escape" });
+    108|     await act(async () => { await Promise.resolve(); });
+    109|     expect(document.activeElement).toBe(opener);
+       |                                    ^
+    110|   });
+    111| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/components/dashboard/Sheet.test.tsx > Sheet whose content autofocuses > returns focus to the opener, not to the autofocused field (TS41 in Chrome)
+AssertionError: expected <input id="entry3"></input> to be <button type="button"></button> // Object.is equality
+
+- Expected
++ Received
+
+- <button
+-   type="button"
+- >
+-   Add trip
+- </button>
++ <input
++   id="entry3"
++ />
+
+ ❯ src/components/dashboard/Sheet.test.tsx:135:36
+    133|     fireEvent.keyDown(document, { key: "Escape" });
+    134|     await act(async () => { await Promise.resolve(); });
+    135|     expect(document.activeElement).toBe(opener);
+       |                                    ^
+    136|   });
+    137| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 3 passed (5)
+   Start at  12:05:09
+   Duration  1.36s (transform 57ms, setup 23ms, import 341ms, tests 491ms, environment 322ms)
+
