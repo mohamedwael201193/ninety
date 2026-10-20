@@ -18,7 +18,7 @@
     },
     {
       "type": "action",
-      "description": "Navigate to /?today=2026-10-19 (without fresh=1, so saved trips are kept)"
+      "description": "Navigate to /?today=2026-10-19 exactly. Do NOT open any URL containing fresh=1 again after saving: fresh=1 deletes saved trips by design, and this test checks that they survive a reload"
     },
     {
       "type": "assertion",

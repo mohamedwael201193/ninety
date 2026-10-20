@@ -9,6 +9,7 @@ import { isIsoDate, localToday } from "@/lib/schengen/dates";
 import { parseEesRecords, reconcile } from "@/lib/ees/reconcile";
 import { buildCorrectionLetter, type CorrectionLetter } from "@/lib/letter/letter";
 import { loadTrips } from "@/lib/trips";
+import { LETTER_FIELD_IDS, validateLetterForm, type LetterForm } from "@/lib/letter/validate";
 import { scenarioById, scenarioTrips } from "@/lib/scenarios";
 import { CarryLink } from "./CarryLink";
 import { ScenarioBanner } from "./ScenarioBanner";
@@ -34,6 +35,7 @@ export function LetterPanel() {
   const [recordsText, setRecordsText] = useState("");
   const [letter, setLetter] = useState<CorrectionLetter | null>(null);
   const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof LetterForm, string>>>({});
 
   useEffect(() => {
     setReady(true);
@@ -51,9 +53,13 @@ export function LetterPanel() {
 
   function generate(event: FormEvent) {
     event.preventDefault();
-    if (!/^\d+$/.test(daysUsed)) {
-      setError("Enter the EES days-used figure as a whole number.");
+    const invalid = validateLetterForm({ fullName, dateOfBirth, nationality, documentNumber, email, memberState, daysUsed });
+    setFieldErrors(invalid);
+    const keys = Object.keys(invalid) as (keyof LetterForm)[];
+    if (keys.length > 0) {
       setLetter(null);
+      setError(keys.length === 1 ? "Fix the highlighted field to draft the letter." : `Fix the ${keys.length} highlighted fields to draft the letter.`);
+      document.getElementById(LETTER_FIELD_IDS[keys[0]])?.focus();
       return;
     }
     const parsed = parseEesRecords(recordsText);
@@ -120,17 +126,17 @@ export function LetterPanel() {
           </div>
           <fieldset className="grid gap-4 sm:grid-cols-2">
             <legend className="sr-only">Identity</legend>
-            <div className="sm:col-span-2"><Field id="letter-name" label="Full name" value={fullName} onChange={setFullName} autoComplete="name" /></div>
-            <Field id="letter-birth" label="Date of birth" value={dateOfBirth} onChange={setDateOfBirth} placeholder="YYYY-MM-DD" autoComplete="bday" />
-            <Field id="letter-nationality" label="Country of nationality" value={nationality} onChange={setNationality} placeholder="e.g. Egypt" />
-            <Field id="letter-document" label="Travel document number" value={documentNumber} onChange={setDocumentNumber} />
-            <Field id="letter-email" label="Email" value={email} onChange={setEmail} autoComplete="email" />
+            <div className="sm:col-span-2"><Field id="letter-name" error={fieldErrors.fullName} label="Full name" value={fullName} onChange={setFullName} autoComplete="name" /></div>
+            <Field id="letter-birth" error={fieldErrors.dateOfBirth} label="Date of birth" value={dateOfBirth} onChange={setDateOfBirth} placeholder="YYYY-MM-DD" autoComplete="bday" />
+            <Field id="letter-nationality" error={fieldErrors.nationality} label="Country of nationality" value={nationality} onChange={setNationality} placeholder="e.g. Egypt" />
+            <Field id="letter-document" error={fieldErrors.documentNumber} label="Travel document number" value={documentNumber} onChange={setDocumentNumber} />
+            <Field id="letter-email" error={fieldErrors.email} label="Email" value={email} onChange={setEmail} autoComplete="email" />
           </fieldset>
           <div className="h-px bg-line-soft" />
           <fieldset className="grid gap-4 sm:grid-cols-2">
             <legend className="mb-3 font-display text-lg font-medium">The EES record</legend>
-            <Field id="letter-member-state" label="Member State" value={memberState} onChange={setMemberState} placeholder="e.g. France" />
-            <Field id="letter-ees-days" label="EES days used" value={daysUsed} onChange={setDaysUsed} placeholder="e.g. 90" />
+            <Field id="letter-member-state" error={fieldErrors.memberState} label="Member State" value={memberState} onChange={setMemberState} placeholder="e.g. France" />
+            <Field id="letter-ees-days" error={fieldErrors.daysUsed} label="EES days used" value={daysUsed} onChange={setDaysUsed} placeholder="e.g. 90" />
             <div className="sm:col-span-2">
               <FieldBlock id="letter-records" label="EES entry and exit records (optional)" hint="One per line: an entry date, or an entry and an exit date.">
                 <textarea id="letter-records" data-testid="letter-records" value={recordsText} onChange={(event) => setRecordsText(event.target.value)}
@@ -151,6 +157,25 @@ export function LetterPanel() {
                 <p className="font-mono text-xs uppercase tracking-wider">Request under Art. 52</p>
                 <span className="rounded-pill bg-solar px-2.5 py-0.5 text-xs font-medium text-ink">Draft</span>
               </div>
+              <table data-testid="letter-evidence" className="w-full border-b border-line-soft bg-paper-warm text-center">
+                <caption className="sr-only">Evidence: days used in the 180 days ending on the date read</caption>
+                <thead>
+                  <tr className="text-xs text-ink-hushed">
+                    <th scope="col" className="px-3 pt-3 font-normal">Date</th>
+                    <th scope="col" className="px-3 pt-3 font-normal">Your dates</th>
+                    <th scope="col" className="px-3 pt-3 font-normal">EES figure</th>
+                    <th scope="col" className="px-3 pt-3 font-normal">Difference</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="divide-x divide-line-soft">
+                    <th scope="row" data-testid="letter-evidence-on" className="px-3 pb-3 font-mono text-sm font-normal">{today}</th>
+                    <td data-testid="letter-evidence-ours" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{letter.evidence.ours}</td>
+                    <td data-testid="letter-evidence-ees" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{letter.evidence.ees}</td>
+                    <td data-testid="letter-evidence-gap" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{Math.abs(letter.evidence.gap)}</td>
+                  </tr>
+                </tbody>
+              </table>
               <pre data-testid="letter-text" className="max-h-[70vh] overflow-auto whitespace-pre-wrap p-6 font-sans text-[15px] leading-7 md:p-8">{letter.text}</pre>
               <div className="flex flex-col gap-3 border-t border-line-soft bg-paper-warm p-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-xs text-ink-hushed">Review, sign and send it yourself. Not a decision by a border authority.</p>
@@ -184,11 +209,13 @@ export function LetterPanel() {
   );
 }
 
-function Field({ id, label, value, onChange, placeholder, autoComplete }: { id: string; label: string; value: string; onChange: (value: string) => void; placeholder?: string; autoComplete?: string }) {
+function Field({ id, label, value, onChange, placeholder, autoComplete, error }: { id: string; label: string; value: string; onChange: (value: string) => void; placeholder?: string; autoComplete?: string; error?: string }) {
   return (
     <FieldBlock id={id} label={label}>
       <input id={id} data-testid={id} value={value} placeholder={placeholder} autoComplete={autoComplete}
-        onChange={(event) => onChange(event.target.value)} className="field" />
+        aria-invalid={error ? true : undefined} aria-describedby={error ? `${id}-error` : undefined}
+        onChange={(event) => onChange(event.target.value)} className={`field ${error ? "!border-risk" : ""}`} />
+      {error ? <p id={`${id}-error`} data-testid={`${id}-error`} className="mt-1.5 text-xs font-medium text-risk">{error}</p> : null}
     </FieldBlock>
   );
 }
