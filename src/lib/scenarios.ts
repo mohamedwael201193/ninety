@@ -37,8 +37,12 @@ export const SCENARIOS: Record<string, Scenario> = {
   },
 };
 
-export function scenarioById(id: string | null): Scenario | null {
-  if (!id) return null;
+/** Short names that open a scenario. `?scenario=demo` is the landing page's demo history. */
+const ALIASES: Record<string, string> = { demo: "near-limit" };
+
+export function scenarioById(raw: string | null): Scenario | null {
+  if (!raw) return null;
+  const id = Object.prototype.hasOwnProperty.call(ALIASES, raw) ? ALIASES[raw] : raw;
   return Object.prototype.hasOwnProperty.call(SCENARIOS, id) ? SCENARIOS[id] : null;
 }
 

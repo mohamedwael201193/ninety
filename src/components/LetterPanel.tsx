@@ -157,11 +157,25 @@ export function LetterPanel() {
                 <p className="font-mono text-xs uppercase tracking-wider">Request under Art. 52</p>
                 <span className="rounded-pill bg-solar px-2.5 py-0.5 text-xs font-medium text-ink">Draft</span>
               </div>
-              <dl data-testid="letter-evidence" className="grid grid-cols-3 divide-x divide-line-soft border-b border-line-soft bg-paper-warm text-center">
-                <div className="p-3"><dt className="text-xs text-ink-hushed">Your dates</dt><dd data-testid="letter-evidence-ours" className="font-display text-2xl font-semibold tnum">{letter.evidence.ours}</dd></div>
-                <div className="p-3"><dt className="text-xs text-ink-hushed">EES figure</dt><dd data-testid="letter-evidence-ees" className="font-display text-2xl font-semibold tnum">{letter.evidence.ees}</dd></div>
-                <div className="p-3"><dt className="text-xs text-ink-hushed">Difference</dt><dd data-testid="letter-evidence-gap" className="font-display text-2xl font-semibold tnum">{Math.abs(letter.evidence.gap)}</dd></div>
-              </dl>
+              <table data-testid="letter-evidence" className="w-full border-b border-line-soft bg-paper-warm text-center">
+                <caption className="sr-only">Evidence: days used in the 180 days ending on the date read</caption>
+                <thead>
+                  <tr className="text-xs text-ink-hushed">
+                    <th scope="col" className="px-3 pt-3 font-normal">Date</th>
+                    <th scope="col" className="px-3 pt-3 font-normal">Your dates</th>
+                    <th scope="col" className="px-3 pt-3 font-normal">EES figure</th>
+                    <th scope="col" className="px-3 pt-3 font-normal">Difference</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="divide-x divide-line-soft">
+                    <th scope="row" data-testid="letter-evidence-on" className="px-3 pb-3 font-mono text-sm font-normal">{today}</th>
+                    <td data-testid="letter-evidence-ours" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{letter.evidence.ours}</td>
+                    <td data-testid="letter-evidence-ees" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{letter.evidence.ees}</td>
+                    <td data-testid="letter-evidence-gap" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{Math.abs(letter.evidence.gap)}</td>
+                  </tr>
+                </tbody>
+              </table>
               <pre data-testid="letter-text" className="max-h-[70vh] overflow-auto whitespace-pre-wrap p-6 font-sans text-[15px] leading-7 md:p-8">{letter.text}</pre>
               <div className="flex flex-col gap-3 border-t border-line-soft bg-paper-warm p-4 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-xs text-ink-hushed">Review, sign and send it yourself. Not a decision by a border authority.</p>
