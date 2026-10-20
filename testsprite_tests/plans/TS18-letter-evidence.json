@@ -22,7 +22,7 @@
     },
     {
       "type": "assertion",
-      "description": "The evidence table shows Your dates 88 (data-testid=letter-evidence-ours), EES figure 90 (letter-evidence-ees) and Difference 2 (letter-evidence-gap)"
+      "description": "Wait 2 seconds for the letter panel to finish animating in. Then the evidence table (data-testid=letter-evidence, columns Date, Your dates, EES figure, Difference) shows 2026-10-19 (letter-evidence-on), Your dates 88 (letter-evidence-ours), EES figure 90 (letter-evidence-ees) and Difference 2 (letter-evidence-gap). Read each value from its data-testid cell"
     },
     {
       "type": "assertion",

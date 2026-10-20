@@ -4,3 +4,6 @@ Tests first (`red-vitest.txt`, 2 failing), then the fix (`green-vitest.txt`): wi
 
 ## TC011 failed twice on this PR (16/17, run 33ed3b0a)
 The test agent re-opened `?today=2026-10-19&fresh=1` after saving, which wiped the trip by design. Rather than re-run a second time, the root cause is fixed: `?fresh=1` is now consumed (trips cleared once, flag removed from the address with replaceState), so a reload of the same tab keeps the trips. Unit test first (`red-fresh.txt`), then green (`green-fresh.txt`). A real user reloading a shared `fresh=1` link no longer loses their trips either.
+
+## TS18 flake on run 2 (16/17)
+TC011 passed after the fix. TS18 then reported the Difference cell blank, but its own DOM snapshot has `letter-evidence-gap` = 2, and headless Chrome at 1280/1024/800/390 px shows the cell filled (`qa/ts18-table-*.png`). The agent read the panel mid-animation. TS18's plan now waits for the panel and reads each figure by data-testid (free plan update, same test id). One re-run, as the flake rule allows.
