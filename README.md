@@ -17,7 +17,7 @@ Ninety counts your Schengen short-stay days from your own trips, checks that cou
 | **43** | TestSprite cloud tests on every PR preview (TS45–TS52 added for bugs found in code review), `TestSprite V3` a required check ([`test-ids.json`](testsprite_tests/test-ids.json), plans in [`testsprite_tests/plans`](testsprite_tests/plans)) |
 | **35/35** | passed on the latest run, PR #56 at `43d4ad0` (status "All 35 tests passed", 2026-10-20; [portal report PDF](docs/evidence/portal-2026-10-20/testsprite-report-35of35-2026-10-20.pdf), [run map](docs/evidence/portal-2026-10-20/run-map-35of35.webp)) |
 | **6** | real app bugs TestSprite caught on a PR preview and that were fixed before merging ([What TestSprite caught](#what-testsprite-caught)) |
-| **332** | Vitest unit, property and fuzz tests on every PR, all passing (2 more run only against the live Commission page) (`npm test`) |
+| **340** | Vitest unit, property and fuzz tests on every PR, all passing (2 more run only against the live Commission page) (`npm test`) |
 | **3** | public API endpoints with an [OpenAPI 3.1 document](https://ninety-coral.vercel.app/api/openapi.json) (copy in [`docs/openapi.json`](docs/openapi.json), kept equal by a test), and the same three as MCP tools: over streamable HTTP at `/api/mcp` and as a stdio [server](packages/ninety-mcp), both tested with the official MCP client |
 | **54** | pull requests merged into `main` |
 
@@ -105,6 +105,10 @@ The home page has six worked histories (open stay, 88 of 90, overstay, same-day 
 ## What TestSprite caught
 
 Counted from the `TestSprite V3` commit statuses of every merged pull request (raw list: [`docs/evidence/receipts/pr-testsprite-history.json`](docs/evidence/receipts/pr-testsprite-history.json)).
+
+The whole loop, iteration by iteration: [`LOOP-ITERATIONS.md`](LOOP-ITERATIONS.md) numbers the 54 merged pull requests in merge order. Each iteration links the PR, the merge commit, every commit's `TestSprite V3` status and the TestSprite execution behind it. 10 iterations went red, then green; the 2 runs that could not start or were blocked are listed apart. It is generated from the GitHub API and TestSprite's run history by [`scripts/loop-iterations.mjs`](scripts/loop-iterations.mjs) and checked by [`iterations.test.ts`](src/lib/loop/iterations.test.ts).
+
+Scheduled smoke: [`testsprite-smoke.yml`](.github/workflows/testsprite-smoke.yml) runs 3 TestSprite tests (TS01, TS03, TS07) against production with the CLI, 1.5 credits a run instead of 21.5 for the whole suite of 43. It is off until the repository variable `TESTSPRITE_SMOKE` is set to `true`, and it has not run yet.
 
 **6 real app bugs**, each red on the PR preview and fixed in the same PR. The status strings are copied from GitHub:
 
