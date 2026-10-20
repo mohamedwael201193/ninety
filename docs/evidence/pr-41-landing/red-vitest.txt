@@ -1,0 +1,50 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-landing
+
+ ❯ src/components/landing/CountBand.test.tsx (4 tests | 2 failed) 333ms
+     × follows the saved trips, read on today, when no scenario is open 68ms
+     × updates when trips are saved on the page 67ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/landing/CountBand.test.tsx > CountBand > follows the saved trips, read on today, when no scenario is open
+AssertionError: expected 'example' to be 'saved' // Object.is equality
+
+Expected: "saved"
+Received: "example"
+
+ ❯ src/components/landing/CountBand.test.tsx:33:74
+     31|     saveTrips(window.localStorage, [{ id: "a", entry: "2026-10-01", ex…
+     32|     render(<CountBand />);
+     33|     expect(screen.getByTestId("count-band").getAttribute("data-source"…
+       |                                                                          ^
+     34|     expect(screen.getByTestId("band-label").textContent).toBe("Your sa…
+     35|     expect(screen.getByTestId("band-used").getAttribute("data-value"))…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/components/landing/CountBand.test.tsx > CountBand > updates when trips are saved on the page
+AssertionError: expected 'example' to be 'saved' // Object.is equality
+
+Expected: "saved"
+Received: "example"
+
+ ❯ src/components/landing/CountBand.test.tsx:43:74
+     41|     expect(screen.getByTestId("count-band").getAttribute("data-source"…
+     42|     act(() => saveTrips(window.localStorage, [{ id: "a", entry: "2026-…
+     43|     expect(screen.getByTestId("count-band").getAttribute("data-source"…
+       |                                                                          ^
+     44|     expect(screen.getByTestId("band-used").getAttribute("data-value"))…
+     45|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed (4)
+   Start at  09:12:41
+   Duration  1.20s (transform 174ms, setup 33ms, import 347ms, tests 333ms, environment 310ms)
+

@@ -169,7 +169,7 @@ export function LetterPanel() {
                 </thead>
                 <tbody>
                   <tr className="divide-x divide-line-soft">
-                    <th scope="row" data-testid="letter-evidence-on" className="px-3 pb-3 font-mono text-sm font-normal">{today}</th>
+                    <td data-testid="letter-evidence-on" className="px-3 pb-3 font-mono text-sm">{today}</td>
                     <td data-testid="letter-evidence-ours" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{letter.evidence.ours}</td>
                     <td data-testid="letter-evidence-ees" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{letter.evidence.ees}</td>
                     <td data-testid="letter-evidence-gap" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{Math.abs(letter.evidence.gap)}</td>

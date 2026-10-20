@@ -45,7 +45,11 @@ export function loadTrips(storage: Pick<Storage, "getItem"> | null): Trip[] {
 
 export function saveTrips(storage: Pick<Storage, "setItem">, trips: Trip[]): void {
   storage.setItem(TRIP_STORAGE_KEY, serializeTrips(trips));
+  // Same-tab listeners (the landing band) hear about the change; "storage" only fires in other tabs.
+  if (typeof window !== "undefined") window.dispatchEvent(new Event(TRIPS_CHANGED_EVENT));
 }
+
+export const TRIPS_CHANGED_EVENT = "ninety:trips-changed";
 
 /** Pairs of trips whose date ranges share at least one day (open trips run to `today`). */
 export function findOverlaps(trips: Trip[], today: string): Array<[Trip, Trip]> {
