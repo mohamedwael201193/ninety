@@ -22,11 +22,15 @@
     },
     {
       "type": "assertion",
-      "description": "Exactly one trip row (data-testid=trip-row) appears, for 2026-09-01 to 2026-09-10"
+      "description": "Exactly one trip row (data-testid=trip-row) appears, for 2026-09-01 to 2026-09-10, showing 10 days"
     },
     {
       "type": "assertion",
-      "description": "The status panel (data-testid=status-panel) shows 10 days used out of 90 and 80 days left"
+      "description": "Days used (data-testid=days-used) shows 10"
+    },
+    {
+      "type": "assertion",
+      "description": "Days left (data-testid=days-left) shows 80"
     }
   ]
 }

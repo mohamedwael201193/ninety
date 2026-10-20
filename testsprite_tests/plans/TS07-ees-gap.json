@@ -31,6 +31,10 @@
     {
       "type": "assertion",
       "description": "The findings list (data-testid=ees-codes) shows the text 'Days-used figures differ'"
+    },
+    {
+      "type": "assertion",
+      "description": "No error message (data-testid=ees-error) is shown"
     }
   ]
 }

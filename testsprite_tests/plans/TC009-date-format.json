@@ -22,7 +22,15 @@
     },
     {
       "type": "assertion",
-      "description": "The form error (data-testid=trip-form-error) says to use YYYY-MM-DD and no trip row (data-testid=trip-row) is added"
+      "description": "The form error (data-testid=trip-form-error) mentions the format YYYY-MM-DD"
+    },
+    {
+      "type": "assertion",
+      "description": "No trip row (data-testid=trip-row) is added"
+    },
+    {
+      "type": "assertion",
+      "description": "Days used (data-testid=days-used) still shows 0"
     }
   ]
 }

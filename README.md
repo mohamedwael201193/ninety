@@ -55,32 +55,42 @@ Current result: **14/14 match**. If the Commission script cannot be loaded, the 
 
 ## Tested with TestSprite
 
-`testsprite_tests/plans/` holds the 11-test end-to-end suite that TestSprite runs in the cloud against the Vercel deployment. Every plan starts at `/?today=2026-10-19&fresh=1`, which pins the date and clears saved trips, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
+`testsprite_tests/plans/` holds the **14-test** end-to-end suite that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
 
-- the example trips give 64 days used and 26 left (TS01),
-- the parity page shows 14/14 with all 14 rows matching (TS02),
-- adding 2026-09-01 → 2026-09-10 gives 10 used and 80 left (TS03),
-- an exit before entry is rejected with its message and nothing is saved (TS04),
-- deleting a trip and pressing Undo brings back the same dates and 64 days (TS05),
-- a legal planned trip fits (TS06),
-- the EES comparison reports a 26-day gap and `figure-differs` (TS07),
-- the Article 52 letter states both counts and the 45-day reply (TS08),
-- an `MM/DD/YYYY` date is rejected (TC009), an edited trip is recounted (TC010), and trips survive a reload (TC011).
+| Id | Proves |
+|---|---|
+| TS01 | The example trips give 64 days used and 26 left |
+| TS02 | `/parity` reads 14/14 with all 14 rows matching |
+| TS03 | 2026-09-01 → 2026-09-10 gives 10 used and 80 left |
+| TS04 | An exit before entry is rejected with its message and nothing is saved |
+| TS05 | Delete then Undo brings back the same dates and 64 days |
+| TS06 | A legal planned trip fits |
+| TS07 | `/ees` reports a 26-day gap and `figure-differs` |
+| TS08 | The Article 52 letter states both counts and the 45-day reply |
+| TS09 | During an open stay, a plan past day 90 does not fit |
+| TS10 | During an open stay, exit on day 90 fits and day 91 does not |
+| TC009 | An `MM/DD/YYYY` date is rejected with a YYYY-MM-DD message |
+| TC010 | Editing a trip recounts it (3 → 10 days) |
+| TC011 | Trips and the count survive a reload |
+| TS26 | A same-day exit and re-entry counts the day once |
 
-`testsprite_tests/test-ids.json` maps each plan file to its TestSprite test id.
+`testsprite_tests/test-ids.json` maps each plan to its TestSprite test id. Plans for further tests (TS13–TS15) are in the folder and are added to the cloud suite in later pull requests.
 
-It catches real bugs, not just happy paths:
+Below the TestSprite suite, every pull request also runs lint, types, and the unit, property and fuzz tests in GitHub Actions (`.github/workflows/ci.yml`).
 
-- **The parity table:** the parity page used to show only a bare score. It was rebuilt as a table of every scenario with both counts and the match, and the suite now fails if the score is not 14/14 or the table does not have all 14 rows.
-- **The pinned story blocking the planned-trip button:** after adding trips, the pinned scroll section on the home page had measured its position before the page grew, and at 1280 px wide it sat over the "Check planned trip" button so the click never landed. TestSprite's run failed on it; the section now re-measures whenever the page height changes.
-- **The undo toast** disappeared before a real user (or a test) could press Undo; it now stays until dismissed.
+Bugs the suite caught that unit tests did not:
 
-## CI in action
+- **The pinned story blocking the planned-trip button:** at 1280 px the pinned scroll section measured its position before the page grew and sat over "Check planned trip", so the click never landed. It now re-measures when the page height changes.
+- **The undo toast** disappeared before a user (or a test) could press Undo; it now stays until dismissed.
+- **The nav dropped the scenario:** "Check" linked to `/#check` without `?scenario=`, so an opened demo lost its history (TS10 went red; fixed in #20).
 
-Every pull request into `main` runs the 11-test TestSprite V3 suite against that PR's Vercel preview deployment. The TestSprite check is required by branch protection, so a failing run blocks the merge.
+## The gate, and its history
 
-- **PR #8 — fail, fix, green.** A refactor of the parity table made the row loop start at index 1, which silently dropped the first scenario. TestSprite went red at 9/11 and the merge was blocked. The fix (6f48b55, then 04527b4) restored the loop and added a unit test for the row count; the next run was 11/11 and the PR merged.
-- **PR #7 — a passing run.** Adds a date-format test and the test index; the suite ran 11/11 on the preview before merge.
+Every pull request into `main` runs the TestSprite V3 suite against that PR's preview deployment, and `TestSprite V3` is a **required** status check: a failing run shows "Merging is blocked". The record of how we got there, including what did not work:
+
+- **PR #8: red, fix, green, but merged on a stale status.** A refactor of the parity table made the row loop start at index 1, which silently dropped the first scenario. TestSprite went red at 9/11. The fix (6f48b55, then 04527b4) restored the loop and added a unit test for the row count, and the next run was 11/11. The commit status GitHub showed at merge time still read 9/11; the green run was recorded as a comment. At that point the check was not yet required.
+- **PR #14: test first, then the fix.** The planner ignored the days of an open stay before a planned trip. We added TS09/TS10 first, and they failed on the preview (12/14, 2 failing). The fix (f466c06, then cba2989 for a stale verdict in the form) turned them green. The merge commit `7a70dde` shows a TestSprite status of `success` with the description `12/14 passed · 2 failed`: the app reported "success" for a run that had failures. We are writing this up for TestSprite as feedback.
+- **Since then** `TestSprite V3` is a required check in branch protection, and a red run blocks the merge (screenshot of PR #14 in the blocked state). Branch names stay short, because a preview hostname over 63 characters does not resolve and the check never starts.
 
 ## Run it locally
 

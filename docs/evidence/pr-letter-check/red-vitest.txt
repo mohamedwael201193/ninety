@@ -1,0 +1,757 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-letter
+
+ ❯ src/components/LetterPanel.test.tsx (4 tests | 2 failed) 313ms
+     × names the evidence as an accessible table: date, your dates, EES figure, difference 176ms
+     × ?scenario=demo opens the landing demo history, as on /ees 12ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/LetterPanel.test.tsx > LetterPanel > names the evidence as an accessible table: date, your dates, EES figure, difference
+TestingLibraryElementError: Unable to find an accessible element with the role "table" and name `/evidence/i`
+
+Here are the accessible roles:
+
+  main:
+
+  Name "":
+  [36m<main />[39m
+
+  --------------------------------------------------
+  paragraph:
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"mb-6 rounded-2xl bg-paper p-4 text-sm text-ink-hushed"[39m
+    [33mdata-scenario[39m=[32m"near-limit"[39m
+    [33mdata-testid[39m=[32m"scenario-banner"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"text-sm text-ink-hushed"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"font-mono text-xs uppercase tracking-wider"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<p[39m
+    [33mclass[39m=[32m"text-xs text-ink-hushed"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  link:
+
+  Name "Use my trips":
+  [36m<a[39m
+    [33mclass[39m=[32m"font-medium text-ink underline underline-offset-4"[39m
+    [33mhref[39m=[32m"/letter"[39m
+  [36m/>[39m
+
+  Name "Run the EES check first":
+  [36m<a[39m
+    [33mclass[39m=[32m"font-medium text-ink underline underline-offset-4"[39m
+    [33mdata-testid[39m=[32m"nav-ees"[39m
+    [33mhref[39m=[32m"/ees"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  heading:
+
+  Name "Your details":
+  [36m<h2[39m
+    [33mclass[39m=[32m"font-display text-2xl font-medium tracking-tight"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  group:
+
+  Name "Identity":
+  [36m<fieldset[39m
+    [33mclass[39m=[32m"grid gap-4 sm:grid-cols-2"[39m
+  [36m/>[39m
+
+  Name "The EES record":
+  [36m<fieldset[39m
+    [33mclass[39m=[32m"grid gap-4 sm:grid-cols-2"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  textbox:
+
+  Name "Full name":
+  [36m<input[39m
+    [33mautocomplete[39m=[32m"name"[39m
+    [33mclass[39m=[32m"field "[39m
+    [33mdata-testid[39m=[32m"letter-name"[39m
+    [33mid[39m=[32m"letter-name"[39m
+    [33mvalue[39m=[32m"Jane Traveller"[39m
+  [36m/>[39m
+
+  Name "Date of birth":
+  [36m<input[39m
+    [33mautocomplete[39m=[32m"bday"[39m
+    [33mclass[39m=[32m"field "[39m
+    [33mdata-testid[39m=[32m"letter-birth"[39m
+    [33mid[39m=[32m"letter-birth"[39m
+    [33mplaceholder[39m=[32m"YYYY-MM-DD"[39m
+    [33mvalue[39m=[32m"1990-05-04"[39m
+  [36m/>[39m
+
+  Name "Country of nationality":
+  [36m<input[39m
+    [33mclass[39m=[32m"field "[39m
+    [33mdata-testid[39m=[32m"letter-nationality"[39m
+    [33mid[39m=[32m"letter-nationality"[39m
+    [33mplaceholder[39m=[32m"e.g. Egypt"[39m
+    [33mvalue[39m=[32m"Egypt"[39m
+  [36m/>[39m
+
+  Name "Travel document number":
+  [36m<input[39m
+    [33mclass[39m=[32m"field "[39m
+    [33mdata-testid[39m=[32m"letter-document"[39m
+    [33mid[39m=[32m"letter-document"[39m
+    [33mvalue[39m=[32m"A1234567"[39m
+  [36m/>[39m
+
+  Name "Email":
+  [36m<input[39m
+    [33mautocomplete[39m=[32m"email"[39m
+    [33mclass[39m=[32m"field "[39m
+    [33mdata-testid[39m=[32m"letter-email"[39m
+    [33mid[39m=[32m"letter-email"[39m
+    [33mvalue[39m=[32m"jane@example.com"[39m
+  [36m/>[39m
+
+  Name "Member State":
+  [36m<input[39m
+    [33mclass[39m=[32m"field "[39m
+    [33mdata-testid[39m=[32m"letter-member-state"[39m
+    [33mid[39m=[32m"letter-member-state"[39m
+    [33mplaceholder[39m=[32m"e.g. France"[39m
+    [33mvalue[39m=[32m"France"[39m
+  [36m/>[39m
+
+  Name "EES days used":
+  [36m<input[39m
+    [33mclass[39m=[32m"field "[39m
+    [33mdata-testid[39m=[32m"letter-ees-days"[39m
+    [33mid[39m=[32m"letter-ees-days"[39m
+    [33mplaceholder[39m=[32m"e.g. 90"[39m
+    [33mvalue[39m=[32m"90"[39m
+  [36m/>[39m
+
+  Name "EES entry and exit records (optional)":
+  [36m<textarea[39m
+    [33mclass[39m=[32m"field !h-auto py-3 font-mono text-sm"[39m
+    [33mdata-testid[39m=[32m"letter-records"[39m
+    [33mid[39m=[32m"letter-records"[39m
+    [33mplaceholder[39m=[32m"2026-06-01"[39m
+    [33mrows[39m=[32m"4"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  button:
+
+  Name "Draft letter":
+  [36m<button[39m
+    [33mclass[39m=[32m"btn btn-dark h-12 w-full"[39m
+    [33mdata-testid[39m=[32m"letter-generate"[39m
+    [33mtype[39m=[32m"submit"[39m
+  [36m/>[39m
+
+  Name "Copy":
+  [36m<button[39m
+    [33mclass[39m=[32m"btn btn-ghost h-11"[39m
+    [33mdata-testid[39m=[32m"letter-copy"[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  Name "Download PDF":
+  [36m<button[39m
+    [33mclass[39m=[32m"btn btn-primary h-11"[39m
+    [33mdata-testid[39m=[32m"letter-download"[39m
+    [33mtype[39m=[32m"button"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  term:
+
+  Name "":
+  [36m<dt[39m
+    [33mclass[39m=[32m"text-xs text-ink-hushed"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<dt[39m
+    [33mclass[39m=[32m"text-xs text-ink-hushed"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<dt[39m
+    [33mclass[39m=[32m"text-xs text-ink-hushed"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+  definition:
+
+  Name "":
+  [36m<dd[39m
+    [33mclass[39m=[32m"font-display text-2xl font-semibold tnum"[39m
+    [33mdata-testid[39m=[32m"letter-evidence-ours"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<dd[39m
+    [33mclass[39m=[32m"font-display text-2xl font-semibold tnum"[39m
+    [33mdata-testid[39m=[32m"letter-evidence-ees"[39m
+  [36m/>[39m
+
+  Name "":
+  [36m<dd[39m
+    [33mclass[39m=[32m"font-display text-2xl font-semibold tnum"[39m
+    [33mdata-testid[39m=[32m"letter-evidence-gap"[39m
+  [36m/>[39m
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"mb-6 rounded-2xl bg-paper p-4 text-sm text-ink-hushed"[39m
+        [33mdata-scenario[39m=[32m"near-limit"[39m
+        [33mdata-testid[39m=[32m"scenario-banner"[39m
+      [36m>[39m
+        [0mDemo scenario: [0m
+        [36m<b[39m
+          [33mclass[39m=[32m"text-ink"[39m
+        [36m>[39m
+          [0mTwo long stays: 88 of 90 days used[0m
+        [36m</b>[39m
+        [0m, read on [0m
+        [0m2026-10-19[0m
+        [0m. Compared with this history, not your saved trips.[0m
+        [0m [0m
+        [36m<a[39m
+          [33mclass[39m=[32m"font-medium text-ink underline underline-offset-4"[39m
+          [33mhref[39m=[32m"/letter"[39m
+        [36m>[39m
+          [0mUse my trips[0m
+        [36m</a>[39m
+      [36m</p>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start"[39m
+      [36m>[39m
+        [36m<form[39m
+          [33mclass[39m=[32m"card-soft space-y-6 p-6 md:p-8"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center justify-between gap-3"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[39m=[32m"font-display text-2xl font-medium tracking-tight"[39m
+            [36m>[39m
+              [0mYour details[0m
+            [36m</h2>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"rounded-pill bg-paper-sunk px-3 py-1 font-mono text-xs text-ink-hushed"[39m
+            [36m>[39m
+              [0mon [0m
+              [36m<span[39m
+                [33mdata-testid[39m=[32m"letter-on"[39m
+              [36m>[39m
+                [0m2026-10-19[0m
+              [36m</span>[39m
+            [36m</span>[39m
+          [36m</div>[39m
+          [36m<fieldset[39m
+            [33mclass[39m=[32m"grid gap-4 sm:grid-cols-2"[39m
+          [36m>[39m
+            [36m<legend[39m
+              [33mclass[39m=[32m"sr-only"[39m
+            [36m>[39m
+              [0mIdentity[0m
+            [36m</legend>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"sm:col-span-2"[39m
+            [36m>[39m
+              [36m<div>[39m
+                [36m<label[39m
+                  [33mfor[39m=[32m"letter-name"[39m
+                [36m>[39m
+                  [0mFull name[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33mautocomplete[39m=[32m"name"[39m
+                  [33mclass[39m=[32m"field "[39m
+                  [33mdata-testid[39m=[32m"letter-name"[39m
+                  [33mid[39m=[32m"letter-name"[39m
+                  [33mvalue[39m=[32m"Jane Traveller"[39m
+                [36m/>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-birth"[39m
+              [36m>[39m
+                [0mDate of birth[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"bday"[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-birth"[39m
+                [33mid[39m=[32m"letter-birth"[39m
+                [33mplaceholder[39m=[32m"YYYY-MM-DD"[39m
+                [33mvalue[39m=[32m"1990-05-04"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-nationality"[39m
+              [36m>[39m
+                [0mCountry of nationality[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-nationality"[39m
+                [33mid[39m=[32m"letter-nationality"[39m
+                [33mplaceholder[39m=[32m"e.g. Egypt"[39m
+                [33mvalue[39m=[32m"Egypt"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-document"[39m
+              [36m>[39m
+                [0mTravel document number[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-document"[39m
+                [33mid[39m=[32m"letter-document"[39m
+                [33mvalue[39m=[32m"A1234567"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-email"[39m
+              [36m>[39m
+                [0mEmail[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"email"[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-email"[39m
+                [33mid[39m=[32m"letter-email"[39m
+                [33mvalue[39m=[32m"jane@example.com"[39m
+              [36m/>[39m
+            [36m</div>[39m
+          [36m</fieldset>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"h-px bg-line-soft"[39m
+          [36m/>[39m
+          [36m<fieldset[39m
+            [33mclass[39m=[32m"grid gap-4 sm:grid-cols-2"[39m
+          [36m>[39m
+            [36m<legend[39m
+              [33mclass[39m=[32m"mb-3 font-display text-lg font-medium"[39m
+            [36m>[39m
+              [0mThe EES record[0m
+            [36m</legend>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-member-state"[39m
+              [36m>[39m
+                [0mMember State[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-member-state"[39m
+                [33mid[39m=[32m"letter-member-state"[39m
+                [33mplaceholder[39m=[32m"e.g. France"[39m
+                [33mvalue[39m=[32m"France"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-ees-days"[39m
+              [36m>[39m
+                [0mEES days used[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-ees-days"[39m
+                [33mid[39m=[32m"letter-ees-days"[39m
+                [33mplaceholder[39m=[32m"e.g. 90"[39m
+                [33mvalue[39m=[32m"90"[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"sm:col-span-2"[39m
+ ...
+ ❯ Object.getElementError ../ninety-repo/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../ninety-repo/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../ninety-repo/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../ninety-repo/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/components/LetterPanel.test.tsx:61:26
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/components/LetterPanel.test.tsx > LetterPanel > ?scenario=demo opens the landing demo history, as on /ees
+TestingLibraryElementError: Unable to find an element by: [data-testid="scenario-banner"]
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start"[39m
+      [36m>[39m
+        [36m<form[39m
+          [33mclass[39m=[32m"card-soft space-y-6 p-6 md:p-8"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"flex items-center justify-between gap-3"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[39m=[32m"font-display text-2xl font-medium tracking-tight"[39m
+            [36m>[39m
+              [0mYour details[0m
+            [36m</h2>[39m
+            [36m<span[39m
+              [33mclass[39m=[32m"rounded-pill bg-paper-sunk px-3 py-1 font-mono text-xs text-ink-hushed"[39m
+            [36m>[39m
+              [0mon [0m
+              [36m<span[39m
+                [33mdata-testid[39m=[32m"letter-on"[39m
+              [36m>[39m
+                [0m2026-10-20[0m
+              [36m</span>[39m
+            [36m</span>[39m
+          [36m</div>[39m
+          [36m<fieldset[39m
+            [33mclass[39m=[32m"grid gap-4 sm:grid-cols-2"[39m
+          [36m>[39m
+            [36m<legend[39m
+              [33mclass[39m=[32m"sr-only"[39m
+            [36m>[39m
+              [0mIdentity[0m
+            [36m</legend>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"sm:col-span-2"[39m
+            [36m>[39m
+              [36m<div>[39m
+                [36m<label[39m
+                  [33mfor[39m=[32m"letter-name"[39m
+                [36m>[39m
+                  [0mFull name[0m
+                [36m</label>[39m
+                [36m<input[39m
+                  [33mautocomplete[39m=[32m"name"[39m
+                  [33mclass[39m=[32m"field "[39m
+                  [33mdata-testid[39m=[32m"letter-name"[39m
+                  [33mid[39m=[32m"letter-name"[39m
+                  [33mvalue[39m=[32m""[39m
+                [36m/>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-birth"[39m
+              [36m>[39m
+                [0mDate of birth[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"bday"[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-birth"[39m
+                [33mid[39m=[32m"letter-birth"[39m
+                [33mplaceholder[39m=[32m"YYYY-MM-DD"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-nationality"[39m
+              [36m>[39m
+                [0mCountry of nationality[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-nationality"[39m
+                [33mid[39m=[32m"letter-nationality"[39m
+                [33mplaceholder[39m=[32m"e.g. Egypt"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-document"[39m
+              [36m>[39m
+                [0mTravel document number[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-document"[39m
+                [33mid[39m=[32m"letter-document"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-email"[39m
+              [36m>[39m
+                [0mEmail[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mautocomplete[39m=[32m"email"[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-email"[39m
+                [33mid[39m=[32m"letter-email"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+          [36m</fieldset>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"h-px bg-line-soft"[39m
+          [36m/>[39m
+          [36m<fieldset[39m
+            [33mclass[39m=[32m"grid gap-4 sm:grid-cols-2"[39m
+          [36m>[39m
+            [36m<legend[39m
+              [33mclass[39m=[32m"mb-3 font-display text-lg font-medium"[39m
+            [36m>[39m
+              [0mThe EES record[0m
+            [36m</legend>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-member-state"[39m
+              [36m>[39m
+                [0mMember State[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-member-state"[39m
+                [33mid[39m=[32m"letter-member-state"[39m
+                [33mplaceholder[39m=[32m"e.g. France"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div>[39m
+              [36m<label[39m
+                [33mfor[39m=[32m"letter-ees-days"[39m
+              [36m>[39m
+                [0mEES days used[0m
+              [36m</label>[39m
+              [36m<input[39m
+                [33mclass[39m=[32m"field "[39m
+                [33mdata-testid[39m=[32m"letter-ees-days"[39m
+                [33mid[39m=[32m"letter-ees-days"[39m
+                [33mplaceholder[39m=[32m"e.g. 90"[39m
+                [33mvalue[39m=[32m""[39m
+              [36m/>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"sm:col-span-2"[39m
+            [36m>[39m
+              [36m<div>[39m
+                [36m<label[39m
+                  [33mfor[39m=[32m"letter-records"[39m
+                [36m>[39m
+                  [0mEES entry and exit records (optional)[0m
+                [36m</label>[39m
+                [36m<textarea[39m
+                  [33mclass[39m=[32m"field !h-auto py-3 font-mono text-sm"[39m
+                  [33mdata-testid[39m=[32m"letter-records"[39m
+                  [33mid[39m=[32m"letter-records"[39m
+                  [33mplaceholder[39m=[32m"2026-06-01"[39m
+                  [33mrows[39m=[32m"4"[39m
+                [36m/>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</fieldset>[39m
+          [36m<button[39m
+            [33mclass[39m=[32m"btn btn-dark h-12 w-full"[39m
+            [33mdata-testid[39m=[32m"letter-generate"[39m
+            [33mtype[39m=[32m"submit"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"lucide lucide-pen-line lucide-edit-3"[39m
+              [33mfill[39m=[32m"none"[39m
+              [33mheight[39m=[32m"16"[39m
+              [33mstroke[39m=[32m"currentColor"[39m
+              [33mstroke-linecap[39m=[32m"round"[39m
+              [33mstroke-linejoin[39m=[32m"round"[39m
+              [33mstroke-width[39m=[32m"2"[39m
+              [33mviewBox[39m=[32m"0 0 24 24"[39m
+              [33mwidth[39m=[32m"16"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M13 21h8"[39m
+              [36m/>[39m
+              [36m<path[39m
+                [33md[39m=[32m"M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"[39m
+              [36m/>[39m
+            [36m</svg>[39m
+            [0m Draft letter[0m
+          [36m</button>[39m
+          [36m<p[39m
+            [33mclass[39m=[32m"text-sm text-ink-hushed"[39m
+          [36m>[39m
+            [0mNot sure of the numbers? [0m
+            [36m<a[39m
+              [33mclass[39m=[32m"font-medium text-ink underline underline-offset-4"[39m
+              [33mdata-testid[39m=[32m"nav-ees"[39m
+              [33mhref[39m=[32m"/ees"[39m
+            [36m>[39m
+              [0mRun the EES check first[0m
+            [36m</a>[39m
+          [36m</p>[39m
+        [36m</form>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"card-soft relative grid min-h-[420px] place-items-center overflow-hidden p-8 text-center"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33maria-hidden[39m=[32m"true"[39m
+            [33mclass[39m=[32m"mesh pointer-events-none absolute inset-0 opacity-70"[39m
+          [36m/>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"relative"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33maria-hidden[39m=[32m"true"[39m
+              [33mclass[39m=[32m"relative mx-auto h-32 w-28"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"absolute inset-0 translate-x-3 rotate-6 rounded-xl bg-paper-sunk shadow-card"[39m
+              [36m/>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"absolute inset-0 space-y-2 rounded-xl bg-paper p-3 shadow-lift"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"h-2 w-3/4 rounded bg-smolder"[39m
+                [36m/>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"skeleton h-1.5 rounded"[39m
+                  [33mstyle[39m=[32m"width: 90%;"[39m
+                [36m/>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"skeleton h-1.5 rounded"[39m
+                  [33mstyle[39m=[32m"width: 70%;"[39m
+                [36m/>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"skeleton h-1.5 rounded"[39m
+                  [33mstyle[39m=[32m"width: 85%;"[39m
+                [36m/>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"skeleton h-1.5 rounded"[39m
+                  [33mstyle[39m=[32m"width: 60%;"[39m
+                [36m/>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"skeleton h-1.5 rounded"[39m
+                  [33mstyle[39m=[32m"width: 80%;"[39m
+                [36m/>[39m
+                [36m<svg[39m
+                  [33maria-hidden[39m=[32m"true"[39m
+                  [33mclass[39m=[32m"lucide lucide-file-text absolute bottom-2 right-2 text-ok"[39m
+                  [33mfill[39m=[32m"none"[39m
+                  [33mheight[39m=[32m"18"[39m
+                  [33mstroke[39m=[32m"currentColor"[39m
+                  [33mstroke-linecap[39m=[32m"round"[39m
+                  [33mstroke-linejoin[39m=[32m"round"[39m
+                  [33mstroke-width[39m=[32m"2"[39m
+                  [33mviewBox[39m=[32m"0 0 24 24"[39m
+                  [33mwidth[39m=[32m"18"[39m
+                  [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+                [36m>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M14 2v5a1 1 0 0 0 1 1h5"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M10 9H8"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M16 13H8"[39m
+                  [36m/>[39m
+                  [36m<path[39m
+                    [33md[39m=[32m"M16 17H8"[39m
+                  [36m/>[39m
+                [36m</svg>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"mt-6 font-display text-xl font-medium"[39m
+            [36m>[39m
+              [0mYour letter appears here.[0m
+            [36m</p>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"mt-1 text-sm text-ink-hushed"[39m
+            [36m>[39m
+              [0mFill in your details and press Draft letter.[0m
+            [36m</p>[39m
+            [36m<p[39m
+              [33mclass[39m=[32m"mt-4 inline-flex items-center gap-1 text-xs text-ink-hushed"[39m
+            [36m>[39m
+              [0mDownload as PDF, accents included [0m
+              [36m<svg[39m
+                [33maria-hidden[39m=[32m"true"[39m
+                [33mclass[39m=[32m"lucide lucide-arrow-right"[39m
+                [33mfill[39m=[32m"none"[39m
+                [33mheight[39m=[32m"12"[39m
+                [33mstroke[39m=[32m"currentColor"[39m
+                [33mstroke-linecap[39m=[32m"round"[39m
+                [33mstroke-linejoin[39m=[32m"round"[39m
+                [33mstroke-width[39m=[32m"2"[39m
+                [33mviewBox[39m=[32m"0 0 24 24"[39m
+                [33mwidth[39m=[32m"12"[39m
+                [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+              [36m>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"M5 12h14"[39m
+                [36m/>[39m
+                [36m<path[39m
+                  [33md[39m=[32m"m12 5 7 7-7 7"[39m
+                [36m/>[39m
+              [36m</svg>[39m
+            [36m</p>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</main>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError ../ninety-repo/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ ../ninety-repo/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ ../ninety-repo/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ ../ninety-repo/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/components/LetterPanel.test.tsx:73:19
+     71|     query = "scenario=demo";
+     72|     render(<LetterPanel />);
+     73|     expect(screen.getByTestId("scenario-banner").getAttribute("data-sc…
+       |                   ^
+     74|     expect(screen.getByTestId("letter-on").textContent).toBe("2026-10-…
+     75|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed (4)
+   Start at  09:11:13
+   Duration  1.43s (transform 316ms, setup 39ms, import 621ms, tests 313ms, environment 283ms)
+

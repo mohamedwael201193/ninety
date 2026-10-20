@@ -46,7 +46,7 @@ export function StatusPanel({ assessment: a, todayOverride, todayInvalid, trips 
         </h2>
         <span data-testid="status-chip" className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium ${cls}`}>
           <Icon className="size-4" aria-hidden="true" />
-          {TONE_LABEL[tone]}
+          {tone === "risk" && !a.overstay ? "No days left" : TONE_LABEL[tone]}
         </span>
       </div>
 
@@ -87,7 +87,8 @@ export function StatusPanel({ assessment: a, todayOverride, todayInvalid, trips 
               wide
             />
             <Tile label="In the Schengen area on this date" testId="present-status" value={a.present ? "Inside" : "Outside"} />
-            <Tile label="Overstay on this date" testId="overstay-status" value={a.overstay ? "Overstay" : "No overstay"} />
+            <Tile label="Overstay on this date" testId="overstay-status" value={a.overstay ? "Overstay" : a.overstays.length > 0 ? "Not today" : "No overstay"}
+              hint={!a.overstay && a.overstays.length > 0 ? "An earlier overstay is listed below" : undefined} />
           </dl>
         </div>
       </div>

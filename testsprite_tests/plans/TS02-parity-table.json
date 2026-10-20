@@ -14,7 +14,15 @@
     },
     {
       "type": "assertion",
-      "description": "The parity table (data-testid=parity-table) has exactly 14 rows (data-testid=parity-row), every one marked 'Match'"
+      "description": "The parity table (data-testid=parity-table) has exactly 14 rows (data-testid=parity-row), and every row is marked 'Match'"
+    },
+    {
+      "type": "assertion",
+      "description": "Reading the Ninety column of each row in order, the 14 rows show: 'No previous stay' 90 left; 'Manual example: 14 Jun 2024' 76 left; 'Manual example: entry on 19 Jun 2024' 20 left; 'Manual example: entry on 7 Aug 2024' 20 left; 'Manual example: last legal day, 29 Aug 2024' 0 left; 'Calculator's built-in example' 67 left; 'Same-day stay' 89 left; 'Day after the spring clock change' 88 left; 'Same-day exit and re-entry' 78 left; 'Exactly 90 days' 0 left; 'Day 91 (overstay)' 1 overstay; 'Re-entry after a full 90 days' 90 left; 'Entry refused the next day' 0 left; 'Overstay through 15 Apr' 16 overstay"
+    },
+    {
+      "type": "assertion",
+      "description": "In every row the Commission calculator column shows the same value as the Ninety column"
     }
   ]
 }

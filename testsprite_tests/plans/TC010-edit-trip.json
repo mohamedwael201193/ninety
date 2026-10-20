@@ -14,7 +14,7 @@
     },
     {
       "type": "assertion",
-      "description": "The status panel (data-testid=status-panel) shows 3 days used out of 90"
+      "description": "Days used (data-testid=days-used) shows 3 and days left (data-testid=days-left) shows 87"
     },
     {
       "type": "action",
@@ -22,7 +22,11 @@
     },
     {
       "type": "assertion",
-      "description": "The only trip row (data-testid=trip-row) shows 2026-09-01 to 2026-09-10 and the status panel shows 10 days used"
+      "description": "There is still exactly one trip row (data-testid=trip-row), now 2026-09-01 to 2026-09-10"
+    },
+    {
+      "type": "assertion",
+      "description": "Days used shows 10 and days left shows 80"
     }
   ]
 }

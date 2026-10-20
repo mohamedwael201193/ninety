@@ -1,10 +1,10 @@
 # TestSprite suite
 
-Frontend end-to-end tests for Ninety. TestSprite runs them in its cloud browser against the Vercel deployment: on every push to `main`, and on pull requests against the PR's preview.
+Frontend end-to-end tests for Ninety. TestSprite runs them in its cloud browser on every pull request, against that PR's Vercel preview. `TestSprite V3` is a required check, so a red run blocks the merge.
 
 ## Test cases
 
-Every plan starts at `/?today=2026-10-19&fresh=1`: the date is pinned and saved trips are cleared.
+Every plan pins the date with `?today=2026-10-19` and starts either with `fresh=1` (saved trips cleared) or from a named `?scenario=`.
 
 | Plan | What it proves |
 | --- | --- |
@@ -19,8 +19,11 @@ Every plan starts at `/?today=2026-10-19&fresh=1`: the date is pinned and saved 
 | `TC009-date-format.json` | `MM/DD/YYYY` is rejected with a YYYY-MM-DD message |
 | `TC010-edit-trip.json` | Editing a trip recounts 3 → 10 days |
 | `TC011-reload.json` | Trips and the count survive a reload |
+| `TS09-open-stay-false-fit.json` | Open stay: a plan past day 90 does not fit |
+| `TS10-open-stay-boundary.json` | Open stay: exit on day 90 fits, day 91 does not |
+| `TS26-same-day-reentry.json` | Same-day exit and re-entry counts the day once |
 
-These 11 plans are the whole suite. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
+These 14 plans are the cloud suite. `TS13`–`TS15` are written and join the suite in later pull requests. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
 
 ## Writing plans
 
