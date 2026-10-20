@@ -63,7 +63,8 @@ describe("LetterPanel", () => {
     expect(headers).toEqual(["Date", "Your dates", "EES figure", "Difference"]);
     const cells = Array.from(table.querySelectorAll("tbody tr > *")).map((c) => c.textContent);
     expect(cells).toEqual(["2026-10-19", "88", "90", "2"]);
-    expect(table.querySelector("tbody th[scope=row]")?.textContent).toBe("2026-10-19");
+    // Every body cell is a plain <td> under its column header: four headers, four cells, read in order.
+    expect(table.querySelectorAll("tbody td").length).toBe(4);
   });
 
   it("?scenario=demo opens the landing demo history, as on /ees", () => {

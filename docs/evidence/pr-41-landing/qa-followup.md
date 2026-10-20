@@ -7,3 +7,6 @@ The test agent re-opened `?today=2026-10-19&fresh=1` after saving, which wiped t
 
 ## TS18 flake on run 2 (16/17)
 TC011 passed after the fix. TS18 then reported the Difference cell blank, but its own DOM snapshot has `letter-evidence-gap` = 2, and headless Chrome at 1280/1024/800/390 px shows the cell filled (`qa/ts18-table-*.png`). The agent read the panel mid-animation. TS18's plan now waits for the panel and reads each figure by data-testid (free plan update, same test id). One re-run, as the flake rule allows.
+
+## TS18 red again after the plan fix (run 9cddc446): a real structure problem, not a flake
+Same result twice: the agent read Your dates 88, EES 90 and a blank Difference, while the DOM has 2 in `letter-evidence-gap`. The date was a row header (`<th scope="row">`) followed by three `<td>`s, so a reader pairing body `<td>`s with the four column headers comes up one cell short, and Difference is left empty. The date is now a plain `<td>`: four column headers, four cells, read in order. The unit test checks that.
