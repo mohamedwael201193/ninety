@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { cleanup, render, screen } from "@testing-library/react";
+import { act, cleanup, render, screen } from "@testing-library/react";
 
 let pathname = "/";
 vi.mock("next/navigation", () => ({ usePathname: () => pathname }));
@@ -52,5 +52,20 @@ describe("Nav", () => {
     render(<Nav />);
     expect(screen.getByTestId("nav-links").dataset.more).toBe("false");
     sw.mockRestore(); cw.mockRestore();
+  });
+  it("re-checks the edge fade when the row is resized (rotation, resize), not only on load", () => {
+    const sw = vi.spyOn(HTMLElement.prototype, "scrollWidth", "get").mockReturnValue(420);
+    const cw = vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(344);
+    const callbacks: ResizeObserverCallback[] = [];
+    const prev = globalThis.ResizeObserver;
+    globalThis.ResizeObserver = class { constructor(cb: ResizeObserverCallback) { callbacks.push(cb); } observe() {} unobserve() {} disconnect() {} } as unknown as typeof ResizeObserver;
+    render(<Nav />);
+    const row = screen.getByTestId("nav-links");
+    expect(row.dataset.more).toBe("true");
+    // Rotate to landscape: the row is now wide enough. No window "resize" event is fired here.
+    cw.mockReturnValue(700);
+    act(() => callbacks.forEach((cb) => cb([], {} as ResizeObserver)));
+    expect(row.dataset.more).toBe("false");
+    globalThis.ResizeObserver = prev; sw.mockRestore(); cw.mockRestore();
   });
 });
