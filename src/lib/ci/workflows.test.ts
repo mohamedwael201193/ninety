@@ -24,8 +24,8 @@ describe("TestSprite CLI workflow", () => {
     expect(yaml).toContain("vars.TESTSPRITE_ON_MAIN == 'true'");
   });
 
-  it("runs nightly unless TESTSPRITE_NIGHTLY is switched off", () => {
-    expect(yaml).toContain("github.event_name == 'schedule' && vars.TESTSPRITE_NIGHTLY != 'false'");
+  it("runs nightly only when TESTSPRITE_NIGHTLY is switched on (off by default)", () => {
+    expect(yaml).toContain("github.event_name == 'schedule' && vars.TESTSPRITE_NIGHTLY == 'true'");
   });
 
   it("uses the official TestSprite action pinned to a commit, with a pinned CLI", () => {

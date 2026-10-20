@@ -12,10 +12,10 @@ Ninety counts your Schengen short-stay days from your own trips, checks that cou
 |---|---|
 | **14/14** | scenarios match the European Commission's own calculator, run from a stored, hashed copy on every PR ([`parity.test.ts`](src/lib/schengen/parity.test.ts)) and live every night ([`drift.yml`](.github/workflows/drift.yml)) |
 | **500 / 3,000** | random travel histories through Ninety and the Commission calculator per PR / per night, 0 disagreements ([`differential.fuzz.test.ts`](src/lib/schengen/differential.fuzz.test.ts), [`ci.yml`](.github/workflows/ci.yml)) |
-| **15** | TestSprite cloud tests on every PR preview, `TestSprite V3` a required check ([`test-ids.json`](testsprite_tests/test-ids.json)) |
-| **96** | Vitest unit, property and fuzz tests on every PR (`npm test`) |
-| **35** | pull requests merged into `main` |
-| **2** | real bugs caught red by TestSprite and fixed to green in the PR (#8, #14; see below) |
+| **17** | TestSprite cloud tests on every PR preview, `TestSprite V3` a required check ([`test-ids.json`](testsprite_tests/test-ids.json)) |
+| **143** | Vitest unit, property and fuzz tests on every PR (`npm test`) |
+| **42** | pull requests merged into `main` |
+| **5** | real bugs caught red by TestSprite and fixed to green in the PR (#8, #14, #39, #41 twice; see below and [`docs/evidence`](docs/evidence/EVIDENCE_INDEX.md)) |
 
 ---
 

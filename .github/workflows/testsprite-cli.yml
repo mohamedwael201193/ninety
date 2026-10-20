@@ -11,7 +11,7 @@
 #
 # Cost: every run bills each test in the project (0.5 credits per test at the
 # time of writing), so it never runs on push or pull_request. Set the
-# repository variable TESTSPRITE_NIGHTLY to "false" to pause the nightly run.
+# repository variable TESTSPRITE_NIGHTLY to "true" to turn the nightly run on (off by default).
 # Needs the repository secret TESTSPRITE_API_KEY.
 name: TestSprite CLI
 
@@ -43,7 +43,7 @@ jobs:
     name: TestSprite suite on production
     if: >-
       ${{ github.event_name == 'workflow_dispatch'
-      || (github.event_name == 'schedule' && vars.TESTSPRITE_NIGHTLY != 'false')
+      || (github.event_name == 'schedule' && vars.TESTSPRITE_NIGHTLY == 'true')
       || (github.event_name == 'deployment_status'
           && github.event.deployment_status.state == 'success'
           && github.event.deployment.environment == 'Production'
