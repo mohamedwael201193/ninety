@@ -14,15 +14,15 @@
     },
     {
       "type": "assertion",
-      "description": "Days used (data-testid=days-used) is 1"
+      "description": "Read the DOM text of the calculator tile data-testid=days-used (a <dd> inside the calculator's status panel, data-testid=status-panel). Do NOT use the landing band (data-testid=band-used) higher up the page: it is exactly \"1\""
     },
     {
       "type": "action",
-      "description": "Navigate to /?today=2024-08-27"
+      "description": "Navigate to exactly /?today=2024-08-27 . The URL must NOT contain fresh=1 (that would delete the saved trip)"
     },
     {
       "type": "assertion",
-      "description": "Days used (data-testid=days-used) is 0"
+      "description": "Read the DOM text of the calculator tile data-testid=days-used (a <dd> inside the calculator's status panel, data-testid=status-panel). Do NOT use the landing band (data-testid=band-used) higher up the page: it is exactly \"0\" (the digit zero is shown, it is not blank). The trip row 2024-02-29 to 2024-02-29 is still listed"
     }
   ]
 }

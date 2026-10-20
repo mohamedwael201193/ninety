@@ -10,7 +10,7 @@
     },
     {
       "type": "action",
-      "description": "Click the add trip button (data-testid=trip-add)"
+      "description": "Without clicking any other link first, click the add trip button (data-testid=trip-add)"
     },
     {
       "type": "assertion",
@@ -18,7 +18,7 @@
     },
     {
       "type": "assertion",
-      "description": "The calculator section (id=calculator) is inside an element that has the inert attribute, and the dialog itself is not"
+      "description": "Check the DOM attributes (not the appearance): document.getElementById('calculator').closest('[inert]') is an element (the page section wrapping the calculator carries the inert attribute), and document.querySelector('[data-testid=trip-sheet]').closest('[inert]') is null"
     },
     {
       "type": "action",
@@ -26,7 +26,7 @@
     },
     {
       "type": "assertion",
-      "description": "The trip sheet is closed, no element on the page has the inert attribute, and the add trip button (data-testid=trip-add) has keyboard focus again"
+      "description": "The trip sheet is closed; in the DOM, document.querySelectorAll('[inert]').length is 0; and document.activeElement is the add trip button (its data-testid is trip-add)"
     }
   ]
 }
