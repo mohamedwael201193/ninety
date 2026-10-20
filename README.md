@@ -110,7 +110,7 @@ The whole loop, iteration by iteration: [`LOOP-ITERATIONS.md`](LOOP-ITERATIONS.m
 
 Scheduled smoke: [`testsprite-smoke.yml`](.github/workflows/testsprite-smoke.yml) runs 3 TestSprite tests (TS01, TS03, TS07) against production with the CLI, 1.5 credits a run instead of 21.5 for the whole suite of 43. It is off until the repository variable `TESTSPRITE_SMOKE` is set to `true`, and it has not run yet.
 
-**6 real app bugs**, each red on the PR preview and fixed in the same PR. The status strings are copied from GitHub:
+**6 real app bugs in 5 pull requests** (#41 caught two, one row), each red on the PR preview and fixed in the same PR. The status strings are copied from GitHub:
 
 | PR | Red status | What was wrong |
 |---|---|---|
@@ -122,7 +122,7 @@ Scheduled smoke: [`testsprite-smoke.yml`](.github/workflows/testsprite-smoke.yml
 
 **Went red, but the app wasn't the defect:** #18 and #22 (dependency and CI pull requests, `13/14 passed · 1 failed`, green on the re-run after merging `main`), #32 (`15/17 passed · 2 failed`, a plan step a cloud agent read differently), #36 (`13/14 passed · 1 failed`, TS26 had a wrong expected value) and #43 (`16/17 passed · 1 failed`, TS18 wording). The plan was fixed, not the app. #9 (the run could not start) and #44 (blocked by the preview) are not counted.
 
-**Found by an independent code review, reproduced by us.** Three rounds of a read-only Cursor review of this code reported bugs; we reproduced 26 of them (4, 6 and 16; one more in round 3 had already been fixed by round 2). Each was reproduced with a failing test first ([`review-findings.test.ts`](src/lib/bughunt/review-findings.test.ts), [`review-round2.test.ts`](src/lib/bughunt/review-round2.test.ts), [`review-round3.test.ts`](src/lib/bughunt/review-round3.test.ts)) and then fixed:
+**Found by an independent code review, reproduced by us.** Three rounds of a read-only Cursor review of this code reported bugs; we reproduced 26 of them (4, 6 and 16; one more in round 3 had already been fixed by round 2). Each was reproduced with a failing test first ([`review-findings.test.ts`](src/lib/bughunt/review-findings.test.ts), [`review-round2.test.ts`](src/lib/bughunt/review-round2.test.ts), [`review-round3.test.ts`](src/lib/bughunt/review-round3.test.ts)) and then fixed (related bugs share a row, so 26 bugs fill 16 rows):
 
 | Bug | Reproduction | Fix |
 |---|---|---|
