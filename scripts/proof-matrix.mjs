@@ -34,6 +34,8 @@ const out = {
     }),
   })),
 };
+// Which cloud runs the figures come from, so the page can say so (a test that never ran stays null and is not counted).
+out.environments = [...new Set(out.rules.flatMap((r) => r.testsprite).map((t) => t.latest?.environment).filter(Boolean))];
 writeFileSync("src/data/proof.json", JSON.stringify(out, null, 2) + "\n");
 const n = out.rules.flatMap((r) => r.testsprite).length;
 console.log(`${out.rules.length} rules, ${n} TestSprite references, generated ${out.generatedAt}`);

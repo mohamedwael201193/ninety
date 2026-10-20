@@ -1,0 +1,83 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-g-meta
+
+ ❯ src/lib/proof/rules.test.ts (16 tests | 1 failed) 15ms
+     × summarises only the TestSprite tests that have a latest run, and names the rest 5ms
+ ❯ src/components/landing/Nav.test.tsx (4 tests | 1 failed) 103ms
+     × Check and Plan keep ?scenario= and ?today= from another page, like EES check and Letter 39ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/landing/Nav.test.tsx > Nav > Check and Plan keep ?scenario= and ?today= from another page, like EES check and Letter
+AssertionError: expected [ [ 'ninety', '/' ], …(7) ] to deep equally contain [ 'Check', …(1) ]
+
+- Expected
++ Received
+
+  [
++   [
++     "ninety",
++     "/",
++   ],
++   [
+      "Check",
+-   "/?scenario=near-limit&today=2026-10-19#check",
++     "/#check",
++   ],
++   [
++     "Plan",
++     "/#planned-heading",
++   ],
++   [
++     "EES check",
++     "/ees?scenario=near-limit&today=2026-10-19",
++   ],
++   [
++     "Letter",
++     "/letter?scenario=near-limit&today=2026-10-19",
++   ],
++   [
++     "Parity",
++     "/parity",
++   ],
++   [
++     "Proof",
++     "/proof",
++   ],
++   [
++     "Check my days",
++     "/#check",
++   ],
+  ]
+
+ ❯ src/components/landing/Nav.test.tsx:40:19
+     38|     render(<Nav />);
+     39|     const hrefs = screen.getAllByRole("link").map((a) => [a.textConten…
+     40|     expect(hrefs).toContainEqual(["Check", "/?scenario=near-limit&toda…
+       |                   ^
+     41|     expect(hrefs).toContainEqual(["Plan", "/?scenario=near-limit&today…
+     42|     window.history.replaceState(null, "", "/");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/lib/proof/rules.test.ts > rule-to-test matrix > summarises only the TestSprite tests that have a latest run, and names the rest
+TypeError: proofSummary is not a function
+ ❯ src/lib/proof/rules.test.ts:39:12
+     37|       { testsprite: [{ id: "TS01", latest: { verdict: "passed" } }, { …
+     38|     ];
+     39|     expect(proofSummary(rules)).toEqual({ tests: 3, ran: 2, passed: 1,…
+       |            ^
+     40|   });
+     41| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  2 failed | 18 passed (20)
+   Start at  11:41:49
+   Duration  887ms (transform 95ms, setup 39ms, import 289ms, tests 118ms, environment 327ms)
+
