@@ -29,6 +29,16 @@ const CHIP = {
   risk: { Icon: OctagonAlert, cls: "bg-risk-wash text-risk" },
 } as const;
 
+/** "earlier" or "later" relative to the date shown, or neither when there are both. */
+function overstayHint(a: StatusPanelProps["assessment"]): string | undefined {
+  if (a.overstay || a.overstays.length === 0) return undefined;
+  const before = a.overstays.some((o) => o.to < a.on);
+  const after = a.overstays.some((o) => o.from > a.on);
+  if (before && !after) return "An earlier overstay is listed below";
+  if (after && !before) return "A later overstay is listed below";
+  return "Overstays are listed below";
+}
+
 export function StatusPanel({ assessment: a, todayOverride, todayInvalid, trips }: StatusPanelProps) {
   const tone = toneFor(a.daysLeft, a.overstay, a.latestExit);
   const { Icon, cls } = CHIP[tone];
@@ -88,7 +98,7 @@ export function StatusPanel({ assessment: a, todayOverride, todayInvalid, trips 
             />
             <Tile label="In the Schengen area on this date" testId="present-status" value={a.present ? "Inside" : "Outside"} />
             <Tile label="Overstay on this date" testId="overstay-status" value={a.overstay ? "Overstay" : a.overstays.length > 0 ? "Not today" : "No overstay"}
-              hint={!a.overstay && a.overstays.length > 0 ? "An earlier overstay is listed below" : undefined} />
+              hint={overstayHint(a)} />
           </dl>
         </div>
       </div>

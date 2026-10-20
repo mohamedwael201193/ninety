@@ -57,4 +57,9 @@ describe("rule-to-test matrix", () => {
     const tied = new Set(proof.rules.flatMap((r) => r.testsprite.map((x) => x.id)));
     expect(suite.filter((t) => !tied.has(t.id)).map((t) => t.id).sort()).toEqual(["TC011", "TS05", "TS16", "TS36", "TS37", "TS39", "TS40", "TS41"]);
   });
+
+  it("proof.json carries the same rules, tests and parity ids as rules.json (it once kept 36 dropped scenarios)", () => {
+    const strip = (r: { id: string; rule: string; basis: string; unit: unknown; parity: unknown }) => ({ id: r.id, rule: r.rule, basis: r.basis, unit: r.unit, parity: r.parity });
+    expect(proof.rules.map(strip)).toEqual(RULES.map(strip));
+  });
 });

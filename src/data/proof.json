@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T18:01:32.446Z",
+  "generatedAt": "2026-10-20T21:47:28.591Z",
   "source": "src/data/rules.json + testsprite test result",
   "rules": [
     {
@@ -19,12 +19,7 @@
       "parity": [
         "exact-90-days",
         "day-91-overstay",
-        "manual-last-day-29-aug-2024",
-        "eighty-nine-days",
-        "seventy-days-one-stay",
-        "eighty-days-two-stays",
-        "eighty-nine-two-stays",
-        "eighty-eight-days"
+        "manual-last-day-29-aug-2024"
       ],
       "testsprite": [
         {
@@ -63,17 +58,7 @@
       ],
       "parity": [
         "same-day-stay",
-        "day-after-spring-dst",
-        "leap-day-single",
-        "across-leap-day",
-        "across-new-year",
-        "across-autumn-dst",
-        "across-spring-dst-2025",
-        "non-leap-feb-2025",
-        "end-of-month-31",
-        "start-on-first",
-        "christmas-2025",
-        "across-leap-day-2028"
+        "day-after-spring-dst"
       ],
       "testsprite": [
         {
@@ -147,12 +132,7 @@
       ],
       "parity": [
         "reentry-after-full-90",
-        "manual-14-jun-2024",
-        "old-stay-fully-dropped-out",
-        "old-and-recent",
-        "two-old-stays-dropped",
-        "long-gap-then-short",
-        "half-and-half"
+        "manual-14-jun-2024"
       ],
       "testsprite": [
         {
@@ -195,11 +175,7 @@
       ],
       "parity": [
         "overstay-through-15-apr",
-        "entry-refused-next-day",
-        "overstay-one-day",
-        "overstay-ten-days",
-        "overstay-across-leap",
-        "overstay-120-days"
+        "entry-refused-next-day"
       ],
       "testsprite": [
         {
@@ -212,6 +188,18 @@
             "environment": "github-pr-56",
             "runId": "2d3b739e-1fa2-4f66-8e63-33a4e1bc3650"
           }
+        },
+        {
+          "id": "TS46",
+          "plan": "TS46-overlapping-overstay-once",
+          "testId": "74507a04-cff1-4a81-bbb3-fe05120a29c9",
+          "latest": null
+        },
+        {
+          "id": "TS52",
+          "plan": "TS52-later-overstay-wording",
+          "testId": "3cf3bbc7-a89c-4844-9503-e71b5634eeb5",
+          "latest": null
         }
       ]
     },
@@ -302,6 +290,12 @@
             "environment": "github-pr-56",
             "runId": "c7b12775-8ed9-486e-8a55-deadfe15f770"
           }
+        },
+        {
+          "id": "TS45",
+          "plan": "TS45-plan-before-booked-stay",
+          "testId": "2f48a9d2-b5ee-48da-837d-b7efa1c243c5",
+          "latest": null
         }
       ]
     },
@@ -419,6 +413,18 @@
             "environment": "github-pr-56",
             "runId": "118a045b-7ccf-4bab-89b2-de2cdde86525"
           }
+        },
+        {
+          "id": "TS47",
+          "plan": "TS47-ees-split-stay",
+          "testId": "93816a28-d56f-4557-aa7d-f82f01fd119b",
+          "latest": null
+        },
+        {
+          "id": "TS48",
+          "plan": "TS48-ees-open-stay-earlier-exit",
+          "testId": "7dbac572-faa5-4614-b090-28c058664d67",
+          "latest": null
         }
       ]
     },
@@ -536,6 +542,18 @@
             "environment": "github-pr-56",
             "runId": "dd615755-3dbc-4443-80ac-46ba83a8c919"
           }
+        },
+        {
+          "id": "TS49",
+          "plan": "TS49-letter-refused-on-match",
+          "testId": "fbf2bf81-8a97-4547-aace-8c389fb44f5d",
+          "latest": null
+        },
+        {
+          "id": "TS50",
+          "plan": "TS50-letter-pdf-cjk-name",
+          "testId": "89fc72df-cb41-49e7-8f06-8d463e5469d4",
+          "latest": null
         }
       ]
     },
@@ -546,28 +564,12 @@
       "unit": [
         {
           "file": "src/lib/schengen/parity.test.ts",
-          "name": "matches the stored Commission calculator on all 50 scenarios"
-        },
-        {
-          "file": "src/lib/schengen/parity.golden.test.ts",
-          "name": "there are at least 36 of them, 50 scenarios in all"
+          "name": "matches the stored Commission calculator on all 14 scenarios"
         }
       ],
       "parity": [
         "no-previous-stay",
-        "calculator-example-kom-1-1",
-        "one-day-yesterday",
-        "ten-days-last-week",
-        "thirty-days-ended-yesterday",
-        "forty-five-days",
-        "sixty-days-two-stays",
-        "three-short-stays",
-        "year-2026-summer",
-        "weekly-commuter",
-        "single-day-many",
-        "autumn-2025-55-days",
-        "one-week-2027",
-        "twenty-plus-twenty"
+        "calculator-example-kom-1-1"
       ],
       "testsprite": [
         {
@@ -580,6 +582,12 @@
             "environment": "github-pr-56",
             "runId": "c61633ac-fc7f-4cef-895f-2668b8e2d424"
           }
+        },
+        {
+          "id": "TS51",
+          "plan": "TS51-proof-parity-names",
+          "testId": "1f3f0b6e-ef5a-4844-aeb9-60f73fdf2d74",
+          "latest": null
         }
       ]
     }
@@ -1004,6 +1012,62 @@
         "environment": "github-pr-56",
         "runId": "34b42886-6417-4d51-b3d0-58181a4b48ac"
       }
+    },
+    {
+      "id": "TS45",
+      "plan": "TS45-plan-before-booked-stay",
+      "name": "A planned trip counts a stay already booked after it (one day on 1 June does not fit before 90 days from 1 July)",
+      "testId": "2f48a9d2-b5ee-48da-837d-b7efa1c243c5",
+      "latest": null
+    },
+    {
+      "id": "TS46",
+      "plan": "TS46-overlapping-overstay-once",
+      "name": "Two overlapping trips that overstay are listed as one overstay of 11 days",
+      "testId": "74507a04-cff1-4a81-bbb3-fe05120a29c9",
+      "latest": null
+    },
+    {
+      "id": "TS47",
+      "plan": "TS47-ees-split-stay",
+      "name": "One stay entered as two trips (an internal border crossing) matches one EES record",
+      "testId": "93816a28-d56f-4557-aa7d-f82f01fd119b",
+      "latest": null
+    },
+    {
+      "id": "TS48",
+      "plan": "TS48-ees-open-stay-earlier-exit",
+      "name": "An open stay whose EES record ends earlier is an exit disagreement, not a missing entry",
+      "testId": "7dbac572-faa5-4614-b090-28c058664d67",
+      "latest": null
+    },
+    {
+      "id": "TS49",
+      "plan": "TS49-letter-refused-on-match",
+      "name": "No Article 52 letter when the EES figure matches the trips",
+      "testId": "fbf2bf81-8a97-4547-aace-8c389fb44f5d",
+      "latest": null
+    },
+    {
+      "id": "TS50",
+      "plan": "TS50-letter-pdf-cjk-name",
+      "name": "The PDF download refuses a name its font cannot draw and says which characters",
+      "testId": "89fc72df-cb41-49e7-8f06-8d463e5469d4",
+      "latest": null
+    },
+    {
+      "id": "TS51",
+      "plan": "TS51-proof-parity-names",
+      "name": "/proof names only the 14 parity scenarios the calculator runs",
+      "testId": "1f3f0b6e-ef5a-4844-aeb9-60f73fdf2d74",
+      "latest": null
+    },
+    {
+      "id": "TS52",
+      "plan": "TS52-later-overstay-wording",
+      "name": "A booked overstay after the date shown is called later, not earlier",
+      "testId": "3cf3bbc7-a89c-4844-9503-e71b5634eeb5",
+      "latest": null
     }
   ],
   "environments": [

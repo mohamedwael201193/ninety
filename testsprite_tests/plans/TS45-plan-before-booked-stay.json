@@ -1,0 +1,40 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "A planned trip counts a stay already booked after it (one day on 1 June does not fit before 90 days from 1 July)",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-01-15&fresh=1 (pins today to 2026-01-15 and clears saved trips)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add) to open the trip sheet"
+    },
+    {
+      "type": "action",
+      "description": "Enter entry date 2026-07-01 (data-testid=trip-entry) and exit date 2026-09-28 (data-testid=trip-exit)"
+    },
+    {
+      "type": "action",
+      "description": "Click save (data-testid=trip-save)"
+    },
+    {
+      "type": "assertion",
+      "description": "Exactly one trip row (data-testid=trip-row) shows 2026-07-01 to 2026-09-28, 90 days"
+    },
+    {
+      "type": "assertion",
+      "description": "Latest legal exit (data-testid=latest-exit) reads exactly 2026-04-01"
+    },
+    {
+      "type": "action",
+      "description": "In the planned trip form, enter planned entry 2026-06-01 (data-testid=planned-entry) and planned exit 2026-06-01 (data-testid=planned-exit), then click the check button (data-testid=planned-check)"
+    },
+    {
+      "type": "assertion",
+      "description": "The planned trip result (data-testid=planned-result) starts with 'Does not fit.'"
+    }
+  ]
+}

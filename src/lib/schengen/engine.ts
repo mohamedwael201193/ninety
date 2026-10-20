@@ -162,14 +162,21 @@ class Presence {
 export function inclusiveAllowance(stays: ClosedStay[], on: IsoDate): number {
   const presence = new Presence(stays);
   const start = parseIso(on);
+  // Window counts for every window that can hold a day of the hypothetical stay, recorded presence
+  // only (earlier and later stays alike: a booked trip after the stay shares windows with it).
+  const first = start, last = start + MAX_FORWARD_DAYS - 1 + WINDOW - 1;
+  const counts: number[] = [];
+  for (let end = first; end <= last; end += 1) counts.push(presence.window(end));
   let length = 0;
   while (length < MAX_FORWARD_DAYS) {
     const day = start + length;
-    const windowStart = day - WINDOW + 1;
-    // Every day from `start` to `day` is presence in this hypothetical stay;
-    // before `start`, only the recorded presence counts.
-    const count = presence.count(windowStart, start - 1) + (day - Math.max(start, windowStart) + 1);
-    if (count > LIMIT) break;
+    if (!presence.has(day)) {
+      // Adding `day` raises every window that ends on it or within the next 179 days.
+      let ok = true;
+      for (let end = day; end <= day + WINDOW - 1; end += 1) if (counts[end - first] + 1 > LIMIT) { ok = false; break; }
+      if (!ok) break;
+      for (let end = day; end <= day + WINDOW - 1; end += 1) counts[end - first] += 1;
+    } else if (counts[day - first] > LIMIT) break;
     length += 1;
   }
   return length;
@@ -189,7 +196,17 @@ export function findOverstays(stays: ClosedStay[]): OverstaySpan[] {
   const ordered = [...stays].sort(
     (a, b) => parseIso(a.entry) - parseIso(b.entry) || parseIso(a.exit) - parseIso(b.exit),
   );
+  // Overlapping trips are one stay for this purpose: their shared days are counted once, so an
+  // overstay inside the overlap is listed once (as the calculator lists the merged stay). A same-day
+  // exit and re-entry stays two stays, as in the calculator.
+  const merged: ClosedStay[] = [];
   for (const stay of ordered) {
+    const last = merged[merged.length - 1];
+    if (last && parseIso(stay.entry) < parseIso(last.exit)) {
+      if (parseIso(stay.exit) > parseIso(last.exit)) last.exit = stay.exit;
+    } else merged.push({ ...stay });
+  }
+  for (const stay of merged) {
     const entry = parseIso(stay.entry);
     const exit = parseIso(stay.exit);
     let first: number | null = null;

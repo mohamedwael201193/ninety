@@ -1,0 +1,52 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "One stay entered as two trips (an internal border crossing) matches one EES record",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-06-30&fresh=1 (pins today to 2026-06-30 and clears saved trips)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add) to open the trip sheet"
+    },
+    {
+      "type": "action",
+      "description": "Enter entry date 2026-06-01 (data-testid=trip-entry) and exit date 2026-06-10 (data-testid=trip-exit)"
+    },
+    {
+      "type": "action",
+      "description": "Click save (data-testid=trip-save)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add) to open the trip sheet"
+    },
+    {
+      "type": "action",
+      "description": "Enter entry date 2026-06-11 (data-testid=trip-entry) and exit date 2026-06-20 (data-testid=trip-exit)"
+    },
+    {
+      "type": "action",
+      "description": "Click save (data-testid=trip-save)"
+    },
+    {
+      "type": "action",
+      "description": "Navigate to /ees?today=2026-06-30"
+    },
+    {
+      "type": "action",
+      "description": "Enter 20 in the EES days used field (data-testid=ees-days-used) and type exactly '2026-06-01 2026-06-20' in the EES records box (data-testid=ees-records)"
+    },
+    {
+      "type": "action",
+      "description": "Click compare (data-testid=ees-compare)"
+    },
+    {
+      "type": "assertion",
+      "description": "The result codes (data-testid=ees-code) are exactly one code, 'match' (its data-code attribute is match); no code 'exit-dates-disagree' is shown"
+    }
+  ]
+}

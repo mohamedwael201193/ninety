@@ -121,6 +121,9 @@ export function buildCorrectionLetter(identity: LetterIdentity, reconciliation: 
 
   // The API refuses with 422 when the comparison has input errors; the page must not draft a letter either.
   if (reconciliation.errors.length > 0) throw new Error(reconciliation.errors.join(" "));
+  if (reconciliation.codes.length === 1 && reconciliation.codes[0] === "match" && reconciliation.errors.length === 0) {
+    throw new Error("No correction to request: the EES figure matches your trips. There is nothing to correct.");
+  }
 
   const evidence: LetterEvidence = {
     on: reconciliation.on,

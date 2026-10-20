@@ -195,6 +195,22 @@ export function explainedByCutoff(codes: MismatchCode[]): boolean {
   return codes.length === 1 && codes[0] === "ees-ignores-pre-cutoff-stay";
 }
 
+/**
+ * The last day of the stay that `exit` belongs to, following trips that continue it on the same day
+ * or the next day (moving between Schengen states is an internal crossing, which the EES does not record).
+ */
+function continuedStay(trips: StayInput[], on: IsoDate, exit: IsoDate): IsoDate {
+  const closed = trips
+    .filter((t) => isIsoDate(t.entry) && (t.exit === null ? parseIso(t.entry) <= parseIso(on) : isIsoDate(t.exit)))
+    .map((t) => ({ entry: parseIso(t.entry), exit: t.exit === null ? parseIso(on) : parseIso(t.exit) }));
+  let end = parseIso(exit);
+  for (let grew = true; grew; ) {
+    grew = false;
+    for (const t of closed) if (t.entry <= end + 1 && t.exit > end) { end = t.exit; grew = true; }
+  }
+  return formatIso(end);
+}
+
 export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
   const on = claim.on;
   const errors: string[] = [];
@@ -278,15 +294,17 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
         })
         .sort((a, b) => parseIso(b.exit!) - parseIso(a.exit!))[0];
       if (!trip || trip.exit === null) continue;
+      const stayEnd = continuedStay(trips, on, trip.exit);
+      if (parseIso(stayEnd) >= parseIso(on)) continue;
       const extra: IsoDate[] = [];
-      for (let day = parseIso(trip.exit) + 1; day <= parseIso(on); day += 1) {
+      for (let day = parseIso(stayEnd) + 1; day <= parseIso(on); day += 1) {
         const date = formatIso(day);
         if (eesOnlySet.has(date)) extra.push(date);
       }
       if (extra.length === 0) continue;
       extra.forEach((date) => explained.add(date));
       notes.push(
-        `Likely missing exit. The EES has no exit for the entry on ${record.entry}. The trips show an exit on ${trip.exit}. The EES still counts ${pluralDays(extra.length)} after that exit (${dayRanges(extra)}).`,
+        `Likely missing exit. The EES has no exit for the entry on ${record.entry}. The trips show an exit on ${stayEnd}. The EES still counts ${pluralDays(extra.length)} after that exit (${dayRanges(extra)}).`,
       );
     }
     if (explained.size > 0) codes.push("likely-missing-exit");
@@ -297,11 +315,16 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
     const earlierExitDays = new Set<IsoDate>();
     for (const record of claim.records) {
       if (record.exit === null) continue;
-      const sameEntry = trips.filter((item) => item.entry === record.entry && item.exit !== null);
-      // Two trips can share an entry date; only flag when none of them ends where the EES record ends.
-      if (sameEntry.some((item) => item.exit === record.exit)) continue;
+      // A trip with no exit is still inside: it ends on the reference date, as the count assumes.
+      const sameEntry = trips
+        .filter((item) => item.entry === record.entry && (item.exit !== null || (isIsoDate(item.entry) && parseIso(item.entry) <= parseIso(on))))
+        .map((item) => (item.exit === null ? { ...item, exit: on } : item));
+      // Two trips can share an entry date; only flag when none of them ends where the EES record ends,
+      // either at its own exit or at the end of the stay it continues into (an internal crossing).
+      if (sameEntry.some((item) => item.exit === record.exit || continuedStay(trips, on, item.exit!) === record.exit)) continue;
       // Two trips with the same entry are one stay as far as the EES is concerned: compare with the latest exit.
-      const trip = [...sameEntry].sort((a, b) => parseIso(b.exit!) - parseIso(a.exit!))[0];
+      const latest = [...sameEntry].sort((a, b) => parseIso(b.exit!) - parseIso(a.exit!))[0];
+      const trip = latest ? { ...latest, exit: continuedStay(trips, on, latest.exit!) } : latest;
       if (trip && trip.exit !== null && trip.exit > record.exit) {
         for (let day = parseIso(record.exit) + 1; day <= parseIso(trip.exit); day += 1) earlierExitDays.add(formatIso(day));
       }

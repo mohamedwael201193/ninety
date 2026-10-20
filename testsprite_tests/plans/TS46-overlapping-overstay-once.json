@@ -1,0 +1,44 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Two overlapping trips that overstay are listed as one overstay of 11 days",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2024-04-10&fresh=1 (pins today to 2024-04-10 and clears saved trips)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add) to open the trip sheet"
+    },
+    {
+      "type": "action",
+      "description": "Enter entry date 2024-01-01 (data-testid=trip-entry) and exit date 2024-04-05 (data-testid=trip-exit)"
+    },
+    {
+      "type": "action",
+      "description": "Click save (data-testid=trip-save)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add) to open the trip sheet"
+    },
+    {
+      "type": "action",
+      "description": "Enter entry date 2024-03-25 (data-testid=trip-entry) and exit date 2024-04-10 (data-testid=trip-exit)"
+    },
+    {
+      "type": "action",
+      "description": "Click save (data-testid=trip-save)"
+    },
+    {
+      "type": "assertion",
+      "description": "Two trip rows (data-testid=trip-row) are listed"
+    },
+    {
+      "type": "assertion",
+      "description": "The overstay list (data-testid=overstay-detail) has exactly one item, and it reads 'Overstay from 2024-03-31 to 2024-04-10 (11 days).'"
+    }
+  ]
+}
