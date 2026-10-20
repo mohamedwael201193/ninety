@@ -28,3 +28,21 @@ describe("PlannedTripForm during an open stay", () => {
     expect(second[0]).toContain("2026-12-29");
   });
 });
+
+describe("PlannedTripForm result on phones", () => {
+  it("brings the verdict into view, clear of the fixed bottom bar, after each check", async () => {
+    const calls: Array<{ el: Element; opts: unknown }> = [];
+    const orig = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = function (this: Element, opts?: unknown) { calls.push({ el: this, opts }); } as typeof orig;
+    try {
+      render(<PlannedTripForm history={[]} today="2026-10-19" />);
+      const [text] = await check("2026-12-10", "2026-12-01");
+      expect(text).toBe("The planned exit is before the planned entry.");
+      await act(async () => { await new Promise((r) => setTimeout(r, 400)); });
+      const target = calls.find((c) => (c.el as HTMLElement).dataset.testid === "planned-verdict");
+      expect(target?.opts).toEqual({ block: "nearest", behavior: "smooth" });
+    } finally {
+      Element.prototype.scrollIntoView = orig;
+    }
+  });
+});
