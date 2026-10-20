@@ -23,3 +23,13 @@ describe("trip storage", () => {
     ).toEqual([{ id: "ok", entry: "2024-01-01", exit: "2024-01-02" }]);
   });
 });
+
+describe("stored trips with an exit before the entry", () => {
+  it("are dropped when loading, and the valid trips are kept", () => {
+    const raw = JSON.stringify([
+      { id: "a", entry: "2024-06-10", exit: "2024-06-01" },
+      { id: "b", entry: "2024-07-01", exit: "2024-07-10" },
+    ]);
+    expect(parseTrips(raw)).toEqual([{ id: "b", entry: "2024-07-01", exit: "2024-07-10" }]);
+  });
+});
