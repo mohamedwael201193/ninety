@@ -11,6 +11,10 @@ const FOCUSABLE = "button,input,select,textarea,[href],[tabindex]:not([tabindex=
 export function Sheet({ open, title, onClose, children }: { open: boolean; title: string; onClose: () => void; children: ReactNode }) {
   const panel = useRef<HTMLDivElement>(null);
   const returnTo = useRef<HTMLElement | null>(null);
+  // The latest onClose, so a parent passing a new function each render does not re-run the open effect
+  // (which used to try to restore focus while the page was still inert, then lose the opener).
+  const closeRef = useRef(onClose);
+  useEffect(() => { closeRef.current = onClose; }, [onClose]);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
@@ -29,7 +33,7 @@ export function Sheet({ open, title, onClose, children }: { open: boolean; title
     if (!open) return;
     returnTo.current = document.activeElement as HTMLElement | null;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") closeRef.current();
       if (e.key === "Tab" && panel.current) {
         const f = panel.current.querySelectorAll<HTMLElement>(FOCUSABLE);
         const list = [...f].filter((el) => !el.hasAttribute("disabled"));
@@ -50,9 +54,12 @@ export function Sheet({ open, title, onClose, children }: { open: boolean; title
       cancelAnimationFrame(frame);
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
-      returnTo.current?.focus?.();
+      // Restore focus after this commit, once the inert attribute is off the page.
+      const target = returnTo.current;
+      returnTo.current = null;
+      if (target) queueMicrotask(() => { if (target.isConnected) target.focus(); });
     };
-  }, [open, onClose]);
+  }, [open]);
 
   if (!mounted) return null;
   return createPortal(

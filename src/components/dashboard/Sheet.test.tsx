@@ -74,6 +74,7 @@ describe("Sheet", () => {
     fireEvent.change(field, { target: { value: "2026-10-01" } }); // parent re-renders while open
     expect(attempts).toBe(0);
     fireEvent.keyDown(document, { key: "Escape" });
+    await Promise.resolve(); // focus is restored in a microtask, after inert is removed
     expect(attempts).toBe(1);
     expect(document.activeElement).toBe(opener);
   });
