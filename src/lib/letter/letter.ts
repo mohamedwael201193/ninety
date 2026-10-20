@@ -26,11 +26,23 @@ export type LetterIdentity = {
   memberState: string;
 };
 
+/** The three figures the request rests on, shown as a table in the preview and stated in the letter. */
+export type LetterEvidence = {
+  on: IsoDate;
+  windowStart: IsoDate;
+  /** Days counted from the traveller's own dates (only stays the EES covers, when some began before the cutoff). */
+  ours: number;
+  ees: number;
+  /** EES minus ours: positive when the EES counts more. */
+  gap: number;
+};
+
 export type CorrectionLetter = {
   title: string;
   addressee: string;
   paragraphs: string[];
   text: string;
+  evidence: LetterEvidence;
 };
 
 const DEMONYMS: Record<string, string> = {
@@ -76,6 +88,11 @@ function dayLines(r: Reconciliation): string[] {
   ];
 }
 
+function evidenceLine(e: LetterEvidence): string {
+  const direction = e.gap > 0 ? "more" : "fewer";
+  return `In figures: my dates ${days(e.ours)}; EES ${days(e.ees)}; difference ${days(Math.abs(e.gap))}${e.gap === 0 ? "" : `, the EES counting ${direction}`}.`;
+}
+
 function reasonLines(r: Reconciliation): string[] {
   const lines: string[] = [];
   if (r.codes.includes("likely-missing-exit")) lines.push("I believe one of my exits from the Schengen area was not recorded, so the EES counts days on which I was not present.");
@@ -90,6 +107,7 @@ export function buildCorrectionLetter(identity: LetterIdentity, reconciliation: 
   const nationality = required(identity.nationality, "Nationality");
   const documentNumber = required(identity.documentNumber, "Travel document number");
   const email = required(identity.email, "Email");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Email must be a full address, for example jane@example.com.");
   const memberState = required(identity.memberState, "Member State");
   if (!isIsoDate(identity.dateOfBirth)) throw new Error("Date of birth must be a YYYY-MM-DD date.");
 
@@ -99,14 +117,27 @@ export function buildCorrectionLetter(identity: LetterIdentity, reconciliation: 
     );
   }
 
+  const evidence: LetterEvidence = {
+    on: reconciliation.on,
+    windowStart: reconciliation.windowStart,
+    ours: reconciliation.preCutoffDays.length > 0 ? reconciliation.eesComparableDaysUsed : reconciliation.travellerDaysUsed,
+    ees: reconciliation.eesDaysUsed,
+    gap: reconciliation.figureGap,
+  };
+
   const title = "Request for rectification of Entry/Exit System data under Article 52 of Regulation (EU) 2017/2226";
   const addressee = `To the competent authority of ${memberState}`;
   const paragraphs = [
     title,
     addressee,
     `I, ${fullName}, born on ${identity.dateOfBirth}, a national of ${countryOf(nationality)}, holder of travel document ${documentNumber}, request rectification and completion of my personal data in the Entry/Exit System (EES).`,
-    "Under Article 52(1) of Regulation (EU) 2017/2226, a request relating to the rights in Articles 15 to 18 of Regulation (EU) 2016/679 may be addressed to the competent authority of any Member State, and the Member State responsible or the Member State to which the request is made shall reply within 45 days of receipt. Under Article 52(2) and (3), the accuracy of the data and the lawfulness of their processing are to be checked, normally within 30 days, and data that are factually inaccurate, incomplete or recorded unlawfully are to be rectified, completed or erased, with written confirmation to me without delay. If the authority does not agree, Article 52(4) requires an administrative decision explaining in writing why.",
+    "Under Article 52(1) of Regulation (EU) 2017/2226, a request relating to the rights in Articles 15 to 18 of Regulation (EU) 2016/679 may be addressed to the competent authority of any Member State, and the Member State responsible or the Member State to which the request is made shall reply within 45 days of receipt.",
+    "Under Article 52(2), where the request is made to a Member State other than the one responsible, that Member State checks the accuracy of the data and the lawfulness of their processing within 30 days if it can do so without consulting the Member State responsible; otherwise it contacts the authorities of the Member State responsible within seven days, and that Member State checks the data within 30 days of being contacted.",
+    "Under Article 52(3), data that are factually inaccurate, incomplete or recorded unlawfully shall be rectified, completed or erased, and I shall be confirmed in writing without delay that action has been taken.",
+    "Under Article 52(4), if the Member State does not agree that the data are inaccurate, incomplete or recorded unlawfully, it shall adopt an administrative decision explaining to me in writing, without delay, why it is not prepared to correct, complete or erase them.",
+    "If this request is refused, I ask that the decision also give, as Article 52(5) requires, information on how to bring an action or a complaint before the competent authorities or courts of that Member State, and on assistance available, including from the competent national supervisory authority.",
     `On ${reconciliation.on}, the EES states that I had used ${days(reconciliation.eesDaysUsed)} in the 180-day period starting ${reconciliation.windowStart}. The entry and exit dates I hold show ${days(reconciliation.travellerDaysUsed)} in that same period.${reconciliation.preCutoffDays.length > 0 ? ` Of these, ${days(reconciliation.preCutoffDays.length)} belong to stays that began before ${EES_CUTOFF}, which the EES does not count; this request does not concern them, and compares the remaining ${days(reconciliation.eesComparableDaysUsed)}.` : ""}`,
+    evidenceLine(evidence),
     ...reasonLines(reconciliation),
     ...dayLines(reconciliation),
     "I ask you to rectify the entry and exit data and the days-used figure so that they match the dates in this request, and to confirm the action in writing.",
@@ -120,5 +151,6 @@ export function buildCorrectionLetter(identity: LetterIdentity, reconciliation: 
     addressee,
     paragraphs,
     text: paragraphs.join("\n\n"),
+    evidence,
   };
 }

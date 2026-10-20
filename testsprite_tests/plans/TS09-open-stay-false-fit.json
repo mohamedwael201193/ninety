@@ -23,6 +23,10 @@
     {
       "type": "assertion",
       "description": "The planned trip result names 2026-12-29 as the latest legal exit, the same date as the status panel (data-testid=latest-exit)"
+    },
+    {
+      "type": "assertion",
+      "description": "The planned trip result says the plan is 46 days"
     }
   ]
 }

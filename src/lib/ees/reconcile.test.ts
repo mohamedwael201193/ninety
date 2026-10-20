@@ -228,3 +228,74 @@ describe("cutoff with overlapping trips", () => {
     expect(r.preCutoffDays).toEqual(["2026-04-09"]);
   });
 });
+
+describe("same-day re-entry on or after the EES cutoff", () => {
+  it("counts a re-entry on the exit day as a new, comparable visit", () => {
+    const trips = [
+      { entry: "2026-03-20", exit: "2026-04-15" },
+      { entry: "2026-04-15", exit: "2026-04-20" },
+    ];
+    const result = reconcile(trips, {
+      daysUsed: 6,
+      on: "2026-05-01",
+      records: [{ entry: "2026-04-15", exit: "2026-04-20" }],
+    });
+    // 20 Mar - 14 Apr belong only to the pre-cutoff stay; 15 Apr is the first day of the new visit.
+    expect(result.preCutoffDays).toHaveLength(26);
+    expect(result.preCutoffDays).not.toContain("2026-04-15");
+    expect(result.eesComparableDaysUsed).toBe(6);
+    expect(result.differences).toEqual([]);
+    expect(result.figureGap).toBe(0);
+    expect(result.codes).toEqual(["ees-ignores-pre-cutoff-stay"]);
+  });
+
+  it("treats a re-entry on the cutoff day itself as a new visit", () => {
+    const result = reconcile(
+      [
+        { entry: "2026-04-01", exit: "2026-04-10" },
+        { entry: "2026-04-10", exit: "2026-04-12" },
+      ],
+      { daysUsed: 3, on: "2026-05-01", records: [{ entry: "2026-04-10", exit: "2026-04-12" }] },
+    );
+    expect(result.preCutoffDays).toHaveLength(9);
+    expect(result.eesComparableDaysUsed).toBe(3);
+    expect(result.figureGap).toBe(0);
+  });
+});
+
+describe("an earlier EES exit", () => {
+  it("is an exit disagreement, not a missing entry", () => {
+    const result = reconcile([{ entry: "2024-06-01", exit: "2024-06-10" }], {
+      daysUsed: 8,
+      on: "2024-06-14",
+      records: [{ entry: "2024-06-01", exit: "2024-06-08" }],
+    });
+    expect(result.codes).toEqual(["figure-differs", "exit-dates-disagree"]);
+    expect(result.explanation).not.toContain("Likely missing entry");
+    expect(result.differences.map((d) => d.date)).toEqual(["2024-06-09", "2024-06-10"]);
+  });
+
+  it("still reports a missing entry for a stay the EES has no record of", () => {
+    const result = reconcile(
+      [{ entry: "2024-06-01", exit: "2024-06-10" }, { entry: "2024-07-01", exit: "2024-07-03" }],
+      { daysUsed: 8, on: "2024-07-05", records: [{ entry: "2024-06-01", exit: "2024-06-08" }] },
+    );
+    expect(result.codes).toContain("exit-dates-disagree");
+    expect(result.codes).toContain("likely-missing-entry");
+    expect(result.explanation).toContain("2024-07-01");
+    expect(result.explanation).not.toMatch(/missing entry[^.]*2024-06-09/);
+  });
+});
+
+describe("a bad trip row next to valid ones", () => {
+  it("still matches when the valid trips agree with the EES, and keeps the error visible", () => {
+    const result = reconcile(
+      [{ entry: "2024-06-10", exit: "2024-06-01" }, { entry: "2024-07-01", exit: "2024-07-10" }],
+      { daysUsed: 10, on: "2024-07-20" },
+    );
+    expect(result.travellerDaysUsed).toBe(10);
+    expect(result.codes).toContain("match");
+    expect(result.errors.length).toBeGreaterThan(0);
+    expect(result.explanation).toContain("ends before it starts");
+  });
+});

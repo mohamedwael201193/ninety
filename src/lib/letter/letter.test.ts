@@ -116,3 +116,26 @@ describe("letterToPdf", () => {
     expect(text).toContain("Łukasz Żółć");
   });
 });
+
+describe("Article 52 clauses", () => {
+  it("states 52(1)–52(5) separately and accurately", () => {
+    const text = buildCorrectionLetter(identity, reconcile([{ entry: "2024-06-01", exit: "2024-06-10" }], { daysUsed: 14, on: "2024-06-14" })).text;
+    expect(text).toContain("45 days");
+    expect(text).toContain("within seven days");
+    expect(text).toContain("supervisory authority");
+    expect(text).toContain("Article 52(5)");
+    expect(text).not.toContain("normally");
+    expect(text).not.toMatch(/52\(3\)[^.]*30 days/);
+  });
+});
+
+describe("reply email", () => {
+  const r = reconcile([{ entry: "2024-06-01", exit: "2024-06-10" }], { daysUsed: 14, on: "2024-06-14" });
+  it("rejects an address with no @ or no domain dot", () => {
+    expect(() => buildCorrectionLetter({ ...identity, email: "not-an-email" }, r)).toThrow(/full address/);
+    expect(() => buildCorrectionLetter({ ...identity, email: "jane@localhost" }, r)).toThrow(/full address/);
+  });
+  it("accepts a normal address", () => {
+    expect(buildCorrectionLetter({ ...identity, email: "jane@example.com" }, r).text).toContain("jane@example.com");
+  });
+});

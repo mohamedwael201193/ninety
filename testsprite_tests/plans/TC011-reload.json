@@ -14,15 +14,19 @@
     },
     {
       "type": "assertion",
-      "description": "The status panel (data-testid=status-panel) shows 10 days used"
+      "description": "Days used (data-testid=days-used) shows 10"
     },
     {
       "type": "action",
-      "description": "Navigate to /?today=2026-10-19 (without fresh=1, so saved trips are kept)"
+      "description": "Navigate to /?today=2026-10-19 exactly. Do NOT open any URL containing fresh=1 again after saving: fresh=1 deletes saved trips by design, and this test checks that they survive a reload"
     },
     {
       "type": "assertion",
-      "description": "Exactly one trip row (data-testid=trip-row) for 2026-09-01 to 2026-09-10 is shown and the status panel still shows 10 days used"
+      "description": "Exactly one trip row (data-testid=trip-row) for 2026-09-01 to 2026-09-10 is shown"
+    },
+    {
+      "type": "assertion",
+      "description": "Days used still shows 10 and days left (data-testid=days-left) shows 80"
     }
   ]
 }

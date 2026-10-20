@@ -14,15 +14,15 @@
     },
     {
       "type": "assertion",
-      "description": "There are 3 trip rows and the status panel shows 64 days used"
+      "description": "There are 3 trip rows and days used (data-testid=days-used) shows 64"
     },
     {
       "type": "action",
-      "description": "Note the dates of the first trip row (data-testid=trip-row), then click its delete button (data-testid=trip-delete)"
+      "description": "Click the delete button (data-testid=trip-delete) of the trip row for 2026-09-29 to 2026-10-13"
     },
     {
       "type": "assertion",
-      "description": "There are 2 trip rows, the deleted dates are gone, and days used is lower than 64"
+      "description": "There are 2 trip rows, none for 2026-09-29 to 2026-10-13, and days used shows 49"
     },
     {
       "type": "action",
@@ -30,7 +30,7 @@
     },
     {
       "type": "assertion",
-      "description": "There are 3 trip rows again, one of them has exactly the dates noted before deleting, and the status panel shows 64 days used"
+      "description": "There are 3 trip rows again, one of them for 2026-09-29 to 2026-10-13, and days used shows 64 and days left shows 26"
     }
   ]
 }

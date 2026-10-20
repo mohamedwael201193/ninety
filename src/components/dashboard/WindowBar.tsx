@@ -25,12 +25,15 @@ export function WindowBar({ trips, today, end = today, planned }: Props) {
     const p0 = planned ? parseIso(planned.entry) : Infinity;
     const p1 = planned ? parseIso(planned.exit) : -Infinity;
     const last = parseIso(end);
+    const now = parseIso(today);
     return Array.from({ length: 180 }, (_, i) => {
       const day = last - 179 + i;
-      return presence.has(day) ? "used" : day >= p0 && day <= p1 ? "plan" : "free";
+      const kind = presence.has(day) ? "used" : day >= p0 && day <= p1 ? "plan" : "free";
+      return { kind, today: day === now };
     });
   }, [trips, today, end, planned]);
-  const used = cells.filter((c) => c === "used").length;
+  const used = cells.filter((c) => c.kind === "used").length;
+  const todayInWindow = cells.some((c) => c.today);
   const start = addDays(end, -179);
 
   return (
@@ -46,7 +49,9 @@ export function WindowBar({ trips, today, end = today, planned }: Props) {
             initial={reduce ? false : { opacity: 0, scaleY: 0.4 }}
             animate={{ opacity: 1, scaleY: 1 }}
             transition={{ delay: reduce ? 0 : Math.min(i * 0.003, 0.5), duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-            className={`h-4 rounded-[2px] ${c === "used" ? "bg-ink" : c === "plan" ? "bg-spring" : "bg-paper-sunk"}`}
+            data-today={c.today || undefined}
+            title={c.today ? "Today" : undefined}
+            className={`h-4 rounded-[2px] ${c.kind === "used" ? "bg-ink" : c.kind === "plan" ? "bg-spring" : "bg-paper-sunk"} ${c.today ? "outline-2 outline-offset-1 outline-solar-deep" : ""}`}
           />
         ))}
       </div>
@@ -55,6 +60,7 @@ export function WindowBar({ trips, today, end = today, planned }: Props) {
         <span className="flex gap-3">
           <span><i className="mr-1 inline-block size-2 rounded-[2px] bg-ink" />Counted</span>
           {planned ? <span><i className="mr-1 inline-block size-2 rounded-[2px] bg-spring" />Planned</span> : null}
+          {todayInWindow ? <span data-testid="window-today-legend"><i className="mr-1 inline-block size-2 rounded-[2px] outline-2 outline-offset-1 outline-solar-deep" />Today</span> : null}
         </span>
         <span>{shortDate(end)}</span>
       </figcaption>

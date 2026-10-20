@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { SectionLink } from "./SectionLink";
+import { CarryLink } from "../CarryLink";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Nav() {
@@ -16,8 +17,8 @@ export default function Nav() {
         <div className="hidden items-center gap-8 text-sm text-ink-hushed md:flex">
           <SectionLink hash="#check" className="hover:text-ink">Check</SectionLink>
           <SectionLink hash="#planned-heading" className="hover:text-ink">Plan</SectionLink>
-          <Link href="/ees" data-testid="nav-ees" className="hover:text-ink">EES check</Link>
-          <Link href="/letter" data-testid="nav-letter" className="hover:text-ink">Letter</Link>
+          <CarryLink href="/ees" data-testid="nav-ees" className="hover:text-ink">EES check</CarryLink>
+          <CarryLink href="/letter" data-testid="nav-letter" className="hover:text-ink">Letter</CarryLink>
           <Link href="/parity" data-testid="nav-parity" className="hover:text-ink">Parity</Link>
         </div>
         <SectionLink hash="#check" className="btn btn-primary !min-h-9 px-4 text-sm">Check my days</SectionLink>
