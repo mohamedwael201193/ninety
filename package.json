@@ -9,7 +9,9 @@
     "lint": "eslint",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "loop:proof": "node scripts/loop-proof.mjs"
+    "loop:proof": "node scripts/loop-proof.mjs",
+    "proof:matrix": "node scripts/proof-matrix.mjs",
+    "tests:add": "node scripts/add-cloud-tests.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

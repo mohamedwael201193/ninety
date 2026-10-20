@@ -1,0 +1,28 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "/proof lists every rule with its tests",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /proof"
+    },
+    {
+      "type": "assertion",
+      "description": "The rule table (data-testid=proof-table) has exactly 12 rows (data-testid=proof-row), R1 to R12"
+    },
+    {
+      "type": "assertion",
+      "description": "The row with data-rule R10 ('EES: stays that began before 10 April 2026 are not compared') lists TestSprite badges TS30 and TS31 (data-testid=proof-ts)"
+    },
+    {
+      "type": "assertion",
+      "description": "The row with data-rule R12 links the parity scenario 'Calculator's built-in example' and lists TS02"
+    },
+    {
+      "type": "assertion",
+      "description": "The generation note (data-testid=proof-generated) shows a date and time in UTC and the summary (data-testid=proof-summary) starts with '12 rules'"
+    }
+  ]
+}

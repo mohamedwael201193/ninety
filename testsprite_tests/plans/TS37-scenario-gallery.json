@@ -1,0 +1,36 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Scenario gallery cards open the history they describe",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-10-19&fresh=1 and scroll to the section 'Six cases the count has to get right' (data-testid=scenario-gallery)"
+    },
+    {
+      "type": "assertion",
+      "description": "The gallery shows exactly 6 cards (data-testid=scenario-card), and every card shows at least one badge reading 'guarded by TS' followed by a number (data-testid=scenario-guard)"
+    },
+    {
+      "type": "assertion",
+      "description": "The card titled 'One stay of 107 days: an overstay' shows 107 used, 0 left, '17 days over', and the badge 'guarded by TS27'"
+    },
+    {
+      "type": "action",
+      "description": "On the card titled 'Two long stays: 88 of 90 days used', click 'Open this history' (data-testid=scenario-open)"
+    },
+    {
+      "type": "assertion",
+      "description": "The page URL contains scenario=near-limit, a demo-scenario banner is shown, and the calculator reads 88 days used and 2 days left"
+    },
+    {
+      "type": "action",
+      "description": "Navigate back to /?today=2026-10-19&fresh=1, scroll to the gallery and click 'Open this history' on the card titled 'One stay before the EES cutoff, one after'"
+    },
+    {
+      "type": "assertion",
+      "description": "The browser is on /ees with scenario=cutoff-mixed in the URL, and the EES check shows the scenario banner for 'One stay before the EES cutoff, one after'"
+    }
+  ]
+}

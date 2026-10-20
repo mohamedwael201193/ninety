@@ -64,9 +64,17 @@ A day-count tool is only useful if it gives the official answer. `/parity` fetch
 
 Current result: **14/14 match**. If the Commission script cannot be loaded, the page says "couldn't verify" rather than claiming a match.
 
+## Scenario gallery
+
+The home page has six worked histories (open stay, 88 of 90, overstay, same-day re-entry, a stay before the EES cutoff, and a mixed one). Each card's figures are computed by the engine at build time, opens its history with `?scenario=` without touching saved trips, and names the TestSprite tests that check that same history ("guarded by TS27"). A unit test fails if a card names a plan that does not exist.
+
+## Proof (`/proof`)
+
+`/proof` lists the 12 rules Ninety applies (90/180, entry and exit days, the rolling window, overstays, open stays, planned trips, input rules, EES findings, the 10 April 2026 cutoff, Article 52, parity) and, for each, the engine test, the Commission parity scenario and the TestSprite tests that guard it, with each test's latest cloud result. The table comes from `src/data/rules.json` and `npm run proof:matrix` (TestSprite reads only), and a unit test fails if any test it names stops existing.
+
 ## Tested with TestSprite
 
-`testsprite_tests/plans/` holds the end-to-end suite (**27 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
+`testsprite_tests/plans/` holds the end-to-end suite (**29 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
 
 | Id | Proves |
 |---|---|
@@ -97,6 +105,8 @@ Current result: **14/14 match**. If the Commission script cannot be loaded, the 
 | TS29 | A trip without an entry date is rejected and not saved |
 | TS34 | A later date drops old days: 30 used on 2026-10-19, 11 on 2026-11-15 |
 | TS35 | 'Use latest exit' turns a 105-day plan into a 46-day plan that fits |
+| TS36 | `/proof` lists the 12 rules, each with its engine, parity and TestSprite tests |
+| TS37 | The scenario gallery opens each history it describes, with its guard badges |
 
 `testsprite_tests/test-ids.json` maps each plan to its TestSprite test id. New plans are added to the cloud suite with `npm run tests:add -- <plan.json>`, which records the id.
 
