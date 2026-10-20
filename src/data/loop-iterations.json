@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T23:23:02.323Z",
+  "generatedAt": "2026-10-20T23:39:41.893Z",
   "source": "GitHub API + src/data/loop.json",
   "iterations": [
     {
@@ -2048,7 +2048,7 @@
         }
       ],
       "redThenGreen": true,
-      "kind": "app",
+      "kind": "ux",
       "stoppedThenGreen": false
     }
   ]

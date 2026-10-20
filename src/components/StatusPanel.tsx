@@ -155,6 +155,13 @@ export function StatusPending() {
           </div>
         ))}
       </dl>
+      {/* Without JavaScript the trips can never be read, so say that instead of "Counting…" forever. */}
+      <noscript>
+        <style>{`[data-state="pending"]{display:none}`}</style>
+        <p data-testid="status-noscript" className="rounded-xl bg-warn-wash p-3 text-sm text-warn">
+          This calculator runs in your browser and needs JavaScript. Your trips are never sent to a server. Turn JavaScript on to count your days.
+        </p>
+      </noscript>
     </section>
   );
 }

@@ -34,12 +34,15 @@ describe("LOOP-ITERATIONS (generated from the GitHub API and TestSprite history)
 
   it("classifies every red-then-green PR as an app defect or a test plan or CI case, and the README and LOOP.md agree", () => {
     const rg = data.iterations.filter((i) => i.redThenGreen);
-    for (const i of rg) expect(["app", "plan-ci"], `#${i.pr}`).toContain(i.kind);
+    for (const i of rg) expect(["app", "ux", "plan-ci"], `#${i.pr}`).toContain(i.kind);
     const app = rg.filter((i) => i.kind === "app").length;
+    const ux = rg.filter((i) => i.kind === "ux").length;
     const readme = readFileSync("README.md", "utf8");
     const loopMd = readFileSync("LOOP.md", "utf8");
-    expect(readme).toContain(`${rg.length} iterations went red, then green (${app} app defects, ${rg.length - app} test plan or CI)`);
-    expect(loopMd).toContain(`So the GitHub check shows ${rg.length} PRs red, then green.`);
+    expect(readme).toContain(`${rg.length} iterations went red, then green (${app} app defects, ${ux} UX loading state, ${rg.length - app - ux} test plan or CI)`);
+    // The headline row: app bugs + UX loading-state catches + review bugs.
+    expect(readme).toContain(`| **${app + 1} + ${ux} + 8** |`); // +1: #41 caught two app bugs in one PR
+    expect(loopMd).toMatch(new RegExp(`gives ${rg.length}: the red-then-green count`));
     expect(loopMd).toContain(`${app} app defects (`);
     // Each fraction the README quotes for a PR is that PR's GitHub check, word for word.
     for (const m of readme.matchAll(/^\| #(\d+) \| `([^`]+)`/gm)) {

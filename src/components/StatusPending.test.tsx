@@ -18,6 +18,9 @@ describe("the count is never an empty cell before the trips load", () => {
     expect(cell(html, "days-used")).toBe("Counting your saved trips…");
     expect(cell(html, "days-left")).toBe("Counting your saved trips…");
     expect(html).toContain('data-state="pending"');
+    // Without JavaScript: a noscript note that says so, and a style that hides "Counting…".
+    expect(html).toMatch(/<noscript>[^]*needs JavaScript[^]*<\/noscript>/);
+    expect(html).toMatch(/<noscript>[^]*\[data-state="pending"\]\{display:none\}[^]*<\/noscript>/);
   });
 
   it("the home page's server fallback shows the same pending tiles, not only Loading…", () => {

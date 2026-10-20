@@ -16,7 +16,7 @@ const BIN = process.env.TESTSPRITE_BIN ?? "testsprite";
 const REPO = "https://github.com/mohamedwael201193/ninety";
 const ids = JSON.parse(readFileSync("testsprite_tests/test-ids.json", "utf8"));
 const kinds = JSON.parse(readFileSync("testsprite_tests/red-runs.json", "utf8"));
-const KIND = { app: "App defect", "plan-ci": "Test plan or CI", blocked: "Blocked, not a catch" };
+const KIND = { app: "App defect", ux: "UX loading state (not a wrong number)", "plan-ci": "Test plan or CI", blocked: "Blocked, not a catch" };
 // The GitHub "TestSprite V3" check on each red commit (written by scripts/loop-iterations.mjs).
 // The check counts every test the run had; the history below counts only tests still in test-ids.json.
 let checkSaid = {};
@@ -100,7 +100,9 @@ function summaryLine() {
   const by = (k) => done.filter((l) => l.kind === k).map((l) => `#${l.pr}`);
   const onCheck = done.filter((l) => (checkSaid[l.pr] ?? []).some((d) => /\d+ failed/.test(d)));
   const open = loops.filter((l) => !l.green).map((l) => `#${l.pr}`);
-  return `${open.length ? `Red, green not yet: ${open.join(", ")}. ` : ""}${done.length} PRs have a red execution, then a green one, in the run history: ${by("app").length} app defects (${by("app").join(", ")}), ${by("plan-ci").length} test plan or CI (${by("plan-ci").join(", ")}), ${by("blocked").length} blocked (${by("blocked").join(", ") || "none"}). ${onCheck.length} of them also show failed tests on the GitHub check (the count in LOOP-ITERATIONS.md and the README); the others: ${done.filter((l) => !onCheck.includes(l)).map((l) => `#${l.pr}${l.kind === "blocked" ? " (blocked on the check)" : " (no red check)"}`).join(", ")}. ${checkOnly().length ? `Red on the GitHub check but not in this history (the failing test was later replaced): ${checkOnly().map((p) => `#${p} (${KIND[kinds[p]?.kind] ?? "unclassified"})`).join(", ")}.` : ""} So the GitHub check shows ${onCheck.length + checkOnly().length} PRs red, then green.`;
+  const others = done.filter((l) => !onCheck.includes(l)).map((l) => `#${l.pr}`);
+  const co = checkOnly();
+  return `${open.length ? `Red, green not yet: ${open.join(", ")}. ` : ""}${done.length} PRs have a red execution, then a green one, in the run history: ${by("app").length} app defects (${by("app").join(", ")}), ${by("ux").length} UX loading state, not a wrong number (${by("ux").join(", ") || "none"}), ${by("plan-ci").length} test plan or CI (${by("plan-ci").join(", ")}), ${by("blocked").length} blocked (${by("blocked").join(", ") || "none"}). ${onCheck.length} of these ${done.length} history rows also failed on the GitHub check; ${others.join(", ")} did not.${co.length ? ` Adding ${co.map((p) => `#${p}`).join(", ")}, red on the GitHub check but missing from this history because its failing test was later replaced, gives ${onCheck.length + co.length}` : ` That gives ${onCheck.length}`}: the red-then-green count in LOOP-ITERATIONS.md and the README.`;
 }
 if (loops.some((l) => l.kind === "unclassified")) console.warn("unclassified red PRs:", loops.filter((l) => l.kind === "unclassified").map((l) => l.pr));
 const prLink = (n) => `[#${n}](${REPO}/pull/${n})`;

@@ -1,10 +1,10 @@
 # The loop, iteration by iteration
 
-Generated 2026-10-20T23:23:02.326Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
+Generated 2026-10-20T23:39:41.896Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
 
 Screenshots of the runs and the merge gate: [docs/evidence/testsprite](docs/evidence/testsprite/README.md).
 
-56 iterations, 12 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): 7 app defects (#8, #14, #39, #41, #55, #57, #60) and 5 where the test plan or CI was wrong (#18, #22, #36, #32, #43). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
+56 iterations, 12 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): 6 app defects (#8, #14, #39, #41, #55, #57), 1 UX loading state that never showed a wrong number (#60) and 5 where the test plan or CI was wrong (#18, #22, #36, #32, #43). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
 
 ## Iteration 1: [#1](https://github.com/mohamedwael201193/ninety/pull/1) Add the Ninety 90/180 foundation
 
@@ -491,7 +491,7 @@ Merged 2026-10-20 22:24 UTC as [`396d6d9`](https://github.com/mohamedwael201193/
 
 Run history: 2026-10-20T21:56Z 34/43 (failed TS02, TS45, TS46, TS47, TS48, TS49, TS50, TS51, TS52) → 2026-10-20T22:02Z 42/43 (failed TS02) → 2026-10-20T22:09Z 43/43.
 
-## Iteration 56: [#60](https://github.com/mohamedwael201193/ninety/pull/60) Judge review: consistent SHAs/UTC, honest parity wording, backend portal evidence, loop counts split by cause (red, then green: app defect)
+## Iteration 56: [#60](https://github.com/mohamedwael201193/ninety/pull/60) Judge review: consistent SHAs/UTC, honest parity wording, backend portal evidence, loop counts split by cause (red, then green: UX loading state)
 
 Merged 2026-10-20 23:18 UTC as [`9f781f6`](https://github.com/mohamedwael201193/ninety/commit/9f781f69e9f9d33c64e869185bfa8905b5df6fb7).
 

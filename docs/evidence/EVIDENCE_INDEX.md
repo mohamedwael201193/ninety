@@ -2,7 +2,11 @@
 
 Every TestSprite run link, screenshot and report gathered for Ninety is kept here and never deleted. One folder per PR or topic.
 
-## Latest: PR #57 and the backend suite → [`testsprite/`](testsprite/README.md)
+## Latest: PR #60 → [`testsprite/ts42-pr60/`](testsprite/ts42-pr60/)
+
+- PR [#60](https://github.com/mohamedwael201193/ninety/pull/60), merged as `9f781f6`. TS42 went red, 42/43 ([execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/1f423c16-9271-4530-bbd6-11c6ec403bef)), on a blank loading state: a UX problem, not a wrong number. After the fix the run passed 43/43 ([execution `eba1bf9c`](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/eba1bf9c-2c9c-4a6a-8711-79b4955b870a)). The folder has the slowed-CPU timeline and the red and green Vitest output.
+
+## Before that: PR #57 and the backend suite → [`testsprite/`](testsprite/README.md)
 
 - PR [#57](https://github.com/mohamedwael201193/ninety/pull/57), merged to `main` as `396d6d9`: TS45–TS52 red on purpose (34/43), TS02 caught a production `/parity` problem (42/43), then 43/43. It has portal and GitHub screenshots and the merge gate.
 - Backend project "Ninety API": 28 tests, 27/28, BE28 caught a missing JSON-RPC error `id`, then green after `8c86d02`. It has screenshots plus red and green files in [`testsprite/backend/`](testsprite/backend/).
@@ -33,5 +37,5 @@ Every TestSprite run link, screenshot and report gathered for Ninety is kept her
 - `receipts/api-smoke.txt`, `receipts/developers.png`: the API on a production build (200, 400 with the field path, 415, CORS preflight 204, OpenAPI 3.1)
 - `receipts/mcp-stdio-test.txt`: the MCP server over stdio, all three tools
 - `receipts/a11y-axe.txt`: axe on 8 pages × 2 widths, no serious or critical violations
-- `receipts/pr-testsprite-history.json`: TestSprite status of every commit of every merged PR (source of the red-to-green count)
+- `receipts/pr-testsprite-history.json`: TestSprite status of every commit of every merged PR up to #56, a snapshot. The current source of the red-to-green count is `src/data/loop-iterations.json` (through #60), with `testsprite_tests/red-runs.json` for why each run went red
 - `receipts/final-*.txt`, `receipts/parity-14-plus-12.png`, `receipts/proof-35of35-final.png`: final local run of this branch: lint, types, Vitest, live parity, axe, browser checks of /parity, /proof, /developers, MCP stdio
