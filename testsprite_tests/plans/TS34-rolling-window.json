@@ -14,19 +14,19 @@
     },
     {
       "type": "assertion",
-      "description": "Days used (data-testid=days-used) shows 30"
+      "description": "Read the DOM text of the calculator tile data-testid=days-used (a <dd> inside the calculator's status panel, data-testid=status-panel). Do NOT use the landing band (data-testid=band-used) higher up the page: it is exactly \"30\""
     },
     {
       "type": "action",
-      "description": "Navigate to /?today=2026-11-15 (without fresh=1, so the saved trip is kept)"
+      "description": "Navigate to exactly /?today=2026-11-15 . The URL must NOT contain fresh=1 (fresh=1 deletes the saved trip and would break this test)"
     },
     {
       "type": "assertion",
-      "description": "The same single trip row (data-testid=trip-row) 2026-05-01 to 2026-05-30 is shown"
+      "description": "In the Trips list there is exactly one trip row (data-testid=trip-row) whose text contains \"2026-05-01 to 2026-05-30\""
     },
     {
       "type": "assertion",
-      "description": "Days used (data-testid=days-used) now shows 11, because only 2026-05-20 to 2026-05-30 is inside the 180 days ending 2026-11-15"
+      "description": "Read the DOM text of the calculator tile data-testid=days-used (a <dd> inside the calculator's status panel, data-testid=status-panel). Do NOT use the landing band (data-testid=band-used) higher up the page: it is exactly \"11\", because only 2026-05-20 to 2026-05-30 is inside the 180 days ending 2026-11-15"
     }
   ]
 }

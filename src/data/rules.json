@@ -71,6 +71,10 @@
       {
         "file": "src/lib/schengen/engine.test.ts",
         "name": "allows 90 days again once the earlier stay has fallen out of the window"
+      },
+      {
+        "file": "src/lib/schengen/engine.test.ts",
+        "name": "a leap-day stay leaves the window exactly 180 days later"
       }
     ],
     "parity": [
@@ -78,7 +82,8 @@
       "manual-14-jun-2024"
     ],
     "testsprite": [
-      "TS34"
+      "TS34",
+      "TS42"
     ]
   },
   {
@@ -155,13 +160,18 @@
       {
         "file": "src/lib/schengen/engine.test.ts",
         "name": "rejects a planned exit before entry"
+      },
+      {
+        "file": "src/lib/schengen/dates.test.ts",
+        "name": "say the date does not exist rather than that it is missing"
       }
     ],
     "parity": [],
     "testsprite": [
       "TS04",
       "TC009",
-      "TS29"
+      "TS29",
+      "TS21"
     ]
   },
   {

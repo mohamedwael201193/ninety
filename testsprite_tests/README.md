@@ -40,6 +40,9 @@ Every plan pins the date with `?today=2026-10-19` and starts either with `fresh=
 | `TS38-cutoff-card.json` | The /ees cutoff card states the 10 April 2026 rule, its figures match the reconciler, and its example loads and compares |
 | `TS39-phone-nav.json` | At 390 px the nav links stay visible, carry the scenario, and mark the current page |
 | `TS40-not-found.json` | An unknown path shows the 404 page, keeps the nav, and its links lead back to the calculator and the EES check |
+| `TS41-sheet-focus.json` | Opening the trip sheet moves focus into it and makes the page behind inert; Escape releases the page and returns focus |
+| `TS21-impossible-date.json` | An impossible date (2024-02-30) is named as not existing, and no trip is saved |
+| `TS42-leap-day.json` | A stay on 29 February 2024 counts on 2024-08-26 and has left the window on 2024-08-27 |
 
 Every plan listed here is in the cloud suite; `test-ids.json` maps each to its TestSprite id. New plans are added with `node scripts/add-cloud-tests.mjs <plan.json>`. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
 

@@ -74,7 +74,7 @@ The home page has six worked histories (open stay, 88 of 90, overstay, same-day 
 
 ## Tested with TestSprite
 
-`testsprite_tests/plans/` holds the end-to-end suite (**32 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
+`testsprite_tests/plans/` holds the end-to-end suite (**35 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
 
 | Id | Proves |
 |---|---|
@@ -110,6 +110,9 @@ The home page has six worked histories (open stay, 88 of 90, overstay, same-day 
 | TS38 | The /ees cutoff card explains 10 April 2026 and its example compares 10 of 30 days |
 | TS39 | At phone width every page is one tap away in the nav, and the current page is marked |
 | TS40 | An unknown address shows the 404 page with a way back to every page |
+| TS41 | The trip sheet takes focus, makes the page behind inert, and gives focus back on Escape |
+| TS21 | 2024-02-30 is rejected as a date that does not exist |
+| TS42 | A leap-day stay leaves the 180-day window exactly 180 days later |
 
 `testsprite_tests/test-ids.json` maps each plan to its TestSprite test id. New plans are added to the cloud suite with `npm run tests:add -- <plan.json>`, which records the id.
 

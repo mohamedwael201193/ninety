@@ -232,3 +232,15 @@ describe("planned trip while a stay is still open", () => {
     expect(checkPlannedTrip(open, today, { entry: "2026-12-01", exit: "2026-12-30" }).fits).toBe(false);
   });
 });
+
+describe("calendar edges", () => {
+  it("a leap-day stay leaves the window exactly 180 days later", () => {
+    const leap = [{ entry: "2024-02-29", exit: "2024-02-29" }];
+    expect(evaluate(leap, "2024-08-26").daysUsed).toBe(1);
+    expect(evaluate(leap, "2024-08-27").daysUsed).toBe(0);
+  });
+  it("counts across a year end and through 2100, which is not a leap year", () => {
+    expect(evaluate([{ entry: "2025-12-25", exit: "2026-01-05" }], "2026-01-05").daysUsed).toBe(12);
+    expect(evaluate([{ entry: "2100-02-27", exit: "2100-03-02" }], "2100-03-02").daysUsed).toBe(4);
+  });
+});

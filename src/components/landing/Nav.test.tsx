@@ -42,4 +42,15 @@ describe("Nav", () => {
     window.history.replaceState(null, "", "/");
     pathname = "/";
   });
+  it("fades the right edge of the phone link row only while links overflow it", () => {
+    const sw = vi.spyOn(HTMLElement.prototype, "scrollWidth", "get").mockReturnValue(420);
+    const cw = vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(344);
+    render(<Nav />);
+    expect(screen.getByTestId("nav-links").dataset.more).toBe("true");
+    cleanup();
+    sw.mockReturnValue(300);
+    render(<Nav />);
+    expect(screen.getByTestId("nav-links").dataset.more).toBe("false");
+    sw.mockRestore(); cw.mockRestore();
+  });
 });

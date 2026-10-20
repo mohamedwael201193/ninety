@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { SectionLink } from "./SectionLink";
 import { CarryLink } from "../CarryLink";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 /** aria-current for the page a link points at, so the current page is announced and styled. */
 function current(pathname: string | null, href: string) {
@@ -16,6 +17,19 @@ const LINK = "hover:text-ink aria-[current=page]:font-medium aria-[current=page]
 export default function Nav() {
   const { scrollY } = useScroll();
   const pathname = usePathname();
+  // When the phone row is wider than the screen, fade its right edge so the cut-off link reads as
+  // "scroll for more" rather than a clipped word (at 384px "Proof" used to show as "Pr").
+  const row = useRef<HTMLDivElement>(null);
+  const [more, setMore] = useState(false);
+  useEffect(() => {
+    const el = row.current;
+    if (!el) return;
+    const check = () => setMore(el.scrollWidth - el.clientWidth - el.scrollLeft > 2);
+    check();
+    el.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => { el.removeEventListener("scroll", check); window.removeEventListener("resize", check); };
+  }, []);
   const border = useTransform(scrollY, [0, 40], ["rgba(26,25,25,0)", "rgba(26,25,25,0.1)"]);
   return (
     <motion.header style={{ borderColor: border }} className="sticky top-0 z-40 border-b bg-paper/80 backdrop-blur-md">
@@ -24,7 +38,7 @@ export default function Nav() {
           ninety<span className="h-2.5 w-2.5 rounded-full bg-solar" aria-hidden />
         </Link>
         {/* On phones the links sit on their own scrollable row under the logo, so the EES check, the letter and the proof are one tap away. */}
-        <div data-testid="nav-links" className="order-last -mx-1 flex w-full items-center gap-6 overflow-x-auto px-1 pt-2 text-sm whitespace-nowrap text-ink-hushed md:order-none md:mx-0 md:w-auto md:gap-8 md:overflow-visible md:px-0 md:pt-0">
+        <div ref={row} data-testid="nav-links" data-more={more ? "true" : "false"} className="order-last -mx-1 flex w-full items-center gap-5 overflow-x-auto px-1 pr-6 pt-2 data-[more=true]:[mask-image:linear-gradient(to_right,#000_calc(100%-2.5rem),transparent)] md:pr-0 md:data-[more=true]:[mask-image:none] text-sm whitespace-nowrap text-ink-hushed md:order-none md:mx-0 md:w-auto md:gap-8 md:overflow-visible md:px-0 md:pt-0">
           <SectionLink hash="#check" className={LINK}>Check</SectionLink>
           <SectionLink hash="#planned-heading" className={LINK}>Plan</SectionLink>
           <CarryLink href="/ees" data-testid="nav-ees" className={LINK} {...current(pathname, "/ees")}>EES check</CarryLink>

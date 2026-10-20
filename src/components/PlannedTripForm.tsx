@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { checkPlannedTrip, type StayInput } from "@/lib/schengen/engine";
-import { isIsoDate, type IsoDate } from "@/lib/schengen/dates";
+import { dateFormatError, isIsoDate, type IsoDate } from "@/lib/schengen/dates";
 import { DateField } from "./dashboard/DateField";
 import { WindowBar } from "./dashboard/WindowBar";
 import { longDate } from "./dashboard/format";
@@ -35,7 +35,10 @@ export function PlannedTripForm({ history, today }: PlannedTripFormProps) {
 
   // Result strings identical to PR #1.
   function run({ entry, exit }: Values) {
-    if (!isIsoDate(entry) || !isIsoDate(exit)) return setV({ tone: "error", text: "Enter both an entry date and an exit date." });
+    if (!isIsoDate(entry) || !isIsoDate(exit)) {
+      const problem = dateFormatError(entry) ?? dateFormatError(exit);
+      return setV({ tone: "error", text: problem ?? "Enter both an entry date and an exit date." });
+    }
     const c = checkPlannedTrip(history, today, { entry, exit });
     const plan = { entry, exit };
     if (c.errors.length > 0) return setV({ tone: "error", text: c.errors.join(" ") });

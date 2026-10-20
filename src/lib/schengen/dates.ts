@@ -83,6 +83,9 @@ const SLASH_DATE = /^\d{1,2}[/.-]\d{1,2}[/.-]\d{4}$/;
 export function dateFormatError(value: string): string | null {
   const trimmed = value.trim();
   if (isIsoDate(trimmed)) return null;
+  if (ISO_DATE.test(trimmed)) {
+    return `${trimmed} does not exist on the calendar. Check the day and the month.`;
+  }
   if (SLASH_DATE.test(trimmed)) {
     return `"${trimmed}" looks like MM/DD/YYYY or DD/MM/YYYY. Use YYYY-MM-DD, for example 2026-06-14.`;
   }

@@ -1,0 +1,28 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "A leap-day stay drops out of the window on day 181",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2024-08-26&fresh=1"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add), enter entry 2024-02-29 (data-testid=trip-entry) and exit 2024-02-29 (data-testid=trip-exit), and click save (data-testid=trip-save)"
+    },
+    {
+      "type": "assertion",
+      "description": "Read the DOM text of the calculator tile data-testid=days-used (a <dd> inside the calculator's status panel, data-testid=status-panel). Do NOT use the landing band (data-testid=band-used) higher up the page: it is exactly \"1\""
+    },
+    {
+      "type": "action",
+      "description": "Navigate to exactly /?today=2024-08-27 . The URL must NOT contain fresh=1 (that would delete the saved trip)"
+    },
+    {
+      "type": "assertion",
+      "description": "Read the DOM text of the calculator tile data-testid=days-used (a <dd> inside the calculator's status panel, data-testid=status-panel). Do NOT use the landing band (data-testid=band-used) higher up the page: it is exactly \"0\" (the digit zero is shown, it is not blank). The trip row 2024-02-29 to 2024-02-29 is still listed"
+    }
+  ]
+}
