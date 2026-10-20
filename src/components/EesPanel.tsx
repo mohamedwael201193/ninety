@@ -142,7 +142,7 @@ export function EesPanel() {
                         <li key={code} data-testid="ees-code" data-code={code} className="inline-flex items-center gap-1.5 rounded-pill bg-paper px-2.5 py-0.5 text-xs font-medium text-ink">
                           {CODE_LABEL[code] ?? code}
                           {/* The machine code is shown too, so it can be quoted in a letter or a bug report. */}
-                          <code className="font-mono text-[10px] font-normal text-ink-hushed">{code}</code>
+                          <code className="font-mono text-[11px] font-normal text-ink">{code}</code>
                         </li>
                       ))}
                     </ul>
