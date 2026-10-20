@@ -28,7 +28,18 @@ export default function Nav() {
     check();
     el.addEventListener("scroll", check, { passive: true });
     window.addEventListener("resize", check);
-    return () => { el.removeEventListener("scroll", check); window.removeEventListener("resize", check); };
+    window.addEventListener("orientationchange", check);
+    // The row's own size changes on rotation, breakpoint changes and font loading, often without a
+    // window resize event reaching us after layout; observe the row and its links directly.
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(() => check()) : null;
+    ro?.observe(el);
+    [...el.children].forEach((c) => ro?.observe(c));
+    return () => {
+      el.removeEventListener("scroll", check);
+      window.removeEventListener("resize", check);
+      window.removeEventListener("orientationchange", check);
+      ro?.disconnect();
+    };
   }, []);
   const border = useTransform(scrollY, [0, 40], ["rgba(26,25,25,0)", "rgba(26,25,25,0.1)"]);
   return (
