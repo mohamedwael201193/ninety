@@ -227,7 +227,7 @@ export function ParityPanel({ deep }: { deep: DeepParityView }) {
       testId="parity-page"
       eyebrow="Parity check"
       title="Same answer as the Commission calculator."
-      intro={<p>Each fixed scenario runs through Ninety and through the European Commission&apos;s own short-stay calculator script, fetched live from the Commission site when this page opens.</p>}
+      intro={<p>Each fixed scenario runs through Ninety and through the European Commission&apos;s own short-stay calculator script, fetched live from the Commission site when this page opens. If the server cannot load that page as the calculator, the stored, hash-checked copy is used, and the page says so.</p>}
     >
       <div className="space-y-6">
         <div className="grid gap-4 sm:grid-cols-3">
@@ -254,9 +254,13 @@ export function ParityPanel({ deep }: { deep: DeepParityView }) {
                 European Commission short-stay calculator <ExternalLink size={14} aria-hidden />
               </a>
             ) : <div className="skeleton mt-3 h-5 w-40 rounded-lg" />}
+            {report?.origin ? <p data-testid="parity-origin-label" className="mt-1 text-xs text-ink-hushed">{report.origin === "stored" ? "Stored official copy (live page unreachable from server)" : "Live page, fetched just now"}</p> : null}
           </div>
         </div>
 
+        {report?.origin === "stored" && report.notice ? (
+          <p data-testid="parity-origin" role="status" className="break-all rounded-2xl bg-warn-wash p-4 text-sm text-warn">{report.notice}</p>
+        ) : null}
         {status === "couldn't verify" ? (
           <p data-testid="parity-reason" role="alert" className="rounded-2xl bg-warn-wash p-4 text-sm text-warn">{report?.reason ?? "The reference calculator could not be loaded."}</p>
         ) : null}

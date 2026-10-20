@@ -32,6 +32,13 @@ export type ParityReport = {
   mismatches: ParityMismatch[];
   source: string;
   reason?: string;
+  /**
+   * Which calculator HTML the report was built from: the page fetched just now, or the stored,
+   * hash-verified copy when the live page could not be loaded as the calculator from the server.
+   */
+  origin?: "live" | "stored";
+  /** Shown with a stored-copy report: why the live page was not used, and the copy's hash. */
+  notice?: string;
   /** Hand-worked boundary cases (golden.ts), run against the same calculator copy. */
   golden?: GoldenRow[];
   /**
