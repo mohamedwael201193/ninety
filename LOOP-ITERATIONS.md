@@ -1,10 +1,10 @@
 # The loop, iteration by iteration
 
-Generated 2026-10-20T22:53:46.972Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
+Generated 2026-10-20T23:23:02.326Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
 
 Screenshots of the runs and the merge gate: [docs/evidence/testsprite](docs/evidence/testsprite/README.md).
 
-55 iterations, 11 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): 6 app defects (#8, #14, #39, #41, #55, #57) and 5 where the test plan or CI was wrong (#18, #22, #36, #32, #43). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
+56 iterations, 12 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): 7 app defects (#8, #14, #39, #41, #55, #57, #60) and 5 where the test plan or CI was wrong (#18, #22, #36, #32, #43). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
 
 ## Iteration 1: [#1](https://github.com/mohamedwael201193/ninety/pull/1) Add the Ninety 90/180 foundation
 
@@ -490,3 +490,14 @@ Merged 2026-10-20 22:24 UTC as [`396d6d9`](https://github.com/mohamedwael201193/
 | [`1963cc1`](https://github.com/mohamedwael201193/ninety/commit/1963cc1923403756491778893cea9e960dd2c32b) parity: when the server cannot load the live Commission page as the ca | success: All 43 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/0036443d-b4c7-413f-99ee-88a00a001036) |
 
 Run history: 2026-10-20T21:56Z 34/43 (failed TS02, TS45, TS46, TS47, TS48, TS49, TS50, TS51, TS52) → 2026-10-20T22:02Z 42/43 (failed TS02) → 2026-10-20T22:09Z 43/43.
+
+## Iteration 56: [#60](https://github.com/mohamedwael201193/ninety/pull/60) Judge review: consistent SHAs/UTC, honest parity wording, backend portal evidence, loop counts split by cause (red, then green: app defect)
+
+Merged 2026-10-20 23:18 UTC as [`9f781f6`](https://github.com/mohamedwael201193/ninety/commit/9f781f69e9f9d33c64e869185bfa8905b5df6fb7).
+
+| Commit | TestSprite V3 | Execution |
+|---|---|---|
+| [`1abce4c`](https://github.com/mohamedwael201193/ninety/commit/1abce4ca1840a9a1843e24bff575f6e77338ed15) Judge review fixes: main SHAs and UTC in README, honest /parity and he | failure: 42/43 passed · 1 failed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/1f423c16-9271-4530-bbd6-11c6ec403bef) |
+| [`9a0c897`](https://github.com/mohamedwael201193/ninety/commit/9a0c89725e6404dd115c51080b8139553f6d6896) Days used is never blank before trips load (caught by TestSprite TS42  | success: All 43 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/eba1bf9c-2c9c-4a6a-8711-79b4955b870a) |
+
+Run history: 2026-10-20T22:59Z 42/43 (failed TS42) → 2026-10-20T23:16Z 43/43.

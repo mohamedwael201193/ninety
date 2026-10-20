@@ -6,7 +6,7 @@ Ninety counts your Schengen short-stay days from your own trips, checks that cou
 
 **Live:** https://ninety-coral.vercel.app
 
-**Receipts** (each one checkable in this repo; TestSprite figures as of `main` at [`396d6d9`](https://github.com/mohamedwael201193/ninety/commit/396d6d9690b6d6cbddc21a4ceba854a6d633fbff), the PR #57 merge; all times UTC):
+**Receipts** (each one checkable in this repo; TestSprite figures as of `main` at [`9f781f6`](https://github.com/mohamedwael201193/ninety/commit/9f781f69e9f9d33c64e869185bfa8905b5df6fb7), the PR #60 merge; all times UTC):
 
 | | |
 |---|---|
@@ -16,11 +16,11 @@ Ninety counts your Schengen short-stay days from your own trips, checks that cou
 | **500 / 3,000** | random travel histories through Ninety and the Commission calculator per PR / per night (overlaps, open stays, trips out of order, exit before entry, dates around 10 April 2026 and the spring clock change), 0 disagreements after the one bug it found was fixed ([`differential.fuzz.test.ts`](src/lib/schengen/differential.fuzz.test.ts), [`ci.yml`](.github/workflows/ci.yml), last nightly [green](https://github.com/mohamedwael201193/ninety/actions/runs/39359668818); a manual re-run on `main` at 2026-10-20 22:54 UTC, 500 histories, also [green](https://github.com/mohamedwael201193/ninety/actions/runs/39511460593)) |
 | **Properties** | checked against brute force on random histories: no legal answer ever has more than 90 days in a 180-day window, a planned trip "fits" exactly when every window stays at 90 or less, and the output is deterministic and independent of trip order ([`properties.test.ts`](src/lib/schengen/properties.test.ts), [`properties.legal.test.ts`](src/lib/schengen/properties.legal.test.ts)) |
 | **43** | TestSprite cloud tests on every PR preview (TS45–TS52 added for bugs found in code review), `TestSprite V3` a required check ([`test-ids.json`](testsprite_tests/test-ids.json), plans in [`testsprite_tests/plans`](testsprite_tests/plans)) |
-| **43/43** | passed on the latest run, on PR #57 (PR head [1963cc1](https://github.com/mohamedwael201193/ninety/commit/1963cc1923403756491778893cea9e960dd2c32b), merged to `main` as `396d6d9`; status "All 43 tests passed", 2026-10-20 22:09 UTC; [screenshots](docs/evidence/testsprite/README.md)). The previous full run, 35/35 on PR #56: [portal report PDF](docs/evidence/portal-2026-10-20/testsprite-report-35of35-2026-10-20.pdf) |
-| **7 + 8** | 7 real app bugs TestSprite found first on a PR preview (6 fixed before merging, and TS02 on #57, which also failed on production); 8 more bugs from code review that TestSprite failed red, then passed after the fix, on #57 ([What TestSprite caught](#what-testsprite-caught)) |
+| **43/43** | passed on the latest run, on PR #60 (PR head [9a0c897](https://github.com/mohamedwael201193/ninety/commit/9a0c89725e6404dd115c51080b8139553f6d6896), merged to `main` as `9f781f6`; status "All 43 tests passed", 2026-10-20 23:18 UTC; [execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/eba1bf9c-2c9c-4a6a-8711-79b4955b870a)). Before that, 43/43 on PR #57 (PR head [1963cc1](https://github.com/mohamedwael201193/ninety/commit/1963cc1923403756491778893cea9e960dd2c32b), merged as `396d6d9`, 2026-10-20 22:09 UTC; [screenshots](docs/evidence/testsprite/README.md)) and 35/35 on PR #56 ([portal report PDF](docs/evidence/portal-2026-10-20/testsprite-report-35of35-2026-10-20.pdf)) |
+| **8 + 8** | 8 real app bugs TestSprite found first on a PR preview (7 fixed before merging, plus TS02 on #57, which also failed on production; the latest is TS42 on #60); 8 more bugs from code review that TestSprite failed red, then passed after the fix, on #57 ([What TestSprite caught](#what-testsprite-caught)) |
 | **360** | Vitest unit, property and fuzz tests on every PR, all passing (3 more run only against the live Commission page) (`npm test`) |
 | **3** | public API endpoints with an [OpenAPI 3.1 document](https://ninety-coral.vercel.app/api/openapi.json) (copy in [`docs/openapi.json`](docs/openapi.json), kept equal by a test), and the same three as MCP tools: over streamable HTTP at `/api/mcp` and as a stdio [server](packages/ninety-mcp), both tested with the official MCP client |
-| **55** | pull requests merged into `main` |
+| **56** | pull requests merged into `main` |
 
 ---
 
@@ -161,11 +161,11 @@ Screenshots of the PR #57 red-then-green runs, the merge gate and the portal, wi
 
 Counted from the `TestSprite V3` commit statuses of every merged pull request (raw list: [`docs/evidence/receipts/pr-testsprite-history.json`](docs/evidence/receipts/pr-testsprite-history.json)).
 
-The whole loop, iteration by iteration: [`LOOP-ITERATIONS.md`](LOOP-ITERATIONS.md) numbers the 55 merged pull requests in merge order. Each iteration links the PR, the merge commit, every commit's `TestSprite V3` status and the TestSprite execution behind it. 11 iterations went red, then green (6 app defects, 5 test plan or CI); the 2 runs that could not start or were blocked are listed apart. It is generated from the GitHub API and TestSprite's run history by [`scripts/loop-iterations.mjs`](scripts/loop-iterations.mjs) and checked by [`iterations.test.ts`](src/lib/loop/iterations.test.ts).
+The whole loop, iteration by iteration: [`LOOP-ITERATIONS.md`](LOOP-ITERATIONS.md) numbers the 56 merged pull requests in merge order. Each iteration links the PR, the merge commit, every commit's `TestSprite V3` status and the TestSprite execution behind it. 12 iterations went red, then green (7 app defects, 5 test plan or CI); the 2 runs that could not start or were blocked are listed apart. It is generated from the GitHub API and TestSprite's run history by [`scripts/loop-iterations.mjs`](scripts/loop-iterations.mjs) and checked by [`iterations.test.ts`](src/lib/loop/iterations.test.ts).
 
 Scheduled smoke: [`testsprite-smoke.yml`](.github/workflows/testsprite-smoke.yml) runs 3 TestSprite tests (TS01, TS03, TS07) against production with the CLI, 1.5 credits a run instead of 21.5 for the whole suite of 43. It is off until the repository variable `TESTSPRITE_SMOKE` is set to `true`, and it has not run yet.
 
-**7 real app bugs in 6 pull requests** (#41 caught two, one row), each red on the PR preview and fixed in the same PR. The status strings are copied from GitHub:
+**8 real app bugs in 7 pull requests** (#41 caught two, one row), each red on the PR preview and fixed in the same PR. The status strings are copied from GitHub:
 
 | PR | Red status | What was wrong |
 |---|---|---|
@@ -175,6 +175,7 @@ Scheduled smoke: [`testsprite-smoke.yml`](.github/workflows/testsprite-smoke.yml
 | #41 | `14/15 passed · 1 failed`, then `16/17 passed · 1 failed` | Reloading a `?fresh=1` page wiped saved trips again; the evidence table's difference cell read as blank |
 | #55 | `34/35 passed · 1 failed` | Closing the trip sheet with Escape left keyboard focus on the page body instead of "Add trip" |
 | #57 | `42/43 passed · 1 failed` (PR head [dae0081](https://github.com/mohamedwael201193/ninety/commit/dae00815749666ebcdce147abd640bb47e260eac); blocked on PR head [78ee487](https://github.com/mohamedwael201193/ninety/commit/78ee487ff8e33740cbec59465e7ca97237787757); merged as `396d6d9`) | `/parity` said "couldn't verify": from Vercel's servers the Commission page did not come back as the calculator. Production showed the same. Fixed at PR head [1963cc1](https://github.com/mohamedwael201193/ninety/commit/1963cc1923403756491778893cea9e960dd2c32b): the stored, hash-checked copy is used, and the page says so |
+| #60 | `42/43 passed · 1 failed` (PR head [1abce4c](https://github.com/mohamedwael201193/ninety/commit/1abce4c), fixed at [9a0c897](https://github.com/mohamedwael201193/ninety/commit/9a0c897), merged as `9f781f6`) | TS42 read "Days used" as empty: until the saved trips loaded, the count area was a blank skeleton, and the server HTML said only "Loading…" (about 3 s with the CPU slowed 20x; a wrong number was never shown). The tiles now say "Counting your saved trips…". The same test alone passed on production first, so this was intermittent ([note](LOOP.md#notes)) |
 
 **Red on purpose, then green: 8 review bugs on #57.** TS45–TS52 were pushed with the code-review bugs they target still in place. The first run was `34/43 passed · 8 failed · 1 blocked`, and all 8 new tests failed on their bug. After the fixes the run was `All 43 tests passed`. TestSprite did not find these 8 first: they were found by independent Cursor review and reproduced by us. This PR shows the suite catches them. Screenshots: [`docs/evidence/testsprite/`](docs/evidence/testsprite/README.md).
 

@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-20T23:14:02.959Z",
+  "generatedAt": "2026-10-20T23:24:47.234Z",
   "source": "testsprite test result --history",
-  "runs": 1712,
+  "runs": 1755,
   "executions": [
     {
       "pr": null,
@@ -1182,6 +1182,14 @@
       "tests": 1,
       "passed": 1,
       "failed": []
+    },
+    {
+      "pr": 60,
+      "env": "github-pr-60",
+      "start": "2026-10-20T23:16:15.023Z",
+      "tests": 43,
+      "passed": 43,
+      "failed": []
     }
   ],
   "loops": [
@@ -1674,7 +1682,14 @@
           }
         ]
       },
-      "green": null,
+      "green": {
+        "pr": 60,
+        "env": "github-pr-60",
+        "start": "2026-10-20T23:16:15.023Z",
+        "tests": 43,
+        "passed": 43,
+        "failed": []
+      },
       "kind": "app"
     }
   ]

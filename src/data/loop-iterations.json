@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T22:53:46.970Z",
+  "generatedAt": "2026-10-20T23:23:02.323Z",
   "source": "GitHub API + src/data/loop.json",
   "iterations": [
     {
@@ -1998,6 +1998,50 @@
         },
         {
           "start": "2026-10-20T22:09:41.423Z",
+          "passed": 43,
+          "tests": 43,
+          "failed": []
+        }
+      ],
+      "redThenGreen": true,
+      "kind": "app",
+      "stoppedThenGreen": false
+    },
+    {
+      "n": 56,
+      "pr": 60,
+      "title": "Judge review: consistent SHAs/UTC, honest parity wording, backend portal evidence, loop counts split by cause",
+      "mergedAt": "2026-10-20T23:18:58Z",
+      "mergeCommit": "9f781f69e9f9d33c64e869185bfa8905b5df6fb7",
+      "checks": [
+        {
+          "sha": "1abce4ca1840a9a1843e24bff575f6e77338ed15",
+          "message": "Judge review fixes: main SHAs and UTC in README, honest /parity and hero wording, backend portal runs and screenshots, app-defect vs plan/CI split in the loop generators, workflow re-runs, evidence index, static /ees and /letter shell",
+          "state": "failure",
+          "at": "2026-10-20T23:04:31Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/1f423c16-9271-4530-bbd6-11c6ec403bef",
+          "description": "42/43 passed · 1 failed"
+        },
+        {
+          "sha": "9a0c89725e6404dd115c51080b8139553f6d6896",
+          "message": "Days used is never blank before trips load (caught by TestSprite TS42 on this PR); LOOP note on the TS42 run",
+          "state": "success",
+          "at": "2026-10-20T23:18:44Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/eba1bf9c-2c9c-4a6a-8711-79b4955b870a",
+          "description": "All 43 tests passed"
+        }
+      ],
+      "executions": [
+        {
+          "start": "2026-10-20T22:59:05.355Z",
+          "passed": 42,
+          "tests": 43,
+          "failed": [
+            "TS42"
+          ]
+        },
+        {
+          "start": "2026-10-20T23:16:15.023Z",
           "passed": 43,
           "tests": 43,
           "failed": []
