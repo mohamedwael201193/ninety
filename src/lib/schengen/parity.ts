@@ -34,6 +34,18 @@ export type ParityReport = {
   reason?: string;
   /** Hand-worked boundary cases (golden.ts), run against the same calculator copy. */
   golden?: GoldenRow[];
+  /**
+   * A separate sample of the deep set, replayed on the calculator HTML this
+   * report was built from. Absent when that HTML was never fetched.
+   */
+  deepLive?: {
+    status: "ran" | "couldn't verify";
+    total: number;
+    matched: number;
+    headline: string;
+    reason?: string;
+    disagreements: { id: string; classification: string; detail: string }[];
+  };
 };
 
 export type GoldenRow = {

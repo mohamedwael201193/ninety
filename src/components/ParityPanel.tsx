@@ -4,6 +4,7 @@ import { ScrollRegion } from "./ScrollRegion";
 import { useEffect, useState } from "react";
 import { CircleCheck, CircleX, ExternalLink } from "lucide-react";
 import type { GoldenRow, ParityReport, ParityRow } from "@/lib/schengen/parity";
+import type { DeepParityView } from "@/lib/schengen/deep/view";
 import { GOLDEN_SCENARIOS } from "@/lib/schengen/golden";
 import { ToolShell } from "./tools/ToolShell";
 
@@ -97,7 +98,105 @@ export function tableRows(rows: ParityRow[]) {
   return rows.map((row, index) => <ParityTableRow key={row.scenario} row={row} number={index + 1} />);
 }
 
-export function ParityPanel() {
+const CLASS_LABEL: Record<DeepParityView["disagreements"][number]["classification"], string> = {
+  match: "Match",
+  "our-bug": "Ninety bug",
+  "commission-quirk": "Commission quirk",
+  "outside-domain": "Outside the calculator",
+};
+
+function DeepSection({ deep, report, failed }: { deep: DeepParityView; report: ParityReport | null; failed: boolean }) {
+  const live = report?.deepLive;
+  const outside = deep.total - deep.inDomain;
+  const inDomainMisses = deep.inDomain - deep.matched;
+  return (
+    <section aria-labelledby="deep-parity-heading" className="space-y-3">
+      <h2 id="deep-parity-heading" className="font-display text-2xl font-medium">Every field the calculator prints</h2>
+      <p data-testid="deep-parity-score" className="font-display text-2xl font-semibold">{deep.headline}</p>
+      <p className="max-w-prose text-sm text-ink-hushed">
+        {deep.total} scenarios were compared with stored output from the Commission script (seed {deep.seed}). {deep.inDomain} are inputs the form accepts and calculates.
+        {" "}{inDomainMisses === 0 ? "All of them agree on every printed field." : `${inDomainMisses} accepted ${inDomainMisses === 1 ? "input does" : "inputs do"} not match, and ${inDomainMisses === 1 ? "is" : "are"} listed below.`}
+        {" "}{outside} more are outside that form. They are listed too, and they are not part of the {deep.inDomain}.
+        The visa-sticker sentence is printed only beside “Possible stay until”, and the words do not change, so it is not one of the compared fields.
+        Days used on the control date are printed only inside an overstay window. An open stay is typed into the form as ending on the control date, because the form requires an exit.
+      </p>
+      <p className="max-w-prose text-sm text-ink-hushed">
+        Compared fields: {deep.fields.join(", ")}. This page judges the stored output. It does not re-run all {deep.total} scenarios. The test re-runs the vendored script and fails if the stored output changes.
+      </p>
+      <div className="card-soft overflow-hidden">
+        <ScrollRegion label="Coverage by group">
+          <table data-testid="deep-parity-groups" className="w-full min-w-[480px] text-left text-sm">
+            <caption className="sr-only">How many scenarios in each group match the calculator</caption>
+            <thead className="bg-paper-sunk">
+              <tr className="eyebrow">
+                <th scope="col" className="px-5 py-3 font-medium">Group</th>
+                <th scope="col" className="px-5 py-3 text-right font-medium">Matched</th>
+                <th scope="col" className="px-5 py-3 text-right font-medium">Accepted by the form</th>
+                <th scope="col" className="px-5 py-3 text-right font-medium">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {deep.groups.map((group) => (
+                <tr key={group.group} className="border-t border-line-soft">
+                  <td className="px-5 py-3 font-mono text-xs">{group.group}</td>
+                  <td className="px-5 py-3 text-right font-mono tnum">{group.matched}</td>
+                  <td className="px-5 py-3 text-right font-mono tnum">{group.inDomain}</td>
+                  <td className="px-5 py-3 text-right font-mono tnum">{group.total}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </ScrollRegion>
+      </div>
+      <ul data-testid="deep-parity-disagreements" className="space-y-2">
+        {deep.disagreements.map((row) => (
+          <li key={row.id} data-testid="deep-parity-disagreement" data-classification={row.classification} className="rounded-2xl bg-paper-sunk p-4 text-sm">
+            <p>
+              <span className="font-mono text-xs">{row.id}</span>
+              {" "}
+              <span className="font-medium">{CLASS_LABEL[row.classification]}</span>
+            </p>
+            {row.note ? <p className="mt-1 text-ink-hushed">{row.note}</p> : null}
+            {row.diffs.map((diff) => (
+              <p key={diff.field} className="mt-1">
+                <span className="font-medium">{diff.field}.</span> Calculator: {diff.commission}. Ninety: {diff.ninety}.
+              </p>
+            ))}
+            {row.control.length > 0 ? (
+              <p className="mt-1 text-ink-hushed">Calculator, control: {row.control.join(" / ")}</p>
+            ) : null}
+            {row.planning.length > 0 ? (
+              <p className="mt-1 text-ink-hushed">Calculator, planning: {row.planning.join(" / ")}</p>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+      <div>
+        <h3 className="font-display text-lg font-medium">Live sample</h3>
+        {!report && !failed ? (
+          <p data-testid="deep-live-pending" className="mt-1 text-sm text-ink-hushed">Checking a sample on the live Commission page…</p>
+        ) : null}
+        {failed || (report && live?.status !== "ran") ? (
+          <p data-testid="deep-live-sample" className="mt-1 text-sm text-warn">Couldn&apos;t verify. {live?.reason ?? "The live sample could not be run."}</p>
+        ) : null}
+        {live && live.status === "ran" ? (
+          <div className="mt-1 space-y-2 text-sm">
+            <p data-testid="deep-live-score">{live.headline}</p>
+            {live.disagreements.length > 0 ? (
+              <ul data-testid="deep-live-disagreements" className="space-y-1">
+                {live.disagreements.map((row) => (
+                  <li key={row.id}><span className="font-mono text-xs">{row.id}</span> ({CLASS_LABEL[row.classification as DeepParityView["disagreements"][number]["classification"]] ?? row.classification}). {row.detail}</li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+export function ParityPanel({ deep }: { deep: DeepParityView }) {
   const [report, setReport] = useState<ParityReport | null>(null);
   const [failed, setFailed] = useState(false);
 
@@ -187,6 +286,8 @@ export function ParityPanel() {
             </table>
           </ScrollRegion>
         </div>
+
+        <DeepSection deep={deep} report={report} failed={failed} />
 
         {report?.golden?.length ? <GoldenTable rows={report.golden} /> : null}
 

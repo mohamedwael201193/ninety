@@ -3,6 +3,11 @@
  * 2026-10-19 from https://ec.europa.eu/assets/home/visa-calculator/calculator.htm.
  * Unit tests run parity against this copy so `npm test` works offline. The
  * nightly "Commission drift" workflow checks the live page still has this hash.
+ *
+ * Source: European Commission, Directorate-General for Migration and Home Affairs.
+ * Reused under the Commission's reuse policy (Decision 2011/833/EU), which allows
+ * reuse with acknowledgement of the source. The copy is unmodified; it is run
+ * only as the reference for parity tests. Ninety is not affiliated with the Commission.
  */
 export const VENDORED_SHA256 = "bd538a7d744ce090cb110b3c0bb0eaf4e65cb9b6ad1ec7cc0bb923d3d1ce4513";
 export const VENDORED_FETCHED_AT = "2026-10-19";

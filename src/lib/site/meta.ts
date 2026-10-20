@@ -20,7 +20,7 @@ export const PAGES: Record<PagePath, { title: string; description: string }> = {
   },
   "/parity": {
     title: "Parity with the Commission calculator",
-    description: "Ninety and the European Commission's own short-stay calculator, run side by side on the same 14 travel histories.",
+    description: "Ninety and the European Commission's own short-stay calculator: 14 scenarios fetched live, and a larger stored set compared on every field the calculator prints.",
   },
   "/developers": {
     title: "API and MCP server",
