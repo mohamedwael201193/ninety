@@ -15,4 +15,12 @@ describe("scenario gallery cards", () => {
     expect(cards["near-limit"].href).toBe("/?scenario=near-limit#check");
     expect(cards["cutoff-mixed"].href).toBe("/ees?scenario=cutoff-mixed");
   });
+
+  it("explains a card whose used and left do not add up to 90", () => {
+    const cards = Object.fromEntries(galleryCards().map((c) => [c.id, c]));
+    expect(cards["same-day"].used).toBe(12);
+    expect(cards["same-day"].left).toBe(90);
+    expect(cards["same-day"].leftNote).toBe("90 left, not 78: the 12 days already used drop out of the 180-day window by 2026-11-08, before a stay starting on 2026-10-19 would reach day 79, so that stay can last 90 days.");
+    expect(cards["near-limit"].leftNote).toBeNull();
+  });
 });
