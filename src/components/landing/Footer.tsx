@@ -27,6 +27,7 @@ export default function Footer() {
             <li><Link href="/letter" data-testid="footer-letter" className="hover:text-paper">Article 52 letter</Link></li>
             <li><Link href="/parity" className="hover:text-paper">Calculator parity</Link></li>
             <li><Link href="/proof" data-testid="footer-proof" className="hover:text-paper">Proof</Link></li>
+            <li><Link href="/developers" data-testid="footer-developers" className="hover:text-paper">API and MCP</Link></li>
           </ul>
         </div>
         <div className="text-sm">

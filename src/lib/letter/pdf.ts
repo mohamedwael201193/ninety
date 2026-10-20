@@ -79,6 +79,7 @@ export async function letterToPdf(letter: CorrectionLetter, fontBytes: Uint8Arra
   }
 
   document.setTitle(letter.title);
-  document.setAuthor(letter.paragraphs.find((paragraph) => paragraph.startsWith("I, ")) ?? "");
+  // PDF 32000-1, 14.3.3: Author is the person who wrote the document, not the identity paragraph.
+  document.setAuthor(letter.signedBy);
   return document.save();
 }

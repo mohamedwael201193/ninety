@@ -1,0 +1,85 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-g-receipts
+
+ ❯ src/lib/proof/rules.test.ts (18 tests | 2 failed) 23ms
+     × the proof data covers the whole cloud suite, not only the tests tied to a rule (was 25/25 against a 35-test suite) 8ms
+     × suiteSummary counts passed out of the tests that ran, and names the ones that did not 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/proof/rules.test.ts > rule-to-test matrix > the proof data covers the whole cloud suite, not only the tests tied to a rule (was 25/25 against a 35-test suite)
+AssertionError: expected [] to deeply equal [ 'TC009', 'TC010', 'TC011', …(32) ]
+
+- Expected
++ Received
+
+- [
+-   "TC009",
+-   "TC010",
+-   "TC011",
+-   "TS01",
+-   "TS02",
+-   "TS03",
+-   "TS04",
+-   "TS05",
+-   "TS06",
+-   "TS07",
+-   "TS08",
+-   "TS09",
+-   "TS10",
+-   "TS13",
+-   "TS14",
+-   "TS15",
+-   "TS16",
+-   "TS17",
+-   "TS18",
+-   "TS21",
+-   "TS26",
+-   "TS27",
+-   "TS28",
+-   "TS29",
+-   "TS30",
+-   "TS31",
+-   "TS34",
+-   "TS35",
+-   "TS36",
+-   "TS37",
+-   "TS38",
+-   "TS39",
+-   "TS40",
+-   "TS41",
+-   "TS42",
+- ]
++ []
+
+ ❯ src/lib/proof/rules.test.ts:46:43
+     44|     const ids = JSON.parse(readFileSync("testsprite_tests/test-ids.jso…
+     45|     const suite = (proof as { suite?: { id: string }[] }).suite ?? [];
+     46|     expect(suite.map((t) => t.id).sort()).toEqual(Object.keys(ids).map…
+       |                                           ^
+     47|   });
+     48|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/lib/proof/rules.test.ts > rule-to-test matrix > suiteSummary counts passed out of the tests that ran, and names the ones that did not
+TypeError: suiteSummary is not a function
+ ❯ src/lib/proof/rules.test.ts:50:12
+     48|
+     49|   it("suiteSummary counts passed out of the tests that ran, and names …
+     50|     expect(suiteSummary([{ id: "TS01", latest: { verdict: "passed" } }…
+       |            ^
+     51|       .toEqual({ tests: 3, ran: 2, passed: 1, notRun: ["TS03"] });
+     52|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 16 passed (18)
+   Start at  21:01:31
+   Duration  348ms (transform 76ms, setup 27ms, import 74ms, tests 23ms, environment 0ms)
+

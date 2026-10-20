@@ -1,6 +1,6 @@
 /**
  * Property tests: random travel histories checked against invariants of the
- * 90/180 rule. About 10,000 random histories run on every `npm test`.
+ * 90/180 rule. 9 properties, 1,250 random histories each, on every `npm test`.
  */
 import fc from "fast-check";
 import { describe, expect, it } from "vitest";

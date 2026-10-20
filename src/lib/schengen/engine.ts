@@ -341,3 +341,13 @@ export function stayLength(stay: StayInput, today: IsoDate): number | null {
   if (stays.length !== 1) return null;
   return daysInclusive(stays[0].entry, stays[0].exit);
 }
+
+/** First date from `from` (inclusive) on which a new entry is allowed: not present and at least one day left. Null if none within 180 days. */
+export function nextLegalEntry(stays: StayInput[], from: IsoDate): IsoDate | null {
+  for (let k = 0; k <= 180; k += 1) {
+    const d = formatIso(parseIso(from) + k) as IsoDate;
+    const a = evaluate(stays, d, d);
+    if (!a.present && a.daysLeft > 0) return d;
+  }
+  return null;
+}

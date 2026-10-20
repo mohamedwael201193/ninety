@@ -37,8 +37,12 @@ const out = {
     }),
   })),
 };
+// Every test in the cloud suite, including those not tied to a rule (UI, accessibility, navigation).
+const planName = (plan) => { try { return JSON.parse(readFileSync(`testsprite_tests/plans/${plan}.json`, "utf8")).name ?? null; } catch { return null; } };
+out.suite = Object.entries(ids).map(([plan, id]) => ({ id: plan.split("-")[0], plan, name: planName(plan), testId: id, latest: latest(id) }));
 // Which cloud runs the figures come from, so the page can say so (a test that never ran stays null and is not counted).
-out.environments = [...new Set(out.rules.flatMap((r) => r.testsprite).map((t) => t.latest?.environment).filter(Boolean))];
+out.environments = [...new Set([...out.rules.flatMap((r) => r.testsprite), ...out.suite].map((t) => t.latest?.environment).filter(Boolean))];
 writeFileSync("src/data/proof.json", JSON.stringify(out, null, 2) + "\n");
 const n = out.rules.flatMap((r) => r.testsprite).length;
-console.log(`${out.rules.length} rules, ${n} TestSprite references, generated ${out.generatedAt}`);
+const passed = out.suite.filter((t) => t.latest?.verdict === "passed").length;
+console.log(`${out.rules.length} rules, ${n} TestSprite references, suite ${passed}/${out.suite.length} passed, generated ${out.generatedAt}`);

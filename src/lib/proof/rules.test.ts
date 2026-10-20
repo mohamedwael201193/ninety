@@ -1,7 +1,8 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { PARITY_SCENARIOS } from "@/lib/schengen/scenarios";
-import { RULES, proofSummary } from "./rules";
+import { RULES, proofSummary, suiteSummary } from "./rules";
+import proof from "@/data/proof.json";
 
 const shortIds = new Set(readdirSync("testsprite_tests/plans").map((f) => f.split("-")[0]));
 
@@ -37,5 +38,23 @@ describe("rule-to-test matrix", () => {
       { testsprite: [{ id: "TS01", latest: { verdict: "passed" } }, { id: "TS30", latest: null }] },
     ];
     expect(proofSummary(rules)).toEqual({ tests: 3, ran: 2, passed: 1, notRun: ["TS30"] });
+  });
+
+  it("the proof data covers the whole cloud suite, not only the tests tied to a rule (was 25/25 against a 35-test suite)", () => {
+    const ids = JSON.parse(readFileSync("testsprite_tests/test-ids.json", "utf8")) as Record<string, string>;
+    const suite = (proof as { suite?: { id: string }[] }).suite ?? [];
+    expect(suite.map((t) => t.id).sort()).toEqual(Object.keys(ids).map((k) => k.split("-")[0]).sort());
+  });
+
+  it("suiteSummary counts passed out of the tests that ran, and names the ones that did not", () => {
+    expect(suiteSummary([{ id: "TS01", latest: { verdict: "passed" } }, { id: "TS02", latest: { verdict: "failed" } }, { id: "TS03", latest: null }]))
+      .toEqual({ tests: 3, ran: 2, passed: 1, notRun: ["TS03"] });
+  });
+
+  it("every suite test carries its plan name, so /proof can list the ones not tied to a rule", () => {
+    const suite = (proof as { suite: { id: string; plan: string; name?: string }[] }).suite;
+    for (const t of suite) expect(t.name, t.id).toBe(JSON.parse(readFileSync(`testsprite_tests/plans/${t.plan}.json`, "utf8")).name);
+    const tied = new Set(proof.rules.flatMap((r) => r.testsprite.map((x) => x.id)));
+    expect(suite.filter((t) => !tied.has(t.id)).map((t) => t.id).sort()).toEqual(["TC011", "TS05", "TS16", "TS36", "TS37", "TS39", "TS40", "TS41"]);
   });
 });

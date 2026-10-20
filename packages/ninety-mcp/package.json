@@ -1,0 +1,16 @@
+{
+  "name": "ninety-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Ninety: Schengen 90/180 counting, EES reconciliation and the Article 52 letter, over stdio.",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "ninety-mcp": "dist/server.mjs" },
+  "files": ["dist"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "esbuild src/server.ts --bundle --platform=node --format=esm --target=node20 --outfile=dist/server.mjs --external:@modelcontextprotocol/sdk --banner:js='#!/usr/bin/env node'",
+    "test": "npm run build && node --test test/*.test.mjs"
+  },
+  "dependencies": { "@modelcontextprotocol/sdk": "1.32.1" },
+  "devDependencies": { "esbuild": "^0.25.0" }
+}

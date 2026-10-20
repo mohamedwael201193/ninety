@@ -37,3 +37,8 @@ export function proofSummary(rules: { testsprite: Ref[] }[]): { tests: number; r
     notRun: [...byId].filter(([, l]) => l === null).map(([id]) => id),
   };
 }
+
+/** The whole cloud suite, from `suite` in proof.json: passed out of the tests that ran, and the ones not run yet. */
+export function suiteSummary(suite: Ref[]): { tests: number; ran: number; passed: number; notRun: string[] } {
+  return proofSummary([{ testsprite: suite }]);
+}

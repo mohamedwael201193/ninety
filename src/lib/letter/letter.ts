@@ -43,6 +43,8 @@ export type CorrectionLetter = {
   paragraphs: string[];
   text: string;
   evidence: LetterEvidence;
+  /** The traveller's name, as signed (the PDF Author). */
+  signedBy: string;
 };
 
 const DEMONYMS: Record<string, string> = {
@@ -117,6 +119,9 @@ export function buildCorrectionLetter(identity: LetterIdentity, reconciliation: 
     );
   }
 
+  // The API refuses with 422 when the comparison has input errors; the page must not draft a letter either.
+  if (reconciliation.errors.length > 0) throw new Error(reconciliation.errors.join(" "));
+
   const evidence: LetterEvidence = {
     on: reconciliation.on,
     windowStart: reconciliation.windowStart,
@@ -152,5 +157,6 @@ export function buildCorrectionLetter(identity: LetterIdentity, reconciliation: 
     paragraphs,
     text: paragraphs.join("\n\n"),
     evidence,
+    signedBy: fullName,
   };
 }

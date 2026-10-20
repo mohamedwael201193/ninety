@@ -1,0 +1,5 @@
+# Schemathesis (property-based tests generated from /api/openapi.json), run in CI against `next start`.
+# 422 is the documented answer for schema-valid input that cannot be counted (for example, no difference
+# to correct), so it is an accepted answer for valid data; everything else in the 4xx range is not.
+[checks.positive_data_acceptance]
+expected-statuses = [200, 422]

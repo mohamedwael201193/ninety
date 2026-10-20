@@ -1,0 +1,775 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Ninety API",
+    "version": "1.0.0",
+    "description": "Schengen 90/180 counting, EES reconciliation and the Article 52 correction letter, using the same engine as https://ninety-coral.vercel.app. No key, no account; nothing you send is stored. This is a helping tool, not a decision by a border authority.",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://ninety-coral.vercel.app"
+    }
+  ],
+  "paths": {
+    "/api/v1/check": {
+      "post": {
+        "operationId": "schengenCheck",
+        "summary": "Days used and left on a date, latest legal exit, next legal entry, overstays; optionally whether a planned trip fits.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "trips"
+                ],
+                "properties": {
+                  "trips": {
+                    "type": "array",
+                    "maxItems": 200,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "entry"
+                      ],
+                      "properties": {
+                        "entry": {
+                          "type": "string",
+                          "format": "date",
+                          "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                          "examples": [
+                            "2026-10-19"
+                          ]
+                        },
+                        "exit": {
+                          "oneOf": [
+                            {
+                              "type": "string",
+                              "format": "date",
+                              "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                              "examples": [
+                                "2026-10-19"
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "Omit or null for a stay still in progress."
+                        }
+                      }
+                    }
+                  },
+                  "on": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                    "examples": [
+                      "2026-10-19"
+                    ],
+                    "description": "Date to count on. Defaults to today (UTC)."
+                  },
+                  "planned": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "entry",
+                      "exit"
+                    ],
+                    "properties": {
+                      "entry": {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                        "examples": [
+                          "2026-10-19"
+                        ]
+                      },
+                      "exit": {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                        "examples": [
+                          "2026-10-19"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "trips": [
+                  {
+                    "entry": "2026-05-01",
+                    "exit": "2026-06-15"
+                  },
+                  {
+                    "entry": "2026-08-20",
+                    "exit": "2026-09-30"
+                  }
+                ],
+                "on": "2026-10-19"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The count.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Check"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid JSON or a field failed validation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body over 64 KB."
+          },
+          "415": {
+            "description": "Content-Type is not application/json."
+          },
+          "422": {
+            "description": "Valid shape, but the trips or plan cannot be counted (for example an exit before its entry).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ees-reconcile": {
+      "post": {
+        "operationId": "eesReconcile",
+        "summary": "Compare the EES days-used figure (and records, if you have them) with your trips, and name the days that differ.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "trips",
+                  "ees"
+                ],
+                "properties": {
+                  "trips": {
+                    "type": "array",
+                    "maxItems": 200,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "entry"
+                      ],
+                      "properties": {
+                        "entry": {
+                          "type": "string",
+                          "format": "date",
+                          "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                          "examples": [
+                            "2026-10-19"
+                          ]
+                        },
+                        "exit": {
+                          "oneOf": [
+                            {
+                              "type": "string",
+                              "format": "date",
+                              "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                              "examples": [
+                                "2026-10-19"
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "Omit or null for a stay still in progress."
+                        }
+                      }
+                    }
+                  },
+                  "ees": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "daysUsed",
+                      "on"
+                    ],
+                    "properties": {
+                      "daysUsed": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 180,
+                        "description": "The days-used figure the EES shows."
+                      },
+                      "on": {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                        "examples": [
+                          "2026-10-19"
+                        ]
+                      },
+                      "records": {
+                        "type": "array",
+                        "maxItems": 200,
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "entry",
+                            "exit"
+                          ],
+                          "properties": {
+                            "entry": {
+                              "type": "string",
+                              "format": "date",
+                              "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                              "examples": [
+                                "2026-10-19"
+                              ]
+                            },
+                            "exit": {
+                              "oneOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date",
+                                  "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                                  "examples": [
+                                    "2026-10-19"
+                                  ]
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The comparison.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Reconciliation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid JSON or a field failed validation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body over 64 KB."
+          },
+          "415": {
+            "description": "Content-Type is not application/json."
+          },
+          "422": {
+            "description": "Valid shape, but the trips or plan cannot be counted (for example an exit before its entry).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/letter": {
+      "post": {
+        "operationId": "article52Letter",
+        "summary": "Draft the Article 52 (Regulation (EU) 2017/2226) request to rectify EES data, from your details and the comparison.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "trips",
+                  "ees",
+                  "identity"
+                ],
+                "properties": {
+                  "trips": {
+                    "type": "array",
+                    "maxItems": 200,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "entry"
+                      ],
+                      "properties": {
+                        "entry": {
+                          "type": "string",
+                          "format": "date",
+                          "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                          "examples": [
+                            "2026-10-19"
+                          ]
+                        },
+                        "exit": {
+                          "oneOf": [
+                            {
+                              "type": "string",
+                              "format": "date",
+                              "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                              "examples": [
+                                "2026-10-19"
+                              ]
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ],
+                          "description": "Omit or null for a stay still in progress."
+                        }
+                      }
+                    }
+                  },
+                  "ees": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "daysUsed",
+                      "on"
+                    ],
+                    "properties": {
+                      "daysUsed": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 180,
+                        "description": "The days-used figure the EES shows."
+                      },
+                      "on": {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                        "examples": [
+                          "2026-10-19"
+                        ]
+                      },
+                      "records": {
+                        "type": "array",
+                        "maxItems": 200,
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": [
+                            "entry",
+                            "exit"
+                          ],
+                          "properties": {
+                            "entry": {
+                              "type": "string",
+                              "format": "date",
+                              "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                              "examples": [
+                                "2026-10-19"
+                              ]
+                            },
+                            "exit": {
+                              "oneOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date",
+                                  "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                                  "examples": [
+                                    "2026-10-19"
+                                  ]
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "identity": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "fullName",
+                      "dateOfBirth",
+                      "nationality",
+                      "documentNumber",
+                      "email",
+                      "memberState"
+                    ],
+                    "properties": {
+                      "fullName": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 120,
+                        "pattern": "\\S"
+                      },
+                      "dateOfBirth": {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(19\\d{2}|2[01]\\d{2})-\\d{2}-\\d{2}$",
+                        "examples": [
+                          "2026-10-19"
+                        ]
+                      },
+                      "nationality": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 60,
+                        "pattern": "\\S"
+                      },
+                      "documentNumber": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 40,
+                        "pattern": "\\S"
+                      },
+                      "email": {
+                        "type": "string",
+                        "maxLength": 200,
+                        "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"
+                      },
+                      "memberState": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 60,
+                        "pattern": "\\S"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The letter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Letter"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid JSON or a field failed validation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body over 64 KB."
+          },
+          "415": {
+            "description": "Content-Type is not application/json."
+          },
+          "422": {
+            "description": "Valid shape, but the trips or plan cannot be counted (for example an exit before its entry).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Check": {
+        "type": "object",
+        "required": [
+          "on",
+          "daysUsed",
+          "daysLeft",
+          "present",
+          "latestExit",
+          "nextLegalEntry",
+          "overstays"
+        ],
+        "properties": {
+          "on": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": [
+              "2026-10-19"
+            ]
+          },
+          "daysUsed": {
+            "type": "integer"
+          },
+          "daysLeft": {
+            "type": "integer"
+          },
+          "present": {
+            "type": "boolean"
+          },
+          "latestExit": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                "examples": [
+                  "2026-10-19"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "nextLegalEntry": {
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "date",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                "examples": [
+                  "2026-10-19"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "overstays": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                  "examples": [
+                    "2026-10-19"
+                  ]
+                },
+                "to": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                  "examples": [
+                    "2026-10-19"
+                  ]
+                },
+                "days": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "planned": {
+            "type": "object",
+            "properties": {
+              "fits": {
+                "type": "boolean"
+              },
+              "plannedDays": {
+                "type": "integer"
+              },
+              "daysLeftOnEntry": {
+                "type": "integer"
+              },
+              "latestExit": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                    "examples": [
+                      "2026-10-19"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "Reconciliation": {
+        "type": "object",
+        "properties": {
+          "on": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": [
+              "2026-10-19"
+            ]
+          },
+          "windowStart": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "examples": [
+              "2026-10-19"
+            ]
+          },
+          "travellerDaysUsed": {
+            "type": "integer"
+          },
+          "eesDaysUsed": {
+            "type": "integer"
+          },
+          "figureGap": {
+            "type": "integer"
+          },
+          "codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "explanation": {
+            "type": "string"
+          },
+          "differences": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                  "examples": [
+                    "2026-10-19"
+                  ]
+                },
+                "to": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+                  "examples": [
+                    "2026-10-19"
+                  ]
+                },
+                "side": {
+                  "type": "string",
+                  "enum": [
+                    "traveller-only",
+                    "ees-only"
+                  ]
+                },
+                "count": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Letter": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "addressee": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

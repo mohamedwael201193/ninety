@@ -1,0 +1,121 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-g-receipts
+
+ ❯ src/lib/schengen/golden.test.ts (17 tests | 2 failed) 307ms
+     × overlap-overstay-counted-once: Ninety and the Commission calculator both give the hand-worked answer 16ms
+     × every row carries Ninety's latest legal day or overstay window, and the calculator's own sentence for it 170ms
+stdout | src/lib/schengen/differential.fuzz.test.ts > differential fuzz vs the Commission calculator (seed 20261019, 150 histories) > agrees on every random history
+differential fuzz: seed 20261019, 150 histories, 8 disagreements, shapes {"open-stay":29,"out-of-order":49,"exit-before-entry":10,"around-10-april-2026":37,"overlap":73,"spring-clock-change-2026":8}
+
+ ❯ src/lib/schengen/differential.fuzz.test.ts (2 tests | 2 failed) 985ms
+     × agrees on every random history 973ms
+     × seed 20261019, run 14: overlapping trips that overstay are listed once, as the calculator lists the merged stay 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/lib/schengen/differential.fuzz.test.ts > differential fuzz vs the Commission calculator (seed 20261019, 150 histories) > agrees on every random history
+AssertionError: seed 20261019
+run 14: {"stays":[{"entry":"2024-01-29","exit":"2024-02-03"},{"entry":"2024-03-25","exit":"2024-04-07"},{"entry":"2024-04-16","exit":"2024-05-09"},{"entry":"2024-05-23","exit":"2024-07-23"},{"entry":"2024-06-23","exit":"2024-08-27"},{"entry":"2024-10-23","exit":"2024-10-27"}],"calculatorStays":[{"entry":"2024-01-29","exit":"2024-02-03"},{"entry":"2024-03-25","exit":"2024-04-07"},{"entry":"2024-04-16","exit":"2024-05-09"},{"entry":"2024-05-23","exit":"2024-08-27"},{"entry":"2024-10-23","exit":"2024-10-27"}],"on":"2024-10-27","reversed":false,"shape":["overlap"]} → Overstay count 2 from the calculator, 3 from Ninety. Planning mode did not report the same overstay as control mode.
+run 20: {"stays":[{"entry":"2025-01-04","exit":"2025-01-28"},{"entry":"2024-09-24","exit":"2024-11-19"},{"entry":"2024-09-15","exit":"2024-10-03"},{"entry":"2024-05-03","exit":"2024-07-16"},{"entry":"2024-04-08","exit":"2024-04-25"}],"calculatorStays":[{"entry":"2024-04-08","exit":"2024-04-25"},{"entry":"2024-05-03","exit":"2024-07-16"},{"entry":"2024-09-15","exit":"2024-11-19"},{"entry":"2025-01-04","exit":"2025-01-28"}],"on":"2025-01-28","reversed":false,"shape":["overlap","out-of-order"]} → Overstay count 3 from the calculator, 4 from Ninety. Planning mode did not report the same overstay as control mode.
+run 21: {"stays":[{"entry":"2025-01-29","exit":"2025-04-21"},{"entry":"2025-05-15","exit":"2025-05-23"},{"entry":"2025-05-26","exit":"2025-08-06"},{"entry":"2025-07-01","exit":"2025-07-10"},{"entry":"2025-07-25","exit":"2025-09-24"},{"entry":"2025-11-03","exit":"2025-11-14"}],"calculatorStays":[{"entry":"2025-01-29","exit":"2025-04-21"},{"entry":"2025-05-15","exit":"2025-05-23"},{"entry":"2025-05-26","exit":"2025-09-24"},{"entry":"2025-11-03","exit":"2025-11-14"}],"on":"2025-12-12","reversed":false,"shape":["overlap"]} → Overstay count 3 from the calculator, 5 from Ninety. Planning mode did not report the same overstay as control mode.
+run 47: {"stays":[{"entry":"2026-03-19","exit":"2026-04-08"},{"entry":"2026-05-06","exit":"2026-05-18"},{"entry":"2026-07-05","exit":"2026-07-26"},{"entry":"2026-08-09","exit":"2026-08-23"},{"entry":"2026-08-16","exit":"2026-09-19"},{"entry":"2026-09-02","exit":"2026-09-22"}],"calculatorStays":[{"entry":"2026-03-19","exit":"2026-04-08"},{"entry":"2026-05-06","exit":"2026-05-18"},{"entry":"2026-07-05","exit":"2026-07-26"},{"entry":"2026-08-09","exit":"2026-09-22"}],"on":"2026-09-22","reversed":false,"shape":["around-10-april-2026","overlap","overlap","spring-clock-change-2026"]} → Overstay count 1 from the calculator, 2 from Ninety. Planning mode did not report the same overstay as control mode.
+run 55: {"stays":[{"entry":"2026-11-05","exit":null},{"entry":"2026-10-31","exit":"2026-11-10"},{"entry":"2026-08-31","exit":"2026-10-11"},{"entry":"2026-04-03","exit":"2026-07-01"}],"calculatorStays":[{"entry":"2026-04-03","exit":"2026-07-01"},{"entry":"2026-08-31","exit":"2026-10-11"},{"entry":"2026-10-31","exit":"2027-01-01"}],"on":"2027-01-01","reversed":false,"shape":["around-10-april-2026","overlap","open-stay","out-of-order"]} → Overstay count 2 from the calculator, 3 from Ninety. Planning mode did not report the same overstay as control mode.: expected [ …(8) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "run 14: {\"stays\":[{\"entry\":\"2024-01-29\",\"exit\":\"2024-02-03\"},{\"entry\":\"2024-03-25\",\"exit\":\"2024-04-07\"},{\"entry\":\"2024-04-16\",\"exit\":\"2024-05-09\"},{\"entry\":\"2024-05-23\",\"exit\":\"2024-07-23\"},{\"entry\":\"2024-06-23\",\"exit\":\"2024-08-27\"},{\"entry\":\"2024-10-23\",\"exit\":\"2024-10-27\"}],\"calculatorStays\":[{\"entry\":\"2024-01-29\",\"exit\":\"2024-02-03\"},{\"entry\":\"2024-03-25\",\"exit\":\"2024-04-07\"},{\"entry\":\"2024-04-16\",\"exit\":\"2024-05-09\"},{\"entry\":\"2024-05-23\",\"exit\":\"2024-08-27\"},{\"entry\":\"2024-10-23\",\"exit\":\"2024-10-27\"}],\"on\":\"2024-10-27\",\"reversed\":false,\"shape\":[\"overlap\"]} → Overstay count 2 from the calculator, 3 from Ninety. Planning mode did not report the same overstay as control mode.",
++   "run 20: {\"stays\":[{\"entry\":\"2025-01-04\",\"exit\":\"2025-01-28\"},{\"entry\":\"2024-09-24\",\"exit\":\"2024-11-19\"},{\"entry\":\"2024-09-15\",\"exit\":\"2024-10-03\"},{\"entry\":\"2024-05-03\",\"exit\":\"2024-07-16\"},{\"entry\":\"2024-04-08\",\"exit\":\"2024-04-25\"}],\"calculatorStays\":[{\"entry\":\"2024-04-08\",\"exit\":\"2024-04-25\"},{\"entry\":\"2024-05-03\",\"exit\":\"2024-07-16\"},{\"entry\":\"2024-09-15\",\"exit\":\"2024-11-19\"},{\"entry\":\"2025-01-04\",\"exit\":\"2025-01-28\"}],\"on\":\"2025-01-28\",\"reversed\":false,\"shape\":[\"overlap\",\"out-of-order\"]} → Overstay count 3 from the calculator, 4 from Ninety. Planning mode did not report the same overstay as control mode.",
++   "run 21: {\"stays\":[{\"entry\":\"2025-01-29\",\"exit\":\"2025-04-21\"},{\"entry\":\"2025-05-15\",\"exit\":\"2025-05-23\"},{\"entry\":\"2025-05-26\",\"exit\":\"2025-08-06\"},{\"entry\":\"2025-07-01\",\"exit\":\"2025-07-10\"},{\"entry\":\"2025-07-25\",\"exit\":\"2025-09-24\"},{\"entry\":\"2025-11-03\",\"exit\":\"2025-11-14\"}],\"calculatorStays\":[{\"entry\":\"2025-01-29\",\"exit\":\"2025-04-21\"},{\"entry\":\"2025-05-15\",\"exit\":\"2025-05-23\"},{\"entry\":\"2025-05-26\",\"exit\":\"2025-09-24\"},{\"entry\":\"2025-11-03\",\"exit\":\"2025-11-14\"}],\"on\":\"2025-12-12\",\"reversed\":false,\"shape\":[\"overlap\"]} → Overstay count 3 from the calculator, 5 from Ninety. Planning mode did not report the same overstay as control mode.",
++   "run 47: {\"stays\":[{\"entry\":\"2026-03-19\",\"exit\":\"2026-04-08\"},{\"entry\":\"2026-05-06\",\"exit\":\"2026-05-18\"},{\"entry\":\"2026-07-05\",\"exit\":\"2026-07-26\"},{\"entry\":\"2026-08-09\",\"exit\":\"2026-08-23\"},{\"entry\":\"2026-08-16\",\"exit\":\"2026-09-19\"},{\"entry\":\"2026-09-02\",\"exit\":\"2026-09-22\"}],\"calculatorStays\":[{\"entry\":\"2026-03-19\",\"exit\":\"2026-04-08\"},{\"entry\":\"2026-05-06\",\"exit\":\"2026-05-18\"},{\"entry\":\"2026-07-05\",\"exit\":\"2026-07-26\"},{\"entry\":\"2026-08-09\",\"exit\":\"2026-09-22\"}],\"on\":\"2026-09-22\",\"reversed\":false,\"shape\":[\"around-10-april-2026\",\"overlap\",\"overlap\",\"spring-clock-change-2026\"]} → Overstay count 1 from the calculator, 2 from Ninety. Planning mode did not report the same overstay as control mode.",
++   "run 55: {\"stays\":[{\"entry\":\"2026-11-05\",\"exit\":null},{\"entry\":\"2026-10-31\",\"exit\":\"2026-11-10\"},{\"entry\":\"2026-08-31\",\"exit\":\"2026-10-11\"},{\"entry\":\"2026-04-03\",\"exit\":\"2026-07-01\"}],\"calculatorStays\":[{\"entry\":\"2026-04-03\",\"exit\":\"2026-07-01\"},{\"entry\":\"2026-08-31\",\"exit\":\"2026-10-11\"},{\"entry\":\"2026-10-31\",\"exit\":\"2027-01-01\"}],\"on\":\"2027-01-01\",\"reversed\":false,\"shape\":[\"around-10-april-2026\",\"overlap\",\"open-stay\",\"out-of-order\"]} → Overstay count 2 from the calculator, 3 from Ninety. Planning mode did not report the same overstay as control mode.",
++   "run 59: {\"stays\":[{\"entry\":\"2025-01-01\",\"exit\":\"2025-01-08\"},{\"entry\":\"2025-02-26\",\"exit\":\"2025-03-21\"},{\"entry\":\"2025-04-10\",\"exit\":\"2025-04-19\"},{\"entry\":\"2025-04-25\",\"exit\":\"2025-06-29\"},{\"entry\":\"2025-08-15\",\"exit\":\"2025-08-20\"},{\"entry\":\"2025-08-18\",\"exit\":null}],\"calculatorStays\":[{\"entry\":\"2025-01-01\",\"exit\":\"2025-01-08\"},{\"entry\":\"2025-02-26\",\"exit\":\"2025-03-21\"},{\"entry\":\"2025-04-10\",\"exit\":\"2025-04-19\"},{\"entry\":\"2025-04-25\",\"exit\":\"2025-06-29\"},{\"entry\":\"2025-08-15\",\"exit\":\"2025-09-17\"}],\"on\":\"2025-09-17\",\"reversed\":false,\"shape\":[\"overlap\",\"open-stay\"]} → Overstay count 2 from the calculator, 3 from Ninety. Planning mode did not report the same overstay as control mode.",
++   "run 111: {\"stays\":[{\"entry\":\"2026-03-26\",\"exit\":\"2026-06-22\"},{\"entry\":\"2026-08-08\",\"exit\":\"2026-11-03\"},{\"entry\":\"2026-09-21\",\"exit\":\"2026-10-04\"},{\"entry\":\"2026-10-14\",\"exit\":\"2026-10-20\"},{\"entry\":\"2026-11-10\",\"exit\":\"2026-12-04\"},{\"entry\":\"2027-01-19\",\"exit\":\"2027-04-14\"}],\"calculatorStays\":[{\"entry\":\"2026-03-26\",\"exit\":\"2026-06-22\"},{\"entry\":\"2026-08-08\",\"exit\":\"2026-11-03\"},{\"entry\":\"2026-11-10\",\"exit\":\"2026-12-04\"},{\"entry\":\"2027-01-19\",\"exit\":\"2027-04-14\"}],\"on\":\"2027-04-18\",\"reversed\":false,\"shape\":[\"around-10-april-2026\",\"overlap\",\"spring-clock-change-2026\"]} → Overstay count 3 from the calculator, 5 from Ninety. Planning mode did not report the same overstay as control mode.",
++   "run 114: {\"stays\":[{\"entry\":\"2025-05-22\",\"exit\":\"2025-08-14\"},{\"entry\":\"2025-01-12\",\"exit\":\"2025-03-25\"},{\"entry\":\"2024-12-09\",\"exit\":\"2024-12-11\"},{\"entry\":\"2024-11-22\",\"exit\":\"2024-12-25\"},{\"entry\":\"2024-08-28\",\"exit\":\"2024-11-07\"}],\"calculatorStays\":[{\"entry\":\"2024-08-28\",\"exit\":\"2024-11-07\"},{\"entry\":\"2024-11-22\",\"exit\":\"2024-12-25\"},{\"entry\":\"2025-01-12\",\"exit\":\"2025-03-25\"},{\"entry\":\"2025-05-22\",\"exit\":\"2025-08-14\"}],\"on\":\"2025-08-15\",\"reversed\":false,\"shape\":[\"overlap\",\"out-of-order\"]} → Overstay count 3 from the calculator, 4 from Ninety. Planning mode did not report the same overstay as control mode.",
++ ]
+
+ ❯ src/lib/schengen/differential.fuzz.test.ts:146:74
+    144|     // One line for the CI log: the seed to replay and what the histor…
+    145|     console.log(`differential fuzz: seed ${SEED}, ${RUNS} histories, $…
+    146|     expect(failures, `seed ${SEED}\n${failures.slice(0, 5).join("\n")}…
+       |                                                                          ^
+    147|   }, 300_000);
+    148| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/lib/schengen/differential.fuzz.test.ts > pinned fuzz finding > seed 20261019, run 14: overlapping trips that overstay are listed once, as the calculator lists the merged stay
+AssertionError: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "Overstay count 2 from the calculator, 3 from Ninety.",
++   "Planning mode did not report the same overstay as control mode.",
++ ]
+
+ ❯ src/lib/schengen/differential.fuzz.test.ts:157:44
+    155|     ];
+    156|     const c: FuzzCase = { stays, calculatorStays: mergeForCalculator(s…
+    157|     expect(disagreement(c, VENDORED_HTML)).toEqual([]);
+       |                                            ^
+    158|   });
+    159| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/lib/schengen/golden.test.ts > hand-worked boundary cases > overlap-overstay-counted-once: Ninety and the Commission calculator both give the hand-worked answer
+AssertionError: expected [ …(3) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "Overstay count 1 from the calculator, 2 from Ninety.",
++   "Planning mode did not report the same overstay as control mode.",
++   "Overstay: Ninety [{\"windowStart\":\"2023-10-09\",\"windowEnd\":\"2024-04-05\",\"daysInWindow\":96,\"from\":\"2024-03-31\",\"to\":\"2024-04-05\",\"days\":6},{\"windowStart\":\"2023-10-14\",\"windowEnd\":\"2024-04-10\",\"daysInWindow\":101,\"from\":\"2024-03-31\",\"to\":\"2024-04-10\",\"days\":11}], by hand {\"from\":\"2024-03-31\",\"to\":\"2024-04-10\",\"days\":11,\"windowStart\":\"2023-10-14\",\"daysInWindow\":101}.",
++ ]
+
+ ❯ src/lib/schengen/golden.test.ts:22:26
+     20|   it.each(GOLDEN_SCENARIOS.map((g) => [g.id, g] as const))("%s: Ninety…
+     21|     const row = checkGolden(VENDORED_HTML, g);
+     22|     expect(row.problems).toEqual([]);
+       |                          ^
+     23|     expect(row.match).toBe(true);
+     24|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/lib/schengen/golden.test.ts > span-level parity on the 14 scenarios > every row carries Ninety's latest legal day or overstay window, and the calculator's own sentence for it
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/lib/schengen/golden.test.ts:49:50
+     47|       expect(row.span?.theirs, row.scenario).not.toBe("none");
+     48|     }
+     49|     expect(report.golden?.every((g) => g.match)).toBe(true);
+       |                                                  ^
+     50|   });
+     51|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  4 failed | 15 passed (19)
+   Start at  21:32:46
+   Duration  1.39s (transform 226ms, setup 36ms, import 265ms, tests 1.29s, environment 0ms)
+

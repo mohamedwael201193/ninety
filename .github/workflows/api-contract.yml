@@ -1,0 +1,38 @@
+# Property-based API tests generated from the OpenAPI document (Schemathesis), against a production
+# build of this PR. Free and offline: no secrets, no credits. Checks every answer against the schema
+# for its status, that schema-valid requests are accepted (200, or the documented 422), that invalid
+# ones are refused, and that nothing is a server error. Settings: schemathesis.toml.
+# The coverage phase is off: it sends TRACE, which Next.js itself answers with a 500 before any app code runs.
+name: API contract (Schemathesis)
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  schemathesis:
+    name: Schemathesis against /api/openapi.json
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Start the production server
+        run: |
+          npx next start -p 3000 > server.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf http://localhost:3000/api/openapi.json > /dev/null && exit 0; sleep 1; done
+          cat server.log; exit 1
+      - name: Run Schemathesis (pipx is preinstalled on ubuntu runners)
+        run: >-
+          pipx run --spec "schemathesis==4.0.0" schemathesis run http://localhost:3000/api/openapi.json --url http://localhost:3000
+          --checks all --exclude-checks unsupported_method --phases examples,fuzzing
+          --max-examples 200 --seed ${{ github.run_id }}

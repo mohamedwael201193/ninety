@@ -1,0 +1,3 @@
+tools: schengen_check, ees_reconcile, article52_letter
+schengen_check: isError false daysUsed 88 daysLeft 2
+ees_reconcile with no input: isError true {"error":"invalid_request","issues":[{"path":"trips","message":"Invalid input: expected array, received undefined"},{"pa

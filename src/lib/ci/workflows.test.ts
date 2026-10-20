@@ -81,3 +81,16 @@ describe("CI workflow", () => {
     expect(triggers(read("ci.yml"))).toContain("pull_request");
   });
 });
+
+describe("api-contract.yml (Schemathesis)", () => {
+  const wf = readFileSync(".github/workflows/api-contract.yml", "utf8");
+  it("runs on pull requests against a production build, with a pinned Schemathesis and no secrets", () => {
+    expect(wf).toMatch(/pull_request:/);
+    expect(wf).toContain("npx next start");
+    expect(wf).toContain('schemathesis==4.0.0');
+    expect(wf).not.toMatch(/secrets\./);
+  });
+  it("accepts only 200 or the documented 422 for schema-valid requests", () => {
+    expect(readFileSync("schemathesis.toml", "utf8")).toMatch(/expected-statuses = \[200, 422\]/);
+  });
+});

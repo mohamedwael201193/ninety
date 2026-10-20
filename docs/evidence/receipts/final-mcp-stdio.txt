@@ -1,0 +1,27 @@
+
+> ninety-mcp@1.0.0 test
+> npm run build && node --test test/
+
+
+> ninety-mcp@1.0.0 build
+> esbuild src/server.ts --bundle --platform=node --format=esm --target=node20 --outfile=dist/server.mjs --external:@modelcontextprotocol/sdk --banner:js='#!/usr/bin/env node'
+
+
+  dist/server.mjs  776.3kb
+
+⚡ Done in 28ms
+TAP version 13
+# Subtest: the stdio server lists and runs schengen_check, ees_reconcile and article52_letter
+ok 1 - the stdio server lists and runs schengen_check, ees_reconcile and article52_letter
+  ---
+  duration_ms: 353.418133
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 630.325221

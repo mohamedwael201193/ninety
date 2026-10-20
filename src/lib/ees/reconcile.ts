@@ -269,10 +269,14 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
     const explained = new Set<IsoDate>();
     for (const record of claim.records) {
       if (record.exit !== null || !isIsoDate(record.entry) || parseIso(record.entry) > parseIso(on)) continue;
-      const trip = trips.find((item) => {
-        if (item.exit === null || !isIsoDate(item.entry) || !isIsoDate(item.exit)) return false;
-        return parseIso(item.entry) <= parseIso(record.entry) && parseIso(item.exit) >= parseIso(record.entry) && parseIso(item.exit) < parseIso(on);
-      });
+      // Of the trips that cover this entry and ended before `on`, the latest exit: the EES has
+      // no exit at all, so only days after the last one the trips record are extra.
+      const trip = trips
+        .filter((item) => {
+          if (item.exit === null || !isIsoDate(item.entry) || !isIsoDate(item.exit)) return false;
+          return parseIso(item.entry) <= parseIso(record.entry) && parseIso(item.exit) >= parseIso(record.entry) && parseIso(item.exit) < parseIso(on);
+        })
+        .sort((a, b) => parseIso(b.exit!) - parseIso(a.exit!))[0];
       if (!trip || trip.exit === null) continue;
       const extra: IsoDate[] = [];
       for (let day = parseIso(trip.exit) + 1; day <= parseIso(on); day += 1) {
@@ -296,7 +300,8 @@ export function reconcile(trips: StayInput[], claim: EesClaim): Reconciliation {
       const sameEntry = trips.filter((item) => item.entry === record.entry && item.exit !== null);
       // Two trips can share an entry date; only flag when none of them ends where the EES record ends.
       if (sameEntry.some((item) => item.exit === record.exit)) continue;
-      const trip = sameEntry[0];
+      // Two trips with the same entry are one stay as far as the EES is concerned: compare with the latest exit.
+      const trip = [...sameEntry].sort((a, b) => parseIso(b.exit!) - parseIso(a.exit!))[0];
       if (trip && trip.exit !== null && trip.exit > record.exit) {
         for (let day = parseIso(record.exit) + 1; day <= parseIso(trip.exit); day += 1) earlierExitDays.add(formatIso(day));
       }

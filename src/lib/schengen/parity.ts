@@ -1,6 +1,7 @@
 import { fromCommissionDate, type IsoDate } from "./dates";
 import { CommissionSourceError, runCommissionScenario } from "./commission-reference";
-import { evaluate, type OverstaySpan, type StayInput } from "./engine";
+import { evaluate, nextLegalEntry, type OverstaySpan, type StayInput } from "./engine";
+import { GOLDEN_SCENARIOS, type GoldenScenario } from "./golden";
 import { PARITY_SCENARIOS, type ParityScenario } from "./scenarios";
 
 export type ParityMismatch = {
@@ -17,6 +18,8 @@ export type ParityRow = {
   /** The Commission calculator's result in the same unit. */
   theirs: string;
   match: boolean;
+  /** The span behind the figure: Ninety's latest legal day or overstay window, and the calculator's own sentence for it. */
+  span?: { ours: string; theirs: string };
 };
 
 export type ParityReport = {
@@ -29,6 +32,19 @@ export type ParityReport = {
   mismatches: ParityMismatch[];
   source: string;
   reason?: string;
+  /** Hand-worked boundary cases (golden.ts), run against the same calculator copy. */
+  golden?: GoldenRow[];
+};
+
+export type GoldenRow = {
+  scenario: string;
+  name: string;
+  on: IsoDate;
+  expected: string;
+  ours: string;
+  theirs: string;
+  match: boolean;
+  problems: string[];
 };
 
 const PLANNING_DAYS = /The stay may be authorised for up to:\s*(\d+)\s*day/;
@@ -162,6 +178,68 @@ export function summarise(
   };
 }
 
+const SPAN_LINES = [STAY_UNTIL, ZERO_DAYS, OVERSTAY_SPAN];
+
+/** Ninety's latest legal day or overstay window, and the calculator's sentence for the same thing. */
+export function spanOf(scenario: { stays: StayInput[]; on: IsoDate }, control: string[]): { ours: string; theirs: string } {
+  const a = evaluate(scenario.stays, scenario.on);
+  const ours = a.overstays.length > 0
+    ? a.overstays.map((o) => `overstay ${o.from} to ${o.to}, ${o.days} ${o.days === 1 ? "day" : "days"} (window ${o.windowStart} to ${o.windowEnd}: ${o.daysInWindow} days)`).join("; ")
+    : a.latestExit ? `latest legal day ${a.latestExit}` : "entry refused";
+  const said = control.filter((line) => SPAN_LINES.some((re) => re.test(line)) || line.includes(REFUSED));
+  return { ours, theirs: said.join(" ") || "none" };
+}
+
+function describeExpected(g: GoldenScenario): string {
+  const e = g.expect;
+  if (e.refused) return "refused";
+  if (e.overstay) return `${e.overstay.days} overstay`;
+  return `${e.daysLeft} left`;
+}
+
+/** Checks one hand-worked case against Ninety and the calculator. Empty when every stated field agrees. */
+export function checkGolden(html: string, g: GoldenScenario): GoldenRow {
+  const problems: string[] = [];
+  const run = runCommissionScenario(html, g.calculatorStays ?? g.stays, g.on);
+  const lines = [...run.control, ...run.planning];
+  for (const sentence of g.calculatorSays) {
+    if (!lines.includes(sentence)) problems.push(`The calculator did not print "${sentence}".`);
+  }
+  const a = evaluate(g.stays, g.on);
+  const e = g.expect;
+  let ours: string;
+  let theirs: string;
+  if (e.refused) {
+    if (!a.errors.includes(e.refused)) problems.push(`Ninety did not refuse with "${e.refused}" (${JSON.stringify(a.errors)}).`);
+    ours = a.errors.length ? "refused" : `${a.daysLeft} left`;
+    theirs = lines.includes("Calculation of stay is not possible") ? "refused" : "counted";
+  } else {
+    problems.push(...compareScenario({ stays: g.stays, on: g.on }, run.control, run.planning));
+    const summary = summarise({ stays: g.stays, on: g.on }, run.control, run.planning);
+    ours = summary.ours;
+    theirs = summary.theirs;
+    if (e.daysUsed !== undefined && a.daysUsed !== e.daysUsed) problems.push(`Days used: Ninety ${a.daysUsed}, by hand ${e.daysUsed}.`);
+    if (e.daysLeft !== undefined && a.daysLeft !== e.daysLeft) problems.push(`Days left: Ninety ${a.daysLeft}, by hand ${e.daysLeft}.`);
+    if (e.latestExit !== undefined && a.latestExit !== e.latestExit) problems.push(`Latest legal day: Ninety ${a.latestExit}, by hand ${e.latestExit}.`);
+    if (e.overstay) {
+      const o = a.overstays[0];
+      if (a.overstays.length !== 1 || !o || o.from !== e.overstay.from || o.to !== e.overstay.to || o.days !== e.overstay.days || o.windowStart !== e.overstay.windowStart || o.daysInWindow !== e.overstay.daysInWindow) {
+        problems.push(`Overstay: Ninety ${JSON.stringify(a.overstays)}, by hand ${JSON.stringify(e.overstay)}.`);
+      }
+    } else if (a.overstays.length > 0) problems.push("Ninety reports an overstay the hand count does not.");
+    if (e.nextEntry) {
+      const next = nextLegalEntry(g.stays, g.on);
+      const then = next ? evaluate(g.stays, next, next).daysLeft : null;
+      if (next !== e.nextEntry.on || then !== e.nextEntry.daysLeft) problems.push(`Next legal entry: Ninety ${next} with ${then} days, by hand ${e.nextEntry.on} with ${e.nextEntry.daysLeft}.`);
+    }
+  }
+  return { scenario: g.id, name: g.name, on: g.on, expected: describeExpected(g), ours, theirs, match: problems.length === 0, problems };
+}
+
+export function goldenFromHtml(html: string): GoldenRow[] {
+  return GOLDEN_SCENARIOS.map((g) => checkGolden(html, g));
+}
+
 export function parityFromHtml(html: string, source: string): ParityReport {
   const mismatches: ParityMismatch[] = [];
   const rows: ParityRow[] = [];
@@ -170,7 +248,7 @@ export function parityFromHtml(html: string, source: string): ParityReport {
       const result = runCommissionScenario(html, scenario.stays, scenario.on);
       const problems = compareScenario(scenario, result.control, result.planning);
       const summary = summarise(scenario, result.control, result.planning);
-      rows.push({ scenario: scenario.id, on: scenario.on, stays: scenario.stays.length, ...summary, match: problems.length === 0 });
+      rows.push({ scenario: scenario.id, on: scenario.on, stays: scenario.stays.length, ...summary, match: problems.length === 0, span: spanOf(scenario, result.control) });
       if (problems.length > 0) {
         mismatches.push({ scenario: scenario.id, detail: problems.join(" ") });
       }
@@ -182,6 +260,12 @@ export function parityFromHtml(html: string, source: string): ParityReport {
     return unverified(reason, source);
   }
 
+  let golden: GoldenRow[] | undefined;
+  try {
+    golden = goldenFromHtml(html);
+  } catch {
+    golden = undefined;
+  }
   const total = PARITY_SCENARIOS.length;
   const matched = total - mismatches.length;
   return {
@@ -191,6 +275,7 @@ export function parityFromHtml(html: string, source: string): ParityReport {
     total,
     mismatches,
     rows,
+    golden,
     source,
   };
 }
