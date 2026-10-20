@@ -8,6 +8,7 @@ describe("scenario links", () => {
     expect(scenarioById("constructor")).toBeNull();
     expect(scenarioById("nope")).toBeNull();
     expect(scenarioById(null)).toBeNull();
+    expect(scenarioById("demo")?.id).toBe("near-limit");
   });
   it("gives stable trip ids", () => {
     expect(scenarioTrips(SCENARIOS["near-limit"]).map((t) => t.id)).toEqual(["scenario-near-limit-1", "scenario-near-limit-2"]);
