@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T23:24:47.234Z",
+  "generatedAt": "2026-10-20T23:40:17.995Z",
   "source": "testsprite test result --history",
   "runs": 1755,
   "executions": [
@@ -1690,7 +1690,7 @@
         "passed": 43,
         "failed": []
       },
-      "kind": "app"
+      "kind": "ux"
     }
   ]
 }

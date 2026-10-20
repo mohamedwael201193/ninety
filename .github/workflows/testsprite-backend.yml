@@ -1,0 +1,74 @@
+# The 28 TestSprite backend tests (project "Ninety API") as a required check.
+#
+# Runs when Vercel reports a deployment ready:
+#   - Preview (a pull request): against that preview URL, so a PR's API is tested before merge;
+#   - Production (main): against https://ninety-coral.vercel.app after the deploy.
+# The check run attaches to the deployed commit, so it shows on the PR.
+# scripts/ci/backend-run.mjs points each test's BASE_URL at the target (TestSprite gives backend
+# tests no environment URL) and fails the job if any test does not pass.
+# Cost: 28 × 0.2 = 5.6 credits per deployment. Needs the repository secret TESTSPRITE_API_KEY.
+name: TestSprite backend
+
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Base URL to test"
+        default: "https://ninety-coral.vercel.app"
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  # The tests are shared, so only one target at a time.
+  group: testsprite-backend
+  cancel-in-progress: false
+
+env:
+  TESTSPRITE_CLI_VERSION: "0.15.0"
+
+jobs:
+  backend:
+    name: TestSprite backend (28 API tests)
+    if: >-
+      ${{ github.event_name == 'workflow_dispatch'
+      || (github.event_name == 'deployment_status'
+          && github.event.deployment_status.state == 'success'
+          && (github.event.deployment.environment == 'Preview' || github.event.deployment.environment == 'Production')) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.deployment.sha || github.sha }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - name: Target
+        id: target
+        env:
+          URL: ${{ github.event.deployment_status.environment_url || inputs.target }}
+          ENVIRONMENT: ${{ github.event.deployment.environment || 'manual' }}
+        run: |
+          echo "url=${URL%/}" >> "$GITHUB_OUTPUT"
+          echo "Testing $ENVIRONMENT deployment at ${URL%/}"
+      - name: Run the 28 backend tests
+        env:
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+          TARGET: ${{ steps.target.outputs.url }}
+        run: |
+          if [ -z "$TESTSPRITE_API_KEY" ]; then
+            echo "::error::Add the TESTSPRITE_API_KEY repository secret to run this workflow."
+            exit 1
+          fi
+          npm install -g "@testsprite/testsprite-cli@${TESTSPRITE_CLI_VERSION}"
+          node scripts/ci/backend-run.mjs "$TARGET"
+      - name: Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: testsprite-backend-${{ github.run_id }}
+          path: backend-results.json
+          if-no-files-found: ignore
