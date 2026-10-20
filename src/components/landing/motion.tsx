@@ -1,6 +1,6 @@
 "use client";
 
-import { animate, motion, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useReducedMotionSafe";
 import { useEffect, useRef, useState } from "react";
 
@@ -40,18 +40,12 @@ export function Words({ text, className, delay = 0 }: { text: string; className?
 }
 
 /** Counts to `value` when scrolled into view. */
-export function CountUp({ value, duration = 0.9, className }: { value: number; duration?: number; className?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
-  const reduce = useReducedMotion();
-  const [n, setN] = useState(0);
-  useEffect(() => {
-    if (!inView) return;
-    if (reduce) { setN(value); return; }
-    const controls = animate(0, value, { duration, ease: EASE, onUpdate: (v) => setN(Math.round(v)) });
-    return () => controls.stop();
-  }, [inView, value, duration, reduce]);
-  return <span ref={ref} className={`tnum ${className ?? ""}`}>{n}</span>;
+/**
+ * A figure in the landing band. It shows the real value from the first paint and never animates:
+ * a count-up from 0 made a nearly full allowance read "0 used / 0 left" for a moment (browser QA).
+ */
+export function CountUp({ value, className }: { value: number; duration?: number; className?: string }) {
+  return <span className={`tnum ${className ?? ""}`}>{value}</span>;
 }
 
 /** Types lines one after another once in view. */

@@ -1,0 +1,50 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-band
+
+ ❯ src/components/landing/CountUp.test.tsx (2 tests | 2 failed) 35ms
+     × shows the real figure before (or without) the in-view animation, never a stray 0 28ms
+     × follows a new value at once (scenario loaded after mount) 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/landing/CountUp.test.tsx > CountUp > shows the real figure before (or without) the in-view animation, never a stray 0
+AssertionError: expected '0' to be '88' // Object.is equality
+
+Expected: "88"
+Received: "0"
+
+ ❯ src/components/landing/CountUp.test.tsx:15:49
+     13|   it("shows the real figure before (or without) the in-view animation,…
+     14|     render(<span data-testid="n"><CountUp value={88} /></span>);
+     15|     expect(screen.getByTestId("n").textContent).toBe("88");
+       |                                                 ^
+     16|   });
+     17|   it("follows a new value at once (scenario loaded after mount)", () =…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/components/landing/CountUp.test.tsx > CountUp > follows a new value at once (scenario loaded after mount)
+AssertionError: expected '0' to be '2' // Object.is equality
+
+Expected: "2"
+Received: "0"
+
+ ❯ src/components/landing/CountUp.test.tsx:20:49
+     18|     const { rerender } = render(<span data-testid="n"><CountUp value={…
+     19|     rerender(<span data-testid="n"><CountUp value={2} /></span>);
+     20|     expect(screen.getByTestId("n").textContent).toBe("2");
+       |                                                 ^
+     21|   });
+     22| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  10:07:42
+   Duration  861ms (transform 44ms, setup 23ms, import 285ms, tests 35ms, environment 331ms)
+

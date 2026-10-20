@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
 import { isIsoDate, localToday } from "@/lib/schengen/dates";
 import { parseEesRecords, reconcile } from "@/lib/ees/reconcile";
+import { daysLabel } from "@/lib/letter/days";
 import { buildCorrectionLetter, type CorrectionLetter } from "@/lib/letter/letter";
 import { loadTrips } from "@/lib/trips";
 import { LETTER_FIELD_IDS, validateLetterForm, type LetterForm } from "@/lib/letter/validate";
@@ -173,9 +174,9 @@ export function LetterPanel() {
                 <tbody>
                   <tr className="divide-x divide-line-soft">
                     <td data-testid="letter-evidence-on" className="px-3 pb-3 font-mono text-sm">{today}</td>
-                    <td data-testid="letter-evidence-ours" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{letter.evidence.ours}</td>
-                    <td data-testid="letter-evidence-ees" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{letter.evidence.ees}</td>
-                    <td data-testid="letter-evidence-gap" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{Math.abs(letter.evidence.gap)}</td>
+                    <td data-testid="letter-evidence-ours" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{daysLabel(letter.evidence.ours)}</td>
+                    <td data-testid="letter-evidence-ees" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{daysLabel(letter.evidence.ees)}</td>
+                    <td data-testid="letter-evidence-gap" className="px-3 pb-3 font-display text-2xl font-semibold tnum">{daysLabel(letter.evidence.gap)}</td>
                   </tr>
                 </tbody>
               </table>
