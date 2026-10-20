@@ -78,7 +78,7 @@ export default function Hero() {
           </motion.div>
           <motion.ul initial={{ y: 6 }} animate={{ y: 0 }} transition={{ delay: 0.6, duration: 0.6, ease: EASE }}
             className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-hushed">
-            <li className="flex items-center gap-1.5"><ShieldCheck size={16} /> Matches the European Commission&apos;s calculator</li>
+            <li className="flex items-center gap-1.5"><ShieldCheck size={16} /> Checked against the European Commission&apos;s own calculator script</li>
             <li className="flex items-center gap-1.5"><Lock size={16} /> No account · data stays in your browser</li>
           </motion.ul>
         </div>

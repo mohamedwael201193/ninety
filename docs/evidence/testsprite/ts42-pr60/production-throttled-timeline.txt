@@ -1,0 +1,7 @@
+Playwright on https://ninety-coral.vercel.app, 2026-10-20 ~23:30 UTC, CPU throttled 20x, 400 ms latency, 50 kB/s.
+Saved trip 2024-02-29, then opened /?today=2024-08-26 and sampled [data-testid=status-panel] [data-testid=days-used] every 50 ms.
+ms since navigation, what was there (no-cell = the cell does not exist yet; the text after it is the start of #check):
+642ms no-cell
+890ms no-cell:Loading…
+3072ms no-cell:How many Schengen days do I really have left?Rebuilds the 90
+4113ms "1"

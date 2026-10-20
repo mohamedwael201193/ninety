@@ -1,0 +1,49 @@
+{
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "skipped": 0,
+  "timedOut": 0,
+  "runs": [
+    {
+      "testId": "66aa232d-2ca6-497d-80c7-32592e1ca728",
+      "title": "OpenAPI document lists the 3 endpoints and their statuses",
+      "runId": "480cc547-2807-415a-965e-ee538f8cb1d9",
+      "status": "passed",
+      "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/test-cases/66aa232d-2ca6-497d-80c7-32592e1ca728",
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/execution/056c455a-04b1-417d-86b5-015bb59b36a7/test/480cc547-2807-415a-965e-ee538f8cb1d9"
+    },
+    {
+      "testId": "3246100e-17de-456f-a540-13df5fa70c45",
+      "title": "Check: 1 Jan to 15 Apr 2024 is 106 days, a 16-day overstay from 31 Mar",
+      "runId": "f3272fc4-a4a1-4ab8-b050-9891a22d2fa7",
+      "status": "passed",
+      "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/test-cases/3246100e-17de-456f-a540-13df5fa70c45",
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/execution/056c455a-04b1-417d-86b5-015bb59b36a7/test/f3272fc4-a4a1-4ab8-b050-9891a22d2fa7"
+    },
+    {
+      "testId": "490dab4e-457b-4923-92ae-b9bb465247e5",
+      "title": "MCP tools/list returns the 3 tools; an unknown protocol version gets 400",
+      "runId": "d463a273-c94f-4a13-af6b-f8cb97e889db",
+      "status": "passed",
+      "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/test-cases/490dab4e-457b-4923-92ae-b9bb465247e5",
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/execution/056c455a-04b1-417d-86b5-015bb59b36a7/test/d463a273-c94f-4a13-af6b-f8cb97e889db"
+    },
+    {
+      "testId": "997dc992-7486-4695-8c4e-f07ab5cf1a4c",
+      "title": "Check: an impossible date, an unknown key and text/plain are refused",
+      "runId": "c2941b7f-d886-47c2-a597-3c859141e6fe",
+      "status": "passed",
+      "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/test-cases/997dc992-7486-4695-8c4e-f07ab5cf1a4c",
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/execution/056c455a-04b1-417d-86b5-015bb59b36a7/test/c2941b7f-d886-47c2-a597-3c859141e6fe"
+    },
+    {
+      "testId": "d0c1abdd-46f0-4e8f-a4ff-4ccc088b5a96",
+      "title": "Parity API: 14/14 match, from the live page or the named stored copy",
+      "runId": "0e184f5e-7cc7-47c1-8e22-15a17a2aa27b",
+      "status": "passed",
+      "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/test-cases/d0c1abdd-46f0-4e8f-a4ff-4ccc088b5a96",
+      "executionUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/execution/056c455a-04b1-417d-86b5-015bb59b36a7/test/0e184f5e-7cc7-47c1-8e22-15a17a2aa27b"
+    }
+  ]
+}

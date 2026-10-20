@@ -2,6 +2,12 @@
 
 Every TestSprite run link, screenshot and report gathered for Ninety is kept here and never deleted. One folder per PR or topic.
 
+## Latest: PR #57 and the backend suite → [`testsprite/`](testsprite/README.md)
+
+- PR [#57](https://github.com/mohamedwael201193/ninety/pull/57), merged to `main` as `396d6d9`: TS45–TS52 red on purpose (34/43), TS02 caught a production `/parity` problem (42/43), then 43/43. It has portal and GitHub screenshots and the merge gate.
+- Backend project "Ninety API": 28 tests, 27/28, BE28 caught a missing JSON-RPC error `id`, then green after `8c86d02`. It has screenshots plus red and green files in [`testsprite/backend/`](testsprite/backend/).
+- `receipts/final-vitest.txt`: Vitest on `main` after these changes.
+
 | Folder | What it proves |
 |---|---|
 | [pr-39-scenario-carry](pr-39-scenario-carry/runs.md) | TS16 written first and red (14/15), then green 15/15 after the fix |

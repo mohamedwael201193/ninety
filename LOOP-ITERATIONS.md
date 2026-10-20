@@ -1,10 +1,10 @@
 # The loop, iteration by iteration
 
-Generated 2026-10-20T22:27:31.713Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
+Generated 2026-10-20T22:53:46.972Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
 
 Screenshots of the runs and the merge gate: [docs/evidence/testsprite](docs/evidence/testsprite/README.md).
 
-55 iterations, 11 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
+55 iterations, 11 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): 6 app defects (#8, #14, #39, #41, #55, #57) and 5 where the test plan or CI was wrong (#18, #22, #36, #32, #43). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
 
 ## Iteration 1: [#1](https://github.com/mohamedwael201193/ninety/pull/1) Add the Ninety 90/180 foundation
 
@@ -45,7 +45,7 @@ Merged 2026-10-19 00:10 UTC as [`ec283f5`](https://github.com/mohamedwael201193/
 | [`a352071`](https://github.com/mohamedwael201193/ninety/commit/a3520717b34720b2efd68973519fac468c327411) TestSprite suite: date-format test plan and a documented test index | success: All 10 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/9b1c34fc-0ce7-48ae-a356-c9438256cc83) |
 | [`f1cd450`](https://github.com/mohamedwael201193/ninety/commit/f1cd4509f4b81f40f5b12792bf074fb0956ff10a) TestSprite README: note the PR merge gate and test count | success: All 11 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b3f93550-866a-49be-88ae-76d5f3c8ad09) |
 
-## Iteration 7: [#8](https://github.com/mohamedwael201193/ninety/pull/8) Refactor parity table rendering (red, then green)
+## Iteration 7: [#8](https://github.com/mohamedwael201193/ninety/pull/8) Refactor parity table rendering (red, then green: app defect)
 
 Merged 2026-10-19 00:22 UTC as [`91b193a`](https://github.com/mohamedwael201193/ninety/commit/91b193ae21ebcdb4c01dc5a3f4d11cc42c3131e2).
 
@@ -125,7 +125,7 @@ Merged 2026-10-19 02:29 UTC as [`8afa6fe`](https://github.com/mohamedwael201193/
 |---|---|---|
 | [`9e5c136`](https://github.com/mohamedwael201193/ninety/commit/9e5c136803dcddba398bba3cd2d54511b8c0bb54) Scenario links: /?scenario=open-stay and friends load a named demo his | success: All 12 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/58efd029-c516-4ff9-8fdc-4572a2c6dff1) |
 
-## Iteration 16: [#14](https://github.com/mohamedwael201193/ninety/pull/14) Planner: a plan made during an open stay must count the days until the trip (red, then green)
+## Iteration 16: [#14](https://github.com/mohamedwael201193/ninety/pull/14) Planner: a plan made during an open stay must count the days until the trip (red, then green: app defect)
 
 Merged 2026-10-19 02:46 UTC as [`7a70dde`](https://github.com/mohamedwael201193/ninety/commit/7a70dde15218ae29b8cdc5b45b31e203e3e27ee3).
 
@@ -147,7 +147,7 @@ Merged 2026-10-19 03:33 UTC as [`e8237b6`](https://github.com/mohamedwael201193/
 |---|---|---|
 | [`0e37f80`](https://github.com/mohamedwael201193/ninety/commit/0e37f8025ce97d1ef6a41ac602f9baa5f5e1b663) Self-host the fonts so the build never depends on Google Fonts (the Ve | success: All 14 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/8944ffe2-ca23-45d9-a13b-e61f50d56c68) |
 
-## Iteration 18: [#18](https://github.com/mohamedwael201193/ninety/pull/18) CI: run on Node 22 (pdfjs-dist needs >=22.13; Node 20 is deprecated on Actions) (red, then green)
+## Iteration 18: [#18](https://github.com/mohamedwael201193/ninety/pull/18) CI: run on Node 22 (pdfjs-dist needs >=22.13; Node 20 is deprecated on Actions) (red, then green: test plan or CI)
 
 Merged 2026-10-19 03:47 UTC as [`5f6fddc`](https://github.com/mohamedwael201193/ninety/commit/5f6fddc0ad679df93d8c6740f542f3acc152b8ae).
 
@@ -174,7 +174,7 @@ Merged 2026-10-19 04:06 UTC as [`98e99c5`](https://github.com/mohamedwael201193/
 |---|---|---|
 | [`de85611`](https://github.com/mohamedwael201193/ninety/commit/de85611b2f73b9ebc59e0706d65f1fbe7f32bc20) TestSprite TS07: assert the visible verdict, not a data attribute; rec | success: All 14 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/d438dac4-7edb-4e69-8d15-e51c79c20849) |
 
-## Iteration 21: [#22](https://github.com/mohamedwael201193/ninety/pull/22) Deps: pin Next's bundled PostCSS to ^8.5.31 (fixes 4 high PostCSS advisories and the Next moderate) (red, then green)
+## Iteration 21: [#22](https://github.com/mohamedwael201193/ninety/pull/22) Deps: pin Next's bundled PostCSS to ^8.5.31 (fixes 4 high PostCSS advisories and the Next moderate) (red, then green: test plan or CI)
 
 Merged 2026-10-19 04:10 UTC as [`f294442`](https://github.com/mohamedwael201193/ninety/commit/f2944428d4e5c8f4dff93d896d5b7fa0e6d54de8).
 
@@ -255,7 +255,7 @@ Merged 2026-10-19 05:01 UTC as [`4e83bde`](https://github.com/mohamedwael201193/
 |---|---|---|
 | [`a93a01e`](https://github.com/mohamedwael201193/ninety/commit/a93a01e593c6410ce673ee45b735d5f1db526eb1) Docs: 14-test suite, PR-only trigger, honest #8 and #14 history; LICEN | success: All 14 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/a24d0209-8edc-49ee-958d-241b6a74971c) |
 
-## Iteration 31: [#36](https://github.com/mohamedwael201193/ninety/pull/36) TestSprite: every plan asserts exact values (TS02 checks all 14 counts) (red, then green)
+## Iteration 31: [#36](https://github.com/mohamedwael201193/ninety/pull/36) TestSprite: every plan asserts exact values (TS02 checks all 14 counts) (red, then green: test plan or CI)
 
 Merged 2026-10-19 05:10 UTC as [`ecc9163`](https://github.com/mohamedwael201193/ninety/commit/ecc91634901ea4a83934239f9232c8a1c75e008b).
 
@@ -282,7 +282,7 @@ Merged 2026-10-19 05:15 UTC as [`b482e1f`](https://github.com/mohamedwael201193/
 |---|---|---|
 | [`9d1dc6e`](https://github.com/mohamedwael201193/ninety/commit/9d1dc6ef2a7ffb0320160291787eb4079ee35e4e) LOOP.md and loop.json generated from TestSprite run history (npm run l | success: All 14 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/a27d2510-9553-4389-967b-42d3edbe5f66) |
 
-## Iteration 34: [#39](https://github.com/mohamedwael201193/ninety/pull/39) A demo scenario carries to /ees and /letter (TS16, test first) (red, then green)
+## Iteration 34: [#39](https://github.com/mohamedwael201193/ninety/pull/39) A demo scenario carries to /ees and /letter (TS16, test first) (red, then green: app defect)
 
 Merged 2026-10-20 05:43 UTC as [`76db832`](https://github.com/mohamedwael201193/ninety/commit/76db832fa9accd036ac8f415704d4a3124605b6e).
 
@@ -310,7 +310,7 @@ Merged 2026-10-20 06:19 UTC as [`0a511fe`](https://github.com/mohamedwael201193/
 | [`825a026`](https://github.com/mohamedwael201193/ninety/commit/825a0265a9c05dd265311d99c8ce13806a5911a5) Evidence: run records for #39, #40, #41 and the letter PR, with an ind | success: All 17 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e7a4159c-fc42-4924-ae8b-bf4b02c2fca6) |
 | [`743e93d`](https://github.com/mohamedwael201193/ninety/commit/743e93d32dc968634ea82a1443b5a90c836f3eb5) Letter: evidence is a real accessible table (date, your dates, EES fig | success: All 17 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/6d734ee2-5e0d-4e8b-9156-e8d6fccc3643) |
 
-## Iteration 37: [#41](https://github.com/mohamedwael201193/ninety/pull/41) Landing: the 180-day band follows the scenario, illustrations are labelled, and a not-covered notice (red, then green)
+## Iteration 37: [#41](https://github.com/mohamedwael201193/ninety/pull/41) Landing: the 180-day band follows the scenario, illustrations are labelled, and a not-covered notice (red, then green: app defect)
 
 Merged 2026-10-20 06:43 UTC as [`68ff6a5`](https://github.com/mohamedwael201193/ninety/commit/68ff6a56df29261fbf00515ac8f2823400179d74).
 
@@ -333,7 +333,7 @@ Merged 2026-10-20 06:55 UTC as [`ce35154`](https://github.com/mohamedwael201193/
 | [`1787170`](https://github.com/mohamedwael201193/ninety/commit/1787170dcfd623f646f24e653701fd166fe10001) EES findings: show each finding's code next to its label | success: All 14 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/4a41007c-d3ba-4284-aaac-90bb60f73df2) |
 | [`6675a0f`](https://github.com/mohamedwael201193/ninety/commit/6675a0fdd7c2c63db2bda029553010dd7a502b1e) EES code tags: 11px full-ink text for contrast (QA nit); QA evidence | success: All 17 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/c84e6cda-2c3c-4a9e-adc6-48e85eca0a4e) |
 
-## Iteration 39: [#32](https://github.com/mohamedwael201193/ninety/pull/32) Smooth scroll on the landing page only; the letter box scrolls with the wheel (red, then green)
+## Iteration 39: [#32](https://github.com/mohamedwael201193/ninety/pull/32) Smooth scroll on the landing page only; the letter box scrolls with the wheel (red, then green: test plan or CI)
 
 Merged 2026-10-20 07:06 UTC as [`261e5bb`](https://github.com/mohamedwael201193/ninety/commit/261e5bb919b933b8a7b4593cc8ed54ee476f7f70).
 
@@ -354,7 +354,7 @@ Merged 2026-10-20 07:07 UTC as [`141adda`](https://github.com/mohamedwael201193/
 | [`2b8f485`](https://github.com/mohamedwael201193/ninety/commit/2b8f485f0e34736a5bf76b786d85bcc8cf294b33) Hero phone: the EES card is in the first paint and the loop only runs  | success: All 14 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/7fbc606b-3508-4539-8a45-4b650170afc5) |
 | [`2c2f6be`](https://github.com/mohamedwael201193/ninety/commit/2c2f6be7e273301d35bc0c6da6d6747df7ea5ede) Watchdog fixes: demo letter prefills the EES side; hero note separates | success: All 17 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/1d157115-88fc-4f3c-a94f-a913f56a7a7b) |
 
-## Iteration 41: [#43](https://github.com/mohamedwael201193/ninety/pull/43) Band counters show the real figure from the first paint (0/0 on /?scenario=demo) (red, then green)
+## Iteration 41: [#43](https://github.com/mohamedwael201193/ninety/pull/43) Band counters show the real figure from the first paint (0/0 on /?scenario=demo) (red, then green: test plan or CI)
 
 Merged 2026-10-20 07:25 UTC as [`db73594`](https://github.com/mohamedwael201193/ninety/commit/db73594f74076e4bb35166d4c753702752c2106b).
 
@@ -458,7 +458,7 @@ Merged 2026-10-20 08:49 UTC as [`ec5d2ba`](https://github.com/mohamedwael201193/
 |---|---|---|
 | [`bbbff63`](https://github.com/mohamedwael201193/ninety/commit/bbbff6321360810b85732e72b5f97762a9e35897) /proof summary counts only tests that ran (matrix regenerated: 25/25 p | success: All 32 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/18bb1fb1-05f1-42c6-bb4d-a9d4755ba0ba) |
 
-## Iteration 53: [#55](https://github.com/mohamedwael201193/ninety/pull/55) Trip sheet keeps focus and makes the page inert; impossible calendar dates are named (TS21, TS41, TS42) (red, then green)
+## Iteration 53: [#55](https://github.com/mohamedwael201193/ninety/pull/55) Trip sheet keeps focus and makes the page inert; impossible calendar dates are named (TS21, TS41, TS42) (red, then green: app defect)
 
 Merged 2026-10-20 12:03 UTC as [`fbf4b64`](https://github.com/mohamedwael201193/ninety/commit/fbf4b6495a89dbd5d0c2055db8936da9525f524e).
 
@@ -479,7 +479,7 @@ Merged 2026-10-20 15:33 UTC as [`c23e7c0`](https://github.com/mohamedwael201193/
 |---|---|---|
 | [`43d4ad0`](https://github.com/mohamedwael201193/ninety/commit/43d4ad0c11f034aee7aae6cfcffc849f4d7c049b) README: 35 TestSprite tests, 35/35 on the latest run, bugs fixed in #3 | success: All 35 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/7159e613-a019-4680-9f36-a934cf3c8aa5) |
 
-## Iteration 55: [#57](https://github.com/mohamedwael201193/ninety/pull/57) TestSprite: 8 plans for review bugs, red first (TS45–TS52), then the fixes (red, then green)
+## Iteration 55: [#57](https://github.com/mohamedwael201193/ninety/pull/57) TestSprite: 8 plans for review bugs, red first (TS45–TS52), then the fixes (red, then green: app defect)
 
 Merged 2026-10-20 22:24 UTC as [`396d6d9`](https://github.com/mohamedwael201193/ninety/commit/396d6d9690b6d6cbddc21a4ceba854a6d633fbff).
 

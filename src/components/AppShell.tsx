@@ -14,7 +14,7 @@ import { evaluate } from "@/lib/schengen/engine";
 import { findOverlaps, loadTrips, saveTrips, type Trip } from "@/lib/trips";
 import { Sheet } from "./dashboard/Sheet";
 import { PlannedTripForm } from "./PlannedTripForm";
-import { StatusPanel } from "./StatusPanel";
+import { StatusPanel, StatusPending } from "./StatusPanel";
 import { TripEditor } from "./TripEditor";
 import { TripList } from "./TripList";
 import { scenarioById, scenarioTrips } from "@/lib/scenarios";
@@ -136,7 +136,7 @@ export function AppShell() {
         {!ready ? (
           <div aria-busy="true" className="grid gap-6 lg:grid-cols-[1fr_400px]">
             <div className="space-y-6">
-              <div className="skeleton h-[420px] rounded-3xl" />
+              <StatusPending />
               <div className="skeleton h-[220px] rounded-3xl" />
             </div>
             <div className="space-y-3">
@@ -177,7 +177,7 @@ export function AppShell() {
 
 
         <footer className="mt-6 text-xs text-ink-hushed">
-          Matches the European Commission&apos;s short-stay calculator. Not an official decision. Trips are stored only in this browser.
+          Checked against the European Commission&apos;s own short-stay calculator script. Not an official decision. Trips are stored only in this browser.
         </footer>
       </main>
 

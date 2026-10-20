@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="testsprite:790eba05-abdb-41c5-ae1a-4b2b0131b438" tests="28" failures="1" errors="0" skipped="0" time="78.165">
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="MCP JSON-RPC errors: unknown method -32601, parse error -32700, invalid request -32600" testId="30a7686b-1a27-4618-ac1b-ceac43202eb1" runId="2985ab3f-8a18-4e1a-9c36-57123a796c1a" time="1.696">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="MCP schengen_check on the Commission&apos;s 106-day example gives the 16-day overstay" testId="337d4058-8834-427e-8a95-ad7aee53a3d3" runId="4e039870-955f-42bd-8c6f-83559d8e5a95" time="1.588">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Check: 1 Jan to 15 Apr 2024 is 106 days, a 16-day overstay from 31 Mar" testId="3246100e-17de-456f-a540-13df5fa70c45" runId="c4ec43d0-22a1-4c19-bbcb-8126f5175fb1" time="1.566">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Exactly 90 days: no overstay, 0 left, last legal day is the day itself" testId="5473a7a1-fb53-41d8-af30-1b707101cb54" runId="91f6e29e-bfa7-4d99-8c96-82108d4837e1" time="1.593">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="After 90 days: refused on day 180 after entry, next legal entry 29 Jun, 90 days on 29 Jun" testId="86f6e12c-871e-449f-b481-17b95a0a09e8" runId="62aa2777-ae29-4bf1-a8c0-433754087af5" time="1.637">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Same-day exit and re-entry counts the day once: 20 days, 70 left" testId="9b2cd050-b2f6-4728-994f-656e19c2a7f5" runId="fb73225a-b89e-44e1-a8e1-796c2272ae06" time="2.545">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="An open stay counts through the date: 10 days, 80 left, until 29 May" testId="386f761d-1a9f-4b60-baf9-ad9b9044ecb8" runId="f42c7c04-d1c3-4bec-a5a4-45a94c245850" time="2.778">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Leap year: 1 to 29 Feb 2024 is 29 days; Commission: 61 days left, stay until 2024-04-30" testId="9b737e5b-dbd4-438f-8f80-e4f83f4e4254" runId="4f51680f-9217-41b9-8e9d-1f23bb0e82d3" time="2.713">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="200 trips are accepted; 201 are refused with 400 (maxItems 200)" testId="0b351a78-33d3-4e2f-9bd9-bdf06ee7c19d" runId="4aebef09-75e9-4470-93bf-e6b2ef1b45c3" time="2.65">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="MCP: a notification gets 202 with no body; a batch is refused; an oversized body is 413" testId="941c8458-6261-4208-974d-4bbd003adaf5" runId="b7279d85-1ef0-428d-ae2b-d7ab5a59c09a" time="2.873">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="MCP tools/list returns the 3 tools; an unknown protocol version gets 400" testId="490dab4e-457b-4923-92ae-b9bb465247e5" runId="114ef6a0-2923-4df4-88e7-cfb54424e7f1" time="2.807">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Day 91 is a 1-day overstay on 31 Mar 2024" testId="e73a52d0-611d-433e-99d4-61e465089707" runId="997e80e5-1332-49c9-b00a-483b3281fe0e" time="2.81">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Duplicate and overlapping trips count each day once" testId="ab1e09b2-693a-4d4f-a469-1d3a8bd6d802" runId="30b1a770-7cd9-4dfc-97fb-acb2e78b1bc9" time="2.639">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Planned trip: 61 days after 29 Feb fit, 62 do not (Commission: up to 61)" testId="65e7439e-9e6a-472a-8877-1135eef46df6" runId="4089d535-61fd-4861-8852-6a3baa55d27b" time="2.681">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="An exit before its entry is 422 (valid shape, cannot be counted)" testId="18184f9b-02df-40ab-8800-94ec13f794b3" runId="27da585d-e896-4fd2-982f-efa856508f60" time="2.628">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Check: an impossible date, an unknown key and text/plain are refused" testId="997dc992-7486-4695-8c4e-f07ab5cf1a4c" runId="a7e4cf35-a7fd-4643-bbc4-7442ef0d38c7" time="2.777">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="29 Feb 2024 counts on 26 Aug 2024 (day 180) and is gone on 27 Aug" testId="2652953f-df16-4bf3-be4b-765a3a927e80" runId="6eb9255b-5d81-49db-8f1e-ae75fba4bd4b" time="2.632">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="OpenAPI document lists the 3 endpoints and their statuses" testId="66aa232d-2ca6-497d-80c7-32592e1ca728" runId="c9ca6d57-275a-4348-9b79-0c5115fb4e39" time="2.676">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="60 one-day trips, 3 days apart: 60 days used, 30 left" testId="1d67ebee-429d-481a-91b4-bad762c442f0" runId="348a5d02-a776-4649-a339-029f3dbf6922" time="2.709">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Body limit is 64 KB of bytes: just under passes the size check, just over is 413" testId="cbcac16a-1b2b-4a8c-87e3-3999ed69f6f5" runId="bb16135b-c793-4591-bf39-b42688abebd5" time="2.899">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Malformed JSON bodies are a 400 JSON error, never a 500" testId="02607657-11f6-458f-8f22-89ceeecabd32" runId="628ed929-2b76-4144-a526-84a5151b762e" time="2.927">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Without &apos;on&apos;, the count is for today in UTC (spec)" testId="2728cfc7-20b3-4ca3-9181-7c5f1df67c86" runId="cb08278d-91e6-440a-847d-33ca7545b89d" time="2.894">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Dates 1900-2199 are counted (2100 is not a leap year); 1899 and 2200 are 400" testId="8b282390-b60c-47da-8c7c-adf7f1a0ee93" runId="be553f97-ac5a-4d35-8a8f-c9d62f319d01" time="3.076">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="CORS preflight, HEAD and wrong methods follow HTTP" testId="eb0ed6c4-168c-4993-8635-0bf87f76fb8d" runId="81aa3e8c-afc7-4b8f-a2f8-acb123bb62e1" time="2.988">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Content-Type: application/json with charset and any case is accepted; others are 415" testId="bb1d7f94-f174-4c12-b32f-da1b7905564c" runId="4d1753eb-f426-443f-b793-c59d1fce5d72" time="3.256">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Parity API: 14/14 match, from the live page or the named stored copy" testId="d0c1abdd-46f0-4e8f-a4ff-4ccc088b5a96" runId="7916ee7c-7270-4a27-a35d-fc3f995f9b2c" time="4.535">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Check agrees with the Commission figures that /api/parity reports" testId="10a7de6d-b92d-42ec-99a4-f726ac109651" runId="5933cb9d-6a6f-4ac8-87bb-a17ab67236f0" time="4.616">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="MCP: an error for an invalid request id still carries &quot;id&quot;: null (JSON-RPC 2.0 section 5)" testId="0f93fa64-cdb3-4e55-93bf-7bc8686ff3e0" runId="8c45fada-b0f6-44c5-83a9-5bcd008c1ff8" time="4.976">
+      <failure message="failed" type="failed">status: failed
+runId: 8c45fada-b0f6-44c5-83a9-5bcd008c1ff8</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -29,6 +29,7 @@ async function get(path) {
   }
 }
 
+const kinds = JSON.parse(readFileSync("testsprite_tests/red-runs.json", "utf8"));
 const loop = JSON.parse(readFileSync("src/data/loop.json", "utf8"));
 const pulls = (await get("/pulls?state=closed")).filter((p) => p.merged_at).sort((a, b) => a.merged_at.localeCompare(b.merged_at));
 
@@ -63,12 +64,14 @@ for (const pr of pulls) {
     checks,
     executions: executions.map((e) => ({ start: e.start, passed: e.passed, tests: e.tests, failed: e.failed.map((f) => f.test) })),
     redThenGreen: Boolean(greenAfter),
+    kind: greenAfter || (!greenAfter && stopThenGreen) ? kinds[pr.number]?.kind ?? "unclassified" : null,
     stoppedThenGreen: !greenAfter && stopThenGreen,
   });
 }
 
 writeFileSync("src/data/loop-iterations.json", JSON.stringify({ generatedAt: new Date().toISOString(), source: "GitHub API + src/data/loop.json", iterations }, null, 2) + "\n");
 
+const rg = (k) => iterations.filter((i) => i.redThenGreen && i.kind === k).map((i) => `#${i.pr}`);
 const short = (sha) => `[\`${sha.slice(0, 7)}\`](${WEB}/commit/${sha})`;
 const lines = [
   "# The loop, iteration by iteration",
@@ -77,11 +80,11 @@ const lines = [
   "",
   "Screenshots of the runs and the merge gate: [docs/evidence/testsprite](docs/evidence/testsprite/README.md).",
   "",
-  `${iterations.length} iterations, ${iterations.filter((i) => i.redThenGreen).length} of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed). ${iterations.filter((i) => i.stoppedThenGreen).length} more had a run that could not start or was blocked before a green run; those are not counted as catches.`,
+  `${iterations.length} iterations, ${iterations.filter((i) => i.redThenGreen).length} of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): ${rg("app").length} app defects (${rg("app").join(", ")}) and ${rg("plan-ci").length} where the test plan or CI was wrong (${rg("plan-ci").join(", ")}). ${iterations.filter((i) => i.stoppedThenGreen).length} more had a run that could not start or was blocked before a green run; those are not counted as catches.`,
   "",
 ];
 for (const it of iterations) {
-  lines.push(`## Iteration ${it.n}: [#${it.pr}](${WEB}/pull/${it.pr}) ${it.title.replace(/\|/g, "/")}${it.redThenGreen ? " (red, then green)" : it.stoppedThenGreen ? " (run could not complete, then green)" : ""}`, "");
+  lines.push(`## Iteration ${it.n}: [#${it.pr}](${WEB}/pull/${it.pr}) ${it.title.replace(/\|/g, "/")}${it.redThenGreen ? ` (red, then green: ${it.kind === "app" ? "app defect" : "test plan or CI"})` : it.stoppedThenGreen ? " (run could not complete, then green)" : ""}`, "");
   lines.push(`Merged ${it.mergedAt.replace("T", " ").slice(0, 16)} UTC as ${short(it.mergeCommit)}.`, "");
   if (it.checks.length) {
     lines.push("| Commit | TestSprite V3 | Execution |", "|---|---|---|");
@@ -94,4 +97,4 @@ for (const it of iterations) {
   }
 }
 writeFileSync("LOOP-ITERATIONS.md", lines.join("\n"));
-console.log(`${iterations.length} iterations, ${iterations.filter((i) => i.redThenGreen).length} red then green, ${iterations.filter((i) => i.stoppedThenGreen).length} stopped then green`);
+console.log(`${iterations.length} iterations, ${iterations.filter((i) => i.redThenGreen).length} red then green (${rg("app").length} app, ${rg("plan-ci").length} plan/CI), ${iterations.filter((i) => i.stoppedThenGreen).length} stopped then green`);
