@@ -5,3 +5,6 @@ Test first (`red-vitest.txt`, 2 failing), then fixed (`green-vitest.txt`): `Coun
 
 ## Browser recheck 1 failed (UX): the count-up replayed from 0
 On scroll-in the counters went 88/2 → 0/0 → 88/2 (and 56/34 → 0 on the plain page). Test first (`red2-vitest.txt`: with the band on screen, the counter read 11, 20, 27, 34, 41… instead of only 88), then fixed (`green2-vitest.txt`): the count-up is removed; the band shows the real figures and never animates them, so reduced-motion users and everyone else see the same stable numbers.
+
+## TS18: the Difference cell now names its unit
+TS18 kept reading the lone "2" Difference cell as blank (4 of 7 runs) while every snapshot had it. Decision (momo): the evidence cells name the unit, "88 days / 90 days / 2 days" ("1 day" singular), which is clearer for readers too. Tests first (`red3-vitest.txt`), then `green3-vitest.txt`; TS18's step updated (free, same id).

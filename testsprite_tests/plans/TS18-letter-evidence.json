@@ -22,7 +22,7 @@
     },
     {
       "type": "assertion",
-      "description": "Read the text of the elements by data-testid (DOM text, not a visual reading of the table): letter-evidence-on is 2026-10-19, letter-evidence-ours is 88, letter-evidence-ees is 90, letter-evidence-gap is 2"
+      "description": "Read the text of the elements by data-testid (DOM text, not a visual reading of the table): letter-evidence-on is 2026-10-19, letter-evidence-ours is '88 days', letter-evidence-ees is '90 days', letter-evidence-gap is '2 days'"
     },
     {
       "type": "assertion",
