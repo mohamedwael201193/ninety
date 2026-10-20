@@ -44,12 +44,15 @@ export function CountUp({ value, duration = 0.9, className }: { value: number; d
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
   const reduce = useReducedMotion();
-  const [n, setN] = useState(0);
+  // Render the real figure from the first paint; the count-up is a one-time flourish when the
+  // band first scrolls into view. A later value (scenario or saved trips read after mount) shows at once.
+  const [n, setN] = useState(value);
+  const played = useRef(false);
   useEffect(() => {
-    if (!inView) return;
-    if (reduce) { setN(value); return; }
-    const controls = animate(0, value, { duration, ease: EASE, onUpdate: (v) => setN(Math.round(v)) });
-    return () => controls.stop();
+    if (!inView || reduce || played.current) { setN(value); return; }
+    played.current = true;
+    const controls = animate(0, value, { duration, ease: EASE, onUpdate: (v) => setN(Math.round(v)), onComplete: () => setN(value) });
+    return () => { controls.stop(); setN(value); };
   }, [inView, value, duration, reduce]);
   return <span ref={ref} className={`tnum ${className ?? ""}`}>{n}</span>;
 }
