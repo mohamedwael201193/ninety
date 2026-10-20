@@ -1,0 +1,6 @@
+      Tests  2 passed (2)
+      Tests  2 passed (2)
+      Tests  2 passed (2)
+      Tests  2 passed (2)
+differential fuzz: seed 7, 3000 histories, 0 disagreements, shapes {"around-10-april-2026":733,"out-of-order":874,"overlap":1628,"spring-clock-change-2026":232,"exit-before-entry":157,"open-stay":606}
+      Tests  2 passed (2)

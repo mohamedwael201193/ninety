@@ -19,7 +19,12 @@ type Props = {
 export function WindowBar({ trips, today, end = today, planned }: Props) {
   const reduce = useReducedMotion();
   const cells = useMemo(() => {
-    const { stays } = closeStays(trips, today);
+    // As checkPlannedTrip assumes: an open stay continues up to the day before a later planned entry.
+    const later = planned && parseIso(planned.entry) > parseIso(today);
+    const assumed = later
+      ? trips.map((t) => (t.exit === null && parseIso(t.entry) <= parseIso(today) ? { entry: t.entry, exit: addDays(planned.entry, -1) } : t))
+      : trips;
+    const { stays } = closeStays(assumed, today);
     const presence = new Set<number>();
     for (const s of stays) for (let d = parseIso(s.entry); d <= parseIso(s.exit); d += 1) presence.add(d);
     const p0 = planned ? parseIso(planned.entry) : Infinity;

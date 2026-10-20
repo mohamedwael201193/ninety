@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-19T05:04:57.219Z",
+  "generatedAt": "2026-10-20T20:57:52.702Z",
   "source": "testsprite test result --history",
-  "runs": 704,
+  "runs": 1539,
   "executions": [
     {
       "pr": null,
@@ -564,8 +564,525 @@
       "pr": 36,
       "env": "github-pr-36",
       "start": "2026-10-19T05:03:21.221Z",
-      "tests": 9,
-      "passed": 9,
+      "tests": 14,
+      "passed": 13,
+      "failed": [
+        {
+          "test": "TS26",
+          "runId": "36075534-5883-4283-b6d5-6ebc8a36d23b",
+          "failureKind": "assertion"
+        }
+      ]
+    },
+    {
+      "pr": 37,
+      "env": "github-pr-37",
+      "start": "2026-10-19T05:04:09.453Z",
+      "tests": 14,
+      "passed": 13,
+      "failed": [
+        {
+          "test": "TS26",
+          "runId": "67680dcb-531a-4869-8fcb-f82efb934ff1",
+          "failureKind": "assertion"
+        }
+      ]
+    },
+    {
+      "pr": 38,
+      "env": "github-pr-38",
+      "start": "2026-10-19T05:05:50.795Z",
+      "tests": 14,
+      "passed": 13,
+      "failed": [
+        {
+          "test": "TS26",
+          "runId": "911e7aac-ed69-4381-a1dd-87181e124c89",
+          "failureKind": "assertion"
+        }
+      ]
+    },
+    {
+      "pr": 36,
+      "env": "github-pr-36",
+      "start": "2026-10-19T05:07:44.934Z",
+      "tests": 14,
+      "passed": 14,
+      "failed": []
+    },
+    {
+      "pr": 37,
+      "env": "github-pr-37",
+      "start": "2026-10-19T05:11:35.027Z",
+      "tests": 14,
+      "passed": 14,
+      "failed": []
+    },
+    {
+      "pr": 38,
+      "env": "github-pr-38",
+      "start": "2026-10-19T05:12:18.130Z",
+      "tests": 14,
+      "passed": 14,
+      "failed": []
+    },
+    {
+      "pr": 39,
+      "env": "github-pr-39",
+      "start": "2026-10-19T05:17:48.731Z",
+      "tests": 15,
+      "passed": 14,
+      "failed": [
+        {
+          "test": "TS16",
+          "runId": "fbf23dee-3c2d-4d3e-aa12-3bb3ee8a3dc4",
+          "failureKind": "unknown"
+        }
+      ]
+    },
+    {
+      "pr": 39,
+      "env": "github-pr-39",
+      "start": "2026-10-20T05:41:07.815Z",
+      "tests": 15,
+      "passed": 15,
+      "failed": []
+    },
+    {
+      "pr": 40,
+      "env": "github-pr-40",
+      "start": "2026-10-20T05:45:22.596Z",
+      "tests": 15,
+      "passed": 15,
+      "failed": []
+    },
+    {
+      "pr": 41,
+      "env": "github-pr-41",
+      "start": "2026-10-20T05:49:33.997Z",
+      "tests": 15,
+      "passed": 14,
+      "failed": [
+        {
+          "test": "TC011",
+          "runId": "49d91960-a481-4515-9acc-9a5929601ca5",
+          "failureKind": "assertion"
+        }
+      ]
+    },
+    {
+      "pr": null,
+      "env": "ninety-git-b-landing-mohamedwael201193s-projects",
+      "start": "2026-10-20T05:54:10.814Z",
+      "tests": 1,
+      "passed": 1,
+      "failed": []
+    },
+    {
+      "pr": 42,
+      "env": "github-pr-42",
+      "start": "2026-10-20T05:58:15.449Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 42,
+      "env": "github-pr-42",
+      "start": "2026-10-20T06:12:48.737Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 41,
+      "env": "github-pr-41",
+      "start": "2026-10-20T06:21:12.872Z",
+      "tests": 17,
+      "passed": 16,
+      "failed": [
+        {
+          "test": "TC011",
+          "runId": "619e50f5-9772-48a7-8757-4d3921399aa4",
+          "failureKind": "assertion"
+        }
+      ]
+    },
+    {
+      "pr": 41,
+      "env": "github-pr-41",
+      "start": "2026-10-20T06:28:46.201Z",
+      "tests": 17,
+      "passed": 16,
+      "failed": [
+        {
+          "test": "TS18",
+          "runId": "a22075ee-b970-404c-b8c4-e96ee146cf59",
+          "failureKind": "unknown"
+        }
+      ]
+    },
+    {
+      "pr": 41,
+      "env": "github-pr-41",
+      "start": "2026-10-20T06:34:02.893Z",
+      "tests": 17,
+      "passed": 16,
+      "failed": [
+        {
+          "test": "TS18",
+          "runId": "9cddc446-8bc8-4d02-9ad8-146f63d40e6a",
+          "failureKind": "unknown"
+        }
+      ]
+    },
+    {
+      "pr": 41,
+      "env": "github-pr-41",
+      "start": "2026-10-20T06:38:19.178Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 33,
+      "env": "github-pr-33",
+      "start": "2026-10-20T06:46:26.759Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 28,
+      "env": "github-pr-28",
+      "start": "2026-10-20T06:52:13.075Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 32,
+      "env": "github-pr-32",
+      "start": "2026-10-20T06:57:28.557Z",
+      "tests": 17,
+      "passed": 15,
+      "failed": [
+        {
+          "test": "TC011",
+          "runId": "ffe676da-5ed6-4b4d-aa81-d71d8b28c4f7",
+          "failureKind": "assertion"
+        },
+        {
+          "test": "TS18",
+          "runId": "fa0b3a41-9820-4fb2-be9d-b61ab1e81476",
+          "failureKind": "unknown"
+        }
+      ]
+    },
+    {
+      "pr": 32,
+      "env": "github-pr-32",
+      "start": "2026-10-20T07:03:42.207Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 43,
+      "env": "github-pr-43",
+      "start": "2026-10-20T07:09:24.074Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 43,
+      "env": "github-pr-43",
+      "start": "2026-10-20T07:15:37.277Z",
+      "tests": 17,
+      "passed": 16,
+      "failed": [
+        {
+          "test": "TS18",
+          "runId": "76bbbf3e-6348-4a38-aaf5-4d7ebaab4c64",
+          "failureKind": "unknown"
+        }
+      ]
+    },
+    {
+      "pr": 43,
+      "env": "github-pr-43",
+      "start": "2026-10-20T07:21:36.432Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 44,
+      "env": "github-pr-44",
+      "start": "2026-10-20T07:27:18.739Z",
+      "tests": 17,
+      "passed": 0,
+      "failed": [
+        {
+          "test": "TS01",
+          "runId": "f97b0f37-a24f-44d7-be25-b94ab69a97b8",
+          "failureKind": null
+        },
+        {
+          "test": "TS02",
+          "runId": "3a47052e-9d53-4cfa-9433-3c29167471ba",
+          "failureKind": null
+        },
+        {
+          "test": "TS03",
+          "runId": "b8b5ec49-07c4-44ab-9057-44ef135de587",
+          "failureKind": null
+        },
+        {
+          "test": "TS04",
+          "runId": "21143eed-de57-43e1-a2c3-bd5fc60fc929",
+          "failureKind": null
+        },
+        {
+          "test": "TS05",
+          "runId": "81bc623c-1c00-481c-b9d0-5f741ac1ba86",
+          "failureKind": null
+        },
+        {
+          "test": "TS06",
+          "runId": "754e5e77-0219-48ab-b360-89b8b86c8cc9",
+          "failureKind": null
+        },
+        {
+          "test": "TS07",
+          "runId": "466144a1-8515-4c71-94af-1a553d103def",
+          "failureKind": null
+        },
+        {
+          "test": "TS08",
+          "runId": "69605e2e-0454-4df8-b028-c8beb491933f",
+          "failureKind": null
+        },
+        {
+          "test": "TC009",
+          "runId": "1cbabc8c-3ed9-4329-872e-7c426732e472",
+          "failureKind": null
+        },
+        {
+          "test": "TC010",
+          "runId": "7101fea0-ab46-4515-8017-7c6f44aad4ee",
+          "failureKind": null
+        },
+        {
+          "test": "TC011",
+          "runId": "9cc584f4-8ed6-42f8-a2aa-c1bd57fdd943",
+          "failureKind": null
+        },
+        {
+          "test": "TS09",
+          "runId": "2baf5c19-39f5-4a1a-901e-b2fc62f46d20",
+          "failureKind": null
+        },
+        {
+          "test": "TS10",
+          "runId": "132bfc93-ac20-4d96-8886-4b8092988a75",
+          "failureKind": null
+        },
+        {
+          "test": "TS26",
+          "runId": "8640ca01-e94d-4ee1-a1f3-b4d452d9f650",
+          "failureKind": null
+        },
+        {
+          "test": "TS16",
+          "runId": "aa41a908-b5e4-49de-b3e4-95bbfc7da9e3",
+          "failureKind": null
+        },
+        {
+          "test": "TS17",
+          "runId": "9fa77b81-47b0-4a8a-858b-fcd5d39a9aad",
+          "failureKind": null
+        },
+        {
+          "test": "TS18",
+          "runId": "5bf19678-3ebe-4f31-b338-3b1d0f7242ee",
+          "failureKind": null
+        }
+      ]
+    },
+    {
+      "pr": 44,
+      "env": "github-pr-44",
+      "start": "2026-10-20T07:31:39.522Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 45,
+      "env": "github-pr-45",
+      "start": "2026-10-20T07:36:20.034Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 46,
+      "env": "github-pr-46",
+      "start": "2026-10-20T07:41:01.383Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 47,
+      "env": "github-pr-47",
+      "start": "2026-10-20T07:47:51.902Z",
+      "tests": 17,
+      "passed": 17,
+      "failed": []
+    },
+    {
+      "pr": 48,
+      "env": "github-pr-48",
+      "start": "2026-10-20T07:54:29.932Z",
+      "tests": 27,
+      "passed": 27,
+      "failed": []
+    },
+    {
+      "pr": 49,
+      "env": "github-pr-49",
+      "start": "2026-10-20T07:59:46.678Z",
+      "tests": 27,
+      "passed": 27,
+      "failed": []
+    },
+    {
+      "pr": 50,
+      "env": "github-pr-50",
+      "start": "2026-10-20T08:09:17.036Z",
+      "tests": 29,
+      "passed": 29,
+      "failed": []
+    },
+    {
+      "pr": 50,
+      "env": "github-pr-50",
+      "start": "2026-10-20T08:16:39.508Z",
+      "tests": 29,
+      "passed": 29,
+      "failed": []
+    },
+    {
+      "pr": 51,
+      "env": "github-pr-51",
+      "start": "2026-10-20T08:21:54.085Z",
+      "tests": 30,
+      "passed": 30,
+      "failed": []
+    },
+    {
+      "pr": 52,
+      "env": "github-pr-52",
+      "start": "2026-10-20T08:28:13.939Z",
+      "tests": 31,
+      "passed": 31,
+      "failed": []
+    },
+    {
+      "pr": 53,
+      "env": "github-pr-53",
+      "start": "2026-10-20T08:35:18.965Z",
+      "tests": 32,
+      "passed": 32,
+      "failed": []
+    },
+    {
+      "pr": 54,
+      "env": "github-pr-54",
+      "start": "2026-10-20T08:44:37.881Z",
+      "tests": 32,
+      "passed": 32,
+      "failed": []
+    },
+    {
+      "pr": 55,
+      "env": "github-pr-55",
+      "start": "2026-10-20T08:51:54.374Z",
+      "tests": 35,
+      "passed": 34,
+      "failed": [
+        {
+          "test": "TS41",
+          "runId": "8dd5496a-e43b-4719-a549-7b7e65988aad",
+          "failureKind": "unknown"
+        }
+      ]
+    },
+    {
+      "pr": 55,
+      "env": "github-pr-55",
+      "start": "2026-10-20T08:58:43.606Z",
+      "tests": 35,
+      "passed": 32,
+      "failed": [
+        {
+          "test": "TS39",
+          "runId": "5ad056cd-a709-42e7-ac05-4e2b00514a21",
+          "failureKind": null
+        },
+        {
+          "test": "TS41",
+          "runId": "1223f90a-2335-4da2-8f10-646d895f5241",
+          "failureKind": "unknown"
+        },
+        {
+          "test": "TS42",
+          "runId": "28fb5beb-7cce-4629-aec1-a6dd1095ee7d",
+          "failureKind": "assertion"
+        }
+      ]
+    },
+    {
+      "pr": 55,
+      "env": "github-pr-55",
+      "start": "2026-10-20T09:10:11.010Z",
+      "tests": 35,
+      "passed": 32,
+      "failed": [
+        {
+          "test": "TS34",
+          "runId": "a2870167-6733-4a14-bb94-3469bfc421e6",
+          "failureKind": "assertion"
+        },
+        {
+          "test": "TS41",
+          "runId": "6566d10e-b865-4d5f-9110-3d7d13be8558",
+          "failureKind": "unknown"
+        },
+        {
+          "test": "TS42",
+          "runId": "2fe9ba79-edca-4d7e-9360-6c6df4765786",
+          "failureKind": "assertion"
+        }
+      ]
+    },
+    {
+      "pr": 55,
+      "env": "github-pr-55",
+      "start": "2026-10-20T11:56:33.238Z",
+      "tests": 35,
+      "passed": 35,
+      "failed": []
+    },
+    {
+      "pr": 56,
+      "env": "github-pr-56",
+      "start": "2026-10-20T15:29:24.013Z",
+      "tests": 35,
+      "passed": 35,
       "failed": []
     }
   ],
@@ -652,6 +1169,316 @@
         "start": "2026-10-19T03:35:19.250Z",
         "tests": 13,
         "passed": 13,
+        "failed": []
+      }
+    },
+    {
+      "pr": 32,
+      "red": {
+        "pr": 32,
+        "env": "github-pr-32",
+        "start": "2026-10-20T06:57:28.557Z",
+        "tests": 17,
+        "passed": 15,
+        "failed": [
+          {
+            "test": "TC011",
+            "runId": "ffe676da-5ed6-4b4d-aa81-d71d8b28c4f7",
+            "failureKind": "assertion"
+          },
+          {
+            "test": "TS18",
+            "runId": "fa0b3a41-9820-4fb2-be9d-b61ab1e81476",
+            "failureKind": "unknown"
+          }
+        ]
+      },
+      "green": {
+        "pr": 32,
+        "env": "github-pr-32",
+        "start": "2026-10-20T07:03:42.207Z",
+        "tests": 17,
+        "passed": 17,
+        "failed": []
+      }
+    },
+    {
+      "pr": 36,
+      "red": {
+        "pr": 36,
+        "env": "github-pr-36",
+        "start": "2026-10-19T05:03:21.221Z",
+        "tests": 14,
+        "passed": 13,
+        "failed": [
+          {
+            "test": "TS26",
+            "runId": "36075534-5883-4283-b6d5-6ebc8a36d23b",
+            "failureKind": "assertion"
+          }
+        ]
+      },
+      "green": {
+        "pr": 36,
+        "env": "github-pr-36",
+        "start": "2026-10-19T05:07:44.934Z",
+        "tests": 14,
+        "passed": 14,
+        "failed": []
+      }
+    },
+    {
+      "pr": 37,
+      "red": {
+        "pr": 37,
+        "env": "github-pr-37",
+        "start": "2026-10-19T05:04:09.453Z",
+        "tests": 14,
+        "passed": 13,
+        "failed": [
+          {
+            "test": "TS26",
+            "runId": "67680dcb-531a-4869-8fcb-f82efb934ff1",
+            "failureKind": "assertion"
+          }
+        ]
+      },
+      "green": {
+        "pr": 37,
+        "env": "github-pr-37",
+        "start": "2026-10-19T05:11:35.027Z",
+        "tests": 14,
+        "passed": 14,
+        "failed": []
+      }
+    },
+    {
+      "pr": 38,
+      "red": {
+        "pr": 38,
+        "env": "github-pr-38",
+        "start": "2026-10-19T05:05:50.795Z",
+        "tests": 14,
+        "passed": 13,
+        "failed": [
+          {
+            "test": "TS26",
+            "runId": "911e7aac-ed69-4381-a1dd-87181e124c89",
+            "failureKind": "assertion"
+          }
+        ]
+      },
+      "green": {
+        "pr": 38,
+        "env": "github-pr-38",
+        "start": "2026-10-19T05:12:18.130Z",
+        "tests": 14,
+        "passed": 14,
+        "failed": []
+      }
+    },
+    {
+      "pr": 39,
+      "red": {
+        "pr": 39,
+        "env": "github-pr-39",
+        "start": "2026-10-19T05:17:48.731Z",
+        "tests": 15,
+        "passed": 14,
+        "failed": [
+          {
+            "test": "TS16",
+            "runId": "fbf23dee-3c2d-4d3e-aa12-3bb3ee8a3dc4",
+            "failureKind": "unknown"
+          }
+        ]
+      },
+      "green": {
+        "pr": 39,
+        "env": "github-pr-39",
+        "start": "2026-10-20T05:41:07.815Z",
+        "tests": 15,
+        "passed": 15,
+        "failed": []
+      }
+    },
+    {
+      "pr": 41,
+      "red": {
+        "pr": 41,
+        "env": "github-pr-41",
+        "start": "2026-10-20T05:49:33.997Z",
+        "tests": 15,
+        "passed": 14,
+        "failed": [
+          {
+            "test": "TC011",
+            "runId": "49d91960-a481-4515-9acc-9a5929601ca5",
+            "failureKind": "assertion"
+          }
+        ]
+      },
+      "green": {
+        "pr": 41,
+        "env": "github-pr-41",
+        "start": "2026-10-20T06:38:19.178Z",
+        "tests": 17,
+        "passed": 17,
+        "failed": []
+      }
+    },
+    {
+      "pr": 43,
+      "red": {
+        "pr": 43,
+        "env": "github-pr-43",
+        "start": "2026-10-20T07:15:37.277Z",
+        "tests": 17,
+        "passed": 16,
+        "failed": [
+          {
+            "test": "TS18",
+            "runId": "76bbbf3e-6348-4a38-aaf5-4d7ebaab4c64",
+            "failureKind": "unknown"
+          }
+        ]
+      },
+      "green": {
+        "pr": 43,
+        "env": "github-pr-43",
+        "start": "2026-10-20T07:21:36.432Z",
+        "tests": 17,
+        "passed": 17,
+        "failed": []
+      }
+    },
+    {
+      "pr": 44,
+      "red": {
+        "pr": 44,
+        "env": "github-pr-44",
+        "start": "2026-10-20T07:27:18.739Z",
+        "tests": 17,
+        "passed": 0,
+        "failed": [
+          {
+            "test": "TS01",
+            "runId": "f97b0f37-a24f-44d7-be25-b94ab69a97b8",
+            "failureKind": null
+          },
+          {
+            "test": "TS02",
+            "runId": "3a47052e-9d53-4cfa-9433-3c29167471ba",
+            "failureKind": null
+          },
+          {
+            "test": "TS03",
+            "runId": "b8b5ec49-07c4-44ab-9057-44ef135de587",
+            "failureKind": null
+          },
+          {
+            "test": "TS04",
+            "runId": "21143eed-de57-43e1-a2c3-bd5fc60fc929",
+            "failureKind": null
+          },
+          {
+            "test": "TS05",
+            "runId": "81bc623c-1c00-481c-b9d0-5f741ac1ba86",
+            "failureKind": null
+          },
+          {
+            "test": "TS06",
+            "runId": "754e5e77-0219-48ab-b360-89b8b86c8cc9",
+            "failureKind": null
+          },
+          {
+            "test": "TS07",
+            "runId": "466144a1-8515-4c71-94af-1a553d103def",
+            "failureKind": null
+          },
+          {
+            "test": "TS08",
+            "runId": "69605e2e-0454-4df8-b028-c8beb491933f",
+            "failureKind": null
+          },
+          {
+            "test": "TC009",
+            "runId": "1cbabc8c-3ed9-4329-872e-7c426732e472",
+            "failureKind": null
+          },
+          {
+            "test": "TC010",
+            "runId": "7101fea0-ab46-4515-8017-7c6f44aad4ee",
+            "failureKind": null
+          },
+          {
+            "test": "TC011",
+            "runId": "9cc584f4-8ed6-42f8-a2aa-c1bd57fdd943",
+            "failureKind": null
+          },
+          {
+            "test": "TS09",
+            "runId": "2baf5c19-39f5-4a1a-901e-b2fc62f46d20",
+            "failureKind": null
+          },
+          {
+            "test": "TS10",
+            "runId": "132bfc93-ac20-4d96-8886-4b8092988a75",
+            "failureKind": null
+          },
+          {
+            "test": "TS26",
+            "runId": "8640ca01-e94d-4ee1-a1f3-b4d452d9f650",
+            "failureKind": null
+          },
+          {
+            "test": "TS16",
+            "runId": "aa41a908-b5e4-49de-b3e4-95bbfc7da9e3",
+            "failureKind": null
+          },
+          {
+            "test": "TS17",
+            "runId": "9fa77b81-47b0-4a8a-858b-fcd5d39a9aad",
+            "failureKind": null
+          },
+          {
+            "test": "TS18",
+            "runId": "5bf19678-3ebe-4f31-b338-3b1d0f7242ee",
+            "failureKind": null
+          }
+        ]
+      },
+      "green": {
+        "pr": 44,
+        "env": "github-pr-44",
+        "start": "2026-10-20T07:31:39.522Z",
+        "tests": 17,
+        "passed": 17,
+        "failed": []
+      }
+    },
+    {
+      "pr": 55,
+      "red": {
+        "pr": 55,
+        "env": "github-pr-55",
+        "start": "2026-10-20T08:51:54.374Z",
+        "tests": 35,
+        "passed": 34,
+        "failed": [
+          {
+            "test": "TS41",
+            "runId": "8dd5496a-e43b-4719-a549-7b7e65988aad",
+            "failureKind": "unknown"
+          }
+        ]
+      },
+      "green": {
+        "pr": 55,
+        "env": "github-pr-55",
+        "start": "2026-10-20T11:56:33.238Z",
+        "tests": 35,
+        "passed": 35,
         "failed": []
       }
     }

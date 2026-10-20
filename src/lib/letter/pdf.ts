@@ -50,6 +50,14 @@ function wrapLine(text: string, maxWidth: number, widthOf: (value: string) => nu
 export async function letterToPdf(letter: CorrectionLetter, fontBytes: Uint8Array): Promise<Uint8Array> {
   const document = await PDFDocument.create();
   document.registerFontkit(fontkit);
+  // A character the font has no glyph for would be written as an invisible \u0000: refuse instead.
+  const face = fontkit.create(fontBytes as unknown as Buffer) as unknown as { hasGlyphForCodePoint(cp: number): boolean };
+  const missing = new Set<string>();
+  for (const paragraph of letter.paragraphs) for (const ch of paragraph) {
+    const cp = ch.codePointAt(0)!;
+    if (cp > 0x20 && !face.hasGlyphForCodePoint(cp)) missing.add(ch);
+  }
+  if (missing.size > 0) throw new Error(`The PDF font cannot draw ${[...missing].join(" ")}. Write these with Latin letters, or copy the text instead of downloading the PDF.`);
   const font = await document.embedFont(fontBytes, { subset: true });
   const maxWidth = PAGE_WIDTH - MARGIN * 2;
   const measure = (value: string, size: number) => font.widthOfTextAtSize(value, size);
@@ -79,6 +87,7 @@ export async function letterToPdf(letter: CorrectionLetter, fontBytes: Uint8Arra
   }
 
   document.setTitle(letter.title);
-  document.setAuthor(letter.paragraphs.find((paragraph) => paragraph.startsWith("I, ")) ?? "");
+  // PDF 32000-1, 14.3.3: Author is the person who wrote the document, not the identity paragraph.
+  document.setAuthor(letter.signedBy);
   return document.save();
 }

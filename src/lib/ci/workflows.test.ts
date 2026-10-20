@@ -81,3 +81,43 @@ describe("CI workflow", () => {
     expect(triggers(read("ci.yml"))).toContain("pull_request");
   });
 });
+
+describe("api-contract.yml (Schemathesis)", () => {
+  const wf = readFileSync(".github/workflows/api-contract.yml", "utf8");
+  it("runs on pull requests against a production build, with a pinned Schemathesis and no secrets", () => {
+    expect(wf).toMatch(/pull_request:/);
+    expect(wf).toContain("npx next start");
+    expect(wf).toContain('schemathesis==4.0.0');
+    expect(wf).not.toMatch(/secrets\./);
+  });
+  it("accepts only 200 or the documented 422 for schema-valid requests", () => {
+    expect(readFileSync("schemathesis.toml", "utf8")).toMatch(/expected-statuses = \[200, 422\]/);
+  });
+});
+
+describe("TestSprite smoke workflow", () => {
+  const yaml = read("testsprite-smoke.yml");
+  const ids = JSON.parse(readFileSync("testsprite_tests/test-ids.json", "utf8")) as Record<string, string>;
+  const plans = (/SMOKE_PLANS: "([^"]+)"/.exec(yaml)?.[1] ?? "").split(" ");
+
+  it("never runs on push or pull_request", () => {
+    expect(triggers(yaml).sort()).toEqual(["schedule", "workflow_dispatch"]);
+  });
+
+  it("runs nightly only when TESTSPRITE_SMOKE is switched on (off by default)", () => {
+    expect(yaml).toContain("github.event_name == 'schedule' && vars.TESTSPRITE_SMOKE == 'true'");
+  });
+
+  it("runs 2 to 4 tests that exist in test-ids.json (1 to 2 credits a run at 0.5 each), against production", () => {
+    expect(plans.length).toBeGreaterThanOrEqual(2);
+    expect(plans.length).toBeLessThanOrEqual(4);
+    for (const p of plans) expect(ids[p], p).toMatch(/^[0-9a-f-]{36}$/);
+    expect(yaml).toContain("TARGET_URL: https://ninety-coral.vercel.app");
+    expect(yaml).toContain("--target-url \"$TARGET_URL\"");
+    expect(yaml).not.toContain("--all");
+  });
+
+  it("pins every third-party action to a full commit SHA", () => {
+    for (const ref of [...yaml.matchAll(/uses: (\S+)/g)].map((m) => m[1])) expect(ref, ref).toMatch(/@[0-9a-f]{40}$/);
+  });
+});

@@ -1,0 +1,32 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "A booked overstay after the date shown is called later, not earlier",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2024-03-01&fresh=1 (pins today to 2024-03-01 and clears saved trips)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add) to open the trip sheet"
+    },
+    {
+      "type": "action",
+      "description": "Enter entry date 2024-01-01 (data-testid=trip-entry) and exit date 2024-04-15 (data-testid=trip-exit)"
+    },
+    {
+      "type": "action",
+      "description": "Click save (data-testid=trip-save)"
+    },
+    {
+      "type": "assertion",
+      "description": "The overstay status (data-testid=overstay-status) reads 'Not today'"
+    },
+    {
+      "type": "assertion",
+      "description": "The hint shown right after the overstay status (the next element after data-testid=overstay-status) reads exactly 'A later overstay is listed below'"
+    }
+  ]
+}

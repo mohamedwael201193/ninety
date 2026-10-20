@@ -6,17 +6,21 @@ Ninety counts your Schengen short-stay days from your own trips, checks that cou
 
 **Live:** https://ninety-coral.vercel.app
 
-**Receipts** (as of `main` at `fbf4b64`, each one checkable in this repo):
+**Receipts** (each one checkable in this repo; TestSprite figures from PR #56 at `43d4ad0`):
 
 | | |
 |---|---|
-| **14/14** | scenarios match the European Commission's own calculator, run from a stored, hashed copy on every PR ([`parity.test.ts`](src/lib/schengen/parity.test.ts)) and live every night ([`drift.yml`](.github/workflows/drift.yml)) |
-| **500 / 3,000** | random travel histories through Ninety and the Commission calculator per PR / per night, 0 disagreements ([`differential.fuzz.test.ts`](src/lib/schengen/differential.fuzz.test.ts), [`ci.yml`](.github/workflows/ci.yml)) |
-| **35** | TestSprite cloud tests on every PR preview, `TestSprite V3` a required check ([`test-ids.json`](testsprite_tests/test-ids.json), plans in [`testsprite_tests/plans`](testsprite_tests/plans)) |
-| **35/35** | passed on the latest run, PR #55 at `815cc79` (2026-10-20; [portal report PDF](docs/evidence/portal-2026-10-20/testsprite-report-35of35-2026-10-20.pdf), [run map](docs/evidence/portal-2026-10-20/run-map-35of35.webp)) |
-| **235** | Vitest unit, property and fuzz tests on every PR (`npm test`) |
-| **53** | pull requests merged into `main` |
-| **6** | real bugs caught red by TestSprite and fixed to green in the PR (#8, #14, #39, #41 twice, #55); 9 more found by unit, fuzz and axe tests in #40–#54, each fixed test-first (see [Bugs fixed in #39–#55](#bugs-fixed-in-39-55) and [`docs/evidence`](docs/evidence/EVIDENCE_INDEX.md)) |
+| **14/14** | scenarios on [`/parity`](https://ninety-coral.vercel.app/parity) match the European Commission's own calculator (the manual's worked examples and edge cases), compared down to the latest legal day, from a stored, hashed copy on every PR ([`parity.test.ts`](src/lib/schengen/parity.test.ts)) and against the live page every night ([`drift.yml`](.github/workflows/drift.yml), last nightly [green](https://github.com/mohamedwael201193/ninety/actions/runs/39366383632)) |
+| **399/400** | stored scenarios the Commission form accepts match its vendored script on every printed field; 12 more the form refuses are listed with both answers, 412 in all ([`deep.test.ts`](src/lib/schengen/deep/deep.test.ts) re-runs the script) |
+| **12** | hand-worked boundary cases, each a different situation, whose answers were written down first and then checked word for word against what the calculator prints ([`golden.ts`](src/lib/schengen/golden.ts)) |
+| **500 / 3,000** | random travel histories through Ninety and the Commission calculator per PR / per night (overlaps, open stays, trips out of order, exit before entry, dates around 10 April 2026 and the spring clock change), 0 disagreements after the one bug it found was fixed ([`differential.fuzz.test.ts`](src/lib/schengen/differential.fuzz.test.ts), [`ci.yml`](.github/workflows/ci.yml), last nightly [green](https://github.com/mohamedwael201193/ninety/actions/runs/39359668818)) |
+| **Properties** | checked against brute force on random histories: no legal answer ever has more than 90 days in a 180-day window, a planned trip "fits" exactly when every window stays at 90 or less, and the output is deterministic and independent of trip order ([`properties.test.ts`](src/lib/schengen/properties.test.ts), [`properties.legal.test.ts`](src/lib/schengen/properties.legal.test.ts)) |
+| **43** | TestSprite cloud tests on every PR preview (TS45–TS52 added for bugs found in code review), `TestSprite V3` a required check ([`test-ids.json`](testsprite_tests/test-ids.json), plans in [`testsprite_tests/plans`](testsprite_tests/plans)) |
+| **35/35** | passed on the latest run, PR #56 at `43d4ad0` (status "All 35 tests passed", 2026-10-20; [portal report PDF](docs/evidence/portal-2026-10-20/testsprite-report-35of35-2026-10-20.pdf), [run map](docs/evidence/portal-2026-10-20/run-map-35of35.webp)) |
+| **6** | real app bugs TestSprite caught on a PR preview and that were fixed before merging ([What TestSprite caught](#what-testsprite-caught)) |
+| **347** | Vitest unit, property and fuzz tests on every PR, all passing (3 more run only against the live Commission page) (`npm test`) |
+| **3** | public API endpoints with an [OpenAPI 3.1 document](https://ninety-coral.vercel.app/api/openapi.json) (copy in [`docs/openapi.json`](docs/openapi.json), kept equal by a test), and the same three as MCP tools: over streamable HTTP at `/api/mcp` and as a stdio [server](packages/ninety-mcp), both tested with the official MCP client |
+| **54** | pull requests merged into `main` |
 
 ---
 
@@ -61,9 +65,39 @@ Article 52 of Regulation (EU) 2017/2226 lets you ask the competent authority of 
 
 ## Parity with the European Commission calculator — 14/14 (`/parity`)
 
-A day-count tool is only useful if it gives the official answer. `/parity` fetches the European Commission's own short-stay calculator script **live**, runs 14 fixed scenarios through both it and Ninety's engine, and shows the result for each one: Ninety's count, the Commission calculator's count, and whether they match. The scenarios cover the Commission manual's worked examples plus edge cases — exactly 90 days, day 91, re-entry after a full 90, same-day stays and turnarounds, and a date just after a clock change.
+A day-count tool is only useful if it gives the official answer. `/parity` fetches the European Commission's own short-stay calculator script **live**, runs 14 fixed scenarios through both it and Ninety's engine, and shows each one: Ninety's count, the calculator's count, whether they match, and, for a stay, the latest legal day each one gives (`data-testid=parity-span-ours` / `parity-span-theirs`). The scenarios are the Commission manual's worked examples plus edge cases: exactly 90 days, day 91, re-entry after a full 90, same-day stays and turnarounds, and a date just after a clock change. If the script cannot be loaded, the page says "couldn't verify" rather than claiming a match.
 
-Current result: **14/14 match**. If the Commission script cannot be loaded, the page says "couldn't verify" rather than claiming a match.
+A wider set is checked against the same vendored script, field by field (days left, the 90- and 180-day period starts, possible stay until, a last legal day with 0 left, a refused entry, the next date a stay is allowed, each overstay window, the length of each stay, and a refusal when the exit is before the entry). 399/400 of the inputs the calculator accepts match on every one of those fields. The other one is an overlap the calculator lists as two overstays. The calculator's raw output is in [`oracle-output.json`](src/lib/schengen/deep/oracle-output.json); [`deep.test.ts`](src/lib/schengen/deep/deep.test.ts) re-runs the script and fails if that file differs. `/parity` shows the count and every case that does not match.
+
+The vendored calculator page ([`commission-calculator.ts`](src/lib/schengen/vendor/commission-calculator.ts)) is © European Union, the European Commission's short-stay calculator, reused unmodified with acknowledgement of the source under Commission Decision 2011/833/EU. Ninety is not affiliated with the Commission.
+
+Below it, **12 hand-worked cases**, each a different situation (a test fails if two share the same reasoning): overlapping trips, an open stay through today, refused entry until the first day leaves the window, the spring clock change, leap day on the last day of the window and the day after, exit before entry, old days leaving during a stay, consecutive exit and entry days, a stay across the EES cutoff, two stays that add up to 93, and overlapping trips that overstay. Each one's answer was written down first with how it was reached (`why` in [`golden.ts`](src/lib/schengen/golden.ts)); the test checks that Ninety gives it and that the calculator prints the exact sentences listed. Writing them down first caught one of our own mistakes: a planned "two old stays, 90 left" case actually added up to 93 days in one window, an overstay. It is kept as a case, with the wrong first answer recorded next to the right one.
+
+What the calculator itself does, found while doing this: it needs an exit for every stay (an open stay is closed on the control date), refuses an exit before the entry or after the control date, and refuses overlapping stays, except that it never compares the first stay with the second. The fuzzer gives it sorted, merged input for that reason.
+
+The fuzzer also found a bug in Ninety: two overlapping trips that overstay were listed as two overstays (6 and 11 days) for 11 real days (seed 20261019, run 14). It is pinned as a named case and fixed: overlapping stays are merged before overstays are counted.
+
+## Public API and MCP server (`/developers`)
+
+The engine is also a JSON API on the same deployment, with no key and open CORS. Nothing you send is stored.
+
+| Endpoint | Answers |
+|---|---|
+| `POST /api/v1/check` | days used and left on a date, latest legal exit, next legal entry, overstays, and (with `planned`) whether a trip fits |
+| `POST /api/v1/ees-reconcile` | the EES figure against your trips: the gap, the likely cause, the exact days that differ |
+| `POST /api/v1/letter` | the Article 52 request, drafted from your details and the comparison |
+
+```bash
+curl -s -X POST https://ninety-coral.vercel.app/api/v1/check -H 'content-type: application/json' \
+  -d '{"trips":[{"entry":"2026-05-01","exit":"2026-06-15"},{"entry":"2026-08-20","exit":"2026-09-30"}],"on":"2026-10-19"}'
+# {"on":"2026-10-19","daysUsed":88,"daysLeft":2,...}
+```
+
+A Schemathesis job ([`api-contract.yml`](.github/workflows/api-contract.yml)) generates requests from the OpenAPI document on every pull request and runs them against a production build: every answer must match the schema for its status, schema-valid requests must get 200 (or the documented 422), and nothing may be a server error. It is free and needs no secrets. Its coverage phase is off because it sends `TRACE`, which Next.js itself answers with a 500 before any app code runs.
+
+Input is checked field by field (`400` names the path, for example `trips.0.entry`), dates that cannot be counted give `422`, and bodies are capped at 64 KB. The [OpenAPI 3.1 document](https://ninety-coral.vercel.app/api/openapi.json) is generated from the same file the tests read, and a test runs its example request and checks every documented field comes back. The examples on `/developers` are produced by the real functions when the page is built.
+
+`POST /api/mcp` serves the same three tools over MCP streamable HTTP (stateless JSON-RPC: `initialize`, `tools/list`, `tools/call`, `ping`), from the same code; its unit test runs in `npm test`, and the official MCP client was run against it locally. [`packages/ninety-mcp`](packages/ninety-mcp) is a stdio MCP server with three tools, `schengen_check`, `ees_reconcile` and `article52_letter`, which call the same functions with the same input schemas. Its test starts the built server with the official MCP client, lists the tools and calls each one; CI runs it on every pull request.
 
 ## Scenario gallery
 
@@ -73,129 +107,43 @@ The home page has six worked histories (open stay, 88 of 90, overstay, same-day 
 
 `/proof` lists the 12 rules Ninety applies (90/180, entry and exit days, the rolling window, overstays, open stays, planned trips, input rules, EES findings, the 10 April 2026 cutoff, Article 52, parity) and, for each, the engine test, the Commission parity scenario and the TestSprite tests that guard it, with each test's latest cloud result. The table comes from `src/data/rules.json` and `npm run proof:matrix` (TestSprite reads only), and a unit test fails if any test it names stops existing.
 
-## Tested with TestSprite
+## What TestSprite caught
 
-`testsprite_tests/plans/` holds the end-to-end suite (**35 tests** after this change; the full list with what each proves is in [`testsprite_tests/README.md`](testsprite_tests/README.md)) that TestSprite runs in its cloud browser against the Vercel preview of every pull request. Every plan starts from a pinned date (`?today=2026-10-19`) and either `fresh=1` (no saved trips) or a named `?scenario=`, so results do not drift with the calendar or leak between tests. Each assertion checks a number or a specific message:
+Counted from the `TestSprite V3` commit statuses of every merged pull request (raw list: [`docs/evidence/receipts/pr-testsprite-history.json`](docs/evidence/receipts/pr-testsprite-history.json)).
 
-| Id | Proves |
-|---|---|
-| TS01 | The example trips give 64 days used and 26 left |
-| TS02 | `/parity` reads 14/14 with all 14 rows matching |
-| TS03 | 2026-09-01 → 2026-09-10 gives 10 used and 80 left |
-| TS04 | An exit before entry is rejected with its message and nothing is saved |
-| TS05 | Delete then Undo brings back the same dates and 64 days |
-| TS06 | A legal planned trip fits |
-| TS07 | `/ees` reports a 26-day gap and `figure-differs` |
-| TS08 | The Article 52 letter states both counts and the 45-day reply |
-| TS09 | During an open stay, a plan past day 90 does not fit |
-| TS10 | During an open stay, exit on day 90 fits and day 91 does not |
-| TC009 | An `MM/DD/YYYY` date is rejected with a YYYY-MM-DD message |
-| TC010 | Editing a trip recounts it (3 → 10 days) |
-| TC011 | Trips and the count survive a reload |
-| TS26 | A same-day exit and re-entry counts the day once |
-| TS16 | A demo scenario carries to `/ees` through the nav with the same 88 days |
-| TS17 | Letter: each missing field gets its own message, no letter is drafted |
-| TS18 | Letter from a scenario shows 88 / 90 / 2 and states them in the text |
-| TS13 | EES: an earlier EES exit is an exit disagreement, not a missing entry |
-| TS14 | EES: a missing exit is found and its 4 days listed as one range |
-| TS30 | EES: a stay that began before 10 April 2026 is left out (20 days, 0 comparable) |
-| TS31 | EES: only the post-cutoff stay is compared (20 left out, 10 comparable) |
-| TS15 | The letter states Article 52(1)–(5) accurately |
-| TS27 | Overstay scenario: 107 used, overstay 2026-08-30 to 2026-09-15 (17 days) |
-| TS28 | Open stay counted through today: 19 used, 71 left, latest exit 2026-12-29 |
-| TS29 | A trip without an entry date is rejected and not saved |
-| TS34 | A later date drops old days: 30 used on 2026-10-19, 11 on 2026-11-15 |
-| TS35 | 'Use latest exit' turns a 105-day plan into a 46-day plan that fits |
-| TS36 | `/proof` lists the 12 rules, each with its engine, parity and TestSprite tests |
-| TS37 | The scenario gallery opens each history it describes, with its guard badges |
-| TS38 | The /ees cutoff card explains 10 April 2026 and its example compares 10 of 30 days |
-| TS39 | At phone width every page is one tap away in the nav, and the current page is marked |
-| TS40 | An unknown address shows the 404 page with a way back to every page |
-| TS41 | The trip sheet takes focus, makes the page behind inert, and gives focus back on Escape |
-| TS21 | 2024-02-30 is rejected as a date that does not exist |
-| TS42 | A leap-day stay leaves the 180-day window exactly 180 days later |
+The whole loop, iteration by iteration: [`LOOP-ITERATIONS.md`](LOOP-ITERATIONS.md) numbers the 54 merged pull requests in merge order. Each iteration links the PR, the merge commit, every commit's `TestSprite V3` status and the TestSprite execution behind it. 10 iterations went red, then green; the 2 runs that could not start or were blocked are listed apart. It is generated from the GitHub API and TestSprite's run history by [`scripts/loop-iterations.mjs`](scripts/loop-iterations.mjs) and checked by [`iterations.test.ts`](src/lib/loop/iterations.test.ts).
 
-`testsprite_tests/test-ids.json` maps each plan to its TestSprite test id. New plans are added to the cloud suite with `npm run tests:add -- <plan.json>`, which records the id.
+Scheduled smoke: [`testsprite-smoke.yml`](.github/workflows/testsprite-smoke.yml) runs 3 TestSprite tests (TS01, TS03, TS07) against production with the CLI, 1.5 credits a run instead of 21.5 for the whole suite of 43. It is off until the repository variable `TESTSPRITE_SMOKE` is set to `true`, and it has not run yet.
 
-Below the TestSprite suite, every pull request also runs lint, types, and the unit, property and fuzz tests in GitHub Actions (`.github/workflows/ci.yml`).
+**6 real app bugs in 5 pull requests** (#41 caught two, one row), each red on the PR preview and fixed in the same PR. The status strings are copied from GitHub:
 
-**From the official TestSprite action, outside pull requests.** `.github/workflows/testsprite-cli.yml` runs the whole cloud suite through [`TestSprite/testsprite-action`](https://github.com/TestSprite/testsprite-action) (pinned to a commit, CLI pinned too) against production: nightly, by hand (Actions → "TestSprite CLI"), and after a merge once Vercel reports the production deployment ready (when the repository variable `TESTSPRITE_ON_MAIN` is `true`). Before it spends a credit it runs `testsprite doctor`. Each run publishes the JUnit report as a per-test check, downloads the TestSprite failure bundle of every failed test as an artifact, and writes a pass/fail table with the credit balance before and after to the job summary. It never runs on push or pull request, because each run bills every test; `src/lib/ci/workflows.test.ts` fails if that changes. It needs the `TESTSPRITE_API_KEY` repository secret.
+| PR | Red status | What was wrong |
+|---|---|---|
+| #8 | `9/11 passed · 2 failed` (46336bf) | The parity table's row loop started at index 1 and dropped the first scenario |
+| #14 | `12/14 passed · 2 failed` | The planner ignored the days of an open stay before a planned trip |
+| #39 | `14/15 passed · 1 failed` | A demo scenario was lost on the way to `/ees` and `/letter` |
+| #41 | `14/15 passed · 1 failed`, then `16/17 passed · 1 failed` | Reloading a `?fresh=1` page wiped saved trips again; the evidence table's difference cell read as blank |
+| #55 | `34/35 passed · 1 failed` | Closing the trip sheet with Escape left keyboard focus on the page body instead of "Add trip" |
 
-**Red runs become issues.** `.github/workflows/run-ledger.yml` watches the TestSprite and Commission workflows. Every finished run adds a line (verdict, commit, passed/total, link) to the pinned **Run log** issue. A red run opens an issue labelled `testsprite-red` with the run link and each failing test, or comments on the one already open; a green run after it comments "green again". The pull request that fixes the failure closes the issue with `Fixes #N`, so the red run, the issue and the fix point at each other. The logic is in `scripts/ci/ledger.mjs` and unit-tested in `src/lib/ci/ledger.test.ts`.
+**Went red, but the app wasn't the defect:** #18 and #22 (dependency and CI pull requests, `13/14 passed · 1 failed`, green on the re-run after merging `main`), #32 (`15/17 passed · 2 failed`, a plan step a cloud agent read differently), #36 (`13/14 passed · 1 failed`, TS26 had a wrong expected value) and #43 (`16/17 passed · 1 failed`, TS18 wording). The plan was fixed, not the app. #9 (the run could not start) and #44 (blocked by the preview) are not counted.
 
-Bugs the suite caught that unit tests did not:
+**Found by an independent code review, reproduced by us.** Three rounds of a read-only Cursor review of this code reported bugs; we reproduced 26 of them (4, 6 and 16; one more in round 3 had already been fixed by round 2). Each was reproduced with a failing test first ([`review-findings.test.ts`](src/lib/bughunt/review-findings.test.ts), [`review-round2.test.ts`](src/lib/bughunt/review-round2.test.ts), [`review-round3.test.ts`](src/lib/bughunt/review-round3.test.ts)) and then fixed (related bugs share a row, so 26 bugs fill 16 rows):
 
-- **The pinned story blocking the planned-trip button:** at 1280 px the pinned scroll section measured its position before the page grew and sat over "Check planned trip", so the click never landed. It now re-measures when the page height changes.
-- **The undo toast** disappeared before a user (or a test) could press Undo; it now stays until dismissed.
-- **The nav dropped the scenario:** "Check" linked to `/#check` without `?scenario=`, so an opened demo lost its history (TS10 went red; fixed in #20).
-
-### Bugs fixed in #39–#55
-
-Each one was fixed with a failing test first, then the fix, in the same pull request.
-
-Caught by TestSprite on the PR preview:
-
-- **#39** A demo scenario was lost on the way to `/ees` and `/letter` (TS16 written first, red, then green).
-- **#41** Reloading a page opened with `?fresh=1` wiped the saved trips again (TC011); the parameter is now removed from the address after the first load. In the same PR the evidence table's "Difference" cell was read as blank and became plain text cells (TS18).
-- **#55** After closing the trip sheet with Escape, keyboard focus fell to the page body instead of returning to "Add trip" (TS41 red, 34/35). The entry field's autofocus took focus before the sheet recorded its opener; the sheet now tracks the opener itself. The final run was 35/35.
-
-Caught by unit, property, fuzz or axe tests:
-
-- **#40** A corrupt EES row could hide a real match (differential fuzzer against the Commission calculator).
-- **#43** The landing band showed 0/0 on `/?scenario=demo` at first paint; it now shows the real figure from the start.
-- **#45** A stored trip whose exit is before its entry corrupted the count; such trips are now skipped.
-- **#49** Three axe findings: low-contrast ok/warn/faint text, invalid markup in the status list, and `aria-describedby` pointing at messages that did not exist.
-- **#50** On phones the planned-trip verdict scrolled under the sticky bottom bar.
-- **#54** "Check" and "Plan" dropped `?scenario=`, and `/proof` counted tests that had never run as failing (13/26); it now counts only tests that ran.
-
-## Accessibility (automated, axe)
-
-`.github/workflows/a11y.yml` builds the app, starts it, and runs axe-core in Chrome on seven pages (the calculator fresh and with a scenario, `/ees`, `/letter`, `/parity`, `/proof`, and the 404 page) at 1280 px and 390 px with reduced motion. It fails on any serious or critical violation of the WCAG 2.0/2.1 A and AA rules axe can test, and writes the per-page counts to the job summary. Running it before this workflow was added found three real problems, each fixed in its own pull request: low contrast of the ok, warn and faint text colours, invalid markup in the status figures list, and wide tables that keyboard users could not scroll on a phone.
-
-What it does not measure: anything axe cannot test automatically, screen-reader announcements, keyboard flows, and states reached only after interaction. Run it locally with `npm run build && npx next start -p 3000` and `npm run a11y`.
-
-## The gate, and its history
-
-Every pull request into `main` runs the TestSprite V3 suite against that PR's preview deployment, and `TestSprite V3` is a **required** status check: a failing run shows "Merging is blocked". The record of how we got there, including what did not work:
-
-- **PR #8: red, fix, green, but merged on a stale status.** A refactor of the parity table made the row loop start at index 1, which silently dropped the first scenario. TestSprite went red at 9/11. The fix (6f48b55, then 04527b4) restored the loop and added a unit test for the row count, and the next run was 11/11. The commit status GitHub showed at merge time still read 9/11; the green run was recorded as a comment. At that point the check was not yet required.
-- **PR #14: test first, then the fix.** The planner ignored the days of an open stay before a planned trip. We added TS09/TS10 first, and they failed on the preview (12/14, 2 failing). The fix (f466c06, then cba2989 for a stale verdict in the form) turned them green. The merge commit `7a70dde` shows a TestSprite status of `success` with the description `12/14 passed · 2 failed`: the app reported "success" for a run that had failures. We are writing this up for TestSprite as feedback.
-- **Since then** `TestSprite V3` is a required check in branch protection, and a red run blocks the merge (screenshot of PR #14 in the blocked state). Branch names stay short, because a preview hostname over 63 characters does not resolve and the check never starts.
-
-## Run it locally
-
-Requires Node.js 20+.
-
-```bash
-npm install
-npm run dev        # http://localhost:3000
-```
-
-Open `/?today=YYYY-MM-DD` to pin "today" so results do not depend on the calendar. Add `fresh=1` to start with no saved trips.
-
-```bash
-npm test           # unit tests (engine, parity against the live Commission script, EES, letter)
-npx tsc --noEmit   # type check
-npm run lint       # eslint
-npm run build      # production build
-```
-
-Run the TestSprite suite with the CLI:
-
-```bash
-npm i -g @testsprite/testsprite-cli
-export TESTSPRITE_API_KEY=...   # never commit it
-testsprite test run --all --project <project-id> --wait
-```
-
-## Stack
-
-Next.js 15 (App Router), React 19, Tailwind CSS v4, framer-motion, GSAP ScrollTrigger and Lenis for motion, react-hook-form + zod for forms, pdf-lib for the letter, Vitest for tests. Deployed on Vercel.
-
-## Disclaimer
-
-Ninety is a helping tool. It is not legal advice, it is not affiliated with the European Union, and its result is not a decision by a border authority.
-
----
-
-Built by **devmo**.
+| Bug | Reproduction | Fix |
+|---|---|---|
+| The latest legal exit and the planned-trip check ignored booked stays after the date | 2026-07-01 → 09-28 booked (90 days); on 2026-01-15 a 1-day plan on 06-01 said "fits", though the 180 days ending 09-28 would hold 91; the status line gave 2026-04-14 instead of 04-01 | Every 180-day window that a new day falls in is checked, later ones too; a brute-force test compares the allowance |
+| Two trips with the same entry date: the first row won | Trips 06-01 → 06-10 and 06-01 → 06-20, EES 06-01 → 06-15, on 06-25: "likely missing entry" citing 06-10 | The comparison uses the latest exit (also for a missing exit) |
+| The Article 52 letter threw when only the 10 April 2026 cutoff explained the gap | `POST /api/v1/letter` and the MCP tool raised "No correction to request…" | `422` naming 2026-04-10; the MCP tool returns `isError: true` |
+| The 64 KB body limit counted characters, not bytes | 40,000 × "é" (80 KB) got through on REST and `/api/mcp` | The limit is checked on the body's bytes |
+| `/proof` still listed 36 parity ids from a dropped scenario set and a test file that no longer existed | `src/data/proof.json` had not been regenerated after `rules.json` went back to the 14 scenarios; the unit test only read `rules.json` | `proof.json` rebuilt from `rules.json`; a test now fails if they differ |
+| An open stay with an earlier EES exit was called a missing entry | Open trip from 2026-06-01, EES 06-01 → 06-10, on 06-20 | An open stay ends on the reference date for the exit comparison: "exit dates disagree" |
+| The letter page drafted a rectification request when the figures matched | Trips 06-01 → 06-10, EES figure 10 | No letter: "the EES figure matches your trips" |
+| `/api/mcp` accepted any `MCP-Protocol-Version` and answered a request with `id: null` | `1999-01-01` → 200; `id: null` → a result | `400` for an unsupported version; `-32600` for a null id (MCP 2025-06-18) |
+| The OpenAPI identity fields lacked the limits the API enforces | nationality of 61 characters: 400 from the API, allowed by the document | `maxLength` 60 / 60 / 200 in the document |
+| One stay entered as two rows (France, then Germany) gave a false "exit dates disagree" and a letter | Trips 06-01 → 06-10 and 06-10 → 06-20, one EES record 06-01 → 06-20 | Trips that continue on the same or the next day are one stay for the EES comparison: `match`, no letter |
+| A name the PDF font cannot draw (Chinese, emoji) became invisible characters | `李明` gave `\u0000\u0000` in the PDF | The download is refused with the characters named; the letter text can still be copied |
+| `packages/ninety-mcp` `npm test` failed on Node 22, which CI uses | `node --test test/` is read as a module path | `node --test test/*.test.mjs` |
+| The letter page drafted a letter while the comparison had input errors; line breaks and bidi controls in identity fields could forge letter paragraphs | `fullName: "Jane\n\nYours faithfully,\n\nMallory"` | No letter on input errors; one-line text only (400 naming the field) |
+| The OpenAPI document allowed dates and blank names the API refuses; the API's email rule differed from the form's | `on: "1899-12-31"`, `fullName: " "`, `jürgen@münchen.de` | Date range and non-blank text in the document; one email rule |
+| The stdio MCP server answered an unknown tool as a tool result; the PDF Author held the identity paragraph; the planned-trip bar ignored an open stay; a later overstay was called "earlier" | | `-32602`; Author is the signer; the bar counts what the verdict assumes; "later" |
+| Protocol details on `/api/mcp` and the REST routes | a batch under MCP 2025-06-18, `initialize` in a batch, `params: "nope"`, `Content-Type: Application/JSON`, `GET` without `Allow` | Refused or answered per the MCP and JSON-RPC specs and RFC 9110 |

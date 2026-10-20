@@ -33,5 +33,13 @@
   "TS39-phone-nav": "ffe0fbe4-e887-4d07-8f04-c3526bf544aa",
   "TS21-impossible-date": "991cf8e1-0d68-4102-8e7b-6045d37c1ee0",
   "TS41-sheet-focus": "e1e10a25-1697-4a85-a071-6e0340c3979d",
-  "TS42-leap-day": "0e997467-fa2a-488c-bb30-60de02358bef"
+  "TS42-leap-day": "0e997467-fa2a-488c-bb30-60de02358bef",
+  "TS45-plan-before-booked-stay": "2f48a9d2-b5ee-48da-837d-b7efa1c243c5",
+  "TS46-overlapping-overstay-once": "74507a04-cff1-4a81-bbb3-fe05120a29c9",
+  "TS47-ees-split-stay": "93816a28-d56f-4557-aa7d-f82f01fd119b",
+  "TS48-ees-open-stay-earlier-exit": "7dbac572-faa5-4614-b090-28c058664d67",
+  "TS49-letter-refused-on-match": "fbf2bf81-8a97-4547-aace-8c389fb44f5d",
+  "TS50-letter-pdf-cjk-name": "89fc72df-cb41-49e7-8f06-8d463e5469d4",
+  "TS51-proof-parity-names": "1f3f0b6e-ef5a-4844-aeb9-60f73fdf2d74",
+  "TS52-later-overstay-wording": "3cf3bbc7-a89c-4844-9503-e71b5634eeb5"
 }

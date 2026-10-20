@@ -10,6 +10,7 @@ describe("sitemap and robots", () => {
       "https://ninety-coral.vercel.app/ees",
       "https://ninety-coral.vercel.app/letter",
       "https://ninety-coral.vercel.app/parity",
+      "https://ninety-coral.vercel.app/developers",
       "https://ninety-coral.vercel.app/proof",
     ]);
     const rules = robots().rules as { disallow: string }[];

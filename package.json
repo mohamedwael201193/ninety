@@ -12,7 +12,8 @@
     "loop:proof": "node scripts/loop-proof.mjs",
     "proof:matrix": "node scripts/proof-matrix.mjs",
     "tests:add": "node scripts/add-cloud-tests.mjs",
-    "a11y": "node scripts/a11y-axe.mjs"
+    "a11y": "node scripts/a11y-axe.mjs",
+    "openapi:write": "npx --yes tsx scripts/openapi-write.mts"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

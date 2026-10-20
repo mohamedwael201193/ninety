@@ -2,7 +2,7 @@ import { ScrollRegion } from "./ScrollRegion";
 import Link from "next/link";
 import proof from "@/data/proof.json";
 import { label } from "@/lib/schengen/scenario-names";
-import { proofSummary } from "@/lib/proof/rules";
+import { proofSummary, suiteSummary } from "@/lib/proof/rules";
 import { ToolShell } from "./tools/ToolShell";
 
 const REPO = "https://github.com/mohamedwael201193/ninety";
@@ -20,6 +20,11 @@ function Verdict({ id, latest }: { id: string; latest: Latest }) {
 
 export function ProofMatrix() {
   const summary = proofSummary(proof.rules);
+  const suiteRefs = ((proof as { suite?: { id: string; plan: string; name?: string | null; latest: Latest }[] }).suite ?? []);
+  const suite = suiteSummary(suiteRefs);
+  const tied = new Set(proof.rules.flatMap((r) => r.testsprite.map((t) => t.id)));
+  const others = suiteRefs.filter((t) => !tied.has(t.id));
+  const envs = proof.environments?.length ? proof.environments.join(", ") : null;
   return (
     <ToolShell
       testId="proof-page"
@@ -27,9 +32,12 @@ export function ProofMatrix() {
       title="Every rule, and the tests that guard it."
       intro={<p>Each rule Ninety applies is checked three ways: an engine unit or property test, a scenario that the European Commission&apos;s own calculator also runs, and a TestSprite end-to-end test in a cloud browser on every pull request.</p>}
     >
+      <p data-testid="proof-headline" className="mb-3 text-lg font-medium">
+        {suite.ran === suite.tests && suite.passed === suite.ran ? `All ${suite.tests} TestSprite tests passed` : `${suite.passed} of ${suite.tests} TestSprite tests passed`}{envs ? ` on their latest cloud run (${envs})` : ""}.
+      </p>
       <p data-testid="proof-generated" className="mb-4 text-sm text-ink-hushed">
         Generated <time dateTime={proof.generatedAt}>{proof.generatedAt.slice(0, 16).replace("T", " ")} UTC</time> from <code>src/data/rules.json</code> and TestSprite&apos;s latest results (<code>npm run proof:matrix</code>).
-        {" "}<span data-testid="proof-summary">{proof.rules.length} rules · {summary.passed}/{summary.ran} TestSprite tests passed on their latest cloud run{proof.environments?.length ? ` (${proof.environments.join(", ")})` : ""}{summary.notRun.length > 0 ? ` · not run yet: ${summary.notRun.join(", ")}` : ""}.</span>
+        {" "}<span data-testid="proof-summary">{proof.rules.length} rules · {summary.passed}/{summary.ran} of the TestSprite tests tied to a rule passed on their latest cloud run · whole suite: <span data-testid="proof-suite">{suite.passed}/{suite.ran}</span> passed{proof.environments?.length ? ` (${proof.environments.join(", ")})` : ""}{suite.notRun.length > 0 ? ` · not run yet: ${suite.notRun.join(", ")}` : ""}.</span>
         {" "}History of every run: <a className="underline underline-offset-4" href={`${REPO}/blob/main/LOOP.md`}>LOOP.md</a>.
       </p>
       <ScrollRegion label="Rule-to-test matrix" className="card-soft">
@@ -63,6 +71,26 @@ export function ProofMatrix() {
           </tbody>
         </table>
       </ScrollRegion>
+      {others.length > 0 && (
+        <section className="mt-8">
+          <h2 className="mb-2 text-base font-medium">The other {others.length} TestSprite tests</h2>
+          <p className="mb-3 text-sm text-ink-hushed">Not tied to one rule: they check the interface, navigation and keyboard behaviour. Same latest cloud run as above.</p>
+          <ScrollRegion label="TestSprite tests not tied to a rule" className="card-soft">
+            <table data-testid="proof-other-table" className="w-full min-w-[560px] text-left text-sm">
+              <thead className="text-xs text-ink-hushed"><tr><th className="px-5 py-3">Test</th><th className="px-5 py-3">Checks</th><th className="px-5 py-3">Latest</th></tr></thead>
+              <tbody>
+                {others.map((t) => (
+                  <tr key={t.id} data-testid="proof-other-row" data-ts={t.id} className="border-t border-line-soft">
+                    <td className="px-5 py-3"><Verdict id={t.id} latest={t.latest ?? null} /></td>
+                    <td className="px-5 py-3">{t.name ?? t.plan}</td>
+                    <td className="px-5 py-3 font-mono text-xs" data-testid="proof-other-verdict">{t.latest?.verdict ?? "not run yet"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </ScrollRegion>
+        </section>
+      )}
     </ToolShell>
   );
 }

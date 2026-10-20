@@ -1,0 +1,21 @@
+# local production build, 2026-10-20 21:08 Cairo
+## check
+{"on":"2026-10-19","daysUsed":88,"daysLeft":2,"present":false,"latestExit":"2026-10-20","nextLegalEntry":"2026-10-19","overstays":[]}
+## check 400
+{"error":"invalid_request","issues":[{"path":"trips.0.entry","message":"Use a real calendar date as YYYY-MM-DD."}]} 400
+## check 415
+415
+## preflight
+HTTP/1.1 204 No Content
+access-control-allow-headers: Content-Type
+access-control-allow-methods: POST, OPTIONS
+access-control-allow-origin: *
+access-control-max-age: 86400
+## ees-reconcile
+{"on":"2026-06-30","windowStart":"2026-01-02","travellerDaysUsed":10,"eesDaysUsed":30,"figureGap":20,"codes":["figure-differs","likely-missing-exit"],"explanation":"Compared on 2026-06-30, over the 180-day period 2026-01-02 to 2026-06-30. The trips count 10 days. The EES states 30 days. Likely missing exit. The EES has no exit for the entry on 2026-06-01. The trips show an exit on 2026-06-10. The 
+
+## letter
+{"title":"Request for rectification of Entry/Exit System data under Article 52 of Regulation (EU) 2017/2226","addressee":"To the competent authority of France","text":"Request for rectification of Entry/Exit System data under Article 52 of Regulation (EU) 2017/2226\n\nTo the competent authority of F
+
+## openapi
+3.1.0 ['/api/v1/check', '/api/v1/ees-reconcile', '/api/v1/letter']

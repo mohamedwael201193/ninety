@@ -1,0 +1,1258 @@
+[
+ {
+  "pr": 1,
+  "title": "Add the Ninety 90/180 foundation",
+  "seq": [
+   [
+    "7ee293c",
+    null
+   ]
+  ]
+ },
+ {
+  "pr": 3,
+  "title": "Landing page + dashboard redesign",
+  "seq": [
+   [
+    "7ee293c",
+    null
+   ],
+   [
+    "ec947c5",
+    null
+   ],
+   [
+    "0e5adcd",
+    null
+   ],
+   [
+    "0fbca68",
+    null
+   ],
+   [
+    "d8f13da",
+    null
+   ],
+   [
+    "e1ff281",
+    null
+   ],
+   [
+    "d1378db",
+    null
+   ],
+   [
+    "cb86027",
+    null
+   ],
+   [
+    "e1d1620",
+    null
+   ],
+   [
+    "a3deb6c",
+    null
+   ],
+   [
+    "33d988f",
+    null
+   ]
+  ]
+ },
+ {
+  "pr": 4,
+  "title": "Add the TestSprite end-to-end suite",
+  "seq": [
+   [
+    "7ee293c",
+    null
+   ],
+   [
+    "ec947c5",
+    null
+   ],
+   [
+    "0e5adcd",
+    null
+   ],
+   [
+    "0fbca68",
+    null
+   ],
+   [
+    "d8f13da",
+    null
+   ],
+   [
+    "e1ff281",
+    null
+   ],
+   [
+    "d1378db",
+    null
+   ],
+   [
+    "cb86027",
+    null
+   ],
+   [
+    "e1d1620",
+    null
+   ],
+   [
+    "091ce3f",
+    null
+   ],
+   [
+    "a3deb6c",
+    null
+   ],
+   [
+    "6e120df",
+    null
+   ],
+   [
+    "3044b7d",
+    null
+   ],
+   [
+    "47d7a45",
+    null
+   ]
+  ]
+ },
+ {
+  "pr": 5,
+  "title": "Keep the pinned story off the dashboard",
+  "seq": [
+   [
+    "7ee293c",
+    null
+   ],
+   [
+    "ec947c5",
+    null
+   ],
+   [
+    "0e5adcd",
+    null
+   ],
+   [
+    "0fbca68",
+    null
+   ],
+   [
+    "d8f13da",
+    null
+   ],
+   [
+    "e1ff281",
+    null
+   ],
+   [
+    "d1378db",
+    null
+   ],
+   [
+    "cb86027",
+    null
+   ],
+   [
+    "e1d1620",
+    null
+   ],
+   [
+    "a3deb6c",
+    null
+   ],
+   [
+    "33d988f",
+    null
+   ],
+   [
+    "2590b6b",
+    null
+   ],
+   [
+    "44d9e73",
+    null
+   ]
+  ]
+ },
+ {
+  "pr": 6,
+  "title": "Write the project README",
+  "seq": [
+   [
+    "6d2b5e9",
+    null
+   ],
+   [
+    "a66dcb5",
+    null
+   ]
+  ]
+ },
+ {
+  "pr": 7,
+  "title": "TestSprite suite: date-format test and test index",
+  "seq": [
+   [
+    "a352071",
+    [
+     "success",
+     "All 10 tests passed"
+    ]
+   ],
+   [
+    "f1cd450",
+    [
+     "success",
+     "All 11 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 8,
+  "title": "Refactor parity table rendering",
+  "seq": [
+   [
+    "46336bf",
+    [
+     "failure",
+     "9/11 passed \u00b7 2 failed"
+    ]
+   ],
+   [
+    "6f48b55",
+    null
+   ],
+   [
+    "04527b4",
+    [
+     "success",
+     "All 11 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 9,
+  "title": "test: pin ?today, clear storage, fix README counts",
+  "seq": [
+   [
+    "81be862",
+    [
+     "success",
+     "All 11 tests passed"
+    ]
+   ],
+   [
+    "2db7bc3",
+    [
+     "failure",
+     "TestSprite could not start this run. See the project activity for details."
+    ]
+   ],
+   [
+    "5870acb",
+    [
+     "failure",
+     "TestSprite could not start this run. See the project activity for details."
+    ]
+   ],
+   [
+    "68fe8bc",
+    [
+     "success",
+     "All 11 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 10,
+  "title": "Leave pre-10 April 2026 stays out of the EES comparison",
+  "seq": [
+   [
+    "97f6556",
+    [
+     "success",
+     "All 11 tests passed"
+    ]
+   ],
+   [
+    "a12bec1",
+    [
+     "success",
+     "All 11 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 11,
+  "title": "Property tests over random travel histories",
+  "seq": [
+   [
+    "22171cc",
+    [
+     "success",
+     "All 11 tests passed"
+    ]
+   ],
+   [
+    "8a2c1bd",
+    [
+     "success",
+     "All 11 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 12,
+  "title": "Readable names on the parity table",
+  "seq": [
+   [
+    "6cafd76",
+    [
+     "success",
+     "All 11 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 13,
+  "title": "CI: lint, types and Vitest on every PR",
+  "seq": [
+   [
+    "2f8579f",
+    [
+     "success",
+     "All 11 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 14,
+  "title": "Planner: a plan made during an open stay must count the days until the trip",
+  "seq": [
+   [
+    "3768b1c",
+    [
+     "failure",
+     "12/14 passed \u00b7 2 failed"
+    ]
+   ],
+   [
+    "4084b51",
+    null
+   ],
+   [
+    "8c94da5",
+    [
+     "failure",
+     "12/14 passed \u00b7 2 failed"
+    ]
+   ],
+   [
+    "60924ac",
+    null
+   ],
+   [
+    "ad2270b",
+    [
+     "failure",
+     "12/14 passed \u00b7 2 failed"
+    ]
+   ],
+   [
+    "f466c06",
+    null
+   ],
+   [
+    "aa70cc1",
+    [
+     "failure",
+     "13/14 passed \u00b7 1 failed"
+    ]
+   ],
+   [
+    "cba2989",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 15,
+  "title": "Trip form: open stays always save; submit no longer shares the 'Add trip' label",
+  "seq": [
+   [
+    "64f1341",
+    [
+     "success",
+     "All 12 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 16,
+  "title": "Trip form: save values set without a change event",
+  "seq": [
+   [
+    "fb917ea",
+    [
+     "success",
+     "All 12 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 17,
+  "title": "Scenario links: load a named demo history from the URL",
+  "seq": [
+   [
+    "9e5c136",
+    [
+     "success",
+     "All 12 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 18,
+  "title": "CI: run on Node 22 (pdfjs-dist needs >=22.13; Node 20 is deprecated on Actions)",
+  "seq": [
+   [
+    "110a5eb",
+    [
+     "failure",
+     "13/14 passed \u00b7 1 failed"
+    ]
+   ],
+   [
+    "5a4d509",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 20,
+  "title": "Section links keep ?scenario= and ?today= on the home page",
+  "seq": [
+   [
+    "336430b",
+    null
+   ],
+   [
+    "0e37f80",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 21,
+  "title": "Deps: Vitest 4.1.12 (fixes critical tinypool RCE and @vitest/mocker path traversal)",
+  "seq": [
+   [
+    "f36c0db",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 22,
+  "title": "Deps: pin Next's bundled PostCSS to ^8.5.31 (fixes 4 high PostCSS advisories and the Next moderate)",
+  "seq": [
+   [
+    "af6e1fa",
+    [
+     "failure",
+     "13/14 passed \u00b7 1 failed"
+    ]
+   ],
+   [
+    "78665f7",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 23,
+  "title": "TestSprite TS07: assert the visible verdict, and record current cloud test ids",
+  "seq": [
+   [
+    "de85611",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 24,
+  "title": "Property tests for the EES cutoff; fix a day dropped from the comparison when trips overlap the cutoff",
+  "seq": [
+   [
+    "71ed57a",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 25,
+  "title": "EES cutoff: a same-day re-entry on or after 10 April 2026 is a new, comparable visit",
+  "seq": [
+   [
+    "bed3e76",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 26,
+  "title": "Letter: state Article 52(1) to 52(5) one clause at a time",
+  "seq": [
+   [
+    "0fab9e8",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 27,
+  "title": "Letter: require a full reply email address",
+  "seq": [
+   [
+    "87c5351",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 28,
+  "title": "EES findings: show each finding's code next to its label",
+  "seq": [
+   [
+    "1787170",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ],
+   [
+    "a14f2ca",
+    null
+   ],
+   [
+    "6675a0f",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 29,
+  "title": "Days ring: keep the label inside the ring",
+  "seq": [
+   [
+    "01d7f09",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 30,
+  "title": "Status: no 'Over limit' next to 'No overstay'",
+  "seq": [
+   [
+    "3a77429",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 31,
+  "title": "Timeline: mark and label today",
+  "seq": [
+   [
+    "fd5fda7",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 32,
+  "title": "Smooth scroll on the landing page only; the letter box scrolls with the wheel",
+  "seq": [
+   [
+    "a29e529",
+    null
+   ],
+   [
+    "751093c",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ],
+   [
+    "9dd3a70",
+    [
+     "failure",
+     "15/17 passed \u00b7 2 failed"
+    ]
+   ],
+   [
+    "bf29e75",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 33,
+  "title": "Hero phone: dock the EES card so it doesn't cover the phone UI",
+  "seq": [
+   [
+    "a65bd56",
+    null
+   ],
+   [
+    "2b8f485",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ],
+   [
+    "cb11bab",
+    null
+   ],
+   [
+    "33d2b39",
+    null
+   ],
+   [
+    "2c2f6be",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 34,
+  "title": "EES: an earlier exit is an exit disagreement, not a missing entry",
+  "seq": [
+   [
+    "9b3db83",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 35,
+  "title": "Docs: match the record (14 tests, PR trigger, #8/#14 history), LICENSE, PR template",
+  "seq": [
+   [
+    "a93a01e",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 36,
+  "title": "TestSprite: every plan asserts exact values (TS02 checks all 14 counts)",
+  "seq": [
+   [
+    "b839ae4",
+    [
+     "failure",
+     "13/14 passed \u00b7 1 failed"
+    ]
+   ],
+   [
+    "c20fb86",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 37,
+  "title": "Parity: offline unit tests on a stored, hashed Commission page + nightly drift job",
+  "seq": [
+   [
+    "53e3ad8",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 38,
+  "title": "LOOP.md: the red-then-green record, generated from TestSprite history",
+  "seq": [
+   [
+    "9d1dc6e",
+    [
+     "success",
+     "All 14 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 39,
+  "title": "A demo scenario carries to /ees and /letter (TS16, test first)",
+  "seq": [
+   [
+    "35ac180",
+    [
+     "failure",
+     "14/15 passed \u00b7 1 failed"
+    ]
+   ],
+   [
+    "3737cab",
+    null
+   ],
+   [
+    "24ba105",
+    [
+     "success",
+     "All 15 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 40,
+  "title": "Engine safety nets: differential fuzzer against the Commission calculator, and a corrupt EES row no longer hides a match",
+  "seq": [
+   [
+    "c547e74",
+    null
+   ],
+   [
+    "05536cc",
+    [
+     "success",
+     "All 15 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 41,
+  "title": "Landing: the 180-day band follows the scenario, illustrations are labelled, and a not-covered notice",
+  "seq": [
+   [
+    "ade5c39",
+    null
+   ],
+   [
+    "90d4f2c",
+    [
+     "failure",
+     "14/15 passed \u00b7 1 failed"
+    ]
+   ],
+   [
+    "3ccbaf8",
+    null
+   ],
+   [
+    "c5ce1f3",
+    null
+   ],
+   [
+    "a545274",
+    [
+     "failure",
+     "16/17 passed \u00b7 1 failed"
+    ]
+   ],
+   [
+    "eb4a6fb",
+    null
+   ],
+   [
+    "bcbb7de",
+    [
+     "failure",
+     "16/17 passed \u00b7 1 failed"
+    ]
+   ],
+   [
+    "e7f9627",
+    [
+     "failure",
+     "16/17 passed \u00b7 1 failed"
+    ]
+   ],
+   [
+    "bdb0527",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 42,
+  "title": "Letter: each missing field is named, and an evidence table shows your dates against EES (TS17, TS18)",
+  "seq": [
+   [
+    "bd8516d",
+    null
+   ],
+   [
+    "825a026",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ],
+   [
+    "b20f44a",
+    null
+   ],
+   [
+    "743e93d",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 43,
+  "title": "Band counters show the real figure from the first paint (0/0 on /?scenario=demo)",
+  "seq": [
+   [
+    "46e302d",
+    null
+   ],
+   [
+    "a4a0362",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ],
+   [
+    "828918e",
+    null
+   ],
+   [
+    "d4f019c",
+    [
+     "failure",
+     "16/17 passed \u00b7 1 failed"
+    ]
+   ],
+   [
+    "809f11a",
+    null
+   ],
+   [
+    "7fdf4fc",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 44,
+  "title": "Engine rewrite (interval presence) + TestSprite official action, JUnit, run ledger and receipts",
+  "seq": [
+   [
+    "d0fefa0",
+    null
+   ],
+   [
+    "f0de275",
+    null
+   ],
+   [
+    "e8d08f8",
+    null
+   ],
+   [
+    "f2dcdb1",
+    null
+   ],
+   [
+    "5894a02",
+    null
+   ],
+   [
+    "5705b3c",
+    null
+   ],
+   [
+    "d701a46",
+    [
+     "failure",
+     "0/17 passed \u00b7 17 blocked"
+    ]
+   ],
+   [
+    "67a96c9",
+    null
+   ],
+   [
+    "fbfc7cd",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 45,
+  "title": "Skip stored trips whose exit is before the entry",
+  "seq": [
+   [
+    "9913986",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 46,
+  "title": "Security headers on every route",
+  "seq": [
+   [
+    "7031145",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 47,
+  "title": "EES and letter pages: the reference date appears only after mount",
+  "seq": [
+   [
+    "95a3fe3",
+    [
+     "success",
+     "All 17 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 48,
+  "title": "TestSprite: EES and calculator suites, 10 new cloud tests (17 \u2192 27)",
+  "seq": [
+   [
+    "59b3d03",
+    null
+   ],
+   [
+    "86281a2",
+    null
+   ],
+   [
+    "54e6465",
+    [
+     "success",
+     "All 27 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 49,
+  "title": "Accessibility: AA contrast tokens, valid status <dl>, describedby only for messages that exist",
+  "seq": [
+   [
+    "4b9e444",
+    null
+   ],
+   [
+    "9ff9f1c",
+    null
+   ],
+   [
+    "8e26370",
+    [
+     "success",
+     "All 27 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 50,
+  "title": "/proof rule-to-test matrix, scenario gallery, focusable wide tables; planned verdict clears the phone bar",
+  "seq": [
+   [
+    "5a0be85",
+    null
+   ],
+   [
+    "6f69375",
+    null
+   ],
+   [
+    "9b3ef22",
+    null
+   ],
+   [
+    "14258d8",
+    null
+   ],
+   [
+    "eac2a51",
+    [
+     "success",
+     "All 29 tests passed"
+    ]
+   ],
+   [
+    "0ff063a",
+    null
+   ],
+   [
+    "cead0be",
+    [
+     "success",
+     "All 29 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 51,
+  "title": "EES: 10 April 2026 cutoff card on /ees with two worked examples (TS38)",
+  "seq": [
+   [
+    "a874c31",
+    null
+   ],
+   [
+    "1caef69",
+    [
+     "success",
+     "All 30 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 52,
+  "title": "axe-core accessibility check in CI; 404 page that leads back to every page (TS40)",
+  "seq": [
+   [
+    "1682281",
+    null
+   ],
+   [
+    "3466e32",
+    null
+   ],
+   [
+    "a3e893d",
+    [
+     "success",
+     "All 31 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 53,
+  "title": "Nav: page links stay visible on phones, current page marked (TS39)",
+  "seq": [
+   [
+    "5c51164",
+    null
+   ],
+   [
+    "edd707a",
+    [
+     "success",
+     "All 32 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 54,
+  "title": "Page metadata, sitemap and robots, footer links; truthful /proof summary; Check/Plan keep the scenario",
+  "seq": [
+   [
+    "b080628",
+    null
+   ],
+   [
+    "a74e098",
+    null
+   ],
+   [
+    "18d9662",
+    null
+   ],
+   [
+    "be5f2d4",
+    null
+   ],
+   [
+    "bbbff63",
+    [
+     "success",
+     "All 32 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 55,
+  "title": "Trip sheet keeps focus and makes the page inert; impossible calendar dates are named (TS21, TS41, TS42)",
+  "seq": [
+   [
+    "96cac97",
+    null
+   ],
+   [
+    "cd8f97f",
+    null
+   ],
+   [
+    "5864646",
+    [
+     "failure",
+     "34/35 passed \u00b7 1 failed"
+    ]
+   ],
+   [
+    "38ffa01",
+    null
+   ],
+   [
+    "515379b",
+    [
+     "failure",
+     "32/35 passed \u00b7 2 failed \u00b7 1 blocked"
+    ]
+   ],
+   [
+    "7cd39b4",
+    null
+   ],
+   [
+    "ff0a76d",
+    [
+     "failure",
+     "32/35 passed \u00b7 3 failed"
+    ]
+   ],
+   [
+    "8851371",
+    null
+   ],
+   [
+    "815cc79",
+    [
+     "success",
+     "All 35 tests passed"
+    ]
+   ]
+  ]
+ },
+ {
+  "pr": 56,
+  "title": "README receipts at 35/35, portal evidence, and the phone nav fade follows resizes",
+  "seq": [
+   [
+    "d4a0c31",
+    null
+   ],
+   [
+    "38abf93",
+    null
+   ],
+   [
+    "43d4ad0",
+    [
+     "success",
+     "All 35 tests passed"
+    ]
+   ]
+  ]
+ }
+]

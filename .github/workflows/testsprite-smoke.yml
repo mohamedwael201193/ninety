@@ -1,0 +1,80 @@
+# Nightly TestSprite smoke on production: 3 tests, not the whole suite.
+#
+# The full nightly (testsprite-cli.yml) bills every test in the project
+# (43 x 0.5 = 21.5 credits a night). This runs three core flows against
+# https://ninety-coral.vercel.app with the TestSprite CLI:
+#   TS01 example trips   (the dashboard counts a known history)
+#   TS03 add a trip      (manual entry gives exact days used and left)
+#   TS07 EES gap         (the EES comparison names the gap)
+# Cost: 3 x 0.5 = 1.5 credits a run (frontend price at the time of writing).
+#
+# OFF by default: the nightly runs only when the repository variable
+# TESTSPRITE_SMOKE is "true". Manual runs: Actions → "TestSprite smoke" → Run workflow.
+# Needs the repository secret TESTSPRITE_API_KEY. Never runs on push or pull_request.
+name: TestSprite smoke
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "41 3 * * *"
+
+permissions:
+  contents: read
+  checks: write
+
+concurrency:
+  group: testsprite-smoke
+  cancel-in-progress: false
+
+env:
+  TESTSPRITE_CLI_VERSION: "0.15.0"
+  TARGET_URL: https://ninety-coral.vercel.app
+  SMOKE_PLANS: "TS01-example-trips TS03-add-trip TS07-ees-gap"
+
+jobs:
+  smoke:
+    name: TestSprite smoke on production (3 tests)
+    if: >-
+      ${{ github.event_name == 'workflow_dispatch'
+      || (github.event_name == 'schedule' && vars.TESTSPRITE_SMOKE == 'true') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - name: Preflight
+        env:
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+        run: |
+          if [ -z "$TESTSPRITE_API_KEY" ]; then
+            echo "::error::Add the TESTSPRITE_API_KEY repository secret to run this workflow."
+            exit 1
+          fi
+          npm install -g "@testsprite/testsprite-cli@${TESTSPRITE_CLI_VERSION}"
+          testsprite doctor
+      - name: Run the smoke tests
+        env:
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+        run: |
+          ids=$(node -e 'const m=require("./testsprite_tests/test-ids.json");console.log(process.env.SMOKE_PLANS.split(" ").map(p=>{if(!m[p])throw new Error("no test id for "+p);return m[p]}).join(" "))')
+          # shellcheck disable=SC2086
+          testsprite test run $ids --target-url "$TARGET_URL" --wait --timeout 900 \
+            --report junit --report-file testsprite-smoke-junit.xml --summary-file smoke-summary.json
+      - name: Test report
+        if: ${{ always() && hashFiles('testsprite-smoke-junit.xml') != '' }}
+        uses: dorny/test-reporter@df6247429542221bc30d46a036ee47af1102c451 # v2
+        with:
+          name: TestSprite smoke (${{ github.event_name }})
+          path: testsprite-smoke-junit.xml
+          reporter: java-junit
+          fail-on-error: "false"
+      - name: Job summary
+        if: ${{ always() }}
+        run: |
+          {
+            echo "### TestSprite smoke on production"
+            echo ""
+            node -e 'const s=require("./smoke-summary.json");console.log(`| passed | failed | timed out | skipped | total |\n|---|---|---|---|---|\n| ${s.passed} | ${s.failed} | ${s.timedOut} | ${s.skipped} | ${s.total} |`)' 2>/dev/null || echo "No summary written (the run stopped before a verdict)."
+          } >> "$GITHUB_STEP_SUMMARY"

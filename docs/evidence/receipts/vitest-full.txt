@@ -1,0 +1,34 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-g-receipts
+
+Error: Not implemented: window.scrollTo
+    at module.exports (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at /workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
+    at file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
+    at Array.forEach (<anonymous>)
+    at measureAllKeyframes (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
+    at triggerCallback (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
+    at Set.forEach (<anonymous>)
+    at Object.process (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
+    at processBatch (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
+    at invokeTheCallbackFunction (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
+Error: Not implemented: window.scrollTo
+    at module.exports (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at /workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
+    at file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
+    at Array.forEach (<anonymous>)
+    at measureAllKeyframes (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
+    at triggerCallback (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
+    at Set.forEach (<anonymous>)
+    at Object.process (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
+    at processBatch (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
+    at invokeTheCallbackFunction (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
+
+ Test Files  51 passed (51)
+      Tests  273 passed | 2 skipped (275)
+   Start at  21:33:55
+   Duration  7.35s (transform 2.14s, setup 462ms, import 10.08s, tests 16.13s, environment 7.82s)
+

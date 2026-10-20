@@ -106,7 +106,8 @@ describe("letterToPdf", () => {
   });
 
   it("renders a second accented name that is outside the WinAnsi set", async () => {
-    const reconciliation = reconcile([], { daysUsed: 0, on: "2024-01-15" });
+    // A real gap: a letter is only drafted when there is something to correct.
+    const reconciliation = reconcile([{ entry: "2024-06-01", exit: "2024-06-10" }], { daysUsed: 14, on: "2024-06-30" });
     const letter = buildCorrectionLetter(
       { ...identity, fullName: "Łukasz Żółć" },
       reconciliation,

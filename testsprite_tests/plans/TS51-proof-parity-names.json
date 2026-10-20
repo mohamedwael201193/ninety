@@ -1,0 +1,20 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "/proof names only the 14 parity scenarios the calculator runs",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /proof"
+    },
+    {
+      "type": "assertion",
+      "description": "Inside the rule table (data-testid=proof-table), count the links whose href is /parity: there are exactly 14"
+    },
+    {
+      "type": "assertion",
+      "description": "No link in the rule table reads 'Eighty nine days', 'Leap day single' or 'Overstay 120 days'"
+    }
+  ]
+}

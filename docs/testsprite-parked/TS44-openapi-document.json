@@ -1,0 +1,20 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "OpenAPI 3.1 document is served",
+  "priority": "p2",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /api/openapi.json"
+    },
+    {
+      "type": "assertion",
+      "description": "The page shows JSON text (read the raw text of the page body) that contains \"openapi\":\"3.1.0\" and \"title\":\"Ninety API\""
+    },
+    {
+      "type": "assertion",
+      "description": "The same JSON text contains the three paths \"/api/v1/check\", \"/api/v1/ees-reconcile\" and \"/api/v1/letter\""
+    }
+  ]
+}

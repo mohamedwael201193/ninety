@@ -1,0 +1,32 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "An open stay whose EES record ends earlier is an exit disagreement, not a missing entry",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-06-20&fresh=1 (pins today to 2026-06-20 and clears saved trips)"
+    },
+    {
+      "type": "action",
+      "description": "Click the add trip button (data-testid=trip-add), enter entry date 2026-06-01 (data-testid=trip-entry), tick 'still in the Schengen area' (data-testid=trip-open) and click save (data-testid=trip-save)"
+    },
+    {
+      "type": "action",
+      "description": "Navigate to /ees?today=2026-06-20"
+    },
+    {
+      "type": "action",
+      "description": "Enter 10 in the EES days used field (data-testid=ees-days-used) and type exactly '2026-06-01 2026-06-10' in the EES records box (data-testid=ees-records)"
+    },
+    {
+      "type": "action",
+      "description": "Click compare (data-testid=ees-compare)"
+    },
+    {
+      "type": "assertion",
+      "description": "Among the result codes (data-testid=ees-code, read the data-code attributes) there is 'exit-dates-disagree' and there is no 'likely-missing-entry'"
+    }
+  ]
+}

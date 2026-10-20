@@ -56,8 +56,8 @@ type CalculatorSandbox = {
   setup: () => void;
 };
 
-function loadCalculator(html: string): {
-  run: (stays: StayInput[], on: IsoDate, mode: Mode) => string[];
+function loadCalculator(html: string, confirmSort = false): {
+  run: (stays: StayInput[], on: IsoDate, mode: Mode) => { lines: string[]; stayDays: number[] };
 } {
   if (!html.includes("function Beregn2") || !html.includes("function leggInndager")) {
     throw new CommissionSourceError(
@@ -124,7 +124,7 @@ function loadCalculator(html: string): {
     document,
     console,
     alert() {},
-    confirm() { return false; },
+    confirm() { return confirmSort; },
     $,
   };
   sandbox.window = sandbox;
@@ -160,10 +160,17 @@ function loadCalculator(html: string): {
           `The Commission calculator failed while calculating (${error instanceof Error ? error.message : "unknown error"}).`,
         );
       }
-      return document
+      const lines = document
         .getElementById("report")
         .children.map((child) => child.innerHTML.replace(/<[^>]+>/g, "").trim())
         .filter((line) => line.length > 0);
+      // The form's "days" column, filled by the script for each stay it read.
+      const stayDays = stays.map((_, index) => {
+        // The script assigns a number, not a string, to the days field.
+        const raw = String(document.getElementById(`dager${index}`).value ?? "").trim();
+        return raw === "" ? Number.NaN : Number(raw);
+      });
+      return { lines, stayDays };
     },
   };
 }
@@ -173,17 +180,33 @@ export type CommissionRun = {
   planning: string[];
 };
 
+export type CommissionDetailedRun = CommissionRun & {
+  /** Inclusive length the script wrote for each stay, in input order. */
+  stayDays: number[];
+};
+
 export function runCommissionScenario(
   html: string,
   stays: StayInput[],
   on: IsoDate,
 ): CommissionRun {
+  const detailed = runCommissionDetailed(html, stays, on);
+  return { control: detailed.control, planning: detailed.planning };
+}
+
+export function runCommissionDetailed(
+  html: string,
+  stays: StayInput[],
+  on: IsoDate,
+  options?: { confirmSort?: boolean },
+): CommissionDetailedRun {
   // A fresh script context per mode. The calculator keeps stay arrays and the
   // rolling-window buffers on the page, and a second calculation would reuse them.
-  return {
-    control: loadCalculator(html).run(stays, on, "control"),
-    planning: loadCalculator(html).run(stays, on, "planning"),
-  };
+  // confirmSort defaults to false: declining the page's "sort the stays?" dialog.
+  const confirmSort = options?.confirmSort ?? false;
+  const control = loadCalculator(html, confirmSort).run(stays, on, "control");
+  const planning = loadCalculator(html, confirmSort).run(stays, on, "planning");
+  return { control: control.lines, planning: planning.lines, stayDays: control.stayDays };
 }
 
 export async function fetchCommissionCalculator(timeoutMs = 15_000): Promise<string> {

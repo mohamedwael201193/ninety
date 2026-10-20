@@ -1,0 +1,32 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Developers page shows the API with real answers",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /developers"
+    },
+    {
+      "type": "assertion",
+      "description": "The heading (data-testid=developers-heading) reads 'The same engine, as an API and an MCP server'"
+    },
+    {
+      "type": "assertion",
+      "description": "There are three endpoint sections: data-testid=endpoint-check (POST /api/v1/check), data-testid=endpoint-ees-reconcile (POST /api/v1/ees-reconcile) and data-testid=endpoint-letter (POST /api/v1/letter)"
+    },
+    {
+      "type": "assertion",
+      "description": "In the endpoint-check section, the answer block (the second code block) shows \"daysUsed\": 88 and \"daysLeft\": 2"
+    },
+    {
+      "type": "assertion",
+      "description": "In the endpoint-ees-reconcile section, the answer block shows \"figureGap\": 20 and the code likely-missing-exit"
+    },
+    {
+      "type": "assertion",
+      "description": "The link data-testid=openapi-link points to /api/openapi.json"
+    }
+  ]
+}

@@ -43,6 +43,14 @@ Every plan pins the date with `?today=2026-10-19` and starts either with `fresh=
 | `TS41-sheet-focus.json` | Opening the trip sheet moves focus into it and makes the page behind inert; Escape releases the page and returns focus |
 | `TS21-impossible-date.json` | An impossible date (2024-02-30) is named as not existing, and no trip is saved |
 | `TS42-leap-day.json` | A stay on 29 February 2024 counts on 2024-08-26 and has left the window on 2024-08-27 |
+| `TS45-plan-before-booked-stay.json` | A planned trip counts a stay booked after it: a 1-day plan on 2026-06-01 does not fit, latest exit 2026-04-01 |
+| `TS46-overlapping-overstay-once.json` | Two overlapping trips that overstay are one overstay of 11 days |
+| `TS47-ees-split-stay.json` | One stay entered as two trips matches one EES record (`match`) |
+| `TS48-ees-open-stay-earlier-exit.json` | An open stay with an earlier EES exit is `exit-dates-disagree`, not a missing entry |
+| `TS49-letter-refused-on-match.json` | No Article 52 letter when the EES figure matches the trips |
+| `TS50-letter-pdf-cjk-name.json` | The PDF download refuses a name its font cannot draw and names the characters |
+| `TS51-proof-parity-names.json` | `/proof` links exactly the 14 parity scenarios |
+| `TS52-later-overstay-wording.json` | A booked overstay after the date shown is called later, not earlier |
 
 Every plan listed here is in the cloud suite; `test-ids.json` maps each to its TestSprite id. New plans are added with `node scripts/add-cloud-tests.mjs <plan.json>`. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
 

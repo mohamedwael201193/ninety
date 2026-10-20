@@ -15,6 +15,7 @@ const PAGES = [
   "/letter?scenario=near-limit",
   "/parity",
   "/proof",
+  "/developers",
   "/no-such-page",
 ];
 

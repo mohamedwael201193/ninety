@@ -105,7 +105,9 @@
       "entry-refused-next-day"
     ],
     "testsprite": [
-      "TS27"
+      "TS27",
+      "TS46",
+      "TS52"
     ]
   },
   {
@@ -145,7 +147,8 @@
     "testsprite": [
       "TS06",
       "TS10",
-      "TS35"
+      "TS35",
+      "TS45"
     ]
   },
   {
@@ -192,7 +195,9 @@
     "testsprite": [
       "TS07",
       "TS13",
-      "TS14"
+      "TS14",
+      "TS47",
+      "TS48"
     ]
   },
   {
@@ -239,7 +244,9 @@
       "TS08",
       "TS15",
       "TS17",
-      "TS18"
+      "TS18",
+      "TS49",
+      "TS50"
     ]
   },
   {
@@ -257,7 +264,8 @@
       "calculator-example-kom-1-1"
     ],
     "testsprite": [
-      "TS02"
+      "TS02",
+      "TS51"
     ]
   }
 ]

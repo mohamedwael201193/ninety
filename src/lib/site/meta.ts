@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const SITE_URL = "https://ninety-coral.vercel.app";
 
-type PagePath = "/" | "/ees" | "/letter" | "/parity" | "/proof";
+type PagePath = "/" | "/ees" | "/letter" | "/parity" | "/proof" | "/developers";
 
 /** Title (without the "· Ninety" suffix the layout adds) and description for every page. */
 export const PAGES: Record<PagePath, { title: string; description: string }> = {
@@ -20,7 +20,11 @@ export const PAGES: Record<PagePath, { title: string; description: string }> = {
   },
   "/parity": {
     title: "Parity with the Commission calculator",
-    description: "Ninety and the European Commission's own short-stay calculator, run side by side on the same 14 travel histories.",
+    description: "Ninety and the European Commission's own short-stay calculator: 14 scenarios fetched live, and a larger stored set compared on every field the calculator prints.",
+  },
+  "/developers": {
+    title: "API and MCP server",
+    description: "A public JSON API and an MCP server for the same 90/180 engine, EES comparison and Article 52 letter. OpenAPI 3.1, no key, nothing stored.",
   },
   "/proof": {
     title: "Proof: every rule and the tests that guard it",

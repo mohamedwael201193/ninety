@@ -1,0 +1,24 @@
+### axe-core 4.14.0: automated accessibility rules (wcag2a, wcag2aa, wcag21a, wcag21aa)
+
+Target: http://localhost:3000. Fails on any **serious** or **critical** violation. axe checks only what can be tested automatically; it does not replace a manual audit with a screen reader or keyboard.
+
+| Page | Violated rules | Elements | Critical | Serious | Moderate | Minor | Rules passed | Needs review |
+|---|---|---|---|---|---|---|---|---|
+| `/?today=2026-10-19&fresh=1 (desktop 1280px)` | 0 | 0 | 0 | 0 | 0 | 0 | 30 | 2 |
+| `/?scenario=near-limit (desktop 1280px)` | 0 | 0 | 0 | 0 | 0 | 0 | 30 | 2 |
+| `/ees?scenario=near-limit (desktop 1280px)` | 0 | 0 | 0 | 0 | 0 | 0 | 26 | 1 |
+| `/letter?scenario=near-limit (desktop 1280px)` | 0 | 0 | 0 | 0 | 0 | 0 | 27 | 1 |
+| `/parity (desktop 1280px)` | 0 | 0 | 0 | 0 | 0 | 0 | 23 | 1 |
+| `/proof (desktop 1280px)` | 0 | 0 | 0 | 0 | 0 | 0 | 23 | 1 |
+| `/developers (desktop 1280px)` | 0 | 0 | 0 | 0 | 0 | 0 | 19 | 0 |
+| `/no-such-page (desktop 1280px)` | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 1 |
+| `/?today=2026-10-19&fresh=1 (phone 390px)` | 0 | 0 | 0 | 0 | 0 | 0 | 30 | 2 |
+| `/?scenario=near-limit (phone 390px)` | 0 | 0 | 0 | 0 | 0 | 0 | 30 | 2 |
+| `/ees?scenario=near-limit (phone 390px)` | 0 | 0 | 0 | 0 | 0 | 0 | 26 | 1 |
+| `/letter?scenario=near-limit (phone 390px)` | 0 | 0 | 0 | 0 | 0 | 0 | 27 | 1 |
+| `/parity (phone 390px)` | 0 | 0 | 0 | 0 | 0 | 0 | 24 | 1 |
+| `/proof (phone 390px)` | 0 | 0 | 0 | 0 | 0 | 0 | 24 | 1 |
+| `/developers (phone 390px)` | 0 | 0 | 0 | 0 | 0 | 0 | 19 | 0 |
+| `/no-such-page (phone 390px)` | 0 | 0 | 0 | 0 | 0 | 0 | 21 | 1 |
+
+No serious or critical violations.

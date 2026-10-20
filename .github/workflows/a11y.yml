@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   axe:
-    name: axe-core, 7 pages × desktop and phone
+    name: axe-core, 8 pages × desktop and phone
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

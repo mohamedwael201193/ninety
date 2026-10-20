@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T08:50:23.980Z",
+  "generatedAt": "2026-10-20T21:47:28.591Z",
   "source": "src/data/rules.json + testsprite test result",
   "rules": [
     {
@@ -28,9 +28,9 @@
           "testId": "673e2df9-f5fd-47b0-b1c3-759c462db1b8",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "2ff0ecf9-206c-4d43-8f03-6a829ac1f3d1"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "9c94a16a-0c51-4321-bc37-1331ba4bfad6"
           }
         },
         {
@@ -39,9 +39,9 @@
           "testId": "b6981077-60ba-4847-b769-719dd19ebc2c",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "1bf86e8e-8ee9-4bdd-a979-40cbcab86905"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "121bd302-f9dd-4410-ab53-cde54731da82"
           }
         }
       ]
@@ -67,9 +67,9 @@
           "testId": "b6981077-60ba-4847-b769-719dd19ebc2c",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "1bf86e8e-8ee9-4bdd-a979-40cbcab86905"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "121bd302-f9dd-4410-ab53-cde54731da82"
           }
         },
         {
@@ -78,9 +78,9 @@
           "testId": "30074ac3-db4d-4ae1-8b43-a06298f40593",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "926d2a1c-3cbc-4acc-8877-9a04c2077e62"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "f04fd626-a3f1-40dc-992f-1614be1bd243"
           }
         }
       ]
@@ -105,9 +105,9 @@
           "testId": "7c648056-0c53-4a39-bf66-ef5550edbd0e",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "fae3c468-4bda-499c-99cb-665b7ba918a1"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "f84fc5f0-e2fa-4cda-a0d8-1230dc364790"
           }
         }
       ]
@@ -141,16 +141,21 @@
           "testId": "776ff74c-96dd-489a-9918-5b747a90881a",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "ccddbd20-e5ee-444b-8661-99b560050c18"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "0dd68326-2a04-4084-afeb-6d369f20d252"
           }
         },
         {
           "id": "TS42",
           "plan": "TS42-leap-day",
           "testId": "0e997467-fa2a-488c-bb30-60de02358bef",
-          "latest": null
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "34b42886-6417-4d51-b3d0-58181a4b48ac"
+          }
         }
       ]
     },
@@ -179,10 +184,22 @@
           "testId": "bd74af2c-d5e2-428d-a230-774035f1d3cd",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "4f326125-8f9f-436f-a6c4-f6aabe004e31"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "2d3b739e-1fa2-4f66-8e63-33a4e1bc3650"
           }
+        },
+        {
+          "id": "TS46",
+          "plan": "TS46-overlapping-overstay-once",
+          "testId": "74507a04-cff1-4a81-bbb3-fe05120a29c9",
+          "latest": null
+        },
+        {
+          "id": "TS52",
+          "plan": "TS52-later-overstay-wording",
+          "testId": "3cf3bbc7-a89c-4844-9503-e71b5634eeb5",
+          "latest": null
         }
       ]
     },
@@ -204,9 +221,9 @@
           "testId": "b7111eb6-e02e-4f8d-84d1-48ae45d96fc4",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "72c906c9-e98f-45c0-bd8f-3644daa5d438"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "7937ec4d-fea6-42e3-be64-95b3a0f0d264"
           }
         },
         {
@@ -215,9 +232,9 @@
           "testId": "2f9ce70d-082b-4c87-8bfc-f6784cd19b37",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "0a91c671-dc9b-4e43-bcdb-d26119900656"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "f7db9320-5364-456d-a3a1-5d7058eeb0b6"
           }
         }
       ]
@@ -247,9 +264,9 @@
           "testId": "58a96778-71b8-4ac8-ac7b-f1e6fbe8e928",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "77d0c881-5c8b-488e-b7c4-7d456f754035"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "62ab192f-03b5-4016-b53a-8ae30bad2107"
           }
         },
         {
@@ -258,9 +275,9 @@
           "testId": "28757a0f-893c-4453-a5dc-27b7a57863fb",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "79bed733-8e86-4a9e-a552-ad9f1ff7de68"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "03d6dd32-6a72-4575-99b7-c2bd49d2108e"
           }
         },
         {
@@ -269,10 +286,16 @@
           "testId": "53b512df-b3aa-4fe9-864d-7bac3f35e073",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "d08ba10f-633d-458b-8513-40f4e75128e3"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "c7b12775-8ed9-486e-8a55-deadfe15f770"
           }
+        },
+        {
+          "id": "TS45",
+          "plan": "TS45-plan-before-booked-stay",
+          "testId": "2f48a9d2-b5ee-48da-837d-b7efa1c243c5",
+          "latest": null
         }
       ]
     },
@@ -302,9 +325,9 @@
           "testId": "12214dbd-f926-45b4-b94b-4ff234bef57e",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "b9ce10bc-4c71-44c5-b62b-3bfee46ffd53"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "b3b38bfd-491f-4089-baff-cf88977317c1"
           }
         },
         {
@@ -313,9 +336,9 @@
           "testId": "c1707e85-ebb8-4959-b1fe-ded27d391ef2",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "92827f85-0ac2-41e0-acce-6b124fc5edc9"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "0eebbaf4-71ef-4b3a-8680-e029fbe9fda3"
           }
         },
         {
@@ -324,16 +347,21 @@
           "testId": "15a89a56-88c3-4a0e-837f-658b434b344b",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "f65915f2-60d0-455e-8630-800fa5e4fa0e"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "bb4365cc-0df8-4f8e-8c9f-3098f7d5a52a"
           }
         },
         {
           "id": "TS21",
           "plan": "TS21-impossible-date",
           "testId": "991cf8e1-0d68-4102-8e7b-6045d37c1ee0",
-          "latest": null
+          "latest": {
+            "verdict": "passed",
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "27e07c0b-45c4-4989-9e8d-23f4a79621b4"
+          }
         }
       ]
     },
@@ -359,9 +387,9 @@
           "testId": "499945d4-1c23-4fef-9825-7d3ba3d28b89",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "b88f037b-bedd-4509-9301-fa1cc7e03a16"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "c8d38303-275a-4e53-82bf-08d343cf0bbc"
           }
         },
         {
@@ -370,9 +398,9 @@
           "testId": "4104729a-a309-4574-8327-f6c8d3abf6a1",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "43075a65-3553-43b4-8a7a-ecde2c4c0b54"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "bff86b84-3ccc-4918-a125-cf6c06cf9cd3"
           }
         },
         {
@@ -381,10 +409,22 @@
           "testId": "54c989a8-c318-4942-8a74-5a56f295b6a9",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "32558cd8-b214-418e-8f7c-987fcd6bdc0a"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "118a045b-7ccf-4bab-89b2-de2cdde86525"
           }
+        },
+        {
+          "id": "TS47",
+          "plan": "TS47-ees-split-stay",
+          "testId": "93816a28-d56f-4557-aa7d-f82f01fd119b",
+          "latest": null
+        },
+        {
+          "id": "TS48",
+          "plan": "TS48-ees-open-stay-earlier-exit",
+          "testId": "7dbac572-faa5-4614-b090-28c058664d67",
+          "latest": null
         }
       ]
     },
@@ -414,9 +454,9 @@
           "testId": "0ccbb8d5-1faf-4a64-abda-6678468e083c",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "15872866-060c-43fe-8a2b-d5e13bdd7acc"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "20f05b54-80a7-4b37-b4c3-caf7928cf420"
           }
         },
         {
@@ -425,9 +465,9 @@
           "testId": "3bbe3d45-67b3-469a-ae15-9e5650eb6aa4",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "6c9aeb5a-9b5f-4852-ac1a-a52fe5a652e9"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "c89473b4-a164-4794-84e4-95079386bf98"
           }
         },
         {
@@ -436,9 +476,9 @@
           "testId": "93e462af-d768-4713-8634-8952f2258b72",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "d01c1633-077e-4d43-8707-fb7f95fe6aed"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "4bdd4ff1-f941-4a99-8457-5542a2a9b268"
           }
         }
       ]
@@ -465,9 +505,9 @@
           "testId": "31dba9a5-5ac6-473b-9517-b6064cdc2ac8",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "4614e7c5-5e6c-467c-ad3e-96366341d455"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "2da2efa9-ebbc-4a4a-8c17-3d18ad9a0f86"
           }
         },
         {
@@ -476,9 +516,9 @@
           "testId": "3ceb95d5-9096-431f-9463-7b09eedcf065",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "6db7d285-bc19-42f8-b072-23333988e366"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "de7b9503-3e9f-40fc-9c7d-e9c3c62b2d05"
           }
         },
         {
@@ -487,9 +527,9 @@
           "testId": "131f6bcd-36db-44bf-9cb5-14fd3769a1d1",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "1fe4b87f-042f-4803-94fe-2e60b7d7d0b8"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "bacd826f-70a1-4741-b8d3-a4aa7844a756"
           }
         },
         {
@@ -498,10 +538,22 @@
           "testId": "c3525f00-6e6f-44e8-a3c2-92049a297106",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "37e8e896-8ebe-43ae-9de2-3bd3ab5830db"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "dd615755-3dbc-4443-80ac-46ba83a8c919"
           }
+        },
+        {
+          "id": "TS49",
+          "plan": "TS49-letter-refused-on-match",
+          "testId": "fbf2bf81-8a97-4547-aace-8c389fb44f5d",
+          "latest": null
+        },
+        {
+          "id": "TS50",
+          "plan": "TS50-letter-pdf-cjk-name",
+          "testId": "89fc72df-cb41-49e7-8f06-8d463e5469d4",
+          "latest": null
         }
       ]
     },
@@ -526,15 +578,499 @@
           "testId": "e8a03848-8e35-4692-8476-4be7c8ff37e0",
           "latest": {
             "verdict": "passed",
-            "at": "2026-10-20T08:44:37.881Z",
-            "environment": "github-pr-54",
-            "runId": "0784b16e-6e0d-4057-8a56-45958ce1ef04"
+            "at": "2026-10-20T15:29:24.013Z",
+            "environment": "github-pr-56",
+            "runId": "c61633ac-fc7f-4cef-895f-2668b8e2d424"
           }
+        },
+        {
+          "id": "TS51",
+          "plan": "TS51-proof-parity-names",
+          "testId": "1f3f0b6e-ef5a-4844-aeb9-60f73fdf2d74",
+          "latest": null
         }
       ]
     }
   ],
+  "suite": [
+    {
+      "id": "TS01",
+      "plan": "TS01-example-trips",
+      "name": "Example trips give 64 days used and 26 left",
+      "testId": "673e2df9-f5fd-47b0-b1c3-759c462db1b8",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "9c94a16a-0c51-4321-bc37-1331ba4bfad6"
+      }
+    },
+    {
+      "id": "TS02",
+      "plan": "TS02-parity-table",
+      "name": "Parity page shows 14/14 match with 14 rows",
+      "testId": "e8a03848-8e35-4692-8476-4be7c8ff37e0",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "c61633ac-fc7f-4cef-895f-2668b8e2d424"
+      }
+    },
+    {
+      "id": "TS03",
+      "plan": "TS03-add-trip",
+      "name": "Add a trip manually: 2026-09-01 to 2026-09-10 is 10 days used",
+      "testId": "b6981077-60ba-4847-b769-719dd19ebc2c",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "121bd302-f9dd-4410-ab53-cde54731da82"
+      }
+    },
+    {
+      "id": "TS04",
+      "plan": "TS04-reversed-dates",
+      "name": "Exit before entry is rejected with a specific message",
+      "testId": "12214dbd-f926-45b4-b94b-4ff234bef57e",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "b3b38bfd-491f-4089-baff-cf88977317c1"
+      }
+    },
+    {
+      "id": "TS05",
+      "plan": "TS05-delete-undo",
+      "name": "Deleting a trip can be undone and the same trip comes back",
+      "testId": "42f9aceb-cb5b-4bca-8498-3e28dacfadcd",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "c7c48308-0e35-43fd-b1a2-b2d69d7244ce"
+      }
+    },
+    {
+      "id": "TS06",
+      "plan": "TS06-legal-plan",
+      "name": "A legal planned trip fits",
+      "testId": "58a96778-71b8-4ac8-ac7b-f1e6fbe8e928",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "62ab192f-03b5-4016-b53a-8ae30bad2107"
+      }
+    },
+    {
+      "id": "TS07",
+      "plan": "TS07-ees-gap",
+      "name": "EES comparison flags a 26-day gap",
+      "testId": "499945d4-1c23-4fef-9825-7d3ba3d28b89",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "c8d38303-275a-4e53-82bf-08d343cf0bbc"
+      }
+    },
+    {
+      "id": "TS08",
+      "plan": "TS08-letter",
+      "name": "Article 52 letter is drafted with the counts and the 45-day reply",
+      "testId": "31dba9a5-5ac6-473b-9517-b6064cdc2ac8",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "2da2efa9-ebbc-4a4a-8c17-3d18ad9a0f86"
+      }
+    },
+    {
+      "id": "TC009",
+      "plan": "TC009-date-format",
+      "name": "Dates in MM/DD/YYYY are rejected with a clear message",
+      "testId": "c1707e85-ebb8-4959-b1fe-ded27d391ef2",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "0eebbaf4-71ef-4b3a-8680-e029fbe9fda3"
+      }
+    },
+    {
+      "id": "TC010",
+      "plan": "TC010-edit-trip",
+      "name": "Edit an existing trip and recalculate the allowance",
+      "testId": "30074ac3-db4d-4ae1-8b43-a06298f40593",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "f04fd626-a3f1-40dc-992f-1614be1bd243"
+      }
+    },
+    {
+      "id": "TC011",
+      "plan": "TC011-reload",
+      "name": "Trips persist after reloading the page",
+      "testId": "21ab60a0-f7b5-4a9b-84f3-aa4cf3e1d541",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "813b6dbe-3e07-4c08-b84e-f89ef00f757c"
+      }
+    },
+    {
+      "id": "TS09",
+      "plan": "TS09-open-stay-false-fit",
+      "name": "Open stay: a plan past day 90 does not fit",
+      "testId": "2f9ce70d-082b-4c87-8bfc-f6784cd19b37",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "f7db9320-5364-456d-a3a1-5d7058eeb0b6"
+      }
+    },
+    {
+      "id": "TS10",
+      "plan": "TS10-open-stay-boundary",
+      "name": "Open stay: exit on day 90 fits, day 91 does not",
+      "testId": "28757a0f-893c-4453-a5dc-27b7a57863fb",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "03d6dd32-6a72-4575-99b7-c2bd49d2108e"
+      }
+    },
+    {
+      "id": "TS26",
+      "plan": "TS26-same-day-reentry",
+      "name": "Same-day exit and re-entry counts the day once",
+      "testId": "7c648056-0c53-4a39-bf66-ef5550edbd0e",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "f84fc5f0-e2fa-4cda-a0d8-1230dc364790"
+      }
+    },
+    {
+      "id": "TS16",
+      "plan": "TS16-scenario-carry",
+      "name": "A demo scenario carries to the EES check with the same numbers",
+      "testId": "49fa416f-02a2-446a-93e0-144f93030701",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "e0f65e4f-40c8-481d-8daf-0a616eed076e"
+      }
+    },
+    {
+      "id": "TS17",
+      "plan": "TS17-letter-validation",
+      "name": "Letter: missing fields are named, and no letter is drafted",
+      "testId": "131f6bcd-36db-44bf-9cb5-14fd3769a1d1",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "bacd826f-70a1-4741-b8d3-a4aa7844a756"
+      }
+    },
+    {
+      "id": "TS18",
+      "plan": "TS18-letter-evidence",
+      "name": "Letter from a demo scenario states the three figures",
+      "testId": "c3525f00-6e6f-44e8-a3c2-92049a297106",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "dd615755-3dbc-4443-80ac-46ba83a8c919"
+      }
+    },
+    {
+      "id": "TS13",
+      "plan": "TS13-earlier-exit",
+      "name": "EES: an earlier exit is not called a missing entry",
+      "testId": "4104729a-a309-4574-8327-f6c8d3abf6a1",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "bff86b84-3ccc-4918-a125-cf6c06cf9cd3"
+      }
+    },
+    {
+      "id": "TS14",
+      "plan": "TS14-missing-exit",
+      "name": "EES: a missing exit is found and its days listed",
+      "testId": "54c989a8-c318-4942-8a74-5a56f295b6a9",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "118a045b-7ccf-4bab-89b2-de2cdde86525"
+      }
+    },
+    {
+      "id": "TS15",
+      "plan": "TS15-letter-law",
+      "name": "Letter states Article 52(1)–(5) accurately",
+      "testId": "3ceb95d5-9096-431f-9463-7b09eedcf065",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "de7b9503-3e9f-40fc-9c7d-e9c3c62b2d05"
+      }
+    },
+    {
+      "id": "TS27",
+      "plan": "TS27-overstay-scenario",
+      "name": "Overstay scenario: the exact overstay days are named",
+      "testId": "bd74af2c-d5e2-428d-a230-774035f1d3cd",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "2d3b739e-1fa2-4f66-8e63-33a4e1bc3650"
+      }
+    },
+    {
+      "id": "TS28",
+      "plan": "TS28-open-stay-count",
+      "name": "Open stay: counted through today",
+      "testId": "b7111eb6-e02e-4f8d-84d1-48ae45d96fc4",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "7937ec4d-fea6-42e3-be64-95b3a0f0d264"
+      }
+    },
+    {
+      "id": "TS29",
+      "plan": "TS29-missing-entry",
+      "name": "A trip without an entry date is rejected",
+      "testId": "15a89a56-88c3-4a0e-837f-658b434b344b",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "bb4365cc-0df8-4f8e-8c9f-3098f7d5a52a"
+      }
+    },
+    {
+      "id": "TS30",
+      "plan": "TS30-cutoff-span",
+      "name": "EES: a stay that began before 10 April 2026 is left out",
+      "testId": "0ccbb8d5-1faf-4a64-abda-6678468e083c",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "20f05b54-80a7-4b37-b4c3-caf7928cf420"
+      }
+    },
+    {
+      "id": "TS31",
+      "plan": "TS31-cutoff-mixed",
+      "name": "EES: only the post-cutoff stay is compared",
+      "testId": "3bbe3d45-67b3-469a-ae15-9e5650eb6aa4",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "c89473b4-a164-4794-84e4-95079386bf98"
+      }
+    },
+    {
+      "id": "TS34",
+      "plan": "TS34-rolling-window",
+      "name": "Rolling window: old days drop out on a later date",
+      "testId": "776ff74c-96dd-489a-9918-5b747a90881a",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "0dd68326-2a04-4084-afeb-6d369f20d252"
+      }
+    },
+    {
+      "id": "TS35",
+      "plan": "TS35-use-latest-exit",
+      "name": "Planner: 'Use latest exit' turns a failing plan into one that fits",
+      "testId": "53b512df-b3aa-4fe9-864d-7bac3f35e073",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "c7b12775-8ed9-486e-8a55-deadfe15f770"
+      }
+    },
+    {
+      "id": "TS36",
+      "plan": "TS36-proof-matrix",
+      "name": "/proof lists every rule with its tests",
+      "testId": "7bcfaa21-c524-4347-b66f-a9bfd5ed3dae",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "1d417050-140c-4938-b753-7a35a5d57942"
+      }
+    },
+    {
+      "id": "TS37",
+      "plan": "TS37-scenario-gallery",
+      "name": "Scenario gallery cards open the history they describe",
+      "testId": "0ea278aa-004e-4689-9611-2b5a362b33f4",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "0ea805fd-1dd7-44a5-a429-01c3dc7627f0"
+      }
+    },
+    {
+      "id": "TS38",
+      "plan": "TS38-cutoff-card",
+      "name": "Cutoff card explains 10 April 2026 and loads its example",
+      "testId": "93e462af-d768-4713-8634-8952f2258b72",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "4bdd4ff1-f941-4a99-8457-5542a2a9b268"
+      }
+    },
+    {
+      "id": "TS40",
+      "plan": "TS40-not-found",
+      "name": "Unknown address: 404 page leads back to every page",
+      "testId": "2171495f-4f7a-4ea8-94b7-cbf24302558f",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "e1913840-364b-47e5-a421-d505ee95c1ec"
+      }
+    },
+    {
+      "id": "TS39",
+      "plan": "TS39-phone-nav",
+      "name": "Phone width: every page is reachable from the navigation",
+      "testId": "ffe0fbe4-e887-4d07-8f04-c3526bf544aa",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "566cf00f-1c3e-4598-8f9e-a127ee772909"
+      }
+    },
+    {
+      "id": "TS21",
+      "plan": "TS21-impossible-date",
+      "name": "A date that does not exist is rejected with that reason",
+      "testId": "991cf8e1-0d68-4102-8e7b-6045d37c1ee0",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "27e07c0b-45c4-4989-9e8d-23f4a79621b4"
+      }
+    },
+    {
+      "id": "TS41",
+      "plan": "TS41-sheet-focus",
+      "name": "Trip sheet takes focus, makes the page inert, and gives it back",
+      "testId": "e1e10a25-1697-4a85-a071-6e0340c3979d",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "ffb9d7c1-c07a-456d-98f7-2aac27f2f097"
+      }
+    },
+    {
+      "id": "TS42",
+      "plan": "TS42-leap-day",
+      "name": "A leap-day stay drops out of the window on day 181",
+      "testId": "0e997467-fa2a-488c-bb30-60de02358bef",
+      "latest": {
+        "verdict": "passed",
+        "at": "2026-10-20T15:29:24.013Z",
+        "environment": "github-pr-56",
+        "runId": "34b42886-6417-4d51-b3d0-58181a4b48ac"
+      }
+    },
+    {
+      "id": "TS45",
+      "plan": "TS45-plan-before-booked-stay",
+      "name": "A planned trip counts a stay already booked after it (one day on 1 June does not fit before 90 days from 1 July)",
+      "testId": "2f48a9d2-b5ee-48da-837d-b7efa1c243c5",
+      "latest": null
+    },
+    {
+      "id": "TS46",
+      "plan": "TS46-overlapping-overstay-once",
+      "name": "Two overlapping trips that overstay are listed as one overstay of 11 days",
+      "testId": "74507a04-cff1-4a81-bbb3-fe05120a29c9",
+      "latest": null
+    },
+    {
+      "id": "TS47",
+      "plan": "TS47-ees-split-stay",
+      "name": "One stay entered as two trips (an internal border crossing) matches one EES record",
+      "testId": "93816a28-d56f-4557-aa7d-f82f01fd119b",
+      "latest": null
+    },
+    {
+      "id": "TS48",
+      "plan": "TS48-ees-open-stay-earlier-exit",
+      "name": "An open stay whose EES record ends earlier is an exit disagreement, not a missing entry",
+      "testId": "7dbac572-faa5-4614-b090-28c058664d67",
+      "latest": null
+    },
+    {
+      "id": "TS49",
+      "plan": "TS49-letter-refused-on-match",
+      "name": "No Article 52 letter when the EES figure matches the trips",
+      "testId": "fbf2bf81-8a97-4547-aace-8c389fb44f5d",
+      "latest": null
+    },
+    {
+      "id": "TS50",
+      "plan": "TS50-letter-pdf-cjk-name",
+      "name": "The PDF download refuses a name its font cannot draw and says which characters",
+      "testId": "89fc72df-cb41-49e7-8f06-8d463e5469d4",
+      "latest": null
+    },
+    {
+      "id": "TS51",
+      "plan": "TS51-proof-parity-names",
+      "name": "/proof names only the 14 parity scenarios the calculator runs",
+      "testId": "1f3f0b6e-ef5a-4844-aeb9-60f73fdf2d74",
+      "latest": null
+    },
+    {
+      "id": "TS52",
+      "plan": "TS52-later-overstay-wording",
+      "name": "A booked overstay after the date shown is called later, not earlier",
+      "testId": "3cf3bbc7-a89c-4844-9503-e71b5634eeb5",
+      "latest": null
+    }
+  ],
   "environments": [
-    "github-pr-54"
+    "github-pr-56"
   ]
 }
