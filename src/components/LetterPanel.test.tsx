@@ -44,9 +44,9 @@ describe("LetterPanel", () => {
     type("letter-member-state", "France");
     type("letter-ees-days", "90");
     fireEvent.click(screen.getByTestId("letter-generate"));
-    expect(screen.getByTestId("letter-evidence-ours").textContent).toBe("88");
-    expect(screen.getByTestId("letter-evidence-ees").textContent).toBe("90");
-    expect(screen.getByTestId("letter-evidence-gap").textContent).toBe("2");
+    expect(screen.getByTestId("letter-evidence-ours").textContent).toBe("88 days");
+    expect(screen.getByTestId("letter-evidence-ees").textContent).toBe("90 days");
+    expect(screen.getByTestId("letter-evidence-gap").textContent).toBe("2 days");
     const text = screen.getByTestId("letter-text").textContent ?? "";
     expect(text).toContain("show 88 days in that same period");
     expect(text).toContain("In figures: my dates 88 days; EES 90 days; difference 2 days, the EES counting more.");
@@ -62,7 +62,7 @@ describe("LetterPanel", () => {
     const headers = Array.from(table.querySelectorAll("th[scope=col]")).map((th) => th.textContent);
     expect(headers).toEqual(["Date", "Your dates", "EES figure", "Difference"]);
     const cells = Array.from(table.querySelectorAll("tbody tr > *")).map((c) => c.textContent);
-    expect(cells).toEqual(["2026-10-19", "88", "90", "2"]);
+    expect(cells).toEqual(["2026-10-19", "88 days", "90 days", "2 days"]);
     // Every body cell is a plain <td> under its column header: four headers, four cells, read in order.
     expect(table.querySelectorAll("tbody td").length).toBe(4);
   });
