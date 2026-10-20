@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Providers } from "@/components/Providers";
 import { SkipLink } from "@/components/SkipLink";
+import { PAGES, SITE_URL } from "@/lib/site/meta";
 import "./globals.css";
 
 // Self-hosted (OFL), so the build never depends on fetching from Google Fonts.
@@ -10,9 +11,10 @@ const sans = localFont({ src: [{ path: "./fonts/ibm-plex-sans-latin-400-normal.w
 const mono = localFont({ src: [{ path: "./fonts/ibm-plex-mono-latin-400-normal.woff2", weight: "400", style: "normal" }, { path: "./fonts/ibm-plex-mono-latin-500-normal.woff2", weight: "500", style: "normal" }], variable: "--font-mono-face", display: "swap" });
 
 export const metadata: Metadata = {
-  title: { default: "Ninety — Schengen days left", template: "%s · Ninety" },
-  description:
-    "How many Schengen days do you really have left? A 90/180 count rebuilt from your trips.",
+  metadataBase: new URL(SITE_URL),
+  // Canonical and Open Graph are set per page (src/lib/site/meta.ts), so the 404 page gets none.
+  title: { default: PAGES["/"].title, template: "%s · Ninety" },
+  description: PAGES["/"].description,
 };
 
 export default function RootLayout({

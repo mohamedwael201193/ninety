@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
+import { pageMetadata } from "@/lib/site/meta";
 import { AppShell } from "@/components/AppShell";
 import CountBand from "@/components/landing/CountBand";
 import Footer from "@/components/landing/Footer";
@@ -7,6 +9,8 @@ import MismatchLetter from "@/components/landing/MismatchLetter";
 import Nav from "@/components/landing/Nav";
 import ScenarioGallery from "@/components/landing/ScenarioGallery";
 import { SmoothScroll } from "@/components/fx/SmoothScroll";
+
+export const metadata: Metadata = pageMetadata("/");
 
 export default function HomePage() {
   return (

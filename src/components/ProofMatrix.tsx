@@ -2,6 +2,7 @@ import { ScrollRegion } from "./ScrollRegion";
 import Link from "next/link";
 import proof from "@/data/proof.json";
 import { label } from "@/lib/schengen/scenario-names";
+import { proofSummary } from "@/lib/proof/rules";
 import { ToolShell } from "./tools/ToolShell";
 
 const REPO = "https://github.com/mohamedwael201193/ninety";
@@ -18,8 +19,7 @@ function Verdict({ id, latest }: { id: string; latest: Latest }) {
 }
 
 export function ProofMatrix() {
-  const total = proof.rules.flatMap((r) => r.testsprite).length;
-  const passed = proof.rules.flatMap((r) => r.testsprite).filter((t) => t.latest?.verdict === "passed").length;
+  const summary = proofSummary(proof.rules);
   return (
     <ToolShell
       testId="proof-page"
@@ -29,7 +29,7 @@ export function ProofMatrix() {
     >
       <p data-testid="proof-generated" className="mb-4 text-sm text-ink-hushed">
         Generated <time dateTime={proof.generatedAt}>{proof.generatedAt.slice(0, 16).replace("T", " ")} UTC</time> from <code>src/data/rules.json</code> and TestSprite&apos;s latest results (<code>npm run proof:matrix</code>).
-        {" "}<span data-testid="proof-summary">{proof.rules.length} rules · {passed}/{total} TestSprite references passing on their latest run.</span>
+        {" "}<span data-testid="proof-summary">{proof.rules.length} rules · {summary.passed}/{summary.ran} TestSprite tests passed on their latest cloud run{proof.environments?.length ? ` (${proof.environments.join(", ")})` : ""}{summary.notRun.length > 0 ? ` · not run yet: ${summary.notRun.join(", ")}` : ""}.</span>
         {" "}History of every run: <a className="underline underline-offset-4" href={`${REPO}/blob/main/LOOP.md`}>LOOP.md</a>.
       </p>
       <ScrollRegion label="Rule-to-test matrix" className="card-soft">
