@@ -86,7 +86,7 @@ export function EesPanel() {
           <div className="flex items-center justify-between gap-3">
             <h2 className="font-display text-2xl font-medium tracking-tight">What the EES says</h2>
             <span className="rounded-pill bg-paper-sunk px-3 py-1 font-mono text-xs text-ink-hushed">
-              on <span data-testid="ees-on">{today}</span>
+              on <span data-testid="ees-on">{ready ? today : "…"}</span>
             </span>
           </div>
           {rawToday && isIsoDate(rawToday) ? <p className="text-xs text-ink-hushed">Date taken from the today parameter.</p> : null}

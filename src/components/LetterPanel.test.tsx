@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server";
 
 afterEach(cleanup);
 
@@ -88,5 +89,12 @@ describe("LetterPanel", () => {
     query = "scenario=near-limit";
     render(<LetterPanel />);
     expect((screen.getByTestId("letter-ees-days") as HTMLInputElement).value).toBe("");
+  });
+});
+
+describe("LetterPanel reference date", () => {
+  it("is filled in only after mount, never from the server's clock", () => {
+    query = "";
+    expect(renderToStaticMarkup(<LetterPanel />)).toMatch(/data-testid="letter-on">…</);
   });
 });

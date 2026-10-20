@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { renderToStaticMarkup } from "react-dom/server";
 
 afterEach(cleanup);
 
@@ -37,5 +38,18 @@ describe("EesPanel with ?scenario=", () => {
     render(<EesPanel />);
     expect(screen.queryByTestId("scenario-banner")).toBeNull();
     expect(await compareWith("90")).toContain("0");
+  });
+});
+
+describe("EesPanel reference date", () => {
+  it("is not in the server HTML, so the server's UTC date never flashes before the local one", () => {
+    query = "";
+    const html = renderToStaticMarkup(<EesPanel />);
+    expect(html).toMatch(/data-testid="ees-on">…</);
+  });
+  it("shows the pinned date once mounted", async () => {
+    query = "today=2026-10-19";
+    render(<EesPanel />);
+    expect((await screen.findByTestId("ees-on")).textContent).toBe("2026-10-19");
   });
 });
