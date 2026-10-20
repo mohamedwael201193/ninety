@@ -1,18 +1,73 @@
 {
   "_note": "Why each PR's TestSprite run went red. app = a real defect in Ninety, fixed in the app. plan-ci = the test plan or CI was wrong, fixed in the test. blocked = the run could not start or every test was blocked. Read by scripts/loop-proof.mjs and scripts/loop-iterations.mjs.",
-  "8": { "kind": "app", "why": "The parity table's row loop started at index 1 and dropped the first scenario" },
-  "14": { "kind": "app", "why": "The planner ignored the days of an open stay before a planned trip" },
-  "39": { "kind": "app", "why": "A demo scenario was lost on the way to /ees and /letter" },
-  "41": { "kind": "app", "why": "Reloading a ?fresh=1 page wiped saved trips again; the evidence table's difference cell read as blank" },
-  "55": { "kind": "app", "why": "Closing the trip sheet with Escape left keyboard focus on the page body" },
-  "57": { "kind": "app", "why": "/parity said couldn't verify on production (TS02); TS45-TS52 red on purpose for 8 review bugs" },
-  "18": { "kind": "plan-ci", "why": "Dependency PR; green on the re-run after merging main" },
-  "22": { "kind": "plan-ci", "why": "CI PR; green on the re-run after merging main" },
-  "32": { "kind": "plan-ci", "why": "A plan step a cloud agent read differently" },
-  "36": { "kind": "plan-ci", "why": "TS26 had a wrong expected value" },
-  "37": { "kind": "plan-ci", "why": "Same TS26 wrong expected value as #36 (red in run history only)" },
-  "38": { "kind": "plan-ci", "why": "Same TS26 wrong expected value as #36 (red in run history only)" },
-  "43": { "kind": "plan-ci", "why": "TS18 wording" },
-  "9": { "kind": "blocked", "why": "TestSprite could not start the run" },
-  "44": { "kind": "blocked", "why": "0/17 passed, 17 blocked by the preview" }
+  "8": {
+    "kind": "app",
+    "why": "The parity table's row loop started at index 1 and dropped the first scenario"
+  },
+  "14": {
+    "kind": "app",
+    "why": "The planner ignored the days of an open stay before a planned trip"
+  },
+  "39": {
+    "kind": "app",
+    "why": "A demo scenario was lost on the way to /ees and /letter"
+  },
+  "41": {
+    "kind": "app",
+    "why": "Reloading a ?fresh=1 page wiped saved trips again; the evidence table's difference cell read as blank"
+  },
+  "55": {
+    "kind": "app",
+    "why": "Closing the trip sheet with Escape left keyboard focus on the page body"
+  },
+  "57": {
+    "kind": "app",
+    "why": "/parity said couldn't verify on production (TS02); TS45-TS52 red on purpose for 8 review bugs"
+  },
+  "18": {
+    "kind": "plan-ci",
+    "why": "Dependency PR; green on the re-run after merging main"
+  },
+  "22": {
+    "kind": "plan-ci",
+    "why": "CI PR; green on the re-run after merging main"
+  },
+  "32": {
+    "kind": "plan-ci",
+    "why": "A plan step a cloud agent read differently"
+  },
+  "36": {
+    "kind": "plan-ci",
+    "why": "TS26 had a wrong expected value"
+  },
+  "37": {
+    "kind": "plan-ci",
+    "why": "Same TS26 wrong expected value as #36 (red in run history only)"
+  },
+  "38": {
+    "kind": "plan-ci",
+    "why": "Same TS26 wrong expected value as #36 (red in run history only)"
+  },
+  "43": {
+    "kind": "plan-ci",
+    "why": "TS18 wording"
+  },
+  "9": {
+    "kind": "blocked",
+    "why": "TestSprite could not start the run"
+  },
+  "44": {
+    "kind": "blocked",
+    "why": "0/17 passed, 17 blocked by the preview"
+  },
+  "60": {
+    "kind": "app",
+    "why": "TS42 read Days used as empty: until saved trips load, the count area was a blank skeleton (server HTML: only Loading…). Now the tiles say Counting your saved trips…"
+  },
+  "_notes": [
+    {
+      "pr": 60,
+      "text": "TS42 (leap-day stay leaves the window on day 181) failed once on PR #60 at commit 1abce4c (42/43, [execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/1f423c16-9271-4530-bbd6-11c6ec403bef)): the agent read the Days used cell as empty. A CLI rerun of TS42 alone against production passed (run 3f1d1a94-9544-4e94-9688-5ace96c0d741). Playwright never saw a wrong number, but with the CPU slowed 20x the status area was an empty skeleton for about 3 s, and the server HTML said only \"Loading…\" ([timeline](docs/evidence/testsprite/ts42-pr60/production-throttled-timeline.txt)). Fixed on #60: until the trips load, the Days used and Days left tiles say \"Counting your saved trips…\" ([red](docs/evidence/testsprite/ts42-pr60/vitest-red.txt), [green](docs/evidence/testsprite/ts42-pr60/vitest-green.txt)). The next full run is the following commit's status in [LOOP-ITERATIONS.md](LOOP-ITERATIONS.md)."
+    }
+  ]
 }

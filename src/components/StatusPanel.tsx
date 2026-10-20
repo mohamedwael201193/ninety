@@ -138,3 +138,23 @@ function Tile({ label, value, testId, hint, strong, wide }: {
     </div>
   );
 }
+
+/**
+ * Shown until the trips saved in this browser have been read (and in the server HTML). The tiles say
+ * so in words, so the count is never an empty box: TestSprite TS42 read "Days used" as blank once on PR #60.
+ */
+export function StatusPending() {
+  return (
+    <section data-testid="status-pending" className="space-y-6 card-soft p-6 md:p-8">
+      <h2 className="font-mono text-xs tracking-[0.08em] text-ink-hushed uppercase">Days left today</h2>
+      <dl className="grid grid-cols-2 gap-3">
+        {[["Days left", "days-left"], ["Days used in the last 180 days", "days-used"]].map(([label, id]) => (
+          <div key={id} className="rounded-2xl bg-paper-warm p-4">
+            <dt className="text-xs text-ink-hushed">{label}</dt>
+            <dd data-testid={id} data-state="pending" className="mt-1 text-lg font-medium text-ink-hushed">Counting your saved trips…</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}

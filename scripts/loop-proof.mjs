@@ -96,9 +96,11 @@ function checkOnly() {
   return Object.entries(checkSaid).filter(([p, d]) => d.some((x) => /\d+ failed/.test(x)) && !loops.some((l) => l.pr === Number(p))).map(([p]) => Number(p));
 }
 function summaryLine() {
-  const by = (k) => loops.filter((l) => l.kind === k).map((l) => `#${l.pr}`);
-  const onCheck = loops.filter((l) => (checkSaid[l.pr] ?? []).some((d) => /\d+ failed/.test(d)));
-  return `${loops.length} PRs have a red execution, then a green one, in the run history: ${by("app").length} app defects (${by("app").join(", ")}), ${by("plan-ci").length} test plan or CI (${by("plan-ci").join(", ")}), ${by("blocked").length} blocked (${by("blocked").join(", ") || "none"}). ${onCheck.length} of them also show failed tests on the GitHub check (the count in LOOP-ITERATIONS.md and the README); the others: ${loops.filter((l) => !onCheck.includes(l)).map((l) => `#${l.pr}${l.kind === "blocked" ? " (blocked on the check)" : " (no red check)"}`).join(", ")}. ${checkOnly().length ? `Red on the GitHub check but not in this history (the failing test was later replaced): ${checkOnly().map((p) => `#${p} (${KIND[kinds[p]?.kind] ?? "unclassified"})`).join(", ")}.` : ""} So the GitHub check shows ${onCheck.length + checkOnly().length} PRs red, then green.`;
+  const done = loops.filter((l) => l.green);
+  const by = (k) => done.filter((l) => l.kind === k).map((l) => `#${l.pr}`);
+  const onCheck = done.filter((l) => (checkSaid[l.pr] ?? []).some((d) => /\d+ failed/.test(d)));
+  const open = loops.filter((l) => !l.green).map((l) => `#${l.pr}`);
+  return `${open.length ? `Red, green not yet: ${open.join(", ")}. ` : ""}${done.length} PRs have a red execution, then a green one, in the run history: ${by("app").length} app defects (${by("app").join(", ")}), ${by("plan-ci").length} test plan or CI (${by("plan-ci").join(", ")}), ${by("blocked").length} blocked (${by("blocked").join(", ") || "none"}). ${onCheck.length} of them also show failed tests on the GitHub check (the count in LOOP-ITERATIONS.md and the README); the others: ${done.filter((l) => !onCheck.includes(l)).map((l) => `#${l.pr}${l.kind === "blocked" ? " (blocked on the check)" : " (no red check)"}`).join(", ")}. ${checkOnly().length ? `Red on the GitHub check but not in this history (the failing test was later replaced): ${checkOnly().map((p) => `#${p} (${KIND[kinds[p]?.kind] ?? "unclassified"})`).join(", ")}.` : ""} So the GitHub check shows ${onCheck.length + checkOnly().length} PRs red, then green.`;
 }
 if (loops.some((l) => l.kind === "unclassified")) console.warn("unclassified red PRs:", loops.filter((l) => l.kind === "unclassified").map((l) => l.pr));
 const prLink = (n) => `[#${n}](${REPO}/pull/${n})`;
@@ -118,6 +120,10 @@ const lines = [
   "| PR | Kind | Red run (history, UTC) | Failing tests | GitHub check said | Green run (history, UTC) |",
   "|---|---|---|---|---|---|",
   ...loops.map((l) => `| ${prLink(l.pr)} | ${KIND[l.kind] ?? l.kind} | ${l.red.start.slice(0, 16)}Z, ${l.red.passed}/${l.red.tests} | ${l.red.failed.map((f) => f.test).join(", ")} | ${(checkSaid[l.pr] ?? []).join("; ") || "no red check (history only)"} | ${l.green ? `${l.green.start.slice(0, 16)}Z, ${l.green.passed}/${l.green.tests}` : "not yet"} |`),
+  "",
+  "## Notes",
+  "",
+  ...(kinds._notes ?? []).map((f) => `- ${f.text}`),
   "",
   "## Every execution",
   "",

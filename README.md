@@ -18,7 +18,7 @@ Ninety counts your Schengen short-stay days from your own trips, checks that cou
 | **43** | TestSprite cloud tests on every PR preview (TS45–TS52 added for bugs found in code review), `TestSprite V3` a required check ([`test-ids.json`](testsprite_tests/test-ids.json), plans in [`testsprite_tests/plans`](testsprite_tests/plans)) |
 | **43/43** | passed on the latest run, on PR #57 (PR head [1963cc1](https://github.com/mohamedwael201193/ninety/commit/1963cc1923403756491778893cea9e960dd2c32b), merged to `main` as `396d6d9`; status "All 43 tests passed", 2026-10-20 22:09 UTC; [screenshots](docs/evidence/testsprite/README.md)). The previous full run, 35/35 on PR #56: [portal report PDF](docs/evidence/portal-2026-10-20/testsprite-report-35of35-2026-10-20.pdf) |
 | **7 + 8** | 7 real app bugs TestSprite found first on a PR preview (6 fixed before merging, and TS02 on #57, which also failed on production); 8 more bugs from code review that TestSprite failed red, then passed after the fix, on #57 ([What TestSprite caught](#what-testsprite-caught)) |
-| **358** | Vitest unit, property and fuzz tests on every PR, all passing (3 more run only against the live Commission page) (`npm test`) |
+| **360** | Vitest unit, property and fuzz tests on every PR, all passing (3 more run only against the live Commission page) (`npm test`) |
 | **3** | public API endpoints with an [OpenAPI 3.1 document](https://ninety-coral.vercel.app/api/openapi.json) (copy in [`docs/openapi.json`](docs/openapi.json), kept equal by a test), and the same three as MCP tools: over streamable HTTP at `/api/mcp` and as a stdio [server](packages/ninety-mcp), both tested with the official MCP client |
 | **55** | pull requests merged into `main` |
 

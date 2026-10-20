@@ -1,0 +1,7 @@
+     × the calculator's first render labels Days used and Days left as pending, in words 15ms
+     × the home page's server fallback shows the same pending tiles, not only Loading… 57ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected undefined to be 'Counting your saved trips…' // Object.is equality
+- Expected:
++ Received:
+      Tests  2 failed (2)

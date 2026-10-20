@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { pageMetadata } from "@/lib/site/meta";
 import { AppShell } from "@/components/AppShell";
+import { StatusPending } from "@/components/StatusPanel";
 import CountBand from "@/components/landing/CountBand";
 import Footer from "@/components/landing/Footer";
 import Hero from "@/components/landing/Hero";
@@ -21,7 +22,7 @@ export default function HomePage() {
       <Hero />
       <CountBand />
       <section id="check" className="scroll-mt-16 bg-paper-warm">
-        <Suspense fallback={<div className="mx-auto max-w-page px-5 py-6">Loading…</div>}>
+        <Suspense fallback={<div className="mx-auto max-w-[1200px] px-5 pt-6 md:px-8"><StatusPending /></div>}>
           <AppShell />
         </Suspense>
       </section>

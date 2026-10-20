@@ -1,12 +1,12 @@
 # The TestSprite loop
 
-Generated 2026-10-20T22:53:03.705Z by `scripts/loop-proof.mjs` from `testsprite test result --history` (1668 runs). Do not edit by hand.
+Generated 2026-10-20T23:14:02.959Z by `scripts/loop-proof.mjs` from `testsprite test result --history` (1712 runs). Do not edit by hand.
 
 Counts cover the tests listed in `testsprite_tests/test-ids.json`. Runs of tests that were later replaced (the first TS09/TS10) are not included, so an execution can show fewer tests than the suite had at the time.
 
 ## Red, then green
 
-13 PRs have a red execution, then a green one, in the run history: 6 app defects (#8, #14, #39, #41, #55, #57), 6 test plan or CI (#18, #32, #36, #37, #38, #43), 1 blocked (#44). 10 of them also show failed tests on the GitHub check (the count in LOOP-ITERATIONS.md and the README); the others: #37 (no red check), #38 (no red check), #44 (blocked on the check). Red on the GitHub check but not in this history (the failing test was later replaced): #22 (Test plan or CI). So the GitHub check shows 11 PRs red, then green.
+Red, green not yet: #60. 13 PRs have a red execution, then a green one, in the run history: 6 app defects (#8, #14, #39, #41, #55, #57), 6 test plan or CI (#18, #32, #36, #37, #38, #43), 1 blocked (#44). 10 of them also show failed tests on the GitHub check (the count in LOOP-ITERATIONS.md and the README); the others: #37 (no red check), #38 (no red check), #44 (blocked on the check). Red on the GitHub check but not in this history (the failing test was later replaced): #22 (Test plan or CI). So the GitHub check shows 11 PRs red, then green.
 
 The two counts differ for a reason: the "Red run" fraction is from the run history and counts only the tests still in `test-ids.json`; the "GitHub check" column quotes the PR's `TestSprite V3` status word for word, which counted every test the run had. The README quotes the GitHub check.
 
@@ -25,6 +25,11 @@ The two counts differ for a reason: the "Red run" fraction is from the run histo
 | [#44](https://github.com/mohamedwael201193/ninety/pull/44) | Blocked, not a catch | 2026-10-20T07:27Z, 0/17 | TS01, TS02, TS03, TS04, TS05, TS06, TS07, TS08, TC009, TC010, TC011, TS09, TS10, TS26, TS16, TS17, TS18 | 0/17 passed · 17 blocked | 2026-10-20T07:31Z, 17/17 |
 | [#55](https://github.com/mohamedwael201193/ninety/pull/55) | App defect | 2026-10-20T08:51Z, 34/35 | TS41 | 34/35 passed · 1 failed; 32/35 passed · 2 failed · 1 blocked; 32/35 passed · 3 failed | 2026-10-20T11:56Z, 35/35 |
 | [#57](https://github.com/mohamedwael201193/ninety/pull/57) | App defect | 2026-10-20T21:56Z, 34/43 | TS02, TS45, TS46, TS47, TS48, TS49, TS50, TS51, TS52 | 34/43 passed · 8 failed · 1 blocked; 42/43 passed · 1 failed | 2026-10-20T22:09Z, 43/43 |
+| [#60](https://github.com/mohamedwael201193/ninety/pull/60) | App defect | 2026-10-20T22:59Z, 42/43 | TS42 | no red check (history only) | not yet |
+
+## Notes
+
+- TS42 (leap-day stay leaves the window on day 181) failed once on PR #60 at commit 1abce4c (42/43, [execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/1f423c16-9271-4530-bbd6-11c6ec403bef)): the agent read the Days used cell as empty. A CLI rerun of TS42 alone against production passed (run 3f1d1a94-9544-4e94-9688-5ace96c0d741). Playwright never saw a wrong number, but with the CPU slowed 20x the status area was an empty skeleton for about 3 s, and the server HTML said only "Loading…" ([timeline](docs/evidence/testsprite/ts42-pr60/production-throttled-timeline.txt)). Fixed on #60: until the trips load, the Days used and Days left tiles say "Counting your saved trips…" ([red](docs/evidence/testsprite/ts42-pr60/vitest-red.txt), [green](docs/evidence/testsprite/ts42-pr60/vitest-green.txt)). The next full run is the following commit's status in [LOOP-ITERATIONS.md](LOOP-ITERATIONS.md).
 
 ## Every execution
 
@@ -136,3 +141,5 @@ The two counts differ for a reason: the "Red run" fraction is from the run histo
 | 2026-10-20T21:56 | [#57](https://github.com/mohamedwael201193/ninety/pull/57) | 34/43 | TS02, TS45, TS46, TS47, TS48, TS49, TS50, TS51, TS52 |
 | 2026-10-20T22:02 | [#57](https://github.com/mohamedwael201193/ninety/pull/57) | 42/43 | TS02 |
 | 2026-10-20T22:09 | [#57](https://github.com/mohamedwael201193/ninety/pull/57) | 43/43 | none |
+| 2026-10-20T22:59 | [#60](https://github.com/mohamedwael201193/ninety/pull/60) | 42/43 | TS42 |
+| 2026-10-20T23:06 | default | 1/1 | none |

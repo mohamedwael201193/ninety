@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-20T22:53:03.705Z",
+  "generatedAt": "2026-10-20T23:14:02.959Z",
   "source": "testsprite test result --history",
-  "runs": 1668,
+  "runs": 1712,
   "executions": [
     {
       "pr": null,
@@ -1160,6 +1160,28 @@
       "tests": 43,
       "passed": 43,
       "failed": []
+    },
+    {
+      "pr": 60,
+      "env": "github-pr-60",
+      "start": "2026-10-20T22:59:05.355Z",
+      "tests": 43,
+      "passed": 42,
+      "failed": [
+        {
+          "test": "TS42",
+          "runId": "5fe7a242-8a64-4668-bcba-5eb10addecb2",
+          "failureKind": "unknown"
+        }
+      ]
+    },
+    {
+      "pr": null,
+      "env": "default",
+      "start": "2026-10-20T23:06:01.040Z",
+      "tests": 1,
+      "passed": 1,
+      "failed": []
     }
   ],
   "loops": [
@@ -1634,6 +1656,25 @@
         "passed": 43,
         "failed": []
       },
+      "kind": "app"
+    },
+    {
+      "pr": 60,
+      "red": {
+        "pr": 60,
+        "env": "github-pr-60",
+        "start": "2026-10-20T22:59:05.355Z",
+        "tests": 43,
+        "passed": 42,
+        "failed": [
+          {
+            "test": "TS42",
+            "runId": "5fe7a242-8a64-4668-bcba-5eb10addecb2",
+            "failureKind": "unknown"
+          }
+        ]
+      },
+      "green": null,
       "kind": "app"
     }
   ]
