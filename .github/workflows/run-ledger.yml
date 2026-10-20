@@ -1,0 +1,83 @@
+# Free ticketing and run notifications on GitHub itself (no paid integrations).
+# When a TestSprite or Commission workflow finishes:
+#   - a comment on the pinned "Run log" issue records the run (verdict, commit,
+#     counts, link);
+#   - a red run opens an issue labelled `testsprite-red` with the run link and
+#     the failing tests, or comments on the one already open;
+#   - a green run after a red one comments "green again" on that issue.
+# The pull request that fixes it closes the issue with "Fixes #N".
+name: Run ledger
+
+on:
+  workflow_run:
+    workflows: ["TestSprite CLI", "Commission drift"]
+    types: [completed]
+
+permissions:
+  contents: read
+  issues: write
+  actions: read
+
+concurrency:
+  group: run-ledger
+  cancel-in-progress: false
+
+jobs:
+  record:
+    name: Record the run in GitHub Issues
+    if: ${{ contains(fromJSON('["success","failure","timed_out"]'), github.event.workflow_run.conclusion) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          sparse-checkout: scripts/ci
+      - name: Fetch the JUnit report of the finished run
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        continue-on-error: true
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+          pattern: testsprite-junit-*
+          path: junit
+          merge-multiple: true
+      - name: Comment on Run log, open or update the red issue
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const fs = require("node:fs");
+            const ledger = await import(`${process.env.GITHUB_WORKSPACE}/scripts/ci/ledger.mjs`);
+            const wr = context.payload.workflow_run;
+            const run = { id: wr.id, url: wr.html_url, workflow: wr.name, event: wr.event,
+                          sha: wr.head_sha, conclusion: wr.conclusion, createdAt: wr.created_at };
+            const junit = fs.existsSync("junit/testsprite-junit.xml") ? fs.readFileSync("junit/testsprite-junit.xml", "utf8") : "";
+            const summary = ledger.summarizeJunit(junit);
+            const { owner, repo } = context.repo;
+
+            for (const [name, color, description] of [
+              [ledger.RED_LABEL, "d73a4a", "A TestSprite or Commission run went red"],
+              [ledger.LOG_LABEL, "6f42c1", "Run log of TestSprite and Commission runs"],
+            ]) {
+              try { await github.rest.issues.getLabel({ owner, repo, name }); }
+              catch { await github.rest.issues.createLabel({ owner, repo, name, color, description }); }
+            }
+
+            const open = async (label) => (await github.rest.issues.listForRepo({ owner, repo, labels: label, state: "open", per_page: 100 })).data.filter((i) => !i.pull_request);
+            const red = (await open(ledger.RED_LABEL)).find((i) => i.title === ledger.redTitle(run.workflow));
+            const step = ledger.plan(run, summary, red ? red.number : null);
+            if (!step.log) return;
+
+            let log = (await open(ledger.LOG_LABEL)).find((i) => i.title === ledger.LOG_TITLE);
+            if (!log) {
+              log = (await github.rest.issues.create({ owner, repo, title: ledger.LOG_TITLE, labels: [ledger.LOG_LABEL],
+                body: "One comment per TestSprite and Commission run, written by the Run ledger workflow." })).data;
+            }
+            await github.rest.issues.createComment({ owner, repo, issue_number: log.number, body: step.log });
+
+            if (step.red?.action === "open") {
+              const created = await github.rest.issues.create({ owner, repo, title: step.red.title, body: step.red.body, labels: [ledger.RED_LABEL] });
+              core.notice(`Opened #${created.data.number}`);
+            } else if (step.red?.action === "comment") {
+              await github.rest.issues.createComment({ owner, repo, issue_number: step.red.issue, body: step.red.body });
+            }
+            await core.summary.addRaw(step.log).write();

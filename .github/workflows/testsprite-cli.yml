@@ -1,0 +1,132 @@
+# TestSprite suite from GitHub Actions, through the official TestSprite action.
+#
+# The merge gate is the TestSprite GitHub App, which runs the suite against each
+# PR's Vercel preview. This workflow is the second path, outside pull requests:
+#   - nightly against production (a calendar that moved on, production drift);
+#   - after a merge, once Vercel reports the production deployment ready
+#     (only when the repository variable TESTSPRITE_ON_MAIN is "true");
+#   - by hand: Actions → "TestSprite CLI" → Run workflow.
+# A full-project run tests the URL configured on the TestSprite project, which
+# is production (https://ninety-coral.vercel.app).
+#
+# Cost: every run bills each test in the project (0.5 credits per test at the
+# time of writing), so it never runs on push or pull_request. Set the
+# repository variable TESTSPRITE_NIGHTLY to "true" to turn the nightly run on (off by default).
+# Needs the repository secret TESTSPRITE_API_KEY.
+name: TestSprite CLI
+
+on:
+  workflow_dispatch:
+    inputs:
+      filter:
+        description: "Only tests whose name contains this (blank = all)"
+        default: ""
+        required: false
+  schedule:
+    - cron: "29 2 * * *"
+  deployment_status:
+
+permissions:
+  contents: read
+  checks: write
+
+concurrency:
+  group: testsprite-cli
+  cancel-in-progress: false
+
+env:
+  TESTSPRITE_PROJECT_ID: bd039118-0c25-4707-b018-b25619a37fce
+  TESTSPRITE_CLI_VERSION: "0.15.0"
+
+jobs:
+  suite:
+    name: TestSprite suite on production
+    if: >-
+      ${{ github.event_name == 'workflow_dispatch'
+      || (github.event_name == 'schedule' && vars.TESTSPRITE_NIGHTLY == 'true')
+      || (github.event_name == 'deployment_status'
+          && github.event.deployment_status.state == 'success'
+          && github.event.deployment.environment == 'Production'
+          && github.event.deployment.ref == 'main'
+          && vars.TESTSPRITE_ON_MAIN == 'true') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - name: Preflight (testsprite doctor)
+        env:
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+        run: |
+          if [ -z "$TESTSPRITE_API_KEY" ]; then
+            echo "::error::Add the TESTSPRITE_API_KEY repository secret to run this workflow."
+            exit 1
+          fi
+          npm install -g "@testsprite/testsprite-cli@${TESTSPRITE_CLI_VERSION}"
+          testsprite doctor
+          testsprite credits | tee credits-before.txt
+      - name: Run the suite (official TestSprite action)
+        id: ts
+        uses: TestSprite/testsprite-action@9f3ac52a42baae6c7099d1f89fa603b31d636d63 # v1.0.0
+        with:
+          api-key: ${{ secrets.TESTSPRITE_API_KEY }}
+          project: ${{ env.TESTSPRITE_PROJECT_ID }}
+          filter: ${{ inputs.filter }}
+          cli-version: ${{ env.TESTSPRITE_CLI_VERSION }}
+          timeout: "900"
+          report-file: testsprite-junit.xml
+          artifact-name: testsprite-junit-${{ github.run_id }}
+      - name: Test report (one check run per test)
+        if: ${{ always() && hashFiles('testsprite-junit.xml') != '' }}
+        uses: dorny/test-reporter@df6247429542221bc30d46a036ee47af1102c451 # v2
+        with:
+          name: TestSprite suite (${{ github.event_name }})
+          path: testsprite-junit.xml
+          reporter: java-junit
+          fail-on-error: "false"
+      - name: Failure bundles for every failed test
+        if: ${{ failure() && hashFiles('testsprite-junit.xml') != '' }}
+        env:
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+        run: |
+          mkdir -p failure-bundles
+          node scripts/ci/failed-runs.mjs testsprite-junit.xml | while read -r run; do
+            testsprite test artifact get "$run" --out "failure-bundles/$run" || echo "::warning::No bundle for $run"
+          done
+      - name: Upload failure bundles
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: testsprite-failure-bundles-${{ github.run_id }}
+          path: failure-bundles/
+          if-no-files-found: ignore
+      - name: Job summary
+        if: ${{ always() }}
+        env:
+          TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
+          PASSED: ${{ steps.ts.outputs.passed }}
+          FAILED: ${{ steps.ts.outputs.failed }}
+          TOTAL: ${{ steps.ts.outputs.total }}
+          SKIPPED: ${{ steps.ts.outputs.skipped }}
+          TIMED_OUT: ${{ steps.ts.outputs.timed-out }}
+          ERROR_CODE: ${{ steps.ts.outputs.error-code }}
+          TRIGGER: ${{ github.event_name }}
+        run: |
+          {
+            echo "### TestSprite on production ($TRIGGER)"
+            echo ""
+            echo "| passed | failed | timed out | skipped | total |"
+            echo "|---|---|---|---|---|"
+            echo "| ${PASSED:-0} | ${FAILED:-0} | ${TIMED_OUT:-0} | ${SKIPPED:-0} | ${TOTAL:-0} |"
+            if [ -n "$ERROR_CODE" ]; then echo ""; echo "Stopped before a verdict: \`$ERROR_CODE\` (infrastructure, not a test result)."; fi
+            echo ""
+            echo "<details><summary>Credits before and after</summary>"
+            echo ""
+            echo '```'
+            echo "before:"; cat credits-before.txt 2>/dev/null || echo "(not read)"
+            echo "after:"; testsprite credits 2>/dev/null || echo "(not read)"
+            echo '```'
+            echo "</details>"
+          } >> "$GITHUB_STEP_SUMMARY"

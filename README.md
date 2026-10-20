@@ -6,6 +6,17 @@ Ninety counts your Schengen short-stay days from your own trips, checks that cou
 
 **Live:** https://ninety-coral.vercel.app
 
+**Receipts** (as of `main` at `1f24bc3`, each one checkable in this repo):
+
+| | |
+|---|---|
+| **14/14** | scenarios match the European Commission's own calculator, run from a stored, hashed copy on every PR ([`parity.test.ts`](src/lib/schengen/parity.test.ts)) and live every night ([`drift.yml`](.github/workflows/drift.yml)) |
+| **500 / 3,000** | random travel histories through Ninety and the Commission calculator per PR / per night, 0 disagreements ([`differential.fuzz.test.ts`](src/lib/schengen/differential.fuzz.test.ts), [`ci.yml`](.github/workflows/ci.yml)) |
+| **17** | TestSprite cloud tests on every PR preview, `TestSprite V3` a required check ([`test-ids.json`](testsprite_tests/test-ids.json)) |
+| **143** | Vitest unit, property and fuzz tests on every PR (`npm test`) |
+| **42** | pull requests merged into `main` |
+| **5** | real bugs caught red by TestSprite and fixed to green in the PR (#8, #14, #39, #41 twice; see below and [`docs/evidence`](docs/evidence/EVIDENCE_INDEX.md)) |
+
 ---
 
 ## The 90/180 rule
@@ -77,6 +88,10 @@ Current result: **14/14 match**. If the Commission script cannot be loaded, the 
 `testsprite_tests/test-ids.json` maps each plan to its TestSprite test id. Plans for further tests (TS13–TS15) are in the folder and are added to the cloud suite in later pull requests.
 
 Below the TestSprite suite, every pull request also runs lint, types, and the unit, property and fuzz tests in GitHub Actions (`.github/workflows/ci.yml`).
+
+**From the official TestSprite action, outside pull requests.** `.github/workflows/testsprite-cli.yml` runs the whole cloud suite through [`TestSprite/testsprite-action`](https://github.com/TestSprite/testsprite-action) (pinned to a commit, CLI pinned too) against production: nightly, by hand (Actions → "TestSprite CLI"), and after a merge once Vercel reports the production deployment ready (when the repository variable `TESTSPRITE_ON_MAIN` is `true`). Before it spends a credit it runs `testsprite doctor`. Each run publishes the JUnit report as a per-test check, downloads the TestSprite failure bundle of every failed test as an artifact, and writes a pass/fail table with the credit balance before and after to the job summary. It never runs on push or pull request, because each run bills every test; `src/lib/ci/workflows.test.ts` fails if that changes. It needs the `TESTSPRITE_API_KEY` repository secret.
+
+**Red runs become issues.** `.github/workflows/run-ledger.yml` watches the TestSprite and Commission workflows. Every finished run adds a line (verdict, commit, passed/total, link) to the pinned **Run log** issue. A red run opens an issue labelled `testsprite-red` with the run link and each failing test, or comments on the one already open; a green run after it comments "green again". The pull request that fixes the failure closes the issue with `Fixes #N`, so the red run, the issue and the fix point at each other. The logic is in `scripts/ci/ledger.mjs` and unit-tested in `src/lib/ci/ledger.test.ts`.
 
 Bugs the suite caught that unit tests did not:
 

@@ -88,23 +88,70 @@ export type PlannedTripCheck = {
 };
 
 const MAX_FORWARD_DAYS = 120;
+const WINDOW = 180;
+const LIMIT = 90;
 
-function presenceDays(stays: ClosedStay[]): Set<number> {
-  const days = new Set<number>();
-  for (const stay of stays) {
-    const entry = parseIso(stay.entry);
-    const exit = parseIso(stay.exit);
-    for (let day = entry; day <= exit; day += 1) days.add(day);
-  }
-  return days;
-}
+/**
+ * Days of presence as sorted, disjoint, inclusive day-number intervals.
+ * Overlapping stays, and stays that touch (a same-day exit and re-entry, or an
+ * exit followed by an entry the next day), merge, so a day counts once.
+ * Window counts are interval overlaps, not day-by-day scans.
+ */
+class Presence {
+  private readonly starts: number[] = [];
+  private readonly ends: number[] = [];
 
-function countInWindow(presence: Set<number>, day: number): number {
-  let count = 0;
-  for (let cursor = day - 179; cursor <= day; cursor += 1) {
-    if (presence.has(cursor)) count += 1;
+  constructor(stays: ClosedStay[]) {
+    const spans = stays
+      .map((stay) => [parseIso(stay.entry), parseIso(stay.exit)] as const)
+      .sort((x, y) => x[0] - y[0] || x[1] - y[1]);
+    for (const [from, to] of spans) {
+      const last = this.ends.length - 1;
+      if (last >= 0 && from <= this.ends[last] + 1) {
+        this.ends[last] = Math.max(this.ends[last], to);
+      } else {
+        this.starts.push(from);
+        this.ends.push(to);
+      }
+    }
   }
-  return count;
+
+  /** Index of the last interval starting on or before `day`, or -1. */
+  private floor(day: number): number {
+    let lo = 0;
+    let hi = this.starts.length - 1;
+    let found = -1;
+    while (lo <= hi) {
+      const mid = (lo + hi) >> 1;
+      if (this.starts[mid] <= day) {
+        found = mid;
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
+    }
+    return found;
+  }
+
+  has(day: number): boolean {
+    const index = this.floor(day);
+    return index >= 0 && this.ends[index] >= day;
+  }
+
+  /** Presence days in [from, to], inclusive. */
+  count(from: number, to: number): number {
+    let total = 0;
+    for (let index = Math.max(0, this.floor(from)); index < this.starts.length && this.starts[index] <= to; index += 1) {
+      const overlap = Math.min(to, this.ends[index]) - Math.max(from, this.starts[index]) + 1;
+      if (overlap > 0) total += overlap;
+    }
+    return total;
+  }
+
+  /** Presence days in the 180-day window ending on `day`. */
+  window(day: number): number {
+    return this.count(day - WINDOW + 1, day);
+  }
 }
 
 /**
@@ -113,31 +160,31 @@ function countInWindow(presence: Set<number>, day: number): number {
  * over the limit (recorded, or as a new entry).
  */
 export function inclusiveAllowance(stays: ClosedStay[], on: IsoDate): number {
-  const presence = presenceDays(stays);
+  const presence = new Presence(stays);
   const start = parseIso(on);
   let length = 0;
   while (length < MAX_FORWARD_DAYS) {
     const day = start + length;
-    let count = 0;
-    for (let cursor = day - 179; cursor <= day; cursor += 1) {
-      if (presence.has(cursor) || (cursor >= start && cursor <= day)) count += 1;
-    }
-    if (count > 90) break;
+    const windowStart = day - WINDOW + 1;
+    // Every day from `start` to `day` is presence in this hypothetical stay;
+    // before `start`, only the recorded presence counts.
+    const count = presence.count(windowStart, start - 1) + (day - Math.max(start, windowStart) + 1);
+    if (count > LIMIT) break;
     length += 1;
   }
   return length;
 }
 
 export function daysUsedOn(stays: ClosedStay[], on: IsoDate): number {
-  return countInWindow(presenceDays(stays), parseIso(on));
+  return new Presence(stays).window(parseIso(on));
 }
 
 export function isPresentOn(stays: ClosedStay[], on: IsoDate): boolean {
-  return presenceDays(stays).has(parseIso(on));
+  return new Presence(stays).has(parseIso(on));
 }
 
 export function findOverstays(stays: ClosedStay[]): OverstaySpan[] {
-  const presence = presenceDays(stays);
+  const presence = new Presence(stays);
   const spans: OverstaySpan[] = [];
   const ordered = [...stays].sort(
     (a, b) => parseIso(a.entry) - parseIso(b.entry) || parseIso(a.exit) - parseIso(b.exit),
@@ -147,16 +194,16 @@ export function findOverstays(stays: ClosedStay[]): OverstaySpan[] {
     const exit = parseIso(stay.exit);
     let first: number | null = null;
     for (let day = entry; day <= exit; day += 1) {
-      if (countInWindow(presence, day) > 90) {
+      if (presence.window(day) > LIMIT) {
         first = day;
         break;
       }
     }
     if (first === null) continue;
     spans.push({
-      windowStart: formatIso(exit - 179),
+      windowStart: formatIso(exit - WINDOW + 1),
       windowEnd: stay.exit,
-      daysInWindow: countInWindow(presence, exit),
+      daysInWindow: presence.window(exit),
       from: formatIso(first),
       to: stay.exit,
       days: exit - first + 1,
@@ -208,13 +255,13 @@ export function closeStays(
 export function evaluate(stays: StayInput[], on: IsoDate, today: IsoDate = on): Assessment {
   parseIso(on);
   const { stays: closed, errors } = closeStays(stays, today);
-  const presence = presenceDays(closed);
+  const presence = new Presence(closed);
   const onNumber = parseIso(on);
   const present = presence.has(onNumber);
-  const daysUsed = countInWindow(presence, onNumber);
+  const daysUsed = presence.window(onNumber);
   const overstays = findOverstays(closed);
   const inclusive = inclusiveAllowance(closed, on);
-  const overstay = daysUsed > 90 && present;
+  const overstay = daysUsed > LIMIT && present;
 
   let daysLeft = 0;
   let latestExit: IsoDate | null = null;
