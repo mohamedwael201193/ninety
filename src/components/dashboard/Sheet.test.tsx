@@ -79,3 +79,59 @@ describe("Sheet", () => {
     expect(document.activeElement).toBe(opener);
   });
 });
+
+function RemountPage() {
+  const [open, setOpen] = useState(false);
+  const [gen, setGen] = useState(0);
+  return (
+    <>
+      <button type="button" onClick={() => setOpen(true)}>Add trip</button>
+      <button type="button" tabIndex={-1} data-testid="remount" onClick={() => setGen((g) => g + 1)}>remount</button>
+      <Sheet key={gen} open={open} title="Add a trip" onClose={() => setOpen(false)}>
+        <label htmlFor="entry2">Entry</label><input id="entry2" />
+      </Sheet>
+    </>
+  );
+}
+
+describe("Sheet remounted while open", () => {
+  it("still returns focus to the original opener, not to a field inside the sheet (TS41 in Chrome)", async () => {
+    render(<RemountPage />);
+    const opener = screen.getByRole("button", { name: "Add trip" });
+    opener.focus();
+    fireEvent.click(opener);
+    await nextFrame();
+    expect(document.activeElement?.id).toBe("entry2");
+    act(() => { screen.getByTestId("remount").click(); });
+    await nextFrame();
+    fireEvent.keyDown(document, { key: "Escape" });
+    await act(async () => { await Promise.resolve(); });
+    expect(document.activeElement).toBe(opener);
+  });
+});
+
+function AutoFocusPage() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button type="button" onClick={() => setOpen(true)}>Add trip</button>
+      <Sheet open={open} title="Add a trip" onClose={() => setOpen(false)}>
+        {/* Like TripEditor: React focuses this during commit, before any effect runs. */}
+        <label htmlFor="entry3">Entry</label><input id="entry3" autoFocus />
+      </Sheet>
+    </>
+  );
+}
+
+describe("Sheet whose content autofocuses", () => {
+  it("returns focus to the opener, not to the autofocused field (TS41 in Chrome)", async () => {
+    render(<AutoFocusPage />);
+    const opener = screen.getByRole("button", { name: "Add trip" });
+    opener.focus();
+    fireEvent.click(opener);
+    expect(document.activeElement?.id).toBe("entry3");
+    fireEvent.keyDown(document, { key: "Escape" });
+    await act(async () => { await Promise.resolve(); });
+    expect(document.activeElement).toBe(opener);
+  });
+});
