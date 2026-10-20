@@ -1,0 +1,36 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "EES: only the post-cutoff stay is compared",
+  "priority": "p0",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-05-01&fresh=1"
+    },
+    {
+      "type": "action",
+      "description": "Add a trip (data-testid=trip-add) with entry 2026-03-01 and exit 2026-03-20 and save (data-testid=trip-save)"
+    },
+    {
+      "type": "action",
+      "description": "Add a second trip with entry 2026-04-15 and exit 2026-04-24 and save"
+    },
+    {
+      "type": "assertion",
+      "description": "Days used (data-testid=days-used) shows 30"
+    },
+    {
+      "type": "action",
+      "description": "Navigate to /ees?today=2026-05-01, enter 10 in the EES days used field (data-testid=ees-days-used) and click compare (data-testid=ees-compare)"
+    },
+    {
+      "type": "assertion",
+      "description": "The cutoff note (data-testid=ees-cutoff-note) has data-days 20 and says 10 days are comparable with the EES"
+    },
+    {
+      "type": "assertion",
+      "description": "The findings list (data-testid=ees-codes) has data-codes exactly 'ees-ignores-pre-cutoff-stay' (no 'figure-differs')"
+    }
+  ]
+}

@@ -22,8 +22,21 @@ Every plan pins the date with `?today=2026-10-19` and starts either with `fresh=
 | `TS09-open-stay-false-fit.json` | Open stay: a plan past day 90 does not fit |
 | `TS10-open-stay-boundary.json` | Open stay: exit on day 90 fits, day 91 does not |
 | `TS26-same-day-reentry.json` | Same-day exit and re-entry counts the day once |
+| `TS16-scenario-carry.json` | A demo scenario carries to /ees through the nav with the same 88 days |
+| `TS17-letter-validation.json` | Letter: each missing field gets its own message and no letter is drafted |
+| `TS18-letter-evidence.json` | Letter from a scenario shows 88 / 90 / 2 and states them in the text |
+| `TS13-earlier-exit.json` | EES: an earlier EES exit is an exit disagreement, not a missing entry |
+| `TS14-missing-exit.json` | EES: a missing exit is found and its 4 days listed as one range |
+| `TS30-cutoff-span.json` | EES: a stay that began before 10 April 2026 is left out (20 days, 0 comparable) |
+| `TS31-cutoff-mixed.json` | EES: only the post-cutoff stay is compared (20 left out, 10 comparable) |
+| `TS15-letter-law.json` | The letter states Article 52(1)–(5) accurately |
+| `TS27-overstay-scenario.json` | Overstay scenario: 107 used, overstay 2026-08-30 to 2026-09-15 (17 days) |
+| `TS28-open-stay-count.json` | Open stay counted through today: 19 used, 71 left, latest exit 2026-12-29 |
+| `TS29-missing-entry.json` | A trip without an entry date is rejected and not saved |
+| `TS34-rolling-window.json` | A later date drops old days: 30 used on 2026-10-19, 11 on 2026-11-15 |
+| `TS35-use-latest-exit.json` | 'Use latest exit' turns a 105-day plan into a 46-day plan that fits |
 
-These 14 plans are the cloud suite. `TS13`–`TS15` are written and join the suite in later pull requests. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
+Every plan listed here is in the cloud suite; `test-ids.json` maps each to its TestSprite id. New plans are added with `node scripts/add-cloud-tests.mjs <plan.json>`. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
 
 ## Writing plans
 
