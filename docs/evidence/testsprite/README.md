@@ -1,6 +1,6 @@
 # TestSprite evidence: PR #57 and the merge gate
 
-Screenshots taken on 2026-10-21 (Cairo, UTC+3) from the TestSprite portal and GitHub. They show PR [#57](https://github.com/mohamedwael201193/ninety/pull/57):
+Screenshots taken on 2026-10-20 between about 22:00 and 22:45 UTC, from the TestSprite portal and GitHub. They show PR [#57](https://github.com/mohamedwael201193/ninety/pull/57):
 - 8 new plans (TS45–TS52) were pushed with the bugs they target still in the code, and TestSprite failed them.
 - The fixes followed in the same PR, and the same tests passed.
 - TS02 also caught a production problem: the live Commission page could not be loaded from the server.
@@ -37,7 +37,7 @@ The run-by-run record is in [`LOOP-ITERATIONS.md`](../../../LOOP-ITERATIONS.md).
 | ![](ts-final-run-43of43.png) | The third run: 100%, 43 passed, 0 failed, 0 blocked, including TS45–TS52 and TS02. |
 | ![](gh-pr57-testsprite-bot-final-43of43.png) | The TestSprite bot comment on PR #57: "All checks passed — 43 of 43 tests green". Its AI-written summary says "44 passed"; the run and the status both say 43. |
 | ![](gh-pr57-mergebox-testsprite-v3.png) | The PR merge box: `TestSprite V3 — All 43 tests passed`, marked **Required**, next to CI, Schemathesis, axe and Vercel. The address bar shows the next page loading; the content is the GitHub PR. |
-| ![](gh-pr57-commits.png) | PR #57's six commits, in order. The plans with the bugs present show ✗ 5/7. The fix commits follow. The last commit is the /parity fallback, ✓ 7/7. |
+| ![](gh-pr57-commits.png) | PR #57's six commits, in order. The plans with the bugs present show ✗ 5/7. The fix commits follow. The last commit is the /parity fallback, ✓ 7/7. **5/7 and 7/7 are GitHub's check rollups** (how many of the commit's 7 GitHub checks passed: CI, Schemathesis, axe, Vercel, `TestSprite V3` and the rest), not TestSprite test counts. The TestSprite counts are 34/43, 42/43 and 43/43 above. |
 | ![](gh-pr57-top.png) | The PR description: the table of the 8 bugs present in the first commit, and the paragraph on what TS02 caught. |
 
 ## Insights (stale)
@@ -48,6 +48,19 @@ The run-by-run record is in [`LOOP-ITERATIONS.md`](../../../LOOP-ITERATIONS.md).
 
 One screenshot was left out: the GitHub Checks tab, which showed only Vercel's details pane and nothing about TestSprite.
 
-## Backend tests (CLI, no screenshots)
+## Backend tests ("Ninety API")
 
-There are 28 TestSprite backend tests in the "Ninety API" project. The first run was 27/28: BE28 caught a real bug, `/api/mcp` errors without an `id` member. After the fix, BE28 passed on its re-run. Run ids and results are in the main README's backend section. There are no portal screenshots for these yet.
+The second TestSprite project has 28 Python backend tests run against production from the CLI. They are not a merge gate: the GitHub App runs only the frontend project. Times are UTC, 2026-10-20. The portal shows them in Cairo time (UTC+3).
+
+| Screenshot | What it shows |
+|---|---|
+| ![](be-runs-list.png) | The project's run list: 5/5 (the first 5 tests, 22:30 UTC), 27/28 (22:35 UTC) and 1/1 (BE28 re-run, 22:38 UTC). |
+| ![](be-run-28-red-be28.png) | Run [`5071eab5`](https://www.testsprite.com/dashboard-v3/o/mohamed-waels-workspace-1b474b7a/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/execution/5071eab5-493e-4982-84fe-168a2133c981): 96%, 27 passed, 1 failed, 28 total. The failed row is BE28, "MCP: an error for an invalid request id still carries "id": null (JSON-RPC 2.0 section 5)". The verdict quotes production's answer: `{"jsonrpc":"2.0","error":{"code":-32600,...}}` with no `id`. |
+| ![](be-be28-failure-detail.png) | BE28 opened in that run: the test code (`True`, `{"a": 1}` and `[1]` as ids, asserting `"id"` is present and null) and the error "error response has no id member". |
+| ![](be-be28-green-rerun.png) | Run [`ef7bc14a`](https://www.testsprite.com/dashboard-v3/o/mohamed-waels-workspace-1b474b7a/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/execution/ef7bc14a-8d5c-467f-bc24-60ce3801ec2e), after the fix reached production in `8c86d02`: BE28 alone, 1 passed, 100%. |
+
+The raw files are in [`backend/`](backend/):
+- the CLI summaries and JUnit for both suite runs (`run-5-first-*`, `run-28-red-*`);
+- the BE28 red result (`BE28-red-result.json`, CLI run id 8c45fada) and green result (`BE28-green-result.json`, CLI run id 2d5c9ab6). The CLI gives each test run its own id; the portal ids above are for the whole run;
+- the unit test `mcp-id.test.ts` without the fix, 5 failed (`BE28-vitest-red.txt`), and with it, 5 passed (`BE28-vitest-green.txt`);
+- the Commission script's outputs that the expected values came from (`oracle-commission.txt`).

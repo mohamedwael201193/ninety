@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T22:27:31.710Z",
+  "generatedAt": "2026-10-20T22:53:46.970Z",
   "source": "GitHub API + src/data/loop.json",
   "iterations": [
     {
@@ -11,6 +11,7 @@
       "checks": [],
       "executions": [],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -22,6 +23,7 @@
       "checks": [],
       "executions": [],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -33,6 +35,7 @@
       "checks": [],
       "executions": [],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -44,6 +47,7 @@
       "checks": [],
       "executions": [],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -55,6 +59,7 @@
       "checks": [],
       "executions": [],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -96,6 +101,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -140,6 +146,7 @@
         }
       ],
       "redThenGreen": true,
+      "kind": "app",
       "stoppedThenGreen": false
     },
     {
@@ -181,6 +188,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -208,6 +216,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -249,6 +258,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -306,6 +316,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": "blocked",
       "stoppedThenGreen": true
     },
     {
@@ -333,6 +344,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -360,6 +372,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -387,6 +400,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -414,6 +428,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -502,6 +517,7 @@
         }
       ],
       "redThenGreen": true,
+      "kind": "app",
       "stoppedThenGreen": false
     },
     {
@@ -529,6 +545,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -572,6 +589,7 @@
         }
       ],
       "redThenGreen": true,
+      "kind": "plan-ci",
       "stoppedThenGreen": false
     },
     {
@@ -599,6 +617,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -626,6 +645,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -667,6 +687,7 @@
         }
       ],
       "redThenGreen": true,
+      "kind": "plan-ci",
       "stoppedThenGreen": false
     },
     {
@@ -694,6 +715,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -721,6 +743,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -748,6 +771,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -775,6 +799,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -802,6 +827,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -829,6 +855,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -856,6 +883,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -889,6 +917,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -916,6 +945,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -959,6 +989,7 @@
         }
       ],
       "redThenGreen": true,
+      "kind": "plan-ci",
       "stoppedThenGreen": false
     },
     {
@@ -994,6 +1025,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1029,6 +1061,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1072,6 +1105,7 @@
         }
       ],
       "redThenGreen": true,
+      "kind": "app",
       "stoppedThenGreen": false
     },
     {
@@ -1099,6 +1133,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1140,6 +1175,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1231,6 +1267,7 @@
         }
       ],
       "redThenGreen": true,
+      "kind": "app",
       "stoppedThenGreen": false
     },
     {
@@ -1272,6 +1309,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1330,6 +1368,7 @@
         }
       ],
       "redThenGreen": true,
+      "kind": "plan-ci",
       "stoppedThenGreen": false
     },
     {
@@ -1377,6 +1416,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1434,6 +1474,7 @@
         }
       ],
       "redThenGreen": true,
+      "kind": "plan-ci",
       "stoppedThenGreen": false
     },
     {
@@ -1493,6 +1534,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": "blocked",
       "stoppedThenGreen": true
     },
     {
@@ -1520,6 +1562,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1547,6 +1590,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1574,6 +1618,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1601,6 +1646,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1628,6 +1674,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1669,6 +1716,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1696,6 +1744,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1723,6 +1772,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1750,6 +1800,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1777,6 +1828,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1856,6 +1908,7 @@
         }
       ],
       "redThenGreen": true,
+      "kind": "app",
       "stoppedThenGreen": false
     },
     {
@@ -1883,6 +1936,7 @@
         }
       ],
       "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     },
     {
@@ -1950,6 +2004,7 @@
         }
       ],
       "redThenGreen": true,
+      "kind": "app",
       "stoppedThenGreen": false
     }
   ]

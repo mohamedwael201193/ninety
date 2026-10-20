@@ -2,33 +2,36 @@
   - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
 Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
 
- RUN  v4.1.12 /workspace/wt-g-receipts
+ RUN  v4.1.12 .
 
+10:57:14 PM [vite] (ssr) warning: invalid import "../../app/api/v1/${name}/route". A file extension must be included in the static part of the import. For example: import(`./foo/${bar}.js`).
+  Plugin: vite:dynamic-import-vars
+  File: ./src/lib/bughunt/review-round3.test.ts
 Error: Not implemented: window.scrollTo
-    at module.exports (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
-    at /workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
-    at file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
+    at module.exports (node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
+    at file://node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
     at Array.forEach (<anonymous>)
-    at measureAllKeyframes (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
-    at triggerCallback (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
+    at measureAllKeyframes (file://node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
+    at triggerCallback (file://node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
     at Set.forEach (<anonymous>)
-    at Object.process (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
-    at processBatch (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
-    at invokeTheCallbackFunction (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
+    at Object.process (file://node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
+    at processBatch (file://node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
+    at invokeTheCallbackFunction (node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
 Error: Not implemented: window.scrollTo
-    at module.exports (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
-    at /workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
-    at file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
+    at module.exports (node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
+    at file://node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
     at Array.forEach (<anonymous>)
-    at measureAllKeyframes (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
-    at triggerCallback (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
+    at measureAllKeyframes (file://node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
+    at triggerCallback (file://node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
     at Set.forEach (<anonymous>)
-    at Object.process (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
-    at processBatch (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
-    at invokeTheCallbackFunction (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
+    at Object.process (file://node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
+    at processBatch (file://node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
+    at invokeTheCallbackFunction (node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
 
- Test Files  53 passed (53)
-      Tests  278 passed | 2 skipped (280)
-   Start at  21:40:38
-   Duration  7.01s (transform 2.22s, setup 468ms, import 10.03s, tests 15.13s, environment 7.46s)
+ Test Files  64 passed (64)
+      Tests  358 passed | 3 skipped (361)
+   Start at  22:57:14
+   Duration  8.95s (transform 2.20s, setup 487ms, import 12.10s, tests 24.49s, environment 7.52s)
 

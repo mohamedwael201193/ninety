@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="testsprite:790eba05-abdb-41c5-ae1a-4b2b0131b438" tests="5" failures="0" errors="0" skipped="0" time="18.247">
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="OpenAPI document lists the 3 endpoints and their statuses" testId="66aa232d-2ca6-497d-80c7-32592e1ca728" runId="480cc547-2807-415a-965e-ee538f8cb1d9" time="2.646">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Check: 1 Jan to 15 Apr 2024 is 106 days, a 16-day overstay from 31 Mar" testId="3246100e-17de-456f-a540-13df5fa70c45" runId="f3272fc4-a4a1-4ab8-b050-9891a22d2fa7" time="3.328">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="MCP tools/list returns the 3 tools; an unknown protocol version gets 400" testId="490dab4e-457b-4923-92ae-b9bb465247e5" runId="d463a273-c94f-4a13-af6b-f8cb97e889db" time="3.338">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Check: an impossible date, an unknown key and text/plain are refused" testId="997dc992-7486-4695-8c4e-f07ab5cf1a4c" runId="c2941b7f-d886-47c2-a597-3c859141e6fe" time="4.075">
+    </testcase>
+    <testcase classname="790eba05-abdb-41c5-ae1a-4b2b0131b438" name="Parity API: 14/14 match, from the live page or the named stored copy" testId="d0c1abdd-46f0-4e8f-a4ff-4ccc088b5a96" runId="0e184f5e-7cc7-47c1-8e22-15a17a2aa27b" time="4.86">
+    </testcase>
+  </testsuite>
+</testsuites>

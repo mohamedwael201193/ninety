@@ -177,7 +177,7 @@ export function AppShell() {
 
 
         <footer className="mt-6 text-xs text-ink-hushed">
-          Matches the European Commission&apos;s short-stay calculator. Not an official decision. Trips are stored only in this browser.
+          Checked against the European Commission&apos;s own short-stay calculator script. Not an official decision. Trips are stored only in this browser.
         </footer>
       </main>
 

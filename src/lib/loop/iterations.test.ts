@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 type Check = { sha: string; state: string; execution: string; description: string | null };
-type Iteration = { n: number; pr: number; mergeCommit: string; checks: Check[]; redThenGreen: boolean; stoppedThenGreen: boolean };
+type Iteration = { n: number; pr: number; mergeCommit: string; checks: Check[]; redThenGreen: boolean; stoppedThenGreen: boolean; kind: string | null };
 const data = JSON.parse(readFileSync("src/data/loop-iterations.json", "utf8")) as { iterations: Iteration[] };
 const md = readFileSync("LOOP-ITERATIONS.md", "utf8");
 
@@ -30,5 +30,21 @@ describe("LOOP-ITERATIONS (generated from the GitHub API and TestSprite history)
 
   it("the markdown has one heading per iteration", () => {
     expect((md.match(/^## Iteration \d+:/gm) ?? []).length).toBe(data.iterations.length);
+  });
+
+  it("classifies every red-then-green PR as an app defect or a test plan or CI case, and the README and LOOP.md agree", () => {
+    const rg = data.iterations.filter((i) => i.redThenGreen);
+    for (const i of rg) expect(["app", "plan-ci"], `#${i.pr}`).toContain(i.kind);
+    const app = rg.filter((i) => i.kind === "app").length;
+    const readme = readFileSync("README.md", "utf8");
+    const loopMd = readFileSync("LOOP.md", "utf8");
+    expect(readme).toContain(`${rg.length} iterations went red, then green (${app} app defects, ${rg.length - app} test plan or CI)`);
+    expect(loopMd).toContain(`So the GitHub check shows ${rg.length} PRs red, then green.`);
+    expect(loopMd).toContain(`${app} app defects (`);
+    // Each fraction the README quotes for a PR is that PR's GitHub check, word for word.
+    for (const m of readme.matchAll(/^\| #(\d+) \| `([^`]+)`/gm)) {
+      const it = data.iterations.find((i) => i.pr === Number(m[1]));
+      expect(it?.checks.map((c) => c.description), `#${m[1]}`).toContain(m[2]);
+    }
   });
 });

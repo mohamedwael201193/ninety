@@ -1,0 +1,18 @@
+{
+  "_note": "Why each PR's TestSprite run went red. app = a real defect in Ninety, fixed in the app. plan-ci = the test plan or CI was wrong, fixed in the test. blocked = the run could not start or every test was blocked. Read by scripts/loop-proof.mjs and scripts/loop-iterations.mjs.",
+  "8": { "kind": "app", "why": "The parity table's row loop started at index 1 and dropped the first scenario" },
+  "14": { "kind": "app", "why": "The planner ignored the days of an open stay before a planned trip" },
+  "39": { "kind": "app", "why": "A demo scenario was lost on the way to /ees and /letter" },
+  "41": { "kind": "app", "why": "Reloading a ?fresh=1 page wiped saved trips again; the evidence table's difference cell read as blank" },
+  "55": { "kind": "app", "why": "Closing the trip sheet with Escape left keyboard focus on the page body" },
+  "57": { "kind": "app", "why": "/parity said couldn't verify on production (TS02); TS45-TS52 red on purpose for 8 review bugs" },
+  "18": { "kind": "plan-ci", "why": "Dependency PR; green on the re-run after merging main" },
+  "22": { "kind": "plan-ci", "why": "CI PR; green on the re-run after merging main" },
+  "32": { "kind": "plan-ci", "why": "A plan step a cloud agent read differently" },
+  "36": { "kind": "plan-ci", "why": "TS26 had a wrong expected value" },
+  "37": { "kind": "plan-ci", "why": "Same TS26 wrong expected value as #36 (red in run history only)" },
+  "38": { "kind": "plan-ci", "why": "Same TS26 wrong expected value as #36 (red in run history only)" },
+  "43": { "kind": "plan-ci", "why": "TS18 wording" },
+  "9": { "kind": "blocked", "why": "TestSprite could not start the run" },
+  "44": { "kind": "blocked", "why": "0/17 passed, 17 blocked by the preview" }
+}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T22:26:47.474Z",
+  "generatedAt": "2026-10-20T22:53:03.705Z",
   "source": "testsprite test result --history",
   "runs": 1668,
   "executions": [
@@ -1191,7 +1191,8 @@
         "tests": 10,
         "passed": 10,
         "failed": []
-      }
+      },
+      "kind": "app"
     },
     {
       "pr": 14,
@@ -1221,7 +1222,8 @@
         "tests": 13,
         "passed": 13,
         "failed": []
-      }
+      },
+      "kind": "app"
     },
     {
       "pr": 18,
@@ -1246,7 +1248,8 @@
         "tests": 13,
         "passed": 13,
         "failed": []
-      }
+      },
+      "kind": "plan-ci"
     },
     {
       "pr": 32,
@@ -1276,7 +1279,8 @@
         "tests": 17,
         "passed": 17,
         "failed": []
-      }
+      },
+      "kind": "plan-ci"
     },
     {
       "pr": 36,
@@ -1301,7 +1305,8 @@
         "tests": 14,
         "passed": 14,
         "failed": []
-      }
+      },
+      "kind": "plan-ci"
     },
     {
       "pr": 37,
@@ -1326,7 +1331,8 @@
         "tests": 14,
         "passed": 14,
         "failed": []
-      }
+      },
+      "kind": "plan-ci"
     },
     {
       "pr": 38,
@@ -1351,7 +1357,8 @@
         "tests": 14,
         "passed": 14,
         "failed": []
-      }
+      },
+      "kind": "plan-ci"
     },
     {
       "pr": 39,
@@ -1376,7 +1383,8 @@
         "tests": 15,
         "passed": 15,
         "failed": []
-      }
+      },
+      "kind": "app"
     },
     {
       "pr": 41,
@@ -1401,7 +1409,8 @@
         "tests": 17,
         "passed": 17,
         "failed": []
-      }
+      },
+      "kind": "app"
     },
     {
       "pr": 43,
@@ -1426,7 +1435,8 @@
         "tests": 17,
         "passed": 17,
         "failed": []
-      }
+      },
+      "kind": "plan-ci"
     },
     {
       "pr": 44,
@@ -1531,7 +1541,8 @@
         "tests": 17,
         "passed": 17,
         "failed": []
-      }
+      },
+      "kind": "blocked"
     },
     {
       "pr": 55,
@@ -1556,7 +1567,8 @@
         "tests": 35,
         "passed": 35,
         "failed": []
-      }
+      },
+      "kind": "app"
     },
     {
       "pr": 57,
@@ -1621,7 +1633,8 @@
         "tests": 43,
         "passed": 43,
         "failed": []
-      }
+      },
+      "kind": "app"
     }
   ]
 }

@@ -1,0 +1,34 @@
+idempotency-key: cli-run-6ca40722-b70c-47be-b13b-ebf8e4328cee
+Run 2d5c9ab6-eca9-4eef-a822-711d1e8f8526
+Dashboard: https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/test-cases/0f93fa64-cdb3-4e55-93bf-7bc8686ff3e0
+{
+  "runId": "2d5c9ab6-eca9-4eef-a822-711d1e8f8526",
+  "testId": "0f93fa64-cdb3-4e55-93bf-7bc8686ff3e0",
+  "testTitle": "MCP: an error for an invalid request id still carries \"id\": null (JSON-RPC 2.0 section 5)",
+  "projectId": "790eba05-abdb-41c5-ae1a-4b2b0131b438",
+  "userId": "4458f428-00e1-703a-fb31-c8e6e4d7f28e",
+  "status": "passed",
+  "source": "cli",
+  "createdAt": "2026-10-20T22:38:10.142Z",
+  "startedAt": "2026-10-20T22:38:10.142Z",
+  "finishedAt": "2026-10-20T22:38:11.725Z",
+  "codeVersion": "v-7a6ee7acc2bf",
+  "targetUrl": null,
+  "environment": null,
+  "createdFrom": null,
+  "failedStepIndex": null,
+  "failureKind": null,
+  "error": "",
+  "videoUrl": null,
+  "stepSummary": {
+    "total": 0,
+    "completed": 0,
+    "passedCount": 0,
+    "failedCount": 0
+  },
+  "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/test-cases/0f93fa64-cdb3-4e55-93bf-7bc8686ff3e0",
+  "executionUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/execution/ef7bc14a-8d5c-467f-bc24-60ce3801ec2e/test/2d5c9ab6-eca9-4eef-a822-711d1e8f8526",
+  "apiOutput": "",
+  "trace": ""
+}
+requestId: cli_98b5fbea-9cfc-4644-ae6a-4bb3ac257df7

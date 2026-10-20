@@ -1,26 +1,30 @@
 # The TestSprite loop
 
-Generated 2026-10-20T22:26:47.474Z by `scripts/loop-proof.mjs` from `testsprite test result --history` (1668 runs). Do not edit by hand.
+Generated 2026-10-20T22:53:03.705Z by `scripts/loop-proof.mjs` from `testsprite test result --history` (1668 runs). Do not edit by hand.
 
 Counts cover the tests listed in `testsprite_tests/test-ids.json`. Runs of tests that were later replaced (the first TS09/TS10) are not included, so an execution can show fewer tests than the suite had at the time.
 
 ## Red, then green
 
-| PR | Red run | Failing tests | Green run |
-|---|---|---|---|
-| [#8](https://github.com/mohamedwael201193/ninety/pull/8) | 2026-10-19T00:11Z, 8/10 | TS02, TC010 | 2026-10-19T00:18Z, 10/10 |
-| [#14](https://github.com/mohamedwael201193/ninety/pull/14) | 2026-10-19T02:31Z, 11/13 | TS09, TS10 | 2026-10-19T02:42Z, 13/13 |
-| [#18](https://github.com/mohamedwael201193/ninety/pull/18) | 2026-10-19T02:47Z, 12/13 | TS10 | 2026-10-19T03:35Z, 13/13 |
-| [#32](https://github.com/mohamedwael201193/ninety/pull/32) | 2026-10-20T06:57Z, 15/17 | TC011, TS18 | 2026-10-20T07:03Z, 17/17 |
-| [#36](https://github.com/mohamedwael201193/ninety/pull/36) | 2026-10-19T05:03Z, 13/14 | TS26 | 2026-10-19T05:07Z, 14/14 |
-| [#37](https://github.com/mohamedwael201193/ninety/pull/37) | 2026-10-19T05:04Z, 13/14 | TS26 | 2026-10-19T05:11Z, 14/14 |
-| [#38](https://github.com/mohamedwael201193/ninety/pull/38) | 2026-10-19T05:05Z, 13/14 | TS26 | 2026-10-19T05:12Z, 14/14 |
-| [#39](https://github.com/mohamedwael201193/ninety/pull/39) | 2026-10-19T05:17Z, 14/15 | TS16 | 2026-10-20T05:41Z, 15/15 |
-| [#41](https://github.com/mohamedwael201193/ninety/pull/41) | 2026-10-20T05:49Z, 14/15 | TC011 | 2026-10-20T06:38Z, 17/17 |
-| [#43](https://github.com/mohamedwael201193/ninety/pull/43) | 2026-10-20T07:15Z, 16/17 | TS18 | 2026-10-20T07:21Z, 17/17 |
-| [#44](https://github.com/mohamedwael201193/ninety/pull/44) | 2026-10-20T07:27Z, 0/17 | TS01, TS02, TS03, TS04, TS05, TS06, TS07, TS08, TC009, TC010, TC011, TS09, TS10, TS26, TS16, TS17, TS18 | 2026-10-20T07:31Z, 17/17 |
-| [#55](https://github.com/mohamedwael201193/ninety/pull/55) | 2026-10-20T08:51Z, 34/35 | TS41 | 2026-10-20T11:56Z, 35/35 |
-| [#57](https://github.com/mohamedwael201193/ninety/pull/57) | 2026-10-20T21:56Z, 34/43 | TS02, TS45, TS46, TS47, TS48, TS49, TS50, TS51, TS52 | 2026-10-20T22:09Z, 43/43 |
+13 PRs have a red execution, then a green one, in the run history: 6 app defects (#8, #14, #39, #41, #55, #57), 6 test plan or CI (#18, #32, #36, #37, #38, #43), 1 blocked (#44). 10 of them also show failed tests on the GitHub check (the count in LOOP-ITERATIONS.md and the README); the others: #37 (no red check), #38 (no red check), #44 (blocked on the check). Red on the GitHub check but not in this history (the failing test was later replaced): #22 (Test plan or CI). So the GitHub check shows 11 PRs red, then green.
+
+The two counts differ for a reason: the "Red run" fraction is from the run history and counts only the tests still in `test-ids.json`; the "GitHub check" column quotes the PR's `TestSprite V3` status word for word, which counted every test the run had. The README quotes the GitHub check.
+
+| PR | Kind | Red run (history, UTC) | Failing tests | GitHub check said | Green run (history, UTC) |
+|---|---|---|---|---|---|
+| [#8](https://github.com/mohamedwael201193/ninety/pull/8) | App defect | 2026-10-19T00:11Z, 8/10 | TS02, TC010 | 9/11 passed · 2 failed | 2026-10-19T00:18Z, 10/10 |
+| [#14](https://github.com/mohamedwael201193/ninety/pull/14) | App defect | 2026-10-19T02:31Z, 11/13 | TS09, TS10 | 12/14 passed · 2 failed; 12/14 passed · 2 failed; 12/14 passed · 2 failed; 13/14 passed · 1 failed | 2026-10-19T02:42Z, 13/13 |
+| [#18](https://github.com/mohamedwael201193/ninety/pull/18) | Test plan or CI | 2026-10-19T02:47Z, 12/13 | TS10 | 13/14 passed · 1 failed | 2026-10-19T03:35Z, 13/13 |
+| [#32](https://github.com/mohamedwael201193/ninety/pull/32) | Test plan or CI | 2026-10-20T06:57Z, 15/17 | TC011, TS18 | 15/17 passed · 2 failed | 2026-10-20T07:03Z, 17/17 |
+| [#36](https://github.com/mohamedwael201193/ninety/pull/36) | Test plan or CI | 2026-10-19T05:03Z, 13/14 | TS26 | 13/14 passed · 1 failed | 2026-10-19T05:07Z, 14/14 |
+| [#37](https://github.com/mohamedwael201193/ninety/pull/37) | Test plan or CI | 2026-10-19T05:04Z, 13/14 | TS26 | no red check (history only) | 2026-10-19T05:11Z, 14/14 |
+| [#38](https://github.com/mohamedwael201193/ninety/pull/38) | Test plan or CI | 2026-10-19T05:05Z, 13/14 | TS26 | no red check (history only) | 2026-10-19T05:12Z, 14/14 |
+| [#39](https://github.com/mohamedwael201193/ninety/pull/39) | App defect | 2026-10-19T05:17Z, 14/15 | TS16 | 14/15 passed · 1 failed | 2026-10-20T05:41Z, 15/15 |
+| [#41](https://github.com/mohamedwael201193/ninety/pull/41) | App defect | 2026-10-20T05:49Z, 14/15 | TC011 | 14/15 passed · 1 failed; 16/17 passed · 1 failed; 16/17 passed · 1 failed; 16/17 passed · 1 failed | 2026-10-20T06:38Z, 17/17 |
+| [#43](https://github.com/mohamedwael201193/ninety/pull/43) | Test plan or CI | 2026-10-20T07:15Z, 16/17 | TS18 | 16/17 passed · 1 failed | 2026-10-20T07:21Z, 17/17 |
+| [#44](https://github.com/mohamedwael201193/ninety/pull/44) | Blocked, not a catch | 2026-10-20T07:27Z, 0/17 | TS01, TS02, TS03, TS04, TS05, TS06, TS07, TS08, TC009, TC010, TC011, TS09, TS10, TS26, TS16, TS17, TS18 | 0/17 passed · 17 blocked | 2026-10-20T07:31Z, 17/17 |
+| [#55](https://github.com/mohamedwael201193/ninety/pull/55) | App defect | 2026-10-20T08:51Z, 34/35 | TS41 | 34/35 passed · 1 failed; 32/35 passed · 2 failed · 1 blocked; 32/35 passed · 3 failed | 2026-10-20T11:56Z, 35/35 |
+| [#57](https://github.com/mohamedwael201193/ninety/pull/57) | App defect | 2026-10-20T21:56Z, 34/43 | TS02, TS45, TS46, TS47, TS48, TS49, TS50, TS51, TS52 | 34/43 passed · 8 failed · 1 blocked; 42/43 passed · 1 failed | 2026-10-20T22:09Z, 43/43 |
 
 ## Every execution
 
