@@ -1,0 +1,61 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v4.1.12 /workspace/wt-g-proof
+
+Error: Not implemented: window.scrollTo
+    at module.exports (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at /workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
+    at file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
+    at Array.forEach (<anonymous>)
+    at measureAllKeyframes (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
+    at triggerCallback (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
+    at Set.forEach (<anonymous>)
+    at Object.process (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
+    at processBatch (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
+    at invokeTheCallbackFunction (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
+Error: Not implemented: window.scrollTo
+    at module.exports (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at /workspace/ninety-repo/node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
+    at file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
+    at Array.forEach (<anonymous>)
+    at measureAllKeyframes (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
+    at triggerCallback (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
+    at Set.forEach (<anonymous>)
+    at Object.process (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
+    at processBatch (file:///workspace/ninety-repo/node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
+    at invokeTheCallbackFunction (/workspace/ninety-repo/node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
+ ❯ src/components/PlannedTripForm.test.tsx (2 tests | 1 failed) 650ms
+     × brings the verdict into view, clear of the fixed bottom bar, after each check 447ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/components/PlannedTripForm.test.tsx > PlannedTripForm result on phones > brings the verdict into view, clear of the fixed bottom bar, after each check
+AssertionError: expected undefined to deeply equal { Object (block, behavior) }
+
+- Expected:
+{
+  "behavior": "smooth",
+  "block": "nearest",
+}
+
++ Received:
+undefined
+
+ ❯ src/components/PlannedTripForm.test.tsx:43:28
+     41|       await act(async () => { await new Promise((r) => setTimeout(r, 4…
+     42|       const target = calls.find((c) => (c.el as HTMLElement).dataset.t…
+     43|       expect(target?.opts).toEqual({ block: "nearest", behavior: "smoo…
+       |                            ^
+     44|     } finally {
+     45|       Element.prototype.scrollIntoView = orig;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  11:07:13
+   Duration  1.66s (transform 88ms, setup 23ms, import 502ms, tests 650ms, environment 315ms)
+

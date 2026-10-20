@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { CircleCheck, OctagonAlert } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { checkPlannedTrip, type StayInput } from "@/lib/schengen/engine";
@@ -21,6 +21,17 @@ type Verdict = { tone: "ok" | "risk" | "error"; text: string; latestExit?: IsoDa
 export function PlannedTripForm({ history, today }: PlannedTripFormProps) {
   const { register, handleSubmit, setValue } = useForm<Values>({ resolver: zodResolver(schema), defaultValues: { entry: "", exit: "" } });
   const [v, setV] = useState<Verdict | null>(null);
+  // On phones a fixed "days left / Add trip" bar covers the bottom 4 rem. After each check, bring the
+  // verdict into view once it has opened (scroll-margin keeps it above the bar).
+  const verdictRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!v) return;
+    const timer = window.setTimeout(() => {
+      const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      verdictRef.current?.scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
+    }, 340);
+    return () => window.clearTimeout(timer);
+  }, [v]);
 
   // Result strings identical to PR #1.
   function run({ entry, exit }: Values) {
@@ -64,8 +75,8 @@ export function PlannedTripForm({ history, today }: PlannedTripFormProps) {
       <div aria-live="polite">
         <AnimatePresence mode="wait">
           {v ? (
-            <motion.div key="planned-verdict" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }} className="overflow-hidden">
+            <motion.div key="planned-verdict" ref={verdictRef} data-testid="planned-verdict" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }} className="scroll-mb-24 overflow-hidden md:scroll-mb-0">
               <div className={`flex gap-3 rounded-2xl p-5 ${banner}`}>
                 {v.tone === "ok" ? <CircleCheck className="mt-0.5 size-5 shrink-0" aria-hidden="true" /> : <OctagonAlert className="mt-0.5 size-5 shrink-0" aria-hidden="true" />}
                 <div className="space-y-3">
