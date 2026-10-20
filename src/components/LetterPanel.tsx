@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Copy, Download, FileText, PenLine } from "lucide-react";
 import { toast } from "sonner";
@@ -10,13 +9,19 @@ import { isIsoDate, localToday } from "@/lib/schengen/dates";
 import { parseEesRecords, reconcile } from "@/lib/ees/reconcile";
 import { buildCorrectionLetter, type CorrectionLetter } from "@/lib/letter/letter";
 import { loadTrips } from "@/lib/trips";
+import { scenarioById, scenarioTrips } from "@/lib/scenarios";
+import { CarryLink } from "./CarryLink";
+import { ScenarioBanner } from "./ScenarioBanner";
 import { FieldBlock, ToolShell } from "./tools/ToolShell";
 
 const FONT_URL = "/fonts/NotoSans-Regular.ttf";
 
 export function LetterPanel() {
   const params = useSearchParams();
-  const rawToday = params.get("today");
+  // ?scenario=<id> compares the named demo history (the one shown on /), not the saved trips.
+  const scenario = scenarioById(params.get("scenario"));
+  const rawToday = params.get("today") ?? scenario?.on ?? null;
+  const currentTrips = () => (scenario ? scenarioTrips(scenario) : loadTrips(window.localStorage));
   const today = rawToday && isIsoDate(rawToday) ? rawToday : localToday();
   const [ready, setReady] = useState(false);
   const [fullName, setFullName] = useState("");
@@ -58,7 +63,7 @@ export function LetterPanel() {
       return;
     }
     try {
-      const reconciliation = reconcile(loadTrips(window.localStorage), {
+      const reconciliation = reconcile(currentTrips(), {
         daysUsed: Number(daysUsed),
         on: today,
         records: recordsText.trim() === "" ? undefined : parsed.records,
@@ -106,6 +111,7 @@ export function LetterPanel() {
       title="Your correction request, written for you."
       intro={<p>Draft a request to rectify Entry/Exit System data. Trips are read from this browser; nothing leaves your device. Review the text before you sign or send it.</p>}
     >
+      {ready && scenario ? <ScenarioBanner scenario={scenario} path="/letter" /> : null}
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start">
         <form onSubmit={generate} className="card-soft space-y-6 p-6 md:p-8">
           <div className="flex items-center justify-between gap-3">
@@ -134,7 +140,7 @@ export function LetterPanel() {
           </fieldset>
           {error ? <p data-testid="letter-error" role="alert" className="rounded-2xl bg-risk-wash p-3 text-sm text-risk">{error}</p> : null}
           <button type="submit" data-testid="letter-generate" className="btn btn-dark h-12 w-full"><PenLine size={16} aria-hidden /> Draft letter</button>
-          <p className="text-sm text-ink-hushed">Not sure of the numbers? <Link href="/ees" data-testid="nav-ees" className="font-medium text-ink underline underline-offset-4">Run the EES check first</Link></p>
+          <p className="text-sm text-ink-hushed">Not sure of the numbers? <CarryLink href="/ees" data-testid="nav-ees" className="font-medium text-ink underline underline-offset-4">Run the EES check first</CarryLink></p>
         </form>
 
         <AnimatePresence mode="wait">

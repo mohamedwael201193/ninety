@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, CircleCheck, Info, Landmark, TriangleAlert, UserRound } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -9,6 +8,9 @@ import { isIsoDate, localToday } from "@/lib/schengen/dates";
 import { EES_CUTOFF, explainedByCutoff, groupDifferences, parseEesRecords, reconcile, type MismatchCode, type Reconciliation } from "@/lib/ees/reconcile";
 import { days } from "@/lib/plural";
 import { loadTrips } from "@/lib/trips";
+import { scenarioById, scenarioTrips } from "@/lib/scenarios";
+import { CarryLink } from "./CarryLink";
+import { ScenarioBanner } from "./ScenarioBanner";
 import { evaluate } from "@/lib/schengen/engine";
 import { NumberTicker } from "./fx/NumberTicker";
 import { FieldBlock, ToolShell } from "./tools/ToolShell";
@@ -25,7 +27,10 @@ const CODE_LABEL: Record<MismatchCode, string> = {
 
 export function EesPanel() {
   const params = useSearchParams();
-  const rawToday = params.get("today");
+  // ?scenario=<id> compares the named demo history (the one shown on /), not the saved trips.
+  const scenario = scenarioById(params.get("scenario"));
+  const rawToday = params.get("today") ?? scenario?.on ?? null;
+  const currentTrips = () => (scenario ? scenarioTrips(scenario) : loadTrips(window.localStorage));
   const todayInvalid = rawToday !== null && !isIsoDate(rawToday);
   const today = rawToday && isIsoDate(rawToday) ? rawToday : localToday();
   const [ready, setReady] = useState(false);
@@ -37,10 +42,10 @@ export function EesPanel() {
   const [savedDays, setSavedDays] = useState<{ trips: number; used: number } | null>(null);
 
   useEffect(() => {
-    const trips = loadTrips(window.localStorage);
+    const trips = scenario ? scenarioTrips(scenario) : loadTrips(window.localStorage);
     setSavedDays({ trips: trips.length, used: trips.length ? evaluate(trips, today, today).daysUsed : 0 });
     setReady(true);
-  }, [today]);
+  }, [today, scenario]);
 
   function compare(event: FormEvent) {
     event.preventDefault();
@@ -56,7 +61,7 @@ export function EesPanel() {
       return;
     }
     setFormError("");
-    const trips = loadTrips(window.localStorage);
+    const trips = currentTrips();
     setResult(
       reconcile(trips, {
         daysUsed: Number(daysUsed),
@@ -75,6 +80,7 @@ export function EesPanel() {
       title="Does the border's count match yours?"
       intro={<p>Compare the days-used figure from the Entry/Exit System with the trips saved in this browser. Add the EES records if you have them and Ninety pinpoints the exact days that differ.</p>}
     >
+      {ready && scenario ? <ScenarioBanner scenario={scenario} path="/ees" /> : null}
       <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-start">
         <form onSubmit={compare} className="card-soft space-y-5 p-6 md:p-8">
           <div className="flex items-center justify-between gap-3">
@@ -163,7 +169,7 @@ export function EesPanel() {
                   </ul>
                 </div>
                 {!matched ? (
-                  <Link href="/letter" data-testid="nav-letter" className="btn btn-primary h-12 w-full">Draft the Article 52 correction letter <ArrowRight size={16} aria-hidden /></Link>
+                  <CarryLink href="/letter" data-testid="nav-letter" className="btn btn-primary h-12 w-full">Draft the Article 52 correction letter <ArrowRight size={16} aria-hidden /></CarryLink>
                 ) : null}
               </motion.section>
             ) : (
@@ -186,7 +192,7 @@ export function EesPanel() {
             )}
           </AnimatePresence>
           {!result || matched ? (
-            <p className="mt-4 text-sm text-ink-hushed">Need the letter anyway? <Link href="/letter" data-testid="nav-letter" className="font-medium text-ink underline underline-offset-4">Article 52 letter</Link></p>
+            <p className="mt-4 text-sm text-ink-hushed">Need the letter anyway? <CarryLink href="/letter" data-testid="nav-letter" className="font-medium text-ink underline underline-offset-4">Article 52 letter</CarryLink></p>
           ) : null}
         </div>
       </div>
