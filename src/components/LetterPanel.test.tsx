@@ -74,4 +74,19 @@ describe("LetterPanel", () => {
     expect(screen.getByTestId("scenario-banner").getAttribute("data-scenario")).toBe("near-limit");
     expect(screen.getByTestId("letter-on").textContent).toBe("2026-10-19");
   });
+
+  it("?scenario=demo prefills the EES side (Member State France, 90 days) so the table shows on one click", () => {
+    window.localStorage.clear();
+    query = "scenario=demo";
+    render(<LetterPanel />);
+    expect((screen.getByTestId("letter-member-state") as HTMLInputElement).value).toBe("France");
+    expect((screen.getByTestId("letter-ees-days") as HTMLInputElement).value).toBe("90");
+  });
+
+  it("a named scenario does not prefill anything", () => {
+    window.localStorage.clear();
+    query = "scenario=near-limit";
+    render(<LetterPanel />);
+    expect((screen.getByTestId("letter-ees-days") as HTMLInputElement).value).toBe("");
+  });
 });
