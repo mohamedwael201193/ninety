@@ -123,7 +123,8 @@ function Tile({ label, value, testId, hint, strong, wide }: {
       <dd data-testid={testId} className={`mt-1 tabular-nums ${strong ? "font-display text-3xl font-semibold" : "text-lg font-medium"}`}>
         {value}
       </dd>
-      {hint ? <p className="text-xs text-ink-hushed">{hint}</p> : null}
+      {/* A second <dd>, not a <p>: inside a <dl> group only <dt> and <dd> are valid (axe: definition-list). */}
+      {hint ? <dd className="text-xs text-ink-hushed">{hint}</dd> : null}
     </div>
   );
 }

@@ -2,8 +2,8 @@
 @theme {
   --color-ink: #0c0a08;
   --color-ink-soft: #1a1919;
-  --color-ink-hushed: rgba(12, 10, 8, 0.6);
-  --color-ink-faint: rgba(12, 10, 8, 0.4);
+  --color-ink-hushed: rgba(12, 10, 8, 0.64);
+  --color-ink-faint: rgba(12, 10, 8, 0.6);
   --color-paper: #ffffff;
   --color-paper-warm: #f7f5f2;
   --color-paper-sunk: #efece8;
@@ -15,9 +15,9 @@
   --color-smolder: #17332d;
   --color-spring: #5683d2;
   --color-spring-wash: #e6edf9;
-  --color-ok: #1e7f4f;
+  --color-ok: #17703f;
   --color-ok-wash: #e3f3ea;
-  --color-warn: #b86e00;
+  --color-warn: #935600;
   --color-warn-wash: #fff1d6;
   --color-risk: #c2361f;
   --color-risk-wash: #fbe6e1;
