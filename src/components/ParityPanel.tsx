@@ -105,7 +105,7 @@ const CLASS_LABEL: Record<DeepParityView["disagreements"][number]["classificatio
   "outside-domain": "Outside the calculator",
 };
 
-function DeepSection({ deep, report, failed }: { deep: DeepParityView; report: ParityReport | null; failed: boolean }) {
+function DeepSection({ deep, report, failed, checking }: { deep: DeepParityView; report: ParityReport | null; failed: boolean; checking: boolean }) {
   const live = report?.deepLive;
   const outside = deep.total - deep.inDomain;
   const inDomainMisses = deep.inDomain - deep.matched;
@@ -173,10 +173,10 @@ function DeepSection({ deep, report, failed }: { deep: DeepParityView; report: P
       </ul>
       <div>
         <h3 className="font-display text-lg font-medium">Live sample</h3>
-        {!report && !failed ? (
+        {(!report && !failed) || checking ? (
           <p data-testid="deep-live-pending" className="mt-1 text-sm text-ink-hushed">Checking a sample on the live Commission page…</p>
         ) : null}
-        {failed || (report && live?.status !== "ran") ? (
+        {!checking && (failed || (report && live?.status !== "ran")) ? (
           <p data-testid="deep-live-sample" className="mt-1 text-sm text-warn">Couldn&apos;t verify. {live?.reason ?? "The live sample could not be run."}</p>
         ) : null}
         {live && live.status === "ran" ? (
@@ -196,8 +196,12 @@ function DeepSection({ deep, report, failed }: { deep: DeepParityView; report: P
   );
 }
 
-export function ParityPanel({ deep }: { deep: DeepParityView }) {
-  const [report, setReport] = useState<ParityReport | null>(null);
+export function ParityPanel({ deep, initial }: { deep: DeepParityView; initial?: ParityReport }) {
+  // The stored-copy result is rendered at once (it is computed when the page is built); the live
+  // check then replaces it if the live Commission page loads. Before, the page showed only
+  // "Checking…" for 6-14 s while the server tried the live page.
+  const [report, setReport] = useState<ParityReport | null>(initial ?? null);
+  const [checking, setChecking] = useState(true);
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
@@ -208,15 +212,18 @@ export function ParityPanel({ deep }: { deep: DeepParityView }) {
         return (await response.json()) as ParityReport;
       })
       .then((body) => {
-        if (!cancelled) setReport(body);
+        if (!cancelled) { setReport(body); setChecking(false); }
       })
       .catch(() => {
-        if (!cancelled) setFailed(true);
+        if (cancelled) return;
+        setChecking(false);
+        // Keep the stored-copy result if there is one; only without it is the page unverified.
+        if (!initial) setFailed(true);
       });
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [initial]);
 
   const status = failed ? "couldn't verify" : report?.status;
   const verified = status === "match" || status === "mismatch";
@@ -227,7 +234,7 @@ export function ParityPanel({ deep }: { deep: DeepParityView }) {
       testId="parity-page"
       eyebrow="Parity check"
       title="Same answer as the Commission calculator."
-      intro={<p>Each fixed scenario runs through Ninety and through the European Commission&apos;s own short-stay calculator script, fetched live from the Commission site when this page opens. If the server cannot load that page as the calculator, the stored, hash-checked copy is used, and the page says so.</p>}
+      intro={<p>Each fixed scenario runs through Ninety and through the European Commission&apos;s own short-stay calculator script. The result first shown comes from a stored, SHA-256-checked copy of that script. The server then tries the live Commission page, and the result is replaced only if the live page loads as the calculator. The labels below say which copy you are looking at. From Vercel&apos;s servers the live page often does not load, and then the stored copy stays.</p>}
     >
       <div className="space-y-6">
         <div className="grid gap-4 sm:grid-cols-3">
@@ -254,7 +261,7 @@ export function ParityPanel({ deep }: { deep: DeepParityView }) {
                 European Commission short-stay calculator <ExternalLink size={14} aria-hidden />
               </a>
             ) : <div className="skeleton mt-3 h-5 w-40 rounded-lg" />}
-            {report?.origin ? <p data-testid="parity-origin-label" className="mt-1 text-xs text-ink-hushed">{report.origin === "stored" ? "Stored official copy (live page unreachable from server)" : "Live page, fetched just now"}</p> : null}
+            {report?.origin ? <p data-testid="parity-origin-label" className="mt-1 text-xs text-ink-hushed">{report.origin === "live" ? "Live page, fetched just now" : checking ? "Stored official copy (checking the live page now…)" : "Stored official copy (live page unreachable from server)"}</p> : null}
           </div>
         </div>
 
@@ -291,7 +298,7 @@ export function ParityPanel({ deep }: { deep: DeepParityView }) {
           </ScrollRegion>
         </div>
 
-        <DeepSection deep={deep} report={report} failed={failed} />
+        <DeepSection deep={deep} report={report} failed={failed} checking={checking} />
 
         {report?.golden?.length ? <GoldenTable rows={report.golden} /> : null}
 

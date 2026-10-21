@@ -2,7 +2,15 @@
 
 Every TestSprite run link, screenshot and report gathered for Ninety is kept here and never deleted. One folder per PR or topic.
 
-## Latest: PR #60 → [`testsprite/ts42-pr60/`](testsprite/ts42-pr60/)
+## Latest: PRs #61 and #62, both gates required
+
+- PR [#61](https://github.com/mohamedwael201193/ninety/pull/61), merged as `392a265`: 43/43 ([execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/d5ce97c4-05b4-4d90-b30f-7b62d893514a)).
+- PR [#62](https://github.com/mohamedwael201193/ninety/pull/62), merged as `a777c3b`: 43/43 ([execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b43fc678-1b47-4f4f-9c4c-cd08eb76daac)); `TestSprite backend (28 API tests)` green on the PR ([run](https://github.com/mohamedwael201193/ninety/actions/runs/39519798095/job/118960558605)) and on `main` ([run](https://github.com/mohamedwael201193/ninety/actions/runs/39520342113/job/118962382936)). Since #62 both `TestSprite V3` and `TestSprite backend (28 API tests)` are required checks on `main`.
+- The README screenshots are in [`docs/screens/`](../screens/). The hero, EES check, letter and parity shots were taken from a local production build of the PR #63 branch; the others from production.
+- [`fresh-band/`](fresh-band/): the `/?fresh=1` band showing the old count, reproduced and fixed in #62.
+- `receipts/final-vitest.txt`: Vitest after these changes (367 passed, 3 skipped).
+
+## Before that: PR #60 → [`testsprite/ts42-pr60/`](testsprite/ts42-pr60/)
 
 - PR [#60](https://github.com/mohamedwael201193/ninety/pull/60), merged as `9f781f6`. TS42 went red, 42/43 ([execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/1f423c16-9271-4530-bbd6-11c6ec403bef)), on a blank loading state: a UX problem, not a wrong number. After the fix the run passed 43/43 ([execution `eba1bf9c`](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/eba1bf9c-2c9c-4a6a-8711-79b4955b870a)). The folder has the slowed-CPU timeline and the red and green Vitest output.
 
@@ -10,7 +18,6 @@ Every TestSprite run link, screenshot and report gathered for Ninety is kept her
 
 - PR [#57](https://github.com/mohamedwael201193/ninety/pull/57), merged to `main` as `396d6d9`: TS45–TS52 red on purpose (34/43), TS02 caught a production `/parity` problem (42/43), then 43/43. It has portal and GitHub screenshots and the merge gate.
 - Backend project "Ninety API": 28 tests, 27/28, BE28 caught a missing JSON-RPC error `id`, then green after `8c86d02`. It has screenshots plus red and green files in [`testsprite/backend/`](testsprite/backend/).
-- `receipts/final-vitest.txt`: Vitest on `main` after these changes.
 
 | Folder | What it proves |
 |---|---|

@@ -16,7 +16,7 @@ describe("Nav", () => {
     const row = screen.getByTestId("nav-links");
     expect(row.className.split(/\s+/)).not.toContain("hidden");
     expect(row.className).toContain("overflow-x-auto");
-    expect(["nav-ees", "nav-letter", "nav-parity", "nav-proof"].map((id) => screen.getByTestId(id).getAttribute("href"))).toEqual(["/ees", "/letter", "/parity", "/proof"]);
+    expect(["nav-ees", "nav-letter", "nav-parity", "nav-proof", "nav-developers"].map((id) => screen.getByTestId(id).getAttribute("href"))).toEqual(["/ees", "/letter", "/parity", "/proof", "/developers"]);
   });
   it("marks the current page with aria-current", () => {
     pathname = "/ees";

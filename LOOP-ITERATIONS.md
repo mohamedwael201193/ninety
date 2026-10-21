@@ -1,10 +1,10 @@
 # The loop, iteration by iteration
 
-Generated 2026-10-20T23:39:41.896Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
+Generated 2026-10-21T00:36:54.302Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
 
 Screenshots of the runs and the merge gate: [docs/evidence/testsprite](docs/evidence/testsprite/README.md).
 
-56 iterations, 12 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): 6 app defects (#8, #14, #39, #41, #55, #57), 1 UX loading state that never showed a wrong number (#60) and 5 where the test plan or CI was wrong (#18, #22, #36, #32, #43). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
+58 iterations, 12 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): 6 app defects (#8, #14, #39, #41, #55, #57), 1 UX loading state that never showed a wrong number (#60) and 5 where the test plan or CI was wrong (#18, #22, #36, #32, #43). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
 
 ## Iteration 1: [#1](https://github.com/mohamedwael201193/ninety/pull/1) Add the Ninety 90/180 foundation
 
@@ -501,3 +501,19 @@ Merged 2026-10-20 23:18 UTC as [`9f781f6`](https://github.com/mohamedwael201193/
 | [`9a0c897`](https://github.com/mohamedwael201193/ninety/commit/9a0c89725e6404dd115c51080b8139553f6d6896) Days used is never blank before trips load (caught by TestSprite TS42  | success: All 43 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/eba1bf9c-2c9c-4a6a-8711-79b4955b870a) |
 
 Run history: 2026-10-20T22:59Z 42/43 (failed TS42) → 2026-10-20T23:16Z 43/43.
+
+## Iteration 57: [#61](https://github.com/mohamedwael201193/ninety/pull/61) Judge review 2: exact loop wording, TS42 as UX, noscript, backend TestSprite gate on previews
+
+Merged 2026-10-20 23:57 UTC as [`392a265`](https://github.com/mohamedwael201193/ninety/commit/392a265bc5059f5c22a6436adc236029c6c456e8).
+
+| Commit | TestSprite V3 | Execution |
+|---|---|---|
+| [`f888bb6`](https://github.com/mohamedwael201193/ninety/commit/f888bb6dca7ffd15369a4b7e8438e9b77326546f) Judge review 2: exact 11+1=12 wording, TS42 as a UX loading state (7 a | success: All 43 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/d5ce97c4-05b4-4d90-b30f-7b62d893514a) |
+
+## Iteration 58: [#62](https://github.com/mohamedwael201193/ninety/pull/62) Backend TestSprite gate on Vercel status; ?fresh=1 clears the landing band
+
+Merged 2026-10-21 00:16 UTC as [`a777c3b`](https://github.com/mohamedwael201193/ninety/commit/a777c3bb27fda82b02d5bdfd8412939244869312).
+
+| Commit | TestSprite V3 | Execution |
+|---|---|---|
+| [`a5f6bde`](https://github.com/mohamedwael201193/ninety/commit/a5f6bde0b0cdfa3a833d18d0f0f6d6099ce7a66e) Backend TestSprite gate waits on Vercel's commit status (deployment_st | success: All 43 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b43fc678-1b47-4f4f-9c4c-cd08eb76daac) |

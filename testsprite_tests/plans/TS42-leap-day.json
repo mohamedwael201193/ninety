@@ -6,6 +6,10 @@
   "planSteps": [
     {
       "type": "action",
+      "description": "Read this first: the second visit in this test must open exactly /?today=2024-08-27 (no other query params; never add fresh=1, which deletes the saved trip). Only the first visit below uses fresh=1."
+    },
+    {
+      "type": "action",
       "description": "Navigate to /?today=2024-08-26&fresh=1"
     },
     {
@@ -18,7 +22,7 @@
     },
     {
       "type": "action",
-      "description": "Navigate to exactly /?today=2024-08-27 . The URL must NOT contain fresh=1 (that would delete the saved trip)"
+      "description": "Open exactly /?today=2024-08-27 (no other query params; never add fresh=1). The URL must NOT contain fresh=1 (that would delete the saved trip)"
     },
     {
       "type": "assertion",

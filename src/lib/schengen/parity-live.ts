@@ -33,19 +33,31 @@ export async function parityReport(fetchHtml: () => Promise<string> = fetchCommi
     liveReason = errorText(error, "The live page could not be loaded.");
   }
 
+  return storedParityReport(liveReason);
+}
+
+/**
+ * The 14 scenarios against the stored, hash-checked copy of the Commission page. With a live error
+ * it is the fallback for /api/parity; without one it is what /parity shows at once, before the
+ * live check answers (the page says the live check is still running).
+ */
+export function storedParityReport(liveReason?: string): ParityReport {
   const hash = sha256(VENDORED_HTML);
   if (hash !== VENDORED_SHA256) {
-    return unverified(`${liveReason} The stored copy does not match its recorded hash, so it was not used either.`, COMMISSION_CALCULATOR_URL);
+    return unverified(`${liveReason ?? ""} The stored copy does not match its recorded hash, so it was not used either.`.trim(), COMMISSION_CALCULATOR_URL);
   }
   const report = parityFromHtml(VENDORED_HTML, COMMISSION_CALCULATOR_URL);
   report.origin = "stored";
-  report.notice = `Live Commission page unreachable from server; checked against the stored official copy (SHA-256 ${hash}, fetched ${VENDORED_FETCHED_AT} from ${COMMISSION_CALCULATOR_URL}). Live error: ${liveReason}`;
+  const copy = `the stored official copy (SHA-256 ${hash}, fetched ${VENDORED_FETCHED_AT} from ${COMMISSION_CALCULATOR_URL})`;
+  report.notice = liveReason === undefined
+    ? `Checked against ${copy}. The live Commission page is being checked now.`
+    : `Live Commission page unreachable from server; checked against ${copy}. Live error: ${liveReason}`;
   report.deepLive = {
     status: "couldn't verify",
     total: 0,
     matched: 0,
     headline: "",
-    reason: "The live Commission page was unreachable from the server, so no live sample ran.",
+    reason: liveReason === undefined ? "The live sample runs once the live Commission page has loaded." : "The live Commission page was unreachable from the server, so no live sample ran.",
     disagreements: [],
   };
   return report;

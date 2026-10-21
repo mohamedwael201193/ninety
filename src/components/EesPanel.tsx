@@ -4,6 +4,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, CircleCheck, Info, Landmark, TriangleAlert, UserRound } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import { saveEesCarry } from "@/lib/ui/ees-carry";
 import { isIsoDate, localToday } from "@/lib/schengen/dates";
 import { EES_CUTOFF, explainedByCutoff, groupDifferences, parseEesRecords, reconcile, type MismatchCode, type Reconciliation } from "@/lib/ees/reconcile";
 import { days } from "@/lib/plural";
@@ -62,6 +63,8 @@ export function EesPanel() {
       return;
     }
     setFormError("");
+    // The letter form picks these up (same tab only).
+    saveEesCarry(window.sessionStorage, { daysUsed, recordsText });
     const trips = currentTrips();
     setResult(
       reconcile(trips, {
@@ -140,10 +143,11 @@ export function EesPanel() {
                     <ul data-testid="ees-codes" data-codes={result.codes.join(" ")} className="mt-2 flex flex-wrap gap-1.5">
                       {result.codes.length === 0 ? <li className="rounded-pill bg-paper px-2.5 py-0.5 text-xs text-ink">No findings</li> : null}
                       {result.codes.map((code) => (
-                        <li key={code} data-testid="ees-code" data-code={code} className="inline-flex items-center gap-1.5 rounded-pill bg-paper px-2.5 py-0.5 text-xs font-medium text-ink">
-                          {CODE_LABEL[code] ?? code}
-                          {/* The machine code is shown too, so it can be quoted in a letter or a bug report. */}
-                          <code className="font-mono text-[11px] font-normal text-ink">{code}</code>
+                        <li key={code} data-testid="ees-code" data-code={code} title={`Code: ${code}`} className="inline-flex items-center gap-1.5 rounded-pill bg-paper px-2.5 py-0.5 text-xs font-medium text-ink">
+                          {/* Human wording first; the code follows in small monospace so bug reports and tests can quote it. */}
+                          {CODE_LABEL[code] ?? "Other finding"}
+                          <span aria-hidden className="text-ink-hushed">{" · "}</span>
+                          <code data-testid="ees-code-id" className="font-mono text-[11px] font-normal text-ink-hushed">{code}</code>
                         </li>
                       ))}
                     </ul>
