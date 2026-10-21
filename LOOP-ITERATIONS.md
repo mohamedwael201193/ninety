@@ -1,10 +1,10 @@
 # The loop, iteration by iteration
 
-Generated 2026-10-21T00:36:54.302Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
+Generated 2026-10-21T01:25:35.814Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
 
 Screenshots of the runs and the merge gate: [docs/evidence/testsprite](docs/evidence/testsprite/README.md).
 
-58 iterations, 12 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): 6 app defects (#8, #14, #39, #41, #55, #57), 1 UX loading state that never showed a wrong number (#60) and 5 where the test plan or CI was wrong (#18, #22, #36, #32, #43). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
+59 iterations, 12 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): 6 app defects (#8, #14, #39, #41, #55, #57), 1 UX loading state that never showed a wrong number (#60) and 5 where the test plan or CI was wrong (#18, #22, #36, #32, #43). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
 
 ## Iteration 1: [#1](https://github.com/mohamedwael201193/ninety/pull/1) Add the Ninety 90/180 foundation
 
@@ -517,3 +517,14 @@ Merged 2026-10-21 00:16 UTC as [`a777c3b`](https://github.com/mohamedwael201193/
 | Commit | TestSprite V3 | Execution |
 |---|---|---|
 | [`a5f6bde`](https://github.com/mohamedwael201193/ninety/commit/a5f6bde0b0cdfa3a833d18d0f0f6d6099ce7a66e) Backend TestSprite gate waits on Vercel's commit status (deployment_st | success: All 43 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b43fc678-1b47-4f4f-9c4c-cd08eb76daac) |
+
+## Iteration 59: [#63](https://github.com/mohamedwael201193/ninety/pull/63) Final QA fixes, README rewrite and screenshots
+
+Merged 2026-10-21 01:23 UTC as [`7bdf5b1`](https://github.com/mohamedwael201193/ninety/commit/7bdf5b151cfda3ed12bb72f2219287ecc37167bd).
+
+| Commit | TestSprite V3 | Execution |
+|---|---|---|
+| [`5a7cc22`](https://github.com/mohamedwael201193/ninety/commit/5a7cc222893f9d3ab73ded760e27bbbe89f975fe) Final QA fixes, README rewrite and screenshots | failure: 41/43 passed · 2 failed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e26baa18-c6da-452f-ae44-7f2a9d0a10ff) |
+| [`a744ca9`](https://github.com/mohamedwael201193/ninety/commit/a744ca9613a76c50b13e99db807fbcfc0b857291) Show the finding code after its label, clearer TS42 plan, new hero sho | failure: 42/43 passed · 1 failed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/9fea50d8-d7b4-48ad-a708-b37aff1d34eb) |
+
+Run history: 2026-10-21T00:47Z 41/43 (failed TS13, TS42).

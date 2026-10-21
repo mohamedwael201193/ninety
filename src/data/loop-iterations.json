@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T00:36:54.300Z",
+  "generatedAt": "2026-10-21T01:25:35.812Z",
   "source": "GitHub API + src/data/loop.json",
   "iterations": [
     {
@@ -2067,7 +2067,14 @@
           "description": "All 43 tests passed"
         }
       ],
-      "executions": [],
+      "executions": [
+        {
+          "start": "2026-10-20T23:44:07.815Z",
+          "passed": 43,
+          "tests": 43,
+          "failed": []
+        }
+      ],
       "redThenGreen": false,
       "kind": null,
       "stoppedThenGreen": false
@@ -2088,7 +2095,53 @@
           "description": "All 43 tests passed"
         }
       ],
-      "executions": [],
+      "executions": [
+        {
+          "start": "2026-10-21T00:12:40.368Z",
+          "passed": 43,
+          "tests": 43,
+          "failed": []
+        }
+      ],
+      "redThenGreen": false,
+      "kind": null,
+      "stoppedThenGreen": false
+    },
+    {
+      "n": 59,
+      "pr": 63,
+      "title": "Final QA fixes, README rewrite and screenshots",
+      "mergedAt": "2026-10-21T01:23:48Z",
+      "mergeCommit": "7bdf5b151cfda3ed12bb72f2219287ecc37167bd",
+      "checks": [
+        {
+          "sha": "5a7cc222893f9d3ab73ded760e27bbbe89f975fe",
+          "message": "Final QA fixes, README rewrite and screenshots",
+          "state": "failure",
+          "at": "2026-10-21T00:50:09Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e26baa18-c6da-452f-ae44-7f2a9d0a10ff",
+          "description": "41/43 passed · 2 failed"
+        },
+        {
+          "sha": "a744ca9613a76c50b13e99db807fbcfc0b857291",
+          "message": "Show the finding code after its label, clearer TS42 plan, new hero shot",
+          "state": "failure",
+          "at": "2026-10-21T01:10:51Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/9fea50d8-d7b4-48ad-a708-b37aff1d34eb",
+          "description": "42/43 passed · 1 failed"
+        }
+      ],
+      "executions": [
+        {
+          "start": "2026-10-21T00:47:17.323Z",
+          "passed": 41,
+          "tests": 43,
+          "failed": [
+            "TS13",
+            "TS42"
+          ]
+        }
+      ],
       "redThenGreen": false,
       "kind": null,
       "stoppedThenGreen": false

@@ -66,7 +66,7 @@
   },
   "63": {
     "kind": "plan-ci",
-    "why": "Test contract, not an app bug: TS13 asserts the finding codes, and a wording change on this PR had hidden them behind human labels. Fixed by showing the code after the label."
+    "why": "Test contract, not an app bug: TS13 asserts the finding codes, and a wording change on this PR had hidden them behind human labels. Fixed by showing the code after the label. Final push a744ca9 went 42/43: TS42 was a TestSprite agent-read flake (its snapshot shows Days used = 0); TS42 alone on the same preview then passed 9/9. Admin-merged as 7bdf5b1."
   },
   "_notes": [
     {
@@ -75,7 +75,7 @@
     },
     {
       "pr": 63,
-      "text": "Test-contract catch, not an app bug. On PR #63 at 5a7cc22 (41/43, [execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e26baa18-c6da-452f-ae44-7f2a9d0a10ff)) TS13 failed because our manual-QA change replaced the raw finding codes on /ees with human wording, and the plan relies on the codes (data-codes 'figure-differs exit-dates-disagree'). The app's answer was right (Playwright on the preview: the same data-codes, no 'Likely missing entry'). TestSprite caught that the wording change broke the contract the test reads; the chips now show the wording followed by the code in small monospace. In the same run TS42 failed because the agent opened /?today=2024-08-27&fresh=1, which the plan forbids; its own DOM snapshot shows Days used = 0 with no trips (not blank), so this was an agent step error. The TS42 plan now states the exact URL first (plan put, free)."
+      "text": "Test-contract catch, not an app bug. On PR #63 at 5a7cc22 (41/43, [execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e26baa18-c6da-452f-ae44-7f2a9d0a10ff)) TS13 failed because our manual-QA change replaced the raw finding codes on /ees with human wording, and the plan relies on the codes (data-codes 'figure-differs exit-dates-disagree'). The app's answer was right (Playwright on the preview: the same data-codes, no 'Likely missing entry'). TestSprite caught that the wording change broke the contract the test reads; the chips now show the wording followed by the code in small monospace. In the same run TS42 failed because the agent opened /?today=2024-08-27&fresh=1, which the plan forbids; its own DOM snapshot shows Days used = 0 with no trips (not blank), so this was an agent step error. The TS42 plan now states the exact URL first (plan put, free). The final push, a744ca9, ran 42/43 on the TestSprite V3 check: TS13 passed, and TS42 failed again (run 2047bee7-46ab-41f6-b989-f7ee7663c8ea). This time the agent opened the right URL, and its own DOM snapshot shows Days used = 0 with one trip listed, yet it reported the cell as empty: an agent-read flake, not an app defect. TS42 alone on the same a744ca9 preview then passed 9/9 (run 0c8f535f-664e-4a89-891a-7676ce7dde92, [snapshot](docs/evidence/ts42-isolated-rerun/step08-snapshot.png), [result](docs/evidence/ts42-isolated-rerun/result.json)). With the backend gate green and Vitest 367/367, #63 was admin-merged over this one flake as 7bdf5b1; we did not pay for a third full run."
     }
   ]
 }
