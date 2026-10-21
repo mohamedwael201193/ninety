@@ -4,7 +4,7 @@ Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
 
  RUN  v4.1.12 /workspace/wt-i
 
-12:44:35 AM [vite] (ssr) warning: invalid import "../../app/api/v1/${name}/route". A file extension must be included in the static part of the import. For example: import(`./foo/${bar}.js`).
+1:05:53 AM [vite] (ssr) warning: invalid import "../../app/api/v1/${name}/route". A file extension must be included in the static part of the import. For example: import(`./foo/${bar}.js`).
   Plugin: vite:dynamic-import-vars
   File: /workspace/wt-i/src/lib/bughunt/review-round3.test.ts
 Error: Not implemented: window.scrollTo
@@ -32,6 +32,6 @@ Error: Not implemented: window.scrollTo
 
  Test Files  67 passed (67)
       Tests  367 passed | 3 skipped (370)
-   Start at  00:44:35
-   Duration  9.15s (transform 2.96s, setup 554ms, import 14.00s, tests 23.60s, environment 7.37s)
+   Start at  01:05:53
+   Duration  9.23s (transform 2.63s, setup 489ms, import 15.52s, tests 24.55s, environment 7.29s)
 

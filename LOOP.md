@@ -1,12 +1,12 @@
 # The TestSprite loop
 
-Generated 2026-10-21T00:37:28.766Z by `scripts/loop-proof.mjs` from `testsprite test result --history` (1841 runs). Do not edit by hand.
+Generated 2026-10-21T01:04:53.432Z by `scripts/loop-proof.mjs` from `testsprite test result --history` (1884 runs). Do not edit by hand.
 
 Counts cover the tests listed in `testsprite_tests/test-ids.json`. Runs of tests that were later replaced (the first TS09/TS10) are not included, so an execution can show fewer tests than the suite had at the time.
 
 ## Red, then green
 
-14 PRs have a red execution, then a green one, in the run history: 6 app defects (#8, #14, #39, #41, #55, #57), 1 UX loading state, not a wrong number (#60), 6 test plan or CI (#18, #32, #36, #37, #38, #43), 1 blocked (#44). 11 of these 14 history rows also failed on the GitHub check; #37, #38, #44 did not. Adding #22, red on the GitHub check but missing from this history because its failing test was later replaced, gives 12: the red-then-green count in LOOP-ITERATIONS.md and the README.
+Red, green not yet: #63. 14 PRs have a red execution, then a green one, in the run history: 6 app defects (#8, #14, #39, #41, #55, #57), 1 UX loading state, not a wrong number (#60), 6 test plan or CI (#18, #32, #36, #37, #38, #43), 1 blocked (#44). 11 of these 14 history rows also failed on the GitHub check; #37, #38, #44 did not. Adding #22, red on the GitHub check but missing from this history because its failing test was later replaced, gives 12: the red-then-green count in LOOP-ITERATIONS.md and the README.
 
 The two counts differ for a reason: the "Red run" fraction is from the run history and counts only the tests still in `test-ids.json`; the "GitHub check" column quotes the PR's `TestSprite V3` status word for word, which counted every test the run had. The README quotes the GitHub check.
 
@@ -26,10 +26,12 @@ The two counts differ for a reason: the "Red run" fraction is from the run histo
 | [#55](https://github.com/mohamedwael201193/ninety/pull/55) | App defect | 2026-10-20T08:51Z, 34/35 | TS41 | 34/35 passed · 1 failed; 32/35 passed · 2 failed · 1 blocked; 32/35 passed · 3 failed | 2026-10-20T11:56Z, 35/35 |
 | [#57](https://github.com/mohamedwael201193/ninety/pull/57) | App defect | 2026-10-20T21:56Z, 34/43 | TS02, TS45, TS46, TS47, TS48, TS49, TS50, TS51, TS52 | 34/43 passed · 8 failed · 1 blocked; 42/43 passed · 1 failed | 2026-10-20T22:09Z, 43/43 |
 | [#60](https://github.com/mohamedwael201193/ninety/pull/60) | UX loading state (not a wrong number) | 2026-10-20T22:59Z, 42/43 | TS42 | 42/43 passed · 1 failed | 2026-10-20T23:16Z, 43/43 |
+| [#63](https://github.com/mohamedwael201193/ninety/pull/63) | Test plan or CI | 2026-10-21T00:47Z, 41/43 | TS13, TS42 | `41/43 passed · 2 failed` on 5a7cc22 (PR open when generated) | not yet |
 
 ## Notes
 
 - Classified as a blank loading state (UX), not a wrong number. TS42 (leap-day stay leaves the window on day 181) failed once on PR #60 at commit 1abce4c (42/43, [execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/1f423c16-9271-4530-bbd6-11c6ec403bef)): the agent read the Days used cell as empty. A CLI rerun of TS42 alone against production passed (run 3f1d1a94-9544-4e94-9688-5ace96c0d741). Playwright never saw a wrong number, but with the CPU slowed 20x the status area was an empty skeleton for about 3 s, and the server HTML said only "Loading…" ([timeline](docs/evidence/testsprite/ts42-pr60/production-throttled-timeline.txt)). Fixed on #60: until the trips load, the Days used and Days left tiles say "Counting your saved trips…" ([red](docs/evidence/testsprite/ts42-pr60/vitest-red.txt), [green](docs/evidence/testsprite/ts42-pr60/vitest-green.txt)). The next full run, on 9a0c897 with the fix, was "All 43 tests passed" ([execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/eba1bf9c-2c9c-4a6a-8711-79b4955b870a)), and #60 merged as 9f781f6.
+- Test-contract catch, not an app bug. On PR #63 at 5a7cc22 (41/43, [execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e26baa18-c6da-452f-ae44-7f2a9d0a10ff)) TS13 failed because our manual-QA change replaced the raw finding codes on /ees with human wording, and the plan relies on the codes (data-codes 'figure-differs exit-dates-disagree'). The app's answer was right (Playwright on the preview: the same data-codes, no 'Likely missing entry'). TestSprite caught that the wording change broke the contract the test reads; the chips now show the wording followed by the code in small monospace. In the same run TS42 failed because the agent opened /?today=2024-08-27&fresh=1, which the plan forbids; its own DOM snapshot shows Days used = 0 with no trips (not blank), so this was an agent step error. The TS42 plan now states the exact URL first (plan put, free).
 
 ## Every execution
 
@@ -146,3 +148,4 @@ The two counts differ for a reason: the "Red run" fraction is from the run histo
 | 2026-10-20T23:16 | [#60](https://github.com/mohamedwael201193/ninety/pull/60) | 43/43 | none |
 | 2026-10-20T23:44 | [#61](https://github.com/mohamedwael201193/ninety/pull/61) | 43/43 | none |
 | 2026-10-21T00:12 | [#62](https://github.com/mohamedwael201193/ninety/pull/62) | 43/43 | none |
+| 2026-10-21T00:47 | [#63](https://github.com/mohamedwael201193/ninety/pull/63) | 41/43 | TS13, TS42 |

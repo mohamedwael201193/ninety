@@ -32,7 +32,7 @@ describe("/ees → /letter", () => {
     expect((screen.getByTestId("letter-records") as HTMLTextAreaElement).value).toBe("2026-01-02 2026-03-31");
   });
 
-  it("finding chips use words, not machine codes (manual QA: a raw 'figure-differs' chip)", async () => {
+  it("finding chips lead with words and show the code after them (manual QA: a raw 'figure-differs' chip; TS13 reads the code)", async () => {
     query = "scenario=near-limit";
     render(<EesPanel />);
     fireEvent.change(screen.getByTestId("ees-days-used"), { target: { value: "95" } });
@@ -41,7 +41,9 @@ describe("/ees → /letter", () => {
     const chips = screen.getAllByTestId("ees-code");
     expect(chips.length).toBeGreaterThan(0);
     for (const chip of chips) {
-      expect(chip.textContent).not.toContain(chip.getAttribute("data-code") ?? "");
+      const code = chip.getAttribute("data-code") ?? "";
+      expect(chip.textContent).toMatch(new RegExp(`^[A-Z][^·]+ · ${code}$`));
+      expect(chip.querySelector("[data-testid=ees-code-id]")?.textContent).toBe(code);
     }
   });
 });

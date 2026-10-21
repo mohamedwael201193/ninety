@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-21T00:37:28.766Z",
+  "generatedAt": "2026-10-21T01:04:53.432Z",
   "source": "testsprite test result --history",
-  "runs": 1841,
+  "runs": 1884,
   "executions": [
     {
       "pr": null,
@@ -1206,6 +1206,25 @@
       "tests": 43,
       "passed": 43,
       "failed": []
+    },
+    {
+      "pr": 63,
+      "env": "github-pr-63",
+      "start": "2026-10-21T00:47:17.323Z",
+      "tests": 43,
+      "passed": 41,
+      "failed": [
+        {
+          "test": "TS13",
+          "runId": "9a4344a8-1f8a-44c7-90ea-59142877da5f",
+          "failureKind": "assertion"
+        },
+        {
+          "test": "TS42",
+          "runId": "8d9f85f4-e87a-40c0-a867-b951d4825e12",
+          "failureKind": "unknown"
+        }
+      ]
     }
   ],
   "loops": [
@@ -1707,6 +1726,30 @@
         "failed": []
       },
       "kind": "ux"
+    },
+    {
+      "pr": 63,
+      "red": {
+        "pr": 63,
+        "env": "github-pr-63",
+        "start": "2026-10-21T00:47:17.323Z",
+        "tests": 43,
+        "passed": 41,
+        "failed": [
+          {
+            "test": "TS13",
+            "runId": "9a4344a8-1f8a-44c7-90ea-59142877da5f",
+            "failureKind": "assertion"
+          },
+          {
+            "test": "TS42",
+            "runId": "8d9f85f4-e87a-40c0-a867-b951d4825e12",
+            "failureKind": "unknown"
+          }
+        ]
+      },
+      "green": null,
+      "kind": "plan-ci"
     }
   ]
 }

@@ -11,7 +11,7 @@
 </div>
 
 <p align="center">
-  <img src="docs/screens/hero.png" alt="Ninety home page: a phone mock-up shows 28 of 90 days left, with an EES says 90 used chip" width="49%">
+  <img src="docs/screens/hero.png" alt="Ninety home page: a phone mock-up shows 34 of 90 days left and an EES count disagrees card, 90 vs 56" width="49%">
   <img src="docs/screens/calculator.png" alt="The calculator with the example history: days used, days left and the trip list" width="49%">
 </p>
 <p align="center">

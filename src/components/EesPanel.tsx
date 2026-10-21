@@ -144,8 +144,10 @@ export function EesPanel() {
                       {result.codes.length === 0 ? <li className="rounded-pill bg-paper px-2.5 py-0.5 text-xs text-ink">No findings</li> : null}
                       {result.codes.map((code) => (
                         <li key={code} data-testid="ees-code" data-code={code} title={`Code: ${code}`} className="inline-flex items-center gap-1.5 rounded-pill bg-paper px-2.5 py-0.5 text-xs font-medium text-ink">
-                          {/* Human wording only; the machine code stays in data-code and the tooltip for bug reports. */}
+                          {/* Human wording first; the code follows in small monospace so bug reports and tests can quote it. */}
                           {CODE_LABEL[code] ?? "Other finding"}
+                          <span aria-hidden className="text-ink-hushed">{" · "}</span>
+                          <code data-testid="ees-code-id" className="font-mono text-[11px] font-normal text-ink-hushed">{code}</code>
                         </li>
                       ))}
                     </ul>
