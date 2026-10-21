@@ -17,6 +17,14 @@ function setSilently(testId: string, value: string) {
 }
 
 describe("TripEditor", () => {
+  it("says \"Save trip\" when adding and when editing (manual QA: \"Save changes\" in one, \"Save trip\" in the other)", () => {
+    render(<TripEditor initial={null} onSave={() => {}} onCancel={() => {}} />);
+    expect(screen.getByTestId("trip-save").textContent).toBe("Save trip");
+    cleanup();
+    render(<TripEditor initial={{ id: "a", entry: "2026-10-01", exit: "2026-10-05" }} onSave={() => {}} onCancel={() => {}} />);
+    expect(screen.getByTestId("trip-save").textContent).toBe("Save trip");
+  });
+
   it("saves an open stay entered by typing", async () => {
     const onSave = vi.fn();
     render(<TripEditor initial={null} onSave={onSave} onCancel={() => {}} />);

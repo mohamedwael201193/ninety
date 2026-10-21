@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Copy, Download, FileText, PenLine } from "lucide-react";
 import { toast } from "sonner";
 import { useSearchParams } from "next/navigation";
+import { loadEesCarry } from "@/lib/ui/ees-carry";
 import { isIsoDate, localToday } from "@/lib/schengen/dates";
 import { parseEesRecords, reconcile } from "@/lib/ees/reconcile";
 import { daysLabel } from "@/lib/letter/days";
@@ -42,8 +43,16 @@ export function LetterPanel() {
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof LetterForm, string>>>({});
 
   useEffect(() => {
+    // Coming from /ees: carry its figure and records over (demo scenarios bring their own).
+    if (!demo) {
+      const carried = loadEesCarry(window.sessionStorage);
+      if (carried) {
+        setDaysUsed((v) => v || carried.daysUsed);
+        setRecordsText((v) => v || carried.recordsText);
+      }
+    }
     setReady(true);
-  }, []);
+  }, [demo]);
 
   async function copyLetter() {
     if (!letter) return;

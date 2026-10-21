@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T23:39:41.893Z",
+  "generatedAt": "2026-10-21T00:36:54.300Z",
   "source": "GitHub API + src/data/loop.json",
   "iterations": [
     {
@@ -2049,6 +2049,48 @@
       ],
       "redThenGreen": true,
       "kind": "ux",
+      "stoppedThenGreen": false
+    },
+    {
+      "n": 57,
+      "pr": 61,
+      "title": "Judge review 2: exact loop wording, TS42 as UX, noscript, backend TestSprite gate on previews",
+      "mergedAt": "2026-10-20T23:57:56Z",
+      "mergeCommit": "392a265bc5059f5c22a6436adc236029c6c456e8",
+      "checks": [
+        {
+          "sha": "f888bb6dca7ffd15369a4b7e8438e9b77326546f",
+          "message": "Judge review 2: exact 11+1=12 wording, TS42 as a UX loading state (7 app bugs + 1), noscript note, backend TestSprite gate on previews, evidence index on #60",
+          "state": "success",
+          "at": "2026-10-20T23:46:35Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/d5ce97c4-05b4-4d90-b30f-7b62d893514a",
+          "description": "All 43 tests passed"
+        }
+      ],
+      "executions": [],
+      "redThenGreen": false,
+      "kind": null,
+      "stoppedThenGreen": false
+    },
+    {
+      "n": 58,
+      "pr": 62,
+      "title": "Backend TestSprite gate on Vercel status; ?fresh=1 clears the landing band",
+      "mergedAt": "2026-10-21T00:16:39Z",
+      "mergeCommit": "a777c3bb27fda82b02d5bdfd8412939244869312",
+      "checks": [
+        {
+          "sha": "a5f6bde0b0cdfa3a833d18d0f0f6d6099ce7a66e",
+          "message": "Backend TestSprite gate waits on Vercel's commit status (deployment_status never fired); ?fresh=1 tells the landing band the saved trips are gone",
+          "state": "success",
+          "at": "2026-10-21T00:16:10Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b43fc678-1b47-4f4f-9c4c-cd08eb76daac",
+          "description": "All 43 tests passed"
+        }
+      ],
+      "executions": [],
+      "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     }
   ]

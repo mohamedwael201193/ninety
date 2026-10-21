@@ -140,3 +140,12 @@ describe("reply email", () => {
     expect(buildCorrectionLetter({ ...identity, email: "jane@example.com" }, r).text).toContain("jane@example.com");
   });
 });
+
+describe("Article 52(3) paragraph (manual QA: 'I shall be confirmed in writing')", () => {
+  it("is grammatical and keeps the Regulation's duty: rectify, complete or erase without delay, then confirm in writing", () => {
+    const reconciliation = reconcile([{ entry: "2024-06-01", exit: "2024-06-10" }], { daysUsed: 15, on: "2024-06-14" });
+    const { text } = buildCorrectionLetter(identity, reconciliation);
+    expect(text).not.toContain("I shall be confirmed");
+    expect(text).toContain("Under Article 52(3), where data are factually inaccurate, incomplete or recorded unlawfully, the Member State responsible shall rectify, complete or erase them without delay and confirm to me in writing that it has done so.");
+  });
+});

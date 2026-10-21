@@ -87,7 +87,7 @@ export function TripEditor({ initial, onSave, onCancel }: TripEditorProps) {
         </button>
         <button type="submit" data-testid="trip-save"
           className="focus-ring h-12 rounded-full bg-solar px-6 font-medium text-ink transition-[background,transform] duration-200 hover:bg-solar-deep active:scale-[.98]">
-          {initial ? "Save changes" : "Save trip"}
+          Save trip
         </button>
       </div>
     </form>

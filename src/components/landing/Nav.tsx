@@ -56,6 +56,7 @@ export default function Nav() {
           <CarryLink href="/letter" data-testid="nav-letter" className={LINK} {...current(pathname, "/letter")}>Letter</CarryLink>
           <Link href="/parity" data-testid="nav-parity" className={LINK} {...current(pathname, "/parity")}>Parity</Link>
           <Link href="/proof" data-testid="nav-proof" className={LINK} {...current(pathname, "/proof")}>Proof</Link>
+          <Link href="/developers" data-testid="nav-developers" className={LINK} {...current(pathname, "/developers")}>API</Link>
         </div>
         <SectionLink hash="#check" className="btn btn-primary !min-h-9 px-4 text-sm">Check my days</SectionLink>
       </nav>

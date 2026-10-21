@@ -2,36 +2,36 @@
   - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
 Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
 
- RUN  v4.1.12 .
+ RUN  v4.1.12 /workspace/wt-i
 
-12:10:34 AM [vite] (ssr) warning: invalid import "../../app/api/v1/${name}/route". A file extension must be included in the static part of the import. For example: import(`./foo/${bar}.js`).
+12:44:35 AM [vite] (ssr) warning: invalid import "../../app/api/v1/${name}/route". A file extension must be included in the static part of the import. For example: import(`./foo/${bar}.js`).
   Plugin: vite:dynamic-import-vars
-  File: ./src/lib/bughunt/review-round3.test.ts
+  File: /workspace/wt-i/src/lib/bughunt/review-round3.test.ts
 Error: Not implemented: window.scrollTo
-    at module.exports (node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
-    at node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
-    at file://node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
+    at module.exports (/workspace/wt-g-caught/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at /workspace/wt-g-caught/node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
+    at file:///workspace/wt-g-caught/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
     at Array.forEach (<anonymous>)
-    at measureAllKeyframes (file://node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
-    at triggerCallback (file://node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
+    at measureAllKeyframes (file:///workspace/wt-g-caught/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
+    at triggerCallback (file:///workspace/wt-g-caught/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
     at Set.forEach (<anonymous>)
-    at Object.process (file://node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
-    at processBatch (file://node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
-    at invokeTheCallbackFunction (node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
+    at Object.process (file:///workspace/wt-g-caught/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
+    at processBatch (file:///workspace/wt-g-caught/node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
+    at invokeTheCallbackFunction (/workspace/wt-g-caught/node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
 Error: Not implemented: window.scrollTo
-    at module.exports (node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
-    at node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
-    at file://node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
+    at module.exports (/workspace/wt-g-caught/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at /workspace/wt-g-caught/node_modules/jsdom/lib/jsdom/browser/Window.js:960:7
+    at file:///workspace/wt-g-caught/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:41:24
     at Array.forEach (<anonymous>)
-    at measureAllKeyframes (file://node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
-    at triggerCallback (file://node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
+    at measureAllKeyframes (file:///workspace/wt-g-caught/node_modules/framer-motion/dist/es/render/utils/KeyframesResolver.mjs:39:28)
+    at triggerCallback (file:///workspace/wt-g-caught/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:28:9)
     at Set.forEach (<anonymous>)
-    at Object.process (file://node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
-    at processBatch (file://node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
-    at invokeTheCallbackFunction (node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
+    at Object.process (file:///workspace/wt-g-caught/node_modules/framer-motion/dist/es/frameloop/render-step.mjs:67:23)
+    at processBatch (file:///workspace/wt-g-caught/node_modules/framer-motion/dist/es/frameloop/batcher.mjs:39:26)
+    at invokeTheCallbackFunction (/workspace/wt-g-caught/node_modules/jsdom/lib/jsdom/living/generated/Function.js:19:26) undefined
 
- Test Files  65 passed (65)
-      Tests  361 passed | 3 skipped (364)
-   Start at  00:10:33
-   Duration  8.64s (transform 2.61s, setup 481ms, import 12.33s, tests 23.24s, environment 7.10s)
+ Test Files  67 passed (67)
+      Tests  367 passed | 3 skipped (370)
+   Start at  00:44:35
+   Duration  9.15s (transform 2.96s, setup 554ms, import 14.00s, tests 23.60s, environment 7.37s)
 
