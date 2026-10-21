@@ -1,0 +1,6 @@
+     × drops the saved trips when ?fresh=1 clears them after the band has read them (watchdog: 64/26 under "Your saved trips" on a fresh page) 57ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected 'saved' to be 'example' // Object.is equality
+Expected: "example"
+Received: "saved"
+      Tests  1 failed | 4 passed (5)

@@ -1,0 +1,11 @@
+Playwright on https://ninety-coral.vercel.app (before the fix), 2026-10-21 ~00:10 UTC.
+Steps: /?fresh=1 → "Try an example" (saved trips, 64 used / 26 left today) → open /?fresh=1 again, sample every 50 ms for 8 s.
+rate 1 (no throttle)
+   0ms panel=undefined/undefined band=Example history, read on 2026-10-19 56/34 ls=1
+   50ms panel=0/90 band=Your saved trips, read on 2026-10-21 64/26 ls=0
+rate 20 (CPU slowed 20x)
+   0ms panel=undefined/undefined band=undefined undefined/undefined ls=1
+   50ms panel=undefined/undefined band=Example history, read on 2026-10-19 56/34 ls=1
+   700ms panel=undefined/undefined band=Your saved trips, read on 2026-10-21 64/26 ls=1
+   750ms panel=0/90 band=Your saved trips, read on 2026-10-21 64/26 ls=0
+The calculator says 0/90 and localStorage is empty (ls=0), but the band keeps the cleared trips for the rest of the 8 s.
