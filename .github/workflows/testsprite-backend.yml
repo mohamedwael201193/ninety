@@ -1,16 +1,20 @@
 # The 28 TestSprite backend tests (project "Ninety API") as a required check.
 #
-# Runs when Vercel reports a deployment ready:
-#   - Preview (a pull request): against that preview URL, so a PR's API is tested before merge;
-#   - Production (main): against https://ninety-coral.vercel.app after the deploy.
-# The check run attaches to the deployed commit, so it shows on the PR.
+#   - pull_request: waits for Vercel's commit status on the PR head to say the preview is ready,
+#     then tests that preview (the branch URL ninety-git-<branch>-mohamedwael201193s-projects.vercel.app);
+#   - push to main: waits for the production deployment of that commit, then tests
+#     https://ninety-coral.vercel.app.
+# This Vercel project posts commit statuses, not GitHub deployments, so `deployment_status` never
+# fires (the first version of this workflow, in #61, waited on it and never ran).
 # scripts/ci/backend-run.mjs points each test's BASE_URL at the target (TestSprite gives backend
 # tests no environment URL) and fails the job if any test does not pass.
-# Cost: 28 × 0.2 = 5.6 credits per deployment. Needs the repository secret TESTSPRITE_API_KEY.
+# Cost: 28 × 0.2 = 5.6 credits per run. Needs the repository secret TESTSPRITE_API_KEY.
 name: TestSprite backend
 
 on:
-  deployment_status:
+  pull_request:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       target:
@@ -20,6 +24,7 @@ on:
 
 permissions:
   contents: read
+  statuses: read
 
 concurrency:
   # The tests are shared, so only one target at a time.
@@ -32,28 +37,41 @@ env:
 jobs:
   backend:
     name: TestSprite backend (28 API tests)
-    if: >-
-      ${{ github.event_name == 'workflow_dispatch'
-      || (github.event_name == 'deployment_status'
-          && github.event.deployment_status.state == 'success'
-          && (github.event.deployment.environment == 'Preview' || github.event.deployment.environment == 'Production')) }}
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          ref: ${{ github.event.deployment.sha || github.sha }}
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
-      - name: Target
+      - name: Wait for the Vercel deployment and pick the target
         id: target
         env:
-          URL: ${{ github.event.deployment_status.environment_url || inputs.target }}
-          ENVIRONMENT: ${{ github.event.deployment.environment || 'manual' }}
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BRANCH: ${{ github.head_ref }}
+          INPUT: ${{ inputs.target }}
         run: |
-          echo "url=${URL%/}" >> "$GITHUB_OUTPUT"
-          echo "Testing $ENVIRONMENT deployment at ${URL%/}"
+          if [ "$EVENT" = "workflow_dispatch" ]; then echo "url=${INPUT%/}" >> "$GITHUB_OUTPUT"; exit 0; fi
+          for i in $(seq 90); do
+            state=$(gh api "repos/$GITHUB_REPOSITORY/commits/$SHA/statuses" --jq '[.[]|select(.context=="Vercel")][0].state' 2>/dev/null || true)
+            [ "$state" = "success" ] && break
+            [ "$state" = "failure" ] || [ "$state" = "error" ] && { echo "::error::Vercel deployment $state"; exit 1; }
+            sleep 10
+          done
+          [ "$state" = "success" ] || { echo "::error::Vercel deployment not ready after 15 minutes"; exit 1; }
+          if [ "$EVENT" = "pull_request" ]; then
+            slug=$(echo "$BRANCH" | tr 'A-Z' 'a-z' | sed 's/[^a-z0-9]/-/g')
+            url="https://ninety-git-${slug}-mohamedwael201193s-projects.vercel.app"
+          else
+            url="https://ninety-coral.vercel.app"
+            sleep 30 # the production alias moves a few seconds after the status
+          fi
+          code=$(curl -s -o /dev/null -w '%{http_code}' "$url/api/openapi.json")
+          [ "$code" = "200" ] || { echo "::error::$url/api/openapi.json answered $code"; exit 1; }
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Testing $EVENT deployment of $SHA at $url"
       - name: Run the 28 backend tests
         env:
           TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
