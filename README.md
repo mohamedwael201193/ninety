@@ -6,7 +6,7 @@
 
 **[ninety-coral.vercel.app](https://ninety-coral.vercel.app)** · [EES check](https://ninety-coral.vercel.app/ees) · [Article 52 letter](https://ninety-coral.vercel.app/letter) · [Commission parity](https://ninety-coral.vercel.app/parity) · [Proof](https://ninety-coral.vercel.app/proof) · [API](https://ninety-coral.vercel.app/developers)
 
-[![TestSprite frontend](https://img.shields.io/badge/TestSprite_frontend-43%2F43_on_%2362-2ea44f)](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b43fc678-1b47-4f4f-9c4c-cd08eb76daac) [![TestSprite backend](https://img.shields.io/badge/TestSprite_backend-28_API_tests-2ea44f)](https://github.com/mohamedwael201193/ninety/actions/workflows/testsprite-backend.yml) [![CI](https://github.com/mohamedwael201193/ninety/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/mohamedwael201193/ninety/actions/workflows/ci.yml) [![Commission parity](https://img.shields.io/badge/Commission_parity-14%2F14-2ea44f)](https://ninety-coral.vercel.app/parity) [![Deep parity](https://img.shields.io/badge/deep_parity-399%2F400-2ea44f)](src/lib/schengen/deep/deep.test.ts) [![Vitest](https://img.shields.io/badge/vitest-367_passing-2ea44f)](#running-locally) [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![TestSprite frontend](https://img.shields.io/badge/TestSprite_frontend-43%2F43_on_%2362-2ea44f)](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b43fc678-1b47-4f4f-9c4c-cd08eb76daac) [![TestSprite backend](https://img.shields.io/badge/TestSprite_backend-28_API_tests-2ea44f)](https://github.com/mohamedwael201193/ninety/actions/workflows/testsprite-backend.yml) [![CI](https://github.com/mohamedwael201193/ninety/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/mohamedwael201193/ninety/actions/workflows/ci.yml) [![Commission parity](https://img.shields.io/badge/Commission_parity-14%2F14-2ea44f)](https://ninety-coral.vercel.app/parity) [![Deep parity](https://img.shields.io/badge/deep_parity-399%2F400-2ea44f)](src/lib/schengen/deep/deep.test.ts) [![Vitest](https://img.shields.io/badge/vitest-372_passing-2ea44f)](#running-locally) [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 </div>
 
@@ -19,6 +19,18 @@
   <img src="docs/screens/letter.png" alt="Article 52 letter drafted from the EES check, with the evidence table 64 / 90 / 26 days" width="32%">
   <img src="docs/screens/parity.png" alt="Parity page: 14/14 scenarios match the European Commission calculator" width="32%">
 </p>
+
+## Judge path (2 minutes)
+
+Each line is something you can check yourself, with the command or link that proves it.
+
+1. **Merge gate.** `curl -s https://api.github.com/repos/mohamedwael201193/ninety/branches/main | jq .protection` lists the required checks on `main`, enforced for admins too. Both TestSprite gates are among them.
+2. **TestSprite on every PR.** Open any recent merged PR, then the Checks tab: `TestSprite V3` (43 frontend tests on the PR's Vercel preview, GitHub App) and `TestSprite backend (28 API tests)` (CLI, [`testsprite-backend.yml`](.github/workflows/testsprite-backend.yml)).
+3. **Red runs are triaged on the PR.** When the backend gate fails, the workflow comments on the PR with each failing test, a first-guess cause, TestSprite's error line, the run id and a one-line reproduce command ([`triage.mjs`](scripts/ci/triage.mjs), tested in [`triage.test.ts`](src/lib/ci/triage.test.ts)). It only reads the gate's own results file; no results means the comment says no test ran.
+4. **Nightly on production.** [`testsprite-smoke.yml`](.github/workflows/testsprite-smoke.yml) runs TS01, TS03 and TS07 every night (1.5 credits). Every finished run is a comment on the [Run log issue](https://github.com/mohamedwael201193/ninety/issues?q=label%3Atestsprite-log), and a red night opens a [`testsprite-red` issue](https://github.com/mohamedwael201193/ninety/issues?q=label%3Atestsprite-red).
+5. **Red then green, counted.** [`LOOP-ITERATIONS.md`](LOOP-ITERATIONS.md), generated from the GitHub API by `node scripts/loop-iterations.mjs`.
+6. **The answer is the official one.** [`/parity`](https://ninety-coral.vercel.app/parity): 14/14 scenarios against the European Commission calculator.
+7. **Locally:** `npm ci && npm test` → 372 passing, 3 skipped.
 
 ## What it does
 
@@ -34,7 +46,7 @@ No account. Trips stay in your browser.
 
 ## How TestSprite proves it
 
-Every pull request must pass **two required checks** before it can merge into `main` (branch protection):
+Every pull request must pass **six required checks** before it can merge into `main` (branch protection, enforced for admins). The two TestSprite gates:
 
 | Gate | What runs | Where |
 |---|---|---|
@@ -48,7 +60,7 @@ As of the #62 merge (`a777c3b`, 2026-10-21 00:16 UTC): PR #62 passed **43/43** (
   <img src="docs/screens/testsprite-runs.png" alt="TestSprite portal: test runs per PR, red runs followed by 43 of 43 passed" width="48%">
 </p>
 
-The expected values come from the European Commission's calculator or from the regulation and the specs, never from Ninety's own output. Around them, on every PR: 367 Vitest unit, property and fuzz tests, 500 random histories against the Commission script, an OpenAPI contract test (Schemathesis), axe-core on 8 pages × desktop and phone, and an end-to-end test of the stdio MCP server.
+The expected values come from the European Commission's calculator or from the regulation and the specs, never from Ninety's own output. Around them, on every PR: 372 Vitest unit, property and fuzz tests, 500 random histories against the Commission script, an OpenAPI contract test (Schemathesis), axe-core on 8 pages × desktop and phone, and an end-to-end test of the stdio MCP server.
 
 ## What TestSprite caught
 
@@ -58,7 +70,11 @@ Counted from the `TestSprite V3` commit statuses of every merged pull request (r
 
 The whole loop, iteration by iteration: [`LOOP-ITERATIONS.md`](LOOP-ITERATIONS.md) numbers the 58 merged pull requests in merge order. Each iteration links the PR, the merge commit, every commit's `TestSprite V3` status and the TestSprite execution behind it. 12 iterations went red, then green (6 app defects, 1 UX loading state, 5 test plan or CI); the 2 runs that could not start or were blocked are listed apart. It is generated from the GitHub API and TestSprite's run history by [`scripts/loop-iterations.mjs`](scripts/loop-iterations.mjs) and checked by [`iterations.test.ts`](src/lib/loop/iterations.test.ts).
 
-Scheduled smoke: [`testsprite-smoke.yml`](.github/workflows/testsprite-smoke.yml) runs 3 TestSprite tests (TS01, TS03, TS07) against production with the CLI, 1.5 credits a run instead of 21.5 for the whole suite of 43. It is off until the repository variable `TESTSPRITE_SMOKE` is set to `true`, and it has not run yet.
+The other four required checks: `Lint, types, unit, property and fuzz tests` and `MCP server (stdio, end to end)` ([`ci.yml`](.github/workflows/ci.yml)), `Schemathesis against /api/openapi.json` ([`api-contract.yml`](.github/workflows/api-contract.yml)) and `axe-core, 8 pages × desktop and phone` ([`a11y.yml`](.github/workflows/a11y.yml)). A change to Markdown or `docs/` only passes the backend gate without a paid run (the job lists the PR's files first); anything else runs all 28 tests.
+
+**Triage on red.** If the backend gate fails on a PR, the same job posts a comment on the PR: each failing test, a first-guess cause from TestSprite's error line, the TestSprite run id, a link to the test code and the command to rerun only those tests ([`triage.mjs`](scripts/ci/triage.mjs)).
+
+**Nightly smoke.** [`testsprite-smoke.yml`](.github/workflows/testsprite-smoke.yml) runs 3 TestSprite tests (TS01, TS03, TS07) against production every night with the CLI, 1.5 credits a run instead of 21.5 for the whole suite of 43. It makes one `testsprite test run <id> --target-url … --wait` call per test ([`smoke-run.mjs`](scripts/ci/smoke-run.mjs)): CLI 0.15.0 refuses several ids in one call against a URL ("several test ids run through one tunnel with --local <port>"). Each run is recorded on the Run log issue by [`run-ledger.yml`](.github/workflows/run-ledger.yml); a red night opens a `testsprite-red` issue with the failing tests, and failure bundles (`testsprite test artifact get`) are uploaded with the run.
 
 **7 real app bugs in 6 pull requests** (#41 caught two, one row), each red on the PR preview and fixed in the same PR. The status strings are copied from GitHub:
 
@@ -172,7 +188,7 @@ Node 22 (as in CI).
 ```bash
 npm ci
 npm run dev          # http://localhost:3000
-npm test             # Vitest: 367 passing, 3 skipped (they need the live Commission page)
+npm test             # Vitest: 372 passing, 3 skipped (they need the live Commission page)
 npm run lint && npm run typecheck && npm run build
 ```
 
@@ -193,7 +209,7 @@ Receipts, each checkable in this repo; TestSprite figures as of the #62 merge (`
 | **28** | TestSprite backend tests (REST, MCP, parity API) on every PR preview and on production after each push to `main`, `TestSprite backend (28 API tests)` a required check ([`testsprite-backend.yml`](.github/workflows/testsprite-backend.yml)) |
 | **43/43** | passed on the latest fully green run, on PR #62 (PR head [a5f6bde](https://github.com/mohamedwael201193/ninety/commit/a5f6bde), merged to `main` as `a777c3b`; status "All 43 tests passed", 2026-10-21 00:12 UTC; [execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b43fc678-1b47-4f4f-9c4c-cd08eb76daac)). Also 43/43 on #61 ([execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/d5ce97c4-05b4-4d90-b30f-7b62d893514a)) and #60; 43/43 on PR #57 ([screenshots](docs/evidence/testsprite/README.md)) and 35/35 on PR #56 ([portal report PDF](docs/evidence/portal-2026-10-20/testsprite-report-35of35-2026-10-20.pdf)). The final PR, #63, ran 42/43: one TS42 agent-read flake, passed 9/9 when rerun alone ([evidence](docs/evidence/ts42-isolated-rerun/)) |
 | **7 + 1 + 8** | **7** real app bugs (wrong behaviour) that TestSprite found first on a PR preview, in 6 PRs. All 7 were fixed before merging, and one of them, TS02 on #57, also failed on production. **1** blank loading state (UX, not a wrong number), TS42 on #60. **8** bugs from code review that TestSprite failed red, then passed after the fix, on #57 ([What TestSprite caught](#what-testsprite-caught)) |
-| **367** | Vitest unit, property and fuzz tests on every PR, all passing (3 more run only against the live Commission page) (`npm test`) |
+| **372** | Vitest unit, property and fuzz tests on every PR, all passing (3 more run only against the live Commission page) (`npm test`) |
 | **3** | public API endpoints with an [OpenAPI 3.1 document](https://ninety-coral.vercel.app/api/openapi.json) (copy in [`docs/openapi.json`](docs/openapi.json), kept equal by a test), and the same three as MCP tools: over streamable HTTP at `/api/mcp` and as a stdio [server](packages/ninety-mcp), both tested with the official MCP client |
 | **59** | pull requests merged into `main` as of the #63 merge |
 

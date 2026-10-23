@@ -10,7 +10,7 @@ name: Run ledger
 
 on:
   workflow_run:
-    workflows: ["TestSprite CLI", "Commission drift"]
+    workflows: ["TestSprite CLI", "TestSprite smoke", "Commission drift"]
     types: [completed]
 
 permissions:
