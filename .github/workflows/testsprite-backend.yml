@@ -25,6 +25,7 @@ on:
 permissions:
   contents: read
   statuses: read
+  pull-requests: write
 
 concurrency:
   # The tests are shared, so only one target at a time.
@@ -44,8 +45,29 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
+      - name: Docs-only change? (then no paid run)
+        id: scope
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          PR: ${{ github.event.pull_request.number }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          # Markdown and docs/ never reach the deployed API, so a change touching only those
+          # passes this required check without spending TestSprite credits. Anything else runs.
+          case "$EVENT" in
+            pull_request) files=$(gh api --paginate "repos/$GITHUB_REPOSITORY/pulls/$PR/files" --jq '.[].filename') ;;
+            push) files=$(gh api "repos/$GITHUB_REPOSITORY/compare/$BEFORE...$GITHUB_SHA" --jq '.files[].filename' 2>/dev/null || echo "unknown") ;;
+            *) files="manual" ;;
+          esac
+          code=$(printf '%s\n' "$files" | grep -Ev '(\.md$|^docs/)' | grep -c . || true)
+          if [ -n "$files" ] && [ "$code" = "0" ]; then
+            echo "docs=true" >> "$GITHUB_OUTPUT"
+            echo "Docs-only change: TestSprite backend run skipped (0 credits)." | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Wait for the Vercel deployment and pick the target
         id: target
+        if: ${{ steps.scope.outputs.docs != 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
           EVENT: ${{ github.event_name }}
@@ -73,6 +95,7 @@ jobs:
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "Testing $EVENT deployment of $SHA at $url"
       - name: Run the 28 backend tests
+        if: ${{ steps.scope.outputs.docs != 'true' }}
         env:
           TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
           TARGET: ${{ steps.target.outputs.url }}
@@ -90,3 +113,18 @@ jobs:
           name: testsprite-backend-${{ github.run_id }}
           path: backend-results.json
           if-no-files-found: ignore
+      - name: Triage comment on the pull request (red runs only)
+        if: ${{ failure() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const fs = require("node:fs");
+            const triage = await import(`${process.env.GITHUB_WORKSPACE}/scripts/ci/triage.mjs`);
+            const results = fs.existsSync("backend-results.json") ? JSON.parse(fs.readFileSync("backend-results.json", "utf8")) : null;
+            const { owner, repo } = context.repo;
+            const sha = context.payload.pull_request.head.sha;
+            const body = triage.triageComment(results, {
+              runUrl: `${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`,
+              sha, ref: sha, workflow: "TestSprite backend", repoUrl: `${context.serverUrl}/${owner}/${repo}` });
+            if (!body) return;
+            await github.rest.issues.createComment({ owner, repo, issue_number: context.payload.pull_request.number, body });

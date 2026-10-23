@@ -104,8 +104,16 @@ describe("TestSprite smoke workflow", () => {
     expect(triggers(yaml).sort()).toEqual(["schedule", "workflow_dispatch"]);
   });
 
-  it("runs nightly only when TESTSPRITE_SMOKE is switched on (off by default)", () => {
-    expect(yaml).toContain("github.event_name == 'schedule' && vars.TESTSPRITE_SMOKE == 'true'");
+  it("runs nightly by default, paused only when TESTSPRITE_SMOKE is \"false\"", () => {
+    expect(yaml).toContain("github.event_name == 'schedule' && vars.TESTSPRITE_SMOKE != 'false'");
+  });
+
+  it("runs one CLI call per test (several ids need --local) and hands its JUnit to the run ledger", () => {
+    const script = readFileSync("scripts/ci/smoke-run.mjs", "utf8");
+    expect(yaml).toContain('node scripts/ci/smoke-run.mjs "$TARGET_URL"');
+    expect(script).toContain('["test", "run", id, "--target-url", target, "--wait"');
+    expect(yaml).toContain("name: testsprite-junit-${{ github.run_id }}");
+    expect(read("run-ledger.yml")).toContain('"TestSprite smoke"');
   });
 
   it("runs 2 to 4 tests that exist in test-ids.json (1 to 2 credits a run at 0.5 each), against production", () => {
@@ -113,7 +121,6 @@ describe("TestSprite smoke workflow", () => {
     expect(plans.length).toBeLessThanOrEqual(4);
     for (const p of plans) expect(ids[p], p).toMatch(/^[0-9a-f-]{36}$/);
     expect(yaml).toContain("TARGET_URL: https://ninety-coral.vercel.app");
-    expect(yaml).toContain("--target-url \"$TARGET_URL\"");
     expect(yaml).not.toContain("--all");
   });
 
