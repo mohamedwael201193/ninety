@@ -29,6 +29,7 @@ describe("triage comment", () => {
 
   it("classifies from the error text", () => {
     expect(triage.classify({ status: "timedOut" })).toMatch(/timeout/);
+    expect(triage.classify({ status: "error", exitCode: 11 })).toMatch(/rate limited/);
     expect(triage.classify({ status: "error", detail: "code put failed" })).toMatch(/infrastructure/);
     expect(triage.classify({ status: "failed", detail: "fetch failed ECONNREFUSED" })).toMatch(/unreachable/);
     expect(triage.classify({ status: "failed", detail: "AssertionError: expected 1" })).toMatch(/assertion/);

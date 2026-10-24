@@ -21,7 +21,11 @@ if (!/^https:\/\/[a-z0-9.-]+$/i.test(target)) {
   console.error(`Usage: smoke-run.mjs https://host (got "${target}")`);
   process.exit(5);
 }
-const map = JSON.parse(readFileSync("testsprite_tests/test-ids.json", "utf8"));
+// Ids come from the main project (test-ids.json, the one the GitHub App runs on every PR) and from the
+// "Ninety phone width (CLI only)" project (phone-ids.json): the App runs tests in a desktop-size browser
+// that cannot be resized, so phone-width checks live in that second project and run only from the CLI,
+// whose replay honours the viewport the stored code sets.
+const map = { ...JSON.parse(readFileSync("testsprite_tests/test-ids.json", "utf8")), ...JSON.parse(readFileSync("testsprite_tests/phone-ids.json", "utf8")) };
 const plans = (process.env.SMOKE_PLANS ?? "").split(/\s+/).filter(Boolean);
 if (!plans.length) { console.error("SMOKE_PLANS is empty"); process.exit(5); }
 

@@ -26,7 +26,7 @@
     },
     {
       "type": "assertion",
-      "description": "Read the DOM text of the calculator tile data-testid=days-used (a <dd> inside the calculator's status panel, data-testid=status-panel). Do NOT use the landing band (data-testid=band-used) higher up the page: it is exactly \"0\" (the digit zero is shown, it is not blank). The trip row 2024-02-29 to 2024-02-29 is still listed"
+      "description": "Wait until the calculator tile data-testid=days-used (inside data-testid=status-panel, not the landing band data-testid=band-used) contains a number (a digit, not blank and not 'Reading saved trips'). Its DOM text is then exactly \"0\" (the 2024-02-29 day has left the 180-day window). The trip row 2024-02-29 to 2024-02-29 is still listed"
     }
   ]
 }

@@ -1,4 +1,4 @@
-# The 28 TestSprite backend tests (project "Ninety API") as a required check.
+# The 30 TestSprite backend tests (project "Ninety API") as a required check.
 #
 #   - pull_request: waits for Vercel's commit status on the PR head to say the preview is ready,
 #     then tests that preview (the branch URL ninety-git-<branch>-mohamedwael201193s-projects.vercel.app);
@@ -8,7 +8,7 @@
 # fires (the first version of this workflow, in #61, waited on it and never ran).
 # scripts/ci/backend-run.mjs points each test's BASE_URL at the target (TestSprite gives backend
 # tests no environment URL) and fails the job if any test does not pass.
-# Cost: 28 × 0.2 = 5.6 credits per run. Needs the repository secret TESTSPRITE_API_KEY.
+# Cost: 30 × 0.2 = 6.0 credits per run. Needs the repository secret TESTSPRITE_API_KEY.
 name: TestSprite backend
 
 on:
@@ -37,7 +37,7 @@ env:
 
 jobs:
   backend:
-    name: TestSprite backend (28 API tests)
+    name: TestSprite backend (30 API tests)
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -94,7 +94,7 @@ jobs:
           [ "$code" = "200" ] || { echo "::error::$url/api/openapi.json answered $code"; exit 1; }
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "Testing $EVENT deployment of $SHA at $url"
-      - name: Run the 28 backend tests
+      - name: Run the 30 backend tests
         if: ${{ steps.scope.outputs.docs != 'true' }}
         env:
           TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}

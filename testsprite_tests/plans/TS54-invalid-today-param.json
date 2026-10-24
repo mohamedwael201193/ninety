@@ -1,0 +1,24 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "An impossible ?today= date is refused with a message and the real date is used",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /?today=2026-02-30&fresh=1 (30 February does not exist)"
+    },
+    {
+      "type": "assertion",
+      "description": "An alert (data-testid=today-error) says the today parameter is not a real calendar date"
+    },
+    {
+      "type": "assertion",
+      "description": "The override flag (data-testid=today-override) is 'no'"
+    },
+    {
+      "type": "assertion",
+      "description": "The date shown (data-testid=today-date) is a real YYYY-MM-DD date, not 2026-02-30"
+    }
+  ]
+}

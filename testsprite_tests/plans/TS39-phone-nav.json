@@ -6,7 +6,7 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "Set the browser viewport to 390 x 844 pixels (phone width)"
+      "description": "Set the browser viewport to 390 x 844 pixels (phone width) and confirm the page is 390 px wide (window.innerWidth = 390)"
     },
     {
       "type": "action",

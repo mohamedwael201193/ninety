@@ -1,0 +1,24 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "/parity shows the deep parity score 399/400 and names the one scenario outside the calculator",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /parity"
+    },
+    {
+      "type": "assertion",
+      "description": "The deep parity score (data-testid=deep-parity-score) reads 399/400"
+    },
+    {
+      "type": "assertion",
+      "description": "The disagreement list (data-testid=deep-parity-disagreements) names kom-1-4 and explains the calculator refuses stays before 22 April 2013"
+    },
+    {
+      "type": "assertion",
+      "description": "The group table (data-testid=deep-parity-groups) lists the existing-14 group"
+    }
+  ]
+}

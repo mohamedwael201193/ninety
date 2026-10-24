@@ -13,7 +13,8 @@
     "proof:matrix": "node scripts/proof-matrix.mjs",
     "tests:add": "node scripts/add-cloud-tests.mjs",
     "a11y": "node scripts/a11y-axe.mjs",
-    "openapi:write": "npx --yes tsx scripts/openapi-write.mts"
+    "openapi:write": "npx --yes tsx scripts/openapi-write.mts",
+    "mutation": "stryker run"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -33,6 +34,8 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@stryker-mutator/core": "^10.1.1",
+    "@stryker-mutator/vitest-runner": "^10.1.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/react": "^16.3.3",

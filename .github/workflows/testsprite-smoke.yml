@@ -1,11 +1,13 @@
-# Nightly TestSprite smoke on production: 3 tests, not the whole suite.
+# Nightly TestSprite smoke on production: 4 tests, not the whole suite.
 #
-# The full suite (testsprite-cli.yml) bills every test in the project (43 x 0.5 = 21.5 credits).
+# The full suite (testsprite-cli.yml) bills every test in the project (54 x 0.5 = 27 credits).
 # This runs three core flows against https://ninety-coral.vercel.app every night:
 #   TS01 example trips   (the dashboard counts a known history)
 #   TS03 add a trip      (manual entry gives exact days used and left)
 #   TS07 EES gap         (the EES comparison names the gap)
-# Cost: 3 x 0.5 = 1.5 credits a night (frontend price at the time of writing).
+#   TS62 phone days bar  (390 px: the sticky bar and its Add trip button; CLI-only project, see
+#                         scripts/ci/smoke-run.mjs: the GitHub App cannot run at phone width)
+# Cost: 4 x 0.5 = 2 credits a night (frontend price at the time of writing).
 # scripts/ci/smoke-run.mjs runs one `testsprite test run <id> --target-url ... --wait` per test:
 # CLI 0.15.0 accepts several ids in one call only with --local (one shared tunnel).
 # Every finished run is recorded publicly by run-ledger.yml on the "Run log" issue, and a red
@@ -30,11 +32,11 @@ concurrency:
 env:
   TESTSPRITE_CLI_VERSION: "0.15.0"
   TARGET_URL: https://ninety-coral.vercel.app
-  SMOKE_PLANS: "TS01-example-trips TS03-add-trip TS07-ees-gap"
+  SMOKE_PLANS: "TS01-example-trips TS03-add-trip TS07-ees-gap TS62-phone-days-bar"
 
 jobs:
   smoke:
-    name: TestSprite smoke on production (3 tests)
+    name: TestSprite smoke on production (4 tests)
     if: >-
       ${{ github.event_name == 'workflow_dispatch'
       || (github.event_name == 'schedule' && vars.TESTSPRITE_SMOKE != 'false') }}
