@@ -55,7 +55,7 @@ describe("rule-to-test matrix", () => {
     const suite = (proof as { suite: { id: string; plan: string; name?: string }[] }).suite;
     for (const t of suite) expect(t.name, t.id).toBe(JSON.parse(readFileSync(`testsprite_tests/plans/${t.plan}.json`, "utf8")).name);
     const tied = new Set(proof.rules.flatMap((r) => r.testsprite.map((x) => x.id)));
-    expect(suite.filter((t) => !tied.has(t.id)).map((t) => t.id).sort()).toEqual(["TC011", "TS05", "TS16", "TS36", "TS37", "TS39", "TS40", "TS41", "TS53", "TS55", "TS56", "TS58", "TS59", "TS62", "TS63"]);
+    expect(suite.filter((t) => !tied.has(t.id)).map((t) => t.id).sort()).toEqual(["TC011", "TS05", "TS16", "TS36", "TS37", "TS39", "TS40", "TS41", "TS53", "TS55", "TS56", "TS58", "TS59", "TS63", "TS64"]);
   });
 
   it("proof.json carries the same rules, tests and parity ids as rules.json (it once kept 36 dropped scenarios)", () => {
