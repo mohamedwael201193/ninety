@@ -32,12 +32,27 @@ const only = (process.env.BACKEND_ONLY ?? "").split(",").filter(Boolean);
 const ids = Object.fromEntries(Object.entries(allIds).filter(([n]) => !only.length || only.some((o) => n.startsWith(o))));
 const dir = mkdtempSync(join(tmpdir(), "be-"));
 
-function cli(args) {
+function once(args) {
   try {
-    return { code: 0, out: execFileSync(BIN, [...args, "--output", "json"], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }) };
+    return { code: 0, out: execFileSync(BIN, [...args, "--output", "json"], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] }), err: "" };
   } catch (e) {
-    return { code: e.status ?? 1, out: String(e.stdout ?? "") };
+    return { code: e.status ?? 1, out: String(e.stdout ?? ""), err: String(e.stderr ?? "") };
   }
+}
+
+// Exit 11 is "rate limited": per-minute throttling or the in-flight cap (50 runs per account, every
+// source counted). The TestSprite GitHub App starts the 54 frontend tests on the same push, so on PR
+// #68 every backend trigger was refused for about 45 seconds and all 30 ended as "error" with no run.
+// Wait and retry instead (up to ~15 minutes), as the CLI help says: "runs have to finish first".
+const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+function cli(args) {
+  let r = once(args);
+  for (let attempt = 1; r.code === 11 && attempt <= 30; attempt += 1) {
+    console.log(`  rate limited (exit 11), retry ${attempt} in 30 s`);
+    sleep(30_000);
+    r = once(args);
+  }
+  return r;
 }
 
 const rows = [];
@@ -51,7 +66,7 @@ for (const [name, id] of Object.entries(ids)) {
   const run = cli(["test", "run", id, "--no-auto-heal", "--wait", "--timeout", "300"]);
   let body = {};
   try { body = JSON.parse(run.out.slice(run.out.indexOf("{"))); } catch { /* keep empty */ }
-  rows.push({ name, id, status: body.status ?? (run.code === 0 ? "passed" : "error"), runId: body.runId ?? "", detail: (body.error ?? "").split("\n")[0].slice(0, 200) });
+  rows.push({ name, id, status: body.status ?? (run.code === 0 ? "passed" : "error"), runId: body.runId ?? "", exitCode: run.code, detail: (body.error || run.err.trim().split("\n").pop() || "").split("\n")[0].slice(0, 200) });
   console.log(`${rows.at(-1).status.padEnd(7)} ${name} ${rows.at(-1).runId}`);
 }
 

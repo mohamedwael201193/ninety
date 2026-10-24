@@ -6,7 +6,7 @@
   "planSteps": [
     {
       "type": "action",
-      "description": "At 390x844, navigate to /?today=2026-10-19&fresh=1 and click 'Try an example'"
+      "description": "Set the browser viewport to 390 x 844 pixels (phone width), then navigate to /?today=2026-10-19&fresh=1 and click 'Try an example'"
     },
     {
       "type": "assertion",

@@ -12,6 +12,7 @@ const TS_RUN = "https://www.testsprite.com/dashboard-v3";
 export function classify(row) {
   const d = `${row.status} ${row.detail ?? ""}`.toLowerCase();
   if (row.status === "timedOut" || /timed? ?out/.test(d)) return "timeout (TestSprite run did not finish in time)";
+  if (row.exitCode === 11 || /rate.?limit|inflight/.test(d)) return "rate limited by TestSprite (in-flight cap or per-minute limit), not a test result";
   if (/code put failed/.test(d)) return "infrastructure (could not upload the test to TestSprite)";
   if (/\b5\d\d\b|econn|enotfound|fetch failed|unreachable|dns/.test(d)) return "target unreachable or server error";
   if (/assert|expected|mismatch|!=|not equal/.test(d)) return "assertion failed (the app answered, but not as the test expects)";

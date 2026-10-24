@@ -17,6 +17,7 @@ async def run_test():
         context = await browser.new_context(viewport={'width': 390, 'height': 844})
         context.set_default_timeout(15000)
         page = await context.new_page()
+        await page.set_viewport_size({"width": 390, "height": 844})
         base = "VAR_{url}".rstrip("/")
         tid = page.get_by_test_id
         await page.goto(base + "/?today=2026-10-19&fresh=1")
