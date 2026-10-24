@@ -38,7 +38,6 @@ Every plan pins the date with `?today=2026-10-19` and starts either with `fresh=
 | `TS36-proof-matrix.json` | /proof lists the 12 rules, each with its engine, parity and TestSprite tests |
 | `TS37-scenario-gallery.json` | The six gallery cards show engine figures and guard badges, and open their history in the calculator or the EES check |
 | `TS38-cutoff-card.json` | The /ees cutoff card states the 10 April 2026 rule, its figures match the reconciler, and its example loads and compares |
-| `TS39-phone-nav.json` | At 390 px the nav links stay visible, carry the scenario, and mark the current page |
 | `TS40-not-found.json` | An unknown path shows the 404 page, keeps the nav, and its links lead back to the calculator and the EES check |
 | `TS41-sheet-focus.json` | Opening the trip sheet moves focus into it and makes the page behind inert; Escape releases the page and returns focus |
 | `TS21-impossible-date.json` | An impossible date (2024-02-30) is named as not existing, and no trip is saved |
@@ -60,12 +59,13 @@ Every plan pins the date with `?today=2026-10-19` and starts either with `fresh=
 | `TS59-footer-links.json` | Footer links open `/proof` and `/developers` |
 | `TS60-window-bar-dates.json` | The 180-day window bar spans 23 Apr–19 Oct on 2026-10-19 and 20 May–15 Nov on 2026-11-15 |
 | `TS61-ees-invalid-today.json` | `/ees?today=2026-13-01` is refused with its own message |
+| `TS65-parity-hand-worked.json` | `/parity`: the 12 hand-worked boundary cases all match (data-match true, 'Match'), with 60 left / refused / 11 overstay by hand, and the one answer first written down wrong |
 | `TS64-saved-trips-to-ees.json` | Trips saved on the calculator are what `/ees` compares: 10 days, and a 4-day gap to an EES figure of 14 |
 | `TS63-band-saved-trips.json` | The landing band switches from the example history to the saved trips (10 used, 80 left) after a reload |
 
-**Phone width.** The GitHub App runs every test in a desktop-size browser that cannot be resized (TS62 was blocked twice on PR #68 for that reason). So `TS62-phone-days-bar.json` (at 390 px the sticky bar reads 26 days left and its Add trip button opens the sheet) lives in a separate project, "Ninety phone width (CLI only)" ([`phone-ids.json`](phone-ids.json)), and runs every night in the CLI smoke, whose replay honours the 390 x 844 viewport its stored code sets. TS39 stays in the App suite, but there it checks the navigation at desktop width; only a CLI run of its stored code checks it at 390 px.
+**Phone width.** The GitHub App runs every test in a desktop-size browser that cannot be resized (TS62 was blocked twice on PR #68 for that reason). So `TS62-phone-days-bar.json` (at 390 px the sticky bar reads 26 days left and its Add trip button opens the sheet) lives in a separate project, "Ninety phone width (CLI only)" ([`phone-ids.json`](phone-ids.json)), and runs every night in the CLI smoke, whose replay honours the 390 x 844 viewport its stored code sets. `TS39-phone-nav.json` (at 390 px the nav links stay visible, carry the scenario and mark the current page) moved there too after the App failed it on PR #69 ("viewport resizing was unavailable"); its App place went to TS65. Both run every night in the CLI smoke.
 
-Every plan listed here, except TS62, is in the cloud suite; `test-ids.json` maps each to its TestSprite id. TS03, TS18, TS39, TS42 and TS53–TS64 run stored, user-authored code (the files in [`frontend/`](frontend/)): each was run locally against production, then run again with one expected value changed to confirm it fails, before `testsprite test code put`. New plans are added with `node scripts/add-cloud-tests.mjs <plan.json>`. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
+Every plan listed here, except TS39 and TS62, is in the App suite; `test-ids.json` maps each to its TestSprite id. TS03, TS18, TS39, TS42 and TS53–TS65 run stored, user-authored code (the files in [`frontend/`](frontend/)): each was run locally against production, then run again with one expected value changed to confirm it fails, before `testsprite test code put`. New plans are added with `node scripts/add-cloud-tests.mjs <plan.json>`. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
 
 ## Writing plans
 

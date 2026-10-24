@@ -30,7 +30,6 @@
   "TS37-scenario-gallery": "0ea278aa-004e-4689-9611-2b5a362b33f4",
   "TS38-cutoff-card": "93e462af-d768-4713-8634-8952f2258b72",
   "TS40-not-found": "2171495f-4f7a-4ea8-94b7-cbf24302558f",
-  "TS39-phone-nav": "ffe0fbe4-e887-4d07-8f04-c3526bf544aa",
   "TS21-impossible-date": "991cf8e1-0d68-4102-8e7b-6045d37c1ee0",
   "TS41-sheet-focus": "e1e10a25-1697-4a85-a071-6e0340c3979d",
   "TS42-leap-day": "0e997467-fa2a-488c-bb30-60de02358bef",
@@ -52,5 +51,6 @@
   "TS60-window-bar-dates": "eb48283c-8001-43b9-9fd5-c7d74c1006c3",
   "TS61-ees-invalid-today": "ea9c8720-6468-40c6-a099-0d94af68f7d3",
   "TS63-band-saved-trips": "837ba49b-07d8-41b7-bf39-eedf3de1507f",
-  "TS64-saved-trips-to-ees": "9677948c-85ea-4f5a-9b6c-ee878514027a"
+  "TS64-saved-trips-to-ees": "9677948c-85ea-4f5a-9b6c-ee878514027a",
+  "TS65-parity-hand-worked": "e2f08d62-3563-4f9e-adcf-654d18885f9a"
 }

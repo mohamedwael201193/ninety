@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T01:25:35.812Z",
+  "generatedAt": "2026-10-24T01:30:57.064Z",
   "source": "GitHub API + src/data/loop.json",
   "iterations": [
     {
@@ -2140,10 +2140,97 @@
             "TS13",
             "TS42"
           ]
+        },
+        {
+          "start": "2026-10-21T01:07:28.075Z",
+          "passed": 42,
+          "tests": 43,
+          "failed": [
+            "TS42"
+          ]
         }
       ],
       "redThenGreen": false,
       "kind": null,
+      "stoppedThenGreen": false
+    },
+    {
+      "n": 60,
+      "pr": 65,
+      "title": "TestSprite gates: nightly smoke fix, PR triage on red, docs-only skip, judge path",
+      "mergedAt": "2026-10-23T22:46:36Z",
+      "mergeCommit": "69163e6f71c0bd0d3e34f89a4eb2c6ff86a05bea",
+      "checks": [
+        {
+          "sha": "e210876a9311bcb4376910aaa4d7d6032374e6a2",
+          "message": "TestSprite gates: per-test nightly smoke, PR triage comment on red, docs-only skip, judge path",
+          "state": "success",
+          "at": "2026-10-23T22:45:54Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/575bb9d6-e365-4bb9-a1e2-ac54abca2552",
+          "description": "All 43 tests passed"
+        }
+      ],
+      "executions": [],
+      "redThenGreen": false,
+      "kind": null,
+      "stoppedThenGreen": false
+    },
+    {
+      "n": 61,
+      "pr": 67,
+      "title": "TS03: stored TestSprite code matches its plan (stale_code red, then green)",
+      "mergedAt": "2026-10-23T22:58:51Z",
+      "mergeCommit": "d5bf7648c678806c4ce2c2773012887a5adade3b",
+      "checks": [
+        {
+          "sha": "65651cb5daeabdbca6170b6804ee4459c1f796b9",
+          "message": "TS03: stored TestSprite code matches its 7-step plan (stale_code red, then green)",
+          "state": "success",
+          "at": "2026-10-23T22:58:40Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/74ad0c32-90ed-48bd-aaea-5380447a0320",
+          "description": "All 43 tests passed"
+        }
+      ],
+      "executions": [],
+      "redThenGreen": false,
+      "kind": null,
+      "stoppedThenGreen": false
+    },
+    {
+      "n": 62,
+      "pr": 68,
+      "title": "TestSprite suite 54 UI + 30 API, independent reference parity, 5,000-history fuzz, mutation 94.47%",
+      "mergedAt": "2026-10-24T01:22:25Z",
+      "mergeCommit": "51b1dd15a87a27c1963bc7eb5148249ef022a6f9",
+      "checks": [
+        {
+          "sha": "db7776cc72a9f1f9baba4ca0d677c10bdb7ad355",
+          "message": "TestSprite suite 54 UI + 30 API, independent reference parity, 5,000-history fuzz, mutation testing 94.47%, evidence screenshots",
+          "state": "failure",
+          "at": "2026-10-24T01:00:33Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/22252c6d-540e-4963-9f23-f9cfc648cd18",
+          "description": "52/54 passed · 1 failed · 1 blocked"
+        },
+        {
+          "sha": "11247a95aa45404fd03cb001d786c1d5f2daf51a",
+          "message": "TS39 sets and checks the 390 px phone viewport; README states the mutation score as combined",
+          "state": "failure",
+          "at": "2026-10-24T01:10:48Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/2697eafd-c8d5-4b44-9c46-1fdf64e16ee8",
+          "description": "52/54 passed · 1 failed · 1 blocked"
+        },
+        {
+          "sha": "280304418ca4c2fc2e37baa79026368337a9710d",
+          "message": "TestSprite: TS64 replaces TS62 in the App suite, TS62 runs nightly from a CLI-only phone project, TS42 waits for a number and asserts 0",
+          "state": "success",
+          "at": "2026-10-24T01:21:50Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/87678f09-2ea3-40ec-bb9c-485ddd4e93aa",
+          "description": "All 54 tests passed"
+        }
+      ],
+      "executions": [],
+      "redThenGreen": true,
+      "kind": "plan-ci",
       "stoppedThenGreen": false
     }
   ]

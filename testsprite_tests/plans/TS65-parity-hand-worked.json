@@ -1,0 +1,13 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "Parity: the 12 hand-worked boundary cases all match the Commission calculator",
+  "priority": "p1",
+  "planSteps": [
+    {"type": "action", "description": "Navigate to /parity"},
+    {"type": "assertion", "description": "The heading 'Boundary cases worked out by hand' is visible and the table data-testid=golden-table has exactly 12 rows (data-testid=golden-row)"},
+    {"type": "assertion", "description": "Every golden-row has data-match=\"true\" and shows the word 'Match'; none shows 'Differs'"},
+    {"type": "assertion", "description": "The 'By hand' cell (data-testid=golden-expected) of the row data-scenario=overlapping-trips reads exactly '60 left', of exit-before-entry-refused reads 'refused', and of overlap-overstay-counted-once reads '11 overstay'"},
+    {"type": "assertion", "description": "Exactly one note data-testid=golden-first-expected is shown, starting 'First written down as'"}
+  ]
+}

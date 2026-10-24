@@ -1,10 +1,10 @@
 # The loop, iteration by iteration
 
-Generated 2026-10-21T01:25:35.814Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
+Generated 2026-10-24T01:30:57.066Z by `scripts/loop-iterations.mjs`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (`src/data/loop.json`, see [LOOP.md](LOOP.md)). Do not edit by hand.
 
 Screenshots of the runs and the merge gate: [docs/evidence/testsprite](docs/evidence/testsprite/README.md).
 
-59 iterations, 12 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): 6 app defects (#8, #14, #39, #41, #55, #57), 1 UX loading state that never showed a wrong number (#60) and 5 where the test plan or CI was wrong (#18, #22, #36, #32, #43). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
+62 iterations, 13 of them red, then green (a PR check reported failed tests, and a later commit on the same PR passed): 6 app defects (#8, #14, #39, #41, #55, #57), 1 UX loading state that never showed a wrong number (#60) and 6 where the test plan or CI was wrong (#18, #22, #36, #32, #43, #68). 2 more had a run that could not start or was blocked before a green run; those are not counted as catches.
 
 ## Iteration 1: [#1](https://github.com/mohamedwael201193/ninety/pull/1) Add the Ninety 90/180 foundation
 
@@ -527,4 +527,30 @@ Merged 2026-10-21 01:23 UTC as [`7bdf5b1`](https://github.com/mohamedwael201193/
 | [`5a7cc22`](https://github.com/mohamedwael201193/ninety/commit/5a7cc222893f9d3ab73ded760e27bbbe89f975fe) Final QA fixes, README rewrite and screenshots | failure: 41/43 passed · 2 failed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e26baa18-c6da-452f-ae44-7f2a9d0a10ff) |
 | [`a744ca9`](https://github.com/mohamedwael201193/ninety/commit/a744ca9613a76c50b13e99db807fbcfc0b857291) Show the finding code after its label, clearer TS42 plan, new hero sho | failure: 42/43 passed · 1 failed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/9fea50d8-d7b4-48ad-a708-b37aff1d34eb) |
 
-Run history: 2026-10-21T00:47Z 41/43 (failed TS13, TS42).
+Run history: 2026-10-21T00:47Z 41/43 (failed TS13, TS42) → 2026-10-21T01:07Z 42/43 (failed TS42).
+
+## Iteration 60: [#65](https://github.com/mohamedwael201193/ninety/pull/65) TestSprite gates: nightly smoke fix, PR triage on red, docs-only skip, judge path
+
+Merged 2026-10-23 22:46 UTC as [`69163e6`](https://github.com/mohamedwael201193/ninety/commit/69163e6f71c0bd0d3e34f89a4eb2c6ff86a05bea).
+
+| Commit | TestSprite V3 | Execution |
+|---|---|---|
+| [`e210876`](https://github.com/mohamedwael201193/ninety/commit/e210876a9311bcb4376910aaa4d7d6032374e6a2) TestSprite gates: per-test nightly smoke, PR triage comment on red, do | success: All 43 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/575bb9d6-e365-4bb9-a1e2-ac54abca2552) |
+
+## Iteration 61: [#67](https://github.com/mohamedwael201193/ninety/pull/67) TS03: stored TestSprite code matches its plan (stale_code red, then green)
+
+Merged 2026-10-23 22:58 UTC as [`d5bf764`](https://github.com/mohamedwael201193/ninety/commit/d5bf7648c678806c4ce2c2773012887a5adade3b).
+
+| Commit | TestSprite V3 | Execution |
+|---|---|---|
+| [`65651cb`](https://github.com/mohamedwael201193/ninety/commit/65651cb5daeabdbca6170b6804ee4459c1f796b9) TS03: stored TestSprite code matches its 7-step plan (stale_code red,  | success: All 43 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/74ad0c32-90ed-48bd-aaea-5380447a0320) |
+
+## Iteration 62: [#68](https://github.com/mohamedwael201193/ninety/pull/68) TestSprite suite 54 UI + 30 API, independent reference parity, 5,000-history fuzz, mutation 94.47% (red, then green: test plan or CI)
+
+Merged 2026-10-24 01:22 UTC as [`51b1dd1`](https://github.com/mohamedwael201193/ninety/commit/51b1dd15a87a27c1963bc7eb5148249ef022a6f9).
+
+| Commit | TestSprite V3 | Execution |
+|---|---|---|
+| [`db7776c`](https://github.com/mohamedwael201193/ninety/commit/db7776cc72a9f1f9baba4ca0d677c10bdb7ad355) TestSprite suite 54 UI + 30 API, independent reference parity, 5,000-h | failure: 52/54 passed · 1 failed · 1 blocked | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/22252c6d-540e-4963-9f23-f9cfc648cd18) |
+| [`11247a9`](https://github.com/mohamedwael201193/ninety/commit/11247a95aa45404fd03cb001d786c1d5f2daf51a) TS39 sets and checks the 390 px phone viewport; README states the muta | failure: 52/54 passed · 1 failed · 1 blocked | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/2697eafd-c8d5-4b44-9c46-1fdf64e16ee8) |
+| [`2803044`](https://github.com/mohamedwael201193/ninety/commit/280304418ca4c2fc2e37baa79026368337a9710d) TestSprite: TS64 replaces TS62 in the App suite, TS62 runs nightly fro | success: All 54 tests passed | [run](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/87678f09-2ea3-40ec-bb9c-485ddd4e93aa) |

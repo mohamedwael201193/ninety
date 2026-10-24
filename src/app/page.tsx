@@ -4,6 +4,7 @@ import { pageMetadata } from "@/lib/site/meta";
 import { AppShell } from "@/components/AppShell";
 import { StatusPending } from "@/components/StatusPanel";
 import CountBand from "@/components/landing/CountBand";
+import VerifiedNumbers from "@/components/proof/VerifiedNumbers";
 import Footer from "@/components/landing/Footer";
 import Hero from "@/components/landing/Hero";
 import MismatchLetter from "@/components/landing/MismatchLetter";
@@ -28,6 +29,12 @@ export default function HomePage() {
       </section>
       <ScenarioGallery />
       <MismatchLetter />
+      <section id="verified" aria-label="Verified numbers" className="bg-paper-warm">
+        <div className="mx-auto max-w-[1200px] px-5 py-14 md:px-8">
+          <VerifiedNumbers />
+          <p className="mt-4 text-sm"><a className="underline underline-offset-4" href="/proof">Every rule and the tests that guard it</a></p>
+        </div>
+      </section>
       <Footer />
     </>
   );
