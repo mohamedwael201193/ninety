@@ -116,9 +116,9 @@ describe("TestSprite smoke workflow", () => {
     expect(read("run-ledger.yml")).toContain('"TestSprite smoke"');
   });
 
-  it("runs 2 to 4 tests that exist in test-ids.json or phone-ids.json (1 to 2 credits a run at 0.5 each), against production", () => {
+  it("runs 2 to 5 tests that exist in test-ids.json or phone-ids.json (1 to 2.5 credits a run at 0.5 each), against production", () => {
     expect(plans.length).toBeGreaterThanOrEqual(2);
-    expect(plans.length).toBeLessThanOrEqual(4);
+    expect(plans.length).toBeLessThanOrEqual(5);
     for (const p of plans) expect(ids[p], p).toMatch(/^[0-9a-f-]{36}$/);
     expect(yaml).toContain("TARGET_URL: https://ninety-coral.vercel.app");
     expect(yaml).not.toContain("--all");

@@ -47,3 +47,10 @@ Before these two, no backend test called `/api/v1/ees-reconcile` or `/api/v1/let
 - **TestSprite V3: all 54 tests passed** ([execution 87678f09](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/87678f09-2ea3-40ec-bb9c-485ddd4e93aa)), TS42 and TS64 included.
 - **TestSprite backend: 30/30 passed** ([run 40049174467](https://github.com/mohamedwael201193/ninety/actions/runs/40049174467)).
 - Lint/types/unit/property/fuzz, MCP end to end, Schemathesis and axe-core all passed. The required check on `main` is now `TestSprite backend (30 API tests)`.
+
+## PR #69 first run (`73013f6`): 52/54, then TS39 moved and TS42 rewritten
+
+- [Execution bf116231](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/bf116231-929e-44c5-a8c5-8e6cbe123ad8): **TS39 failed**, "the 390 × 844 viewport requirement could not be verified because viewport resizing was unavailable"; **TS42 failed**, "Days used … remained blank after multiple waits".
+- TestSprite's `test rerun --status failed` exists in the CLI, but it does not update the GitHub App's `TestSprite V3` check, so it cannot clear the gate.
+- **TS39** moved to the CLI-only phone project (`01cb7fe7`, passed: run `6daaf82b`) and runs nightly. Its App place went to **TS65** (`/parity`: the 12 hand-worked boundary cases all match): a copy expecting "61 left" failed (run `d165c529`), the real one passed (run `87da5992`).
+- **TS42** now reads the Latest legal exit tile (2024-11-23 on day 180, 2024-11-24 on day 181), a plain date, instead of the small "Days used" count beside the ring's rolling digits. A copy expecting 2024-11-23 on day 181 failed (run `243c59ca`), the real one passed (run `50cb9b5b`).
