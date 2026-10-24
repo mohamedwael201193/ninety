@@ -1,0 +1,98 @@
+# Every final (non-pending) "TestSprite V3" commit status on every PR commit of this repo, read with gh api repos/mohamedwael201193/ninety/commits/<sha>/statuses on 2026-10-24 04:07 UTC. Columns: PR, commit, state | description.
+69 73013f6 failure | 52/54 passed · 2 failed
+69 1e49cea success | All 54 tests passed
+68 db7776c failure | 52/54 passed · 1 failed · 1 blocked
+68 11247a9 failure | 52/54 passed · 1 failed · 1 blocked
+68 2803044 success | All 54 tests passed
+67 65651cb success | All 43 tests passed
+65 e210876 success | All 43 tests passed
+63 5a7cc22 failure | 41/43 passed · 2 failed
+63 a744ca9 failure | 42/43 passed · 1 failed
+62 a5f6bde success | All 43 tests passed
+61 f888bb6 success | All 43 tests passed
+60 1abce4c failure | 42/43 passed · 1 failed
+60 9a0c897 success | All 43 tests passed
+57 78ee487 failure | 34/43 passed · 8 failed · 1 blocked
+57 dae0081 failure | 42/43 passed · 1 failed
+57 1963cc1 success | All 43 tests passed
+56 43d4ad0 success | All 35 tests passed
+55 5864646 failure | 34/35 passed · 1 failed
+55 515379b failure | 32/35 passed · 2 failed · 1 blocked
+55 ff0a76d failure | 32/35 passed · 3 failed
+55 815cc79 success | All 35 tests passed
+54 bbbff63 success | All 32 tests passed
+53 edd707a success | All 32 tests passed
+52 a3e893d success | All 31 tests passed
+51 1caef69 success | All 30 tests passed
+50 eac2a51 success | All 29 tests passed
+50 cead0be success | All 29 tests passed
+49 8e26370 success | All 27 tests passed
+48 54e6465 success | All 27 tests passed
+47 95a3fe3 success | All 17 tests passed
+46 7031145 success | All 17 tests passed
+45 9913986 success | All 17 tests passed
+44 d701a46 failure | 0/17 passed · 17 blocked
+44 fbfc7cd success | All 17 tests passed
+43 a4a0362 success | All 17 tests passed
+43 d4f019c failure | 16/17 passed · 1 failed
+43 7fdf4fc success | All 17 tests passed
+42 825a026 success | All 17 tests passed
+42 743e93d success | All 17 tests passed
+41 90d4f2c failure | 14/15 passed · 1 failed
+41 a545274 failure | 16/17 passed · 1 failed
+41 bcbb7de failure | 16/17 passed · 1 failed
+41 e7f9627 failure | 16/17 passed · 1 failed
+41 bdb0527 success | All 17 tests passed
+40 05536cc success | All 15 tests passed
+39 35ac180 failure | 14/15 passed · 1 failed
+39 24ba105 success | All 15 tests passed
+38 9d1dc6e success | All 14 tests passed
+37 53e3ad8 success | All 14 tests passed
+36 b839ae4 failure | 13/14 passed · 1 failed
+36 c20fb86 success | All 14 tests passed
+35 a93a01e success | All 14 tests passed
+34 9b3db83 success | All 14 tests passed
+33 2b8f485 success | All 14 tests passed
+33 2c2f6be success | All 17 tests passed
+32 751093c success | All 14 tests passed
+32 9dd3a70 failure | 15/17 passed · 2 failed
+32 bf29e75 success | All 17 tests passed
+31 fd5fda7 success | All 14 tests passed
+30 3a77429 success | All 14 tests passed
+29 01d7f09 success | All 14 tests passed
+28 1787170 success | All 14 tests passed
+28 6675a0f success | All 17 tests passed
+27 87c5351 success | All 14 tests passed
+26 0fab9e8 success | All 14 tests passed
+25 bed3e76 success | All 14 tests passed
+24 71ed57a success | All 14 tests passed
+23 de85611 success | All 14 tests passed
+22 af6e1fa failure | 13/14 passed · 1 failed
+22 78665f7 success | All 14 tests passed
+21 f36c0db success | All 14 tests passed
+20 0e37f80 success | All 14 tests passed
+19 0e37f80 success | All 14 tests passed
+18 110a5eb failure | 13/14 passed · 1 failed
+18 5a4d509 success | All 14 tests passed
+17 9e5c136 success | All 12 tests passed
+16 fb917ea success | All 12 tests passed
+15 64f1341 success | All 12 tests passed
+14 3768b1c failure | 12/14 passed · 2 failed
+14 8c94da5 failure | 12/14 passed · 2 failed
+14 ad2270b failure | 12/14 passed · 2 failed
+14 aa70cc1 failure | 13/14 passed · 1 failed
+14 cba2989 success | All 14 tests passed
+13 2f8579f success | All 11 tests passed
+12 6cafd76 success | All 11 tests passed
+11 22171cc success | All 11 tests passed
+11 8a2c1bd success | All 11 tests passed
+10 97f6556 success | All 11 tests passed
+10 a12bec1 success | All 11 tests passed
+9 81be862 success | All 11 tests passed
+9 2db7bc3 failure | TestSprite could not start this run. See the project activity for details.
+9 5870acb failure | TestSprite could not start this run. See the project activity for details.
+9 68fe8bc success | All 11 tests passed
+8 46336bf failure | 9/11 passed · 2 failed
+8 04527b4 success | All 11 tests passed
+7 a352071 success | All 10 tests passed
+7 f1cd450 success | All 11 tests passed

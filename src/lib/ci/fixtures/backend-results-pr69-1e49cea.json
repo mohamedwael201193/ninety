@@ -1,0 +1,245 @@
+{
+  "target": "https://ninety-git-final-numbers-mohamedwael201193s-projects.vercel.app",
+  "rows": [
+    {
+      "name": "BE01-openapi-document",
+      "id": "66aa232d-2ca6-497d-80c7-32592e1ca728",
+      "status": "passed",
+      "runId": "5e3cbec0-6230-4680-bb7c-034121e8c866",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE02-mcp-tools-list",
+      "id": "490dab4e-457b-4923-92ae-b9bb465247e5",
+      "status": "passed",
+      "runId": "400821b1-b79d-41c7-985b-5adacf12e5bb",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE03-check-overstay",
+      "id": "3246100e-17de-456f-a540-13df5fa70c45",
+      "status": "passed",
+      "runId": "641acec4-f444-44cf-8c75-51e753613149",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE04-check-bad-input",
+      "id": "997dc992-7486-4695-8c4e-f07ab5cf1a4c",
+      "status": "passed",
+      "runId": "6909ba97-fee5-4c97-8b63-24e23351afa0",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE05-parity-14-of-14",
+      "id": "d0c1abdd-46f0-4e8f-a4ff-4ccc088b5a96",
+      "status": "passed",
+      "runId": "13e94fde-b1c2-4a58-ba29-4d2cf9149ee4",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE06-leap-day-29-feb",
+      "id": "9b737e5b-dbd4-438f-8f80-e4f83f4e4254",
+      "status": "passed",
+      "runId": "ebb9f5c9-4894-4a00-acb9-62569baaadd0",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE07-leap-day-leaves-window",
+      "id": "2652953f-df16-4bf3-be4b-765a3a927e80",
+      "status": "passed",
+      "runId": "98f31934-68e2-45c4-98b9-fd42891d7425",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE08-exactly-90-days",
+      "id": "5473a7a1-fb53-41d8-af30-1b707101cb54",
+      "status": "passed",
+      "runId": "c8e97bea-26ae-45d7-bf12-147cd84ec650",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE09-day-91-overstay",
+      "id": "e73a52d0-611d-433e-99d4-61e465089707",
+      "status": "passed",
+      "runId": "56c64ec8-18c2-4602-a569-2b47e2c99d50",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE10-window-edge-180-181",
+      "id": "86f6e12c-871e-449f-b481-17b95a0a09e8",
+      "status": "passed",
+      "runId": "818b314d-e075-43c9-8712-21a12b0f9d70",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE11-same-day-reentry",
+      "id": "9b2cd050-b2f6-4728-994f-656e19c2a7f5",
+      "status": "passed",
+      "runId": "03aa190d-1662-4e85-bd79-9142f73ef4e6",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE12-open-stay",
+      "id": "386f761d-1a9f-4b60-baf9-ad9b9044ecb8",
+      "status": "passed",
+      "runId": "be24b704-605e-4d76-a63a-365729520f68",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE13-duplicate-and-overlap",
+      "id": "ab1e09b2-693a-4d4f-a469-1d3a8bd6d802",
+      "status": "passed",
+      "runId": "0bfd171f-58d6-47b4-ad73-f3e91fda62db",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE14-sixty-trips",
+      "id": "1d67ebee-429d-481a-91b4-bad762c442f0",
+      "status": "passed",
+      "runId": "1328a572-7248-4d4f-baa0-6445f68df94c",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE15-trip-limit-200",
+      "id": "0b351a78-33d3-4e2f-9bd9-bdf06ee7c19d",
+      "status": "passed",
+      "runId": "80c5ede2-1d62-4025-af53-04bd37ac24a8",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE16-body-size-413",
+      "id": "cbcac16a-1b2b-4a8c-87e3-3999ed69f6f5",
+      "status": "passed",
+      "runId": "7096ec36-c8b2-46b5-97cb-9903f411f0a1",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE17-malformed-json",
+      "id": "02607657-11f6-458f-8f22-89ceeecabd32",
+      "status": "passed",
+      "runId": "f9095c60-2eea-4963-a111-8542964a4e72",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE18-content-type-variants",
+      "id": "bb1d7f94-f174-4c12-b32f-da1b7905564c",
+      "status": "passed",
+      "runId": "672d73ed-be7d-4468-93ba-8924cbf2b704",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE19-date-range",
+      "id": "8b282390-b60c-47da-8c7c-adf7f1a0ee93",
+      "status": "passed",
+      "runId": "0a367422-151b-4d74-a1b5-22479b43179e",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE20-default-date-utc",
+      "id": "2728cfc7-20b3-4ca3-9181-7c5f1df67c86",
+      "status": "passed",
+      "runId": "9fc55970-47dd-4b4c-bcc2-2005fe71bd9f",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE21-exit-before-entry-422",
+      "id": "18184f9b-02df-40ab-8800-94ec13f794b3",
+      "status": "passed",
+      "runId": "12e83b62-e472-46ce-bb1c-bf39c5eee35a",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE22-planned-trip-boundary",
+      "id": "65e7439e-9e6a-472a-8877-1135eef46df6",
+      "status": "passed",
+      "runId": "2d87c8e2-0c5c-4c9a-be65-d0bb98feb94d",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE23-parity-vs-check",
+      "id": "10a7de6d-b92d-42ec-99a4-f726ac109651",
+      "status": "passed",
+      "runId": "a37a032e-bda1-4e4e-8337-4c75b093dee4",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE24-mcp-jsonrpc-errors",
+      "id": "30a7686b-1a27-4618-ac1b-ceac43202eb1",
+      "status": "passed",
+      "runId": "7fd933d1-11fd-4d91-8dd9-14d64fb14cd6",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE25-mcp-notification-batch-size",
+      "id": "941c8458-6261-4208-974d-4bbd003adaf5",
+      "status": "passed",
+      "runId": "e7c1a4b9-133d-4c20-b006-cf61c9d6a821",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE26-mcp-tool-call-oracle",
+      "id": "337d4058-8834-427e-8a95-ad7aee53a3d3",
+      "status": "passed",
+      "runId": "edefb5c7-1718-47ca-a64b-52e7534a8eed",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE27-cors-options-head",
+      "id": "eb0ed6c4-168c-4993-8635-0bf87f76fb8d",
+      "status": "passed",
+      "runId": "25336672-2bc1-4af9-b2f2-1d459251e2aa",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE28-mcp-error-always-has-id",
+      "id": "0f93fa64-cdb3-4e55-93bf-7bc8686ff3e0",
+      "status": "passed",
+      "runId": "ac959d1b-e2a8-4d74-ae70-26cb949b888e",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE29-ees-reconcile-exit-disagree",
+      "id": "95285353-fd40-427e-9d5e-c55532cd80a5",
+      "status": "passed",
+      "runId": "e55c8bd7-b7d2-48ba-a0a1-b320c49dcc27",
+      "exitCode": 0,
+      "detail": ""
+    },
+    {
+      "name": "BE30-letter-article52",
+      "id": "3dcb6789-6b7e-4502-ae19-4c1d8adfeb6e",
+      "status": "passed",
+      "runId": "9c23f683-8746-475e-a915-f01d466a74f6",
+      "exitCode": 0,
+      "detail": ""
+    }
+  ]
+}

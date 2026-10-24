@@ -21,6 +21,13 @@
     "testsprite": [
       "TS01",
       "TS03"
+    ],
+    "law": [
+      {
+        "cite": "Regulation (EU) 2016/399, Art. 6(1)",
+        "href": "https://eur-lex.europa.eu/eli/reg/2016/399/oj",
+        "text": "no more than 90 days in any 180-day period, which entails considering the 180-day period preceding each day of stay"
+      }
     ]
   },
   {
@@ -40,6 +47,13 @@
     "testsprite": [
       "TS03",
       "TC010"
+    ],
+    "law": [
+      {
+        "cite": "Regulation (EU) 2016/399, Art. 6(2)",
+        "href": "https://eur-lex.europa.eu/eli/reg/2016/399/oj",
+        "text": "the date of entry shall be considered as the first day of stay ... and the date of exit shall be considered as the last day of stay"
+      }
     ]
   },
   {
@@ -57,7 +71,8 @@
     ],
     "testsprite": [
       "TS26"
-    ]
+    ],
+    "law": []
   },
   {
     "id": "R4",
@@ -85,6 +100,13 @@
       "TS34",
       "TS42",
       "TS60"
+    ],
+    "law": [
+      {
+        "cite": "Regulation (EU) 2016/399, Art. 6(1)",
+        "href": "https://eur-lex.europa.eu/eli/reg/2016/399/oj",
+        "text": "no more than 90 days in any 180-day period, which entails considering the 180-day period preceding each day of stay"
+      }
     ]
   },
   {
@@ -109,7 +131,8 @@
       "TS27",
       "TS46",
       "TS52"
-    ]
+    ],
+    "law": []
   },
   {
     "id": "R6",
@@ -125,7 +148,8 @@
     "testsprite": [
       "TS28",
       "TS09"
-    ]
+    ],
+    "law": []
   },
   {
     "id": "R7",
@@ -150,7 +174,8 @@
       "TS10",
       "TS35",
       "TS45"
-    ]
+    ],
+    "law": []
   },
   {
     "id": "R8",
@@ -178,7 +203,8 @@
       "TS21",
       "TS54",
       "TS61"
-    ]
+    ],
+    "law": []
   },
   {
     "id": "R9",
@@ -201,6 +227,13 @@
       "TS14",
       "TS47",
       "TS48"
+    ],
+    "law": [
+      {
+        "cite": "Regulation (EU) 2017/2226, Art. 12(1)",
+        "href": "https://eur-lex.europa.eu/eli/reg/2017/2226/oj",
+        "text": "automatically identify which entry/exit records do not have exit data immediately following the date of expiry of an authorised stay"
+      }
     ]
   },
   {
@@ -226,6 +259,18 @@
       "TS30",
       "TS31",
       "TS38"
+    ],
+    "law": [
+      {
+        "cite": "Regulation (EU) 2025/1534, Art. 2(1)",
+        "href": "https://eur-lex.europa.eu/eli/reg/2025/1534/oj",
+        "text": "'progressive start of operations of the EES' means the period of 180 days starting from the date from which the EES is to start operations"
+      },
+      {
+        "cite": "Regulation (EU) 2025/1534, Art. 5(6)(a)",
+        "href": "https://eur-lex.europa.eu/eli/reg/2025/1534/oj",
+        "text": "National authorities and Europol shall disregard ... the results of the automated calculator ... referred to in Article 11 of Regulation (EU) 2017/2226"
+      }
     ]
   },
   {
@@ -250,6 +295,13 @@
       "TS18",
       "TS49",
       "TS50"
+    ],
+    "law": [
+      {
+        "cite": "Regulation (EU) 2017/2226, Art. 52(1)–(3)",
+        "href": "https://eur-lex.europa.eu/eli/reg/2017/2226/oj",
+        "text": "shall reply to such requests within 45 days of receipt ... check the accuracy of the data ... within 30 days ... rectify, complete or erase the personal data"
+      }
     ]
   },
   {
@@ -271,6 +323,7 @@
       "TS51",
       "TS57",
       "TS65"
-    ]
+    ],
+    "law": []
   }
 ]

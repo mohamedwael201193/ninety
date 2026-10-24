@@ -40,6 +40,8 @@ jobs:
     name: TestSprite backend (30 API tests)
     runs-on: ubuntu-latest
     timeout-minutes: 40
+    outputs:
+      docs: ${{ steps.scope.outputs.docs }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -99,6 +101,7 @@ jobs:
         env:
           TESTSPRITE_API_KEY: ${{ secrets.TESTSPRITE_API_KEY }}
           TARGET: ${{ steps.target.outputs.url }}
+          SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           if [ -z "$TESTSPRITE_API_KEY" ]; then
             echo "::error::Add the TESTSPRITE_API_KEY repository secret to run this workflow."
@@ -128,3 +131,31 @@ jobs:
               sha, ref: sha, workflow: "TestSprite backend", repoUrl: `${context.serverUrl}/${owner}/${repo}` });
             if (!body) return;
             await github.rest.issues.createComment({ owner, repo, issue_number: context.payload.pull_request.number, body });
+
+  # Fail-closed merge gate: both TestSprite suites N/N on the PR head SHA (docs/NN-GATE.md).
+  # Reads the "TestSprite V3" status that testsprite[bot] posts (its description holds the count)
+  # and this run's backend-results.json. No result, an unreadable one, N = 0 or passed < N fails.
+  gate:
+    name: TestSprite N/N gate
+    needs: backend
+    if: ${{ always() && github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - name: Backend results of this run
+        if: ${{ needs.backend.outputs.docs != 'true' }}
+        continue-on-error: true
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: testsprite-backend-${{ github.run_id }}
+      - name: Both suites N/N on the same SHA
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+          DOCS_ONLY: ${{ needs.backend.outputs.docs == 'true' }}
+        run: node scripts/ci/nn-gate.mjs backend-results.json

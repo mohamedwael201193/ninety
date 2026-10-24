@@ -8,6 +8,8 @@ import { ToolShell } from "./tools/ToolShell";
 
 const REPO = "https://github.com/mohamedwael201193/ninety";
 
+type Law = { cite: string; href: string; text: string };
+
 type Latest = { verdict: string; at: string | null; environment: string | null } | null;
 
 function Verdict({ id, latest }: { id: string; latest: Latest }) {
@@ -42,6 +44,20 @@ export function ProofMatrix() {
         {" "}History of every run: <a className="underline underline-offset-4" href={`${REPO}/blob/main/LOOP.md`}>LOOP.md</a>.
       </p>
       <section aria-label="Verified numbers" className="mb-8"><VerifiedNumbers heading={false} /></section>
+      <section data-testid="proof-gate" aria-label="Merge gate and defect ledger" className="mb-8 grid gap-3 md:grid-cols-3">
+        <div className="card-soft p-4 text-sm">
+          <h2 className="mb-1 text-base font-medium">TestSprite N/N gate</h2>
+          <p>A required check reads the real count from the <code>TestSprite V3</code> status and the backend run on the same commit. It fails unless both are N/N with N &gt; 0, and fails closed when a result is missing or unreadable. <a className="underline underline-offset-4" href={`${REPO}/blob/main/docs/NN-GATE.md`}>How it works and what we found</a>.</p>
+        </div>
+        <div className="card-soft p-4 text-sm">
+          <h2 className="mb-1 text-base font-medium">Defect ledger</h2>
+          <p>All 13 pull requests that went red on TestSprite, then green, with the red and green status for each commit: 6 with app defects (7 real bugs), 1 UX, 6 test plan or CI. <a className="underline underline-offset-4" href={`${REPO}/blob/main/docs/DEFECTS.md`}>docs/DEFECTS.md</a>.</p>
+        </div>
+        <div data-testid="proof-deep-diff" className="card-soft p-4 text-sm">
+          <h2 className="mb-1 text-base font-medium">Deep parity 399/400: the one difference</h2>
+          <p>Two overlapping trips, 1 Jan–5 Apr and 25 Mar–10 Apr 2024, checked on 10 Apr. The Commission script prints one overstay per row: 31 Mar–5 Apr (6 days) and 31 Mar–10 Apr (11 days). The 6 days sit inside the 11. Ninety lists the 11 days once, and the script itself prints one 11-day overstay when the same days are entered as one stay. <a className="underline underline-offset-4" href={`${REPO}/blob/main/docs/PARITY-399.md`}>Details</a>.</p>
+        </div>
+      </section>
       <ScrollRegion label="Rule-to-test matrix" className="card-soft">
         <table data-testid="proof-table" className="w-full min-w-[860px] text-left text-sm">
           <thead className="text-xs text-ink-hushed">
@@ -54,6 +70,13 @@ export function ProofMatrix() {
                   <span className="font-mono text-xs text-ink-hushed">{rule.id}</span>
                   <p className="font-medium">{rule.rule}</p>
                   <p className="text-xs text-ink-hushed">{rule.basis}</p>
+                  {(rule as { law?: Law[] }).law?.length ? (
+                    <ul data-testid="proof-law" className="mt-1 space-y-1 text-xs">
+                      {(rule as { law?: Law[] }).law!.map((l) => (
+                        <li key={l.cite}><a className="underline decoration-line underline-offset-4" href={l.href} title={`“${l.text}”`}>{l.cite}</a> <span className="text-ink-hushed">“{l.text}”</span></li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </td>
                 <td className="px-5 py-4">
                   <ul className="space-y-1">
