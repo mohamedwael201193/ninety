@@ -44,3 +44,7 @@ axe-report.json
 # MCP package build output
 /packages/*/node_modules
 /packages/*/dist
+
+# StrykerJS
+.stryker-tmp/
+reports/mutation/

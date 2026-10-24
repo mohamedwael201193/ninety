@@ -8,7 +8,7 @@ Every TestSprite run link, screenshot and report gathered for Ninety is kept her
 - PR [#62](https://github.com/mohamedwael201193/ninety/pull/62), merged as `a777c3b`: 43/43 ([execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b43fc678-1b47-4f4f-9c4c-cd08eb76daac)); `TestSprite backend (28 API tests)` green on the PR ([run](https://github.com/mohamedwael201193/ninety/actions/runs/39519798095/job/118960558605)) and on `main` ([run](https://github.com/mohamedwael201193/ninety/actions/runs/39520342113/job/118962382936)). Since #62 both `TestSprite V3` and `TestSprite backend (28 API tests)` are required checks on `main`.
 - The README screenshots are in [`docs/screens/`](../screens/). The hero, EES check, letter and parity shots were taken from a local production build of the PR #63 branch; the others from production.
 - [`fresh-band/`](fresh-band/): the `/?fresh=1` band showing the old count, reproduced and fixed in #62.
-- `receipts/final-vitest.txt`: Vitest after these changes (367 passed, 3 skipped).
+- `receipts/final-vitest.txt`: Vitest after those changes (367 passed, 3 skipped; 393 as of 2026-10-24).
 
 ## Before that: PR #60 → [`testsprite/ts42-pr60/`](testsprite/ts42-pr60/)
 
@@ -46,3 +46,10 @@ Every TestSprite run link, screenshot and report gathered for Ninety is kept her
 - `receipts/a11y-axe.txt`: axe on 8 pages × 2 widths, no serious or critical violations
 - `receipts/pr-testsprite-history.json`: TestSprite status of every commit of every merged PR up to #56, a snapshot. The current source of the red-to-green count is `src/data/loop-iterations.json` (through #60), with `testsprite_tests/red-runs.json` for why each run went red
 - `receipts/final-*.txt`, `receipts/parity-14-plus-12.png`, `receipts/proof-35of35-final.png`: final local run of this branch: lint, types, Vitest, live parity, axe, browser checks of /parity, /proof, /developers, MCP stdio
+
+## 2026-10-24 (PRs #65 to #68)
+
+- `pr65-67/`: eight screenshots with captions: PR #65 checks, TestSprite 43/43 on #65, branch protection with six required checks, the red nightly smoke, issue #66 opened by the ledger, TS03 green, PR #67 merged, the docs-only skip.
+- `ts03-stale-code/`: TS03 blocked as `stale_code`, the rewritten script, and the green rerun.
+- `suite-54-30/`: the 11 new frontend tests (TS53–TS63) and 2 backend tests (BE29, BE30): TestSprite run ids and the mutation that proved each can fail.
+- `mutation/summary.json`: StrykerJS on `engine.ts` and `dates.ts`: 94.47% (376/398) after `mutation-gaps.test.ts`, 87.44% before; every remaining mutant listed.

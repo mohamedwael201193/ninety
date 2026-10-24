@@ -1,0 +1,24 @@
+{
+  "projectId": "bd039118-0c25-4707-b018-b25619a37fce",
+  "type": "frontend",
+  "name": "The developers page documents the API and its OpenAPI document lists the three endpoints",
+  "priority": "p1",
+  "planSteps": [
+    {
+      "type": "action",
+      "description": "Navigate to /developers"
+    },
+    {
+      "type": "assertion",
+      "description": "Heading (data-testid=developers-heading) reads 'The same engine, as an API and an MCP server'"
+    },
+    {
+      "type": "assertion",
+      "description": "The MCP endpoint (data-testid=developers-mcp-http) reads 'POST /api/mcp'"
+    },
+    {
+      "type": "assertion",
+      "description": "The OpenAPI link (data-testid=openapi-link) points to /api/openapi.json, which answers 200 with an OpenAPI 3.1 document listing /api/v1/check, /api/v1/ees-reconcile and /api/v1/letter"
+    }
+  ]
+}

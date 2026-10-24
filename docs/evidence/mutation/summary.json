@@ -1,0 +1,239 @@
+{
+ "tool": "StrykerJS 9 + vitest-runner, stryker.config.mjs",
+ "mutated": [
+  "src/lib/schengen/engine.ts",
+  "src/lib/schengen/dates.ts"
+ ],
+ "run1": "full run, 2026-10-24, before mutation-gaps.test.ts: 87.44% (all files)",
+ "run2": "after adding src/lib/schengen/mutation-gaps.test.ts: rerun of every line that had a surviving or uncovered mutant (--mutate file:line-line)",
+ "final": {
+  "total": 398,
+  "killed": 360,
+  "timeout": 16,
+  "survived": 18,
+  "noCoverage": 4,
+  "score": 94.47
+ },
+ "remaining": [
+  {
+   "file": "src/lib/schengen/dates.ts",
+   "line": 17,
+   "column": 7,
+   "mutator": "ConditionalExpression",
+   "replacement": "false",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/dates.ts",
+   "line": 35,
+   "column": 5,
+   "mutator": "LogicalOperator",
+   "replacement": "check.getUTCFullYear() !== year && check.getUTCMonth() !== month - 1",
+   "run1": "Survived",
+   "run2": null,
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/dates.ts",
+   "line": 35,
+   "column": 5,
+   "mutator": "ConditionalExpression",
+   "replacement": "false",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/dates.ts",
+   "line": 36,
+   "column": 5,
+   "mutator": "ConditionalExpression",
+   "replacement": "false",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/dates.ts",
+   "line": 37,
+   "column": 5,
+   "mutator": "ConditionalExpression",
+   "replacement": "false",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 244,
+   "column": 13,
+   "mutator": "BlockStatement",
+   "replacement": "{}",
+   "run1": "NoCoverage",
+   "run2": null,
+   "final": "NoCoverage"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 259,
+   "column": 13,
+   "mutator": "BlockStatement",
+   "replacement": "{}",
+   "run1": "NoCoverage",
+   "run2": null,
+   "final": "NoCoverage"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 314,
+   "column": 11,
+   "mutator": "BlockStatement",
+   "replacement": "{}",
+   "run1": "NoCoverage",
+   "run2": null,
+   "final": "NoCoverage"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 315,
+   "column": 12,
+   "mutator": "ObjectLiteral",
+   "replacement": "{}",
+   "run1": "NoCoverage",
+   "run2": null,
+   "final": "NoCoverage"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 107,
+   "column": 38,
+   "mutator": "ArithmeticOperator",
+   "replacement": "x[1] + y[1]",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 110,
+   "column": 11,
+   "mutator": "ConditionalExpression",
+   "replacement": "true",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 110,
+   "column": 24,
+   "mutator": "EqualityOperator",
+   "replacement": "from < this.ends[last] + 1",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 122,
+   "column": 14,
+   "mutator": "ArithmeticOperator",
+   "replacement": "this.starts.length + 1",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 144,
+   "column": 83,
+   "mutator": "ConditionalExpression",
+   "replacement": "true",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 146,
+   "column": 11,
+   "mutator": "EqualityOperator",
+   "replacement": "overlap >= 0",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 167,
+   "column": 31,
+   "mutator": "ArithmeticOperator",
+   "replacement": "start + MAX_FORWARD_DAYS - 1 + WINDOW + 1",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 167,
+   "column": 31,
+   "mutator": "ArithmeticOperator",
+   "replacement": "start + MAX_FORWARD_DAYS + 1",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 169,
+   "column": 25,
+   "mutator": "EqualityOperator",
+   "replacement": "end < last",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 171,
+   "column": 10,
+   "mutator": "EqualityOperator",
+   "replacement": "length <= MAX_FORWARD_DAYS",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 176,
+   "column": 27,
+   "mutator": "EqualityOperator",
+   "replacement": "end < day + WINDOW - 1",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 206,
+   "column": 11,
+   "mutator": "EqualityOperator",
+   "replacement": "parseIso(stay.exit) >= parseIso(last.exit)",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  },
+  {
+   "file": "src/lib/schengen/engine.ts",
+   "line": 273,
+   "column": 3,
+   "mutator": "CallExpression",
+   "replacement": ";",
+   "run1": "Survived",
+   "run2": "Survived",
+   "final": "Survived"
+  }
+ ]
+}

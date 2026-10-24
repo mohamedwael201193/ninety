@@ -41,5 +41,16 @@
   "TS49-letter-refused-on-match": "fbf2bf81-8a97-4547-aace-8c389fb44f5d",
   "TS50-letter-pdf-cjk-name": "89fc72df-cb41-49e7-8f06-8d463e5469d4",
   "TS51-proof-parity-names": "1f3f0b6e-ef5a-4844-aeb9-60f73fdf2d74",
-  "TS52-later-overstay-wording": "3cf3bbc7-a89c-4844-9503-e71b5634eeb5"
+  "TS52-later-overstay-wording": "3cf3bbc7-a89c-4844-9503-e71b5634eeb5",
+  "TS53-developers-openapi": "75149c42-dc02-46ae-a1ac-09efcfd91d0b",
+  "TS54-invalid-today-param": "ad429c6e-3916-46e9-9c98-22a5da230ac0",
+  "TS55-cancel-trip": "9db5f03a-4953-4cdc-83e3-bb8028cf801c",
+  "TS56-delete-all-trips": "01d75319-6e41-4489-a606-82bcb422da66",
+  "TS57-deep-parity": "b2730c77-3076-41b7-a23a-da462c5c0497",
+  "TS58-skip-link": "8f5902cf-820b-4a2b-8bb2-53a4a9970572",
+  "TS59-footer-links": "1387acd6-824f-417e-9dc5-58aea2cf52c5",
+  "TS60-window-bar-dates": "eb48283c-8001-43b9-9fd5-c7d74c1006c3",
+  "TS61-ees-invalid-today": "ea9c8720-6468-40c6-a099-0d94af68f7d3",
+  "TS62-phone-days-bar": "6c99666b-7ae8-41c7-ad62-967461f047e1",
+  "TS63-band-saved-trips": "837ba49b-07d8-41b7-bf39-eedf3de1507f"
 }

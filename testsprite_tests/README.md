@@ -51,8 +51,19 @@ Every plan pins the date with `?today=2026-10-19` and starts either with `fresh=
 | `TS50-letter-pdf-cjk-name.json` | The PDF download refuses a name its font cannot draw and names the characters |
 | `TS51-proof-parity-names.json` | `/proof` links exactly the 14 parity scenarios |
 | `TS52-later-overstay-wording.json` | A booked overstay after the date shown is called later, not earlier |
+| `TS53-developers-openapi.json` | `/developers` documents the API; its OpenAPI 3.1 document lists `/api/v1/check`, `/api/v1/ees-reconcile` and `/api/v1/letter` |
+| `TS54-invalid-today-param.json` | `?today=2026-02-30` is refused with "not a real calendar date" and the real date is used |
+| `TS55-cancel-trip.json` | Cancelling a filled trip sheet saves nothing: 0 rows, 0 used, 90 left |
+| `TS56-delete-all-trips.json` | Deleting the 3 example trips one by one ends at the empty state, 0 used, 90 left |
+| `TS57-deep-parity.json` | `/parity` shows deep parity 399/400 and names kom-1-4 (stays before 22 April 2013) |
+| `TS58-skip-link.json` | The skip link is the first Tab stop and Enter moves to the main content |
+| `TS59-footer-links.json` | Footer links open `/proof` and `/developers` |
+| `TS60-window-bar-dates.json` | The 180-day window bar spans 23 Apr–19 Oct on 2026-10-19 and 20 May–15 Nov on 2026-11-15 |
+| `TS61-ees-invalid-today.json` | `/ees?today=2026-13-01` is refused with its own message |
+| `TS62-phone-days-bar.json` | At 390 px the sticky bar reads 26 days left and its Add trip button opens the sheet |
+| `TS63-band-saved-trips.json` | The landing band switches from the example history to the saved trips (10 used, 80 left) after a reload |
 
-Every plan listed here is in the cloud suite; `test-ids.json` maps each to its TestSprite id. New plans are added with `node scripts/add-cloud-tests.mjs <plan.json>`. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
+Every plan listed here is in the cloud suite; `test-ids.json` maps each to its TestSprite id. TS03 and TS53–TS63 run stored, user-authored code (the files in [`frontend/`](frontend/)): each was run locally against production, then run again with one expected value changed to confirm it fails, before `testsprite test code put`. New plans are added with `node scripts/add-cloud-tests.mjs <plan.json>`. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
 
 ## Writing plans
 

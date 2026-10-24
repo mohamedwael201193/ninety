@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Runs the 28 TestSprite backend tests ("Ninety API") against one base URL and exits 1 on any
+ * Runs the 30 TestSprite backend tests ("Ninety API") against one base URL and exits 1 on any
  * failure. Used by .github/workflows/testsprite-backend.yml.
  *
  *   TESTSPRITE_API_KEY=... node scripts/ci/backend-run.mjs https://<preview>.vercel.app
@@ -12,7 +12,7 @@
  * the test with that line pointing at the target (`test code put`). Every run starts from the repo
  * files, so a cancelled job cannot leave a stale URL behind for the next one. The workflow
  * serialises runs with a concurrency group because the tests are shared.
- * Cost: 0.2 credits per test, 5.6 per run.
+ * Cost: 0.2 credits per test, 6.0 per run.
  */
 import { execFileSync } from "node:child_process";
 import { mkdtempSync, readFileSync, writeFileSync, appendFileSync } from "node:fs";
@@ -27,7 +27,7 @@ if (!/^https:\/\/[a-z0-9.-]+$/i.test(target)) {
 }
 const LINE = /^BASE_URL = "https:\/\/ninety-coral\.vercel\.app"$/m;
 const allIds = JSON.parse(readFileSync("testsprite_tests/backend-ids.json", "utf8"));
-// BACKEND_ONLY=BE01,BE28 runs a subset (local checks); CI always runs all 28.
+// BACKEND_ONLY=BE01,BE28 runs a subset (local checks); CI always runs all 30.
 const only = (process.env.BACKEND_ONLY ?? "").split(",").filter(Boolean);
 const ids = Object.fromEntries(Object.entries(allIds).filter(([n]) => !only.length || only.some((o) => n.startsWith(o))));
 const dir = mkdtempSync(join(tmpdir(), "be-"));

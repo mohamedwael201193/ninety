@@ -1,6 +1,6 @@
 # Nightly TestSprite smoke on production: 3 tests, not the whole suite.
 #
-# The full suite (testsprite-cli.yml) bills every test in the project (43 x 0.5 = 21.5 credits).
+# The full suite (testsprite-cli.yml) bills every test in the project (54 x 0.5 = 27 credits).
 # This runs three core flows against https://ninety-coral.vercel.app every night:
 #   TS01 example trips   (the dashboard counts a known history)
 #   TS03 add a trip      (manual entry gives exact days used and left)

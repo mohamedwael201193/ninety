@@ -30,7 +30,9 @@ jobs:
       - name: Vitest (unit, property, differential fuzz)
         run: npx vitest run
         env:
-          FUZZ_RUNS: ${{ github.event_name == 'schedule' && '3000' || '500' }}
+          FUZZ_RUNS: ${{ github.event_name == 'schedule' && '20000' || '5000' }}
+          REF_CASES: ${{ github.event_name == 'schedule' && '20000' || '1200' }}
+          REF_SEED: ${{ github.event_name == 'schedule' && github.run_id || '20261024' }}
           FUZZ_SEED: ${{ github.event_name == 'schedule' && github.run_id || '20261019' }}
 
   mcp:

@@ -26,5 +26,7 @@
   "BE25-mcp-notification-batch-size": "941c8458-6261-4208-974d-4bbd003adaf5",
   "BE26-mcp-tool-call-oracle": "337d4058-8834-427e-8a95-ad7aee53a3d3",
   "BE27-cors-options-head": "eb0ed6c4-168c-4993-8635-0bf87f76fb8d",
-  "BE28-mcp-error-always-has-id": "0f93fa64-cdb3-4e55-93bf-7bc8686ff3e0"
+  "BE28-mcp-error-always-has-id": "0f93fa64-cdb3-4e55-93bf-7bc8686ff3e0",
+  "BE29-ees-reconcile-exit-disagree": "95285353-fd40-427e-9d5e-c55532cd80a5",
+  "BE30-letter-article52": "3dcb6789-6b7e-4502-ae19-4c1d8adfeb6e"
 }
