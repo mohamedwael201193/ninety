@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-21T01:26:13.915Z",
+  "generatedAt": "2026-10-24T01:34:38.337Z",
   "source": "testsprite test result --history",
-  "runs": 1928,
+  "runs": 2197,
   "executions": [
     {
       "pr": null,
@@ -1247,6 +1247,129 @@
       "tests": 1,
       "passed": 1,
       "failed": []
+    },
+    {
+      "pr": null,
+      "env": "default",
+      "start": "2026-10-22T04:49:47.643Z",
+      "tests": 3,
+      "passed": 2,
+      "failed": [
+        {
+          "test": "TS03",
+          "runId": "638a361e-6799-4730-a597-a0311a4172fb",
+          "failureKind": null
+        }
+      ]
+    },
+    {
+      "pr": 65,
+      "env": "github-pr-65",
+      "start": "2026-10-23T22:43:47.449Z",
+      "tests": 43,
+      "passed": 43,
+      "failed": []
+    },
+    {
+      "pr": null,
+      "env": "default",
+      "start": "2026-10-23T22:46:55.330Z",
+      "tests": 3,
+      "passed": 2,
+      "failed": [
+        {
+          "test": "TS03",
+          "runId": "57979ea2-faa7-4c6d-81e9-58baf3695272",
+          "failureKind": null
+        }
+      ]
+    },
+    {
+      "pr": null,
+      "env": "default",
+      "start": "2026-10-23T22:53:41.562Z",
+      "tests": 1,
+      "passed": 1,
+      "failed": []
+    },
+    {
+      "pr": 67,
+      "env": "github-pr-67",
+      "start": "2026-10-23T22:55:27.008Z",
+      "tests": 43,
+      "passed": 43,
+      "failed": []
+    },
+    {
+      "pr": null,
+      "env": "default",
+      "start": "2026-10-23T23:10:39.102Z",
+      "tests": 10,
+      "passed": 10,
+      "failed": []
+    },
+    {
+      "pr": 68,
+      "env": "github-pr-68",
+      "start": "2026-10-24T00:57:35.597Z",
+      "tests": 53,
+      "passed": 52,
+      "failed": [
+        {
+          "test": "TS18",
+          "runId": "3e1e889a-01fa-4f56-a3f5-dd1fb77f051f",
+          "failureKind": "unknown"
+        }
+      ]
+    },
+    {
+      "pr": null,
+      "env": "ninety-git-pr2-depth-mohamedwael201193s-projects",
+      "start": "2026-10-24T01:04:22.000Z",
+      "tests": 4,
+      "passed": 2,
+      "failed": [
+        {
+          "test": "TS42",
+          "runId": "1306aeab-fdfa-400c-9a35-c2db133959ce",
+          "failureKind": "timeout"
+        },
+        {
+          "test": "TS64",
+          "runId": "7ad3adc2-1447-44ff-a6f6-bbbfb89217ff",
+          "failureKind": "timeout"
+        }
+      ]
+    },
+    {
+      "pr": 68,
+      "env": "github-pr-68",
+      "start": "2026-10-24T01:07:28.886Z",
+      "tests": 53,
+      "passed": 52,
+      "failed": [
+        {
+          "test": "TS42",
+          "runId": "b557bf4c-dc79-4a1f-a8d6-5d143082713b",
+          "failureKind": "unknown"
+        }
+      ]
+    },
+    {
+      "pr": null,
+      "env": "ninety-git-pr2-depth-mohamedwael201193s-projects",
+      "start": "2026-10-24T01:15:49.315Z",
+      "tests": 2,
+      "passed": 2,
+      "failed": []
+    },
+    {
+      "pr": 68,
+      "env": "github-pr-68",
+      "start": "2026-10-24T01:18:54.592Z",
+      "tests": 54,
+      "passed": 54,
+      "failed": []
     }
   ],
   "loops": [
@@ -1771,6 +1894,32 @@
         ]
       },
       "green": null,
+      "kind": "plan-ci"
+    },
+    {
+      "pr": 68,
+      "red": {
+        "pr": 68,
+        "env": "github-pr-68",
+        "start": "2026-10-24T00:57:35.597Z",
+        "tests": 53,
+        "passed": 52,
+        "failed": [
+          {
+            "test": "TS18",
+            "runId": "3e1e889a-01fa-4f56-a3f5-dd1fb77f051f",
+            "failureKind": "unknown"
+          }
+        ]
+      },
+      "green": {
+        "pr": 68,
+        "env": "github-pr-68",
+        "start": "2026-10-24T01:18:54.592Z",
+        "tests": 54,
+        "passed": 54,
+        "failed": []
+      },
       "kind": "plan-ci"
     }
   ]

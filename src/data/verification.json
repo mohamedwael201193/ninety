@@ -1,0 +1,14 @@
+{
+  "_note": "The verified numbers shown on / and /proof. Each links its source. verification.test.ts checks them against test-ids.json, backend-ids.json, loop-iterations.json and the workflows, so they cannot drift.",
+  "asOf": "PR #68, merged 2026-10-24 as 51b1dd1",
+  "items": [
+    { "id": "ui", "value": "54/54", "label": "TestSprite end-to-end tests passed on the PR preview, a required check", "href": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/87678f09-2ea3-40ec-bb9c-485ddd4e93aa" },
+    { "id": "api", "value": "30/30", "label": "TestSprite API and MCP tests passed, a required check", "href": "https://github.com/mohamedwael201193/ninety/actions/runs/40049174467" },
+    { "id": "checks", "value": "6", "label": "required checks before anything merges into main, admins included", "href": "https://github.com/mohamedwael201193/ninety/blob/main/docs/evidence/pr65-67/README.md" },
+    { "id": "redgreen", "value": "13", "label": "pull requests that went red on TestSprite, then green (6 app defects, 1 UX, 6 test or CI)", "href": "https://github.com/mohamedwael201193/ninety/blob/main/LOOP-ITERATIONS.md" },
+    { "id": "parity", "value": "14/14", "label": "scenarios match the European Commission calculator", "href": "/parity" },
+    { "id": "fuzz", "value": "5,000", "label": "random histories against the Commission script on every PR (20,000 nightly)", "href": "https://github.com/mohamedwael201193/ninety/blob/main/src/lib/schengen/differential.fuzz.test.ts" },
+    { "id": "reference", "value": "1,200", "label": "cases against an independent reference of the rule on every PR (20,000 nightly)", "href": "https://github.com/mohamedwael201193/ninety/blob/main/src/lib/schengen/reference-rule.test.ts" },
+    { "id": "mutation", "value": "94.47%", "label": "engine mutation score, combined: a full run (87.44%), then a targeted rerun", "href": "https://github.com/mohamedwael201193/ninety/blob/main/docs/evidence/mutation/summary.json" }
+  ]
+}

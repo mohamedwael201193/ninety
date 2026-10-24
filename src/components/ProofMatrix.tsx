@@ -3,6 +3,7 @@ import Link from "next/link";
 import proof from "@/data/proof.json";
 import { label } from "@/lib/schengen/scenario-names";
 import { proofSummary, suiteSummary } from "@/lib/proof/rules";
+import VerifiedNumbers from "@/components/proof/VerifiedNumbers";
 import { ToolShell } from "./tools/ToolShell";
 
 const REPO = "https://github.com/mohamedwael201193/ninety";
@@ -40,6 +41,7 @@ export function ProofMatrix() {
         {" "}<span data-testid="proof-summary">{proof.rules.length} rules · {summary.passed}/{summary.ran} of the TestSprite tests tied to a rule passed on their latest cloud run · whole suite: <span data-testid="proof-suite">{suite.passed}/{suite.ran}</span> passed{proof.environments?.length ? ` (${proof.environments.join(", ")})` : ""}{suite.notRun.length > 0 ? ` · not run yet: ${suite.notRun.join(", ")}` : ""}.</span>
         {" "}History of every run: <a className="underline underline-offset-4" href={`${REPO}/blob/main/LOOP.md`}>LOOP.md</a>.
       </p>
+      <section aria-label="Verified numbers" className="mb-8"><VerifiedNumbers heading={false} /></section>
       <ScrollRegion label="Rule-to-test matrix" className="card-soft">
         <table data-testid="proof-table" className="w-full min-w-[860px] text-left text-sm">
           <thead className="text-xs text-ink-hushed">
