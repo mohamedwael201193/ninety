@@ -63,7 +63,7 @@ Every plan pins the date with `?today=2026-10-19` and starts either with `fresh=
 | `TS62-phone-days-bar.json` | At 390 px the sticky bar reads 26 days left and its Add trip button opens the sheet |
 | `TS63-band-saved-trips.json` | The landing band switches from the example history to the saved trips (10 used, 80 left) after a reload |
 
-Every plan listed here is in the cloud suite; `test-ids.json` maps each to its TestSprite id. TS03 and TS53–TS63 run stored, user-authored code (the files in [`frontend/`](frontend/)): each was run locally against production, then run again with one expected value changed to confirm it fails, before `testsprite test code put`. New plans are added with `node scripts/add-cloud-tests.mjs <plan.json>`. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
+Every plan listed here is in the cloud suite; `test-ids.json` maps each to its TestSprite id. TS03, TS18, TS39 and TS53–TS63 run stored, user-authored code (the files in [`frontend/`](frontend/)): each was run locally against production, then run again with one expected value changed to confirm it fails, before `testsprite test code put`. New plans are added with `node scripts/add-cloud-tests.mjs <plan.json>`. Every pull request runs all of them against its Vercel preview, and the merge is blocked until they pass. `test-ids.json` maps each plan to its TestSprite test id.
 
 ## Writing plans
 
