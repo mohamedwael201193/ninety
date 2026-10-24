@@ -6,6 +6,7 @@ Every TestSprite run link, screenshot and report gathered for Ninety is kept her
 
 - PR [#68](https://github.com/mohamedwael201193/ninety/pull/68), merged as `51b1dd1`: 54/54 ([execution 87678f09](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/87678f09-2ea3-40ec-bb9c-485ddd4e93aa)) and 30/30 backend ([run](https://github.com/mohamedwael201193/ninety/actions/runs/40049174467)); two red commits before (TS18, TS42, TS62), fixed in the tests: [`suite-54-30/`](suite-54-30/README.md).
 - Mutation testing: [`mutation/summary.json`](mutation/summary.json), 94.47% combined (full run 87.44%, then a targeted rerun).
+- TestSprite N/N gate (required check 7): what the `TestSprite V3` status reports on every PR, and the gate's design: [`../NN-GATE.md`](../NN-GATE.md), raw status list [`nn-gate/`](nn-gate/testsprite-v3-final-statuses.txt). Defect ledger: [`../DEFECTS.md`](../DEFECTS.md). Deep parity difference: [`../PARITY-399.md`](../PARITY-399.md).
 - PRs #65–#67 (nightly smoke, triage, required checks, TS03 `stale_code` red then green): [`pr65-67/`](pr65-67/README.md).
 - Vitest on the final branch: 397 passed, 3 skipped (71 files).
 

@@ -44,6 +44,13 @@
             "runId": "b40a48bc-605f-4465-a123-e536b1d9061f"
           }
         }
+      ],
+      "law": [
+        {
+          "cite": "Regulation (EU) 2016/399, Art. 6(1)",
+          "href": "https://eur-lex.europa.eu/eli/reg/2016/399/oj",
+          "text": "no more than 90 days in any 180-day period, which entails considering the 180-day period preceding each day of stay"
+        }
       ]
     },
     {
@@ -83,6 +90,13 @@
             "runId": "1c1a9659-1cab-4b57-bfda-2c764c6bbb5c"
           }
         }
+      ],
+      "law": [
+        {
+          "cite": "Regulation (EU) 2016/399, Art. 6(2)",
+          "href": "https://eur-lex.europa.eu/eli/reg/2016/399/oj",
+          "text": "the date of entry shall be considered as the first day of stay ... and the date of exit shall be considered as the last day of stay"
+        }
       ]
     },
     {
@@ -110,7 +124,8 @@
             "runId": "8e74691c-e618-4b3e-a36e-0c7b243fc44f"
           }
         }
-      ]
+      ],
+      "law": []
     },
     {
       "id": "R4",
@@ -168,6 +183,13 @@
             "runId": "32ebff69-9813-43d6-b3c5-d665e7b82c21"
           }
         }
+      ],
+      "law": [
+        {
+          "cite": "Regulation (EU) 2016/399, Art. 6(1)",
+          "href": "https://eur-lex.europa.eu/eli/reg/2016/399/oj",
+          "text": "no more than 90 days in any 180-day period, which entails considering the 180-day period preceding each day of stay"
+        }
       ]
     },
     {
@@ -222,7 +244,8 @@
             "runId": "92de6105-dde2-48ae-bfc2-3b829d4c02ba"
           }
         }
-      ]
+      ],
+      "law": []
     },
     {
       "id": "R6",
@@ -258,7 +281,8 @@
             "runId": "22e63950-1e8c-446f-bcba-80bd18d8e870"
           }
         }
-      ]
+      ],
+      "law": []
     },
     {
       "id": "R7",
@@ -323,7 +347,8 @@
             "runId": "1ca36dd7-dfc2-4a12-90c0-598f80038ea8"
           }
         }
-      ]
+      ],
+      "law": []
     },
     {
       "id": "R8",
@@ -411,7 +436,8 @@
             "runId": "41454568-e10a-411f-8bf3-2aaa3af6cf29"
           }
         }
-      ]
+      ],
+      "law": []
     },
     {
       "id": "R9",
@@ -484,6 +510,13 @@
             "runId": "3d80d2cc-caee-482b-a21b-1f7e15310236"
           }
         }
+      ],
+      "law": [
+        {
+          "cite": "Regulation (EU) 2017/2226, Art. 12(1)",
+          "href": "https://eur-lex.europa.eu/eli/reg/2017/2226/oj",
+          "text": "automatically identify which entry/exit records do not have exit data immediately following the date of expiry of an authorised stay"
+        }
       ]
     },
     {
@@ -538,6 +571,18 @@
             "environment": "github-pr-69",
             "runId": "79c99e61-0126-4ff7-b845-d4814a1d6901"
           }
+        }
+      ],
+      "law": [
+        {
+          "cite": "Regulation (EU) 2025/1534, Art. 2(1)",
+          "href": "https://eur-lex.europa.eu/eli/reg/2025/1534/oj",
+          "text": "'progressive start of operations of the EES' means the period of 180 days starting from the date from which the EES is to start operations"
+        },
+        {
+          "cite": "Regulation (EU) 2025/1534, Art. 5(6)(a)",
+          "href": "https://eur-lex.europa.eu/eli/reg/2025/1534/oj",
+          "text": "National authorities and Europol shall disregard ... the results of the automated calculator ... referred to in Article 11 of Regulation (EU) 2017/2226"
         }
       ]
     },
@@ -623,6 +668,13 @@
             "runId": "ad99d7b2-2e05-4240-a2e2-4ff68c6dded6"
           }
         }
+      ],
+      "law": [
+        {
+          "cite": "Regulation (EU) 2017/2226, Art. 52(1)–(3)",
+          "href": "https://eur-lex.europa.eu/eli/reg/2017/2226/oj",
+          "text": "shall reply to such requests within 45 days of receipt ... check the accuracy of the data ... within 30 days ... rectify, complete or erase the personal data"
+        }
       ]
     },
     {
@@ -684,7 +736,8 @@
             "runId": "87da5992-6253-486b-9a0c-4fbce7b61fff"
           }
         }
-      ]
+      ],
+      "law": []
     }
   ],
   "suite": [
