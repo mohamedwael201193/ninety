@@ -1,6 +1,6 @@
 idempotency-key: cli-run-6ca40722-b70c-47be-b13b-ebf8e4328cee
 Run 2d5c9ab6-eca9-4eef-a822-711d1e8f8526
-Dashboard: https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/test-cases/0f93fa64-cdb3-4e55-93bf-7bc8686ff3e0
+Dashboard: testsprite-portal
 {
   "runId": "2d5c9ab6-eca9-4eef-a822-711d1e8f8526",
   "testId": "0f93fa64-cdb3-4e55-93bf-7bc8686ff3e0",
@@ -26,8 +26,8 @@ Dashboard: https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8
     "passedCount": 0,
     "failedCount": 0
   },
-  "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/test-cases/0f93fa64-cdb3-4e55-93bf-7bc8686ff3e0",
-  "executionUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/execution/ef7bc14a-8d5c-467f-bc24-60ce3801ec2e/test/2d5c9ab6-eca9-4eef-a822-711d1e8f8526",
+  "dashboardUrl": "testsprite-portal",
+  "executionUrl": "testsprite-execution:ef7bc14a-8d5c-467f-bc24-60ce3801ec2e",
   "apiOutput": "",
   "trace": ""
 }

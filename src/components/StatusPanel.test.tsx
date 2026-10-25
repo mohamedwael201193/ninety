@@ -29,6 +29,7 @@ describe("StatusPanel figures list", () => {
     const hint = screen.getByTestId("latest-exit").nextElementSibling;
     expect(hint?.tagName).toBe("DD");
     expect(hint?.textContent).toContain("2026");
+    expect(screen.getByTestId("latest-exit-hint").textContent).toBe("29 December 2026");
   });
   it("lists the earlier overstay hint under 'Not today'", () => {
     renderScenario("overstay");

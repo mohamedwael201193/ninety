@@ -15,4 +15,4 @@ testsprite test code put b6981077-60ba-4847-b769-719dd19ebc2c --code-file TS03-a
 testsprite test run b6981077-60ba-4847-b769-719dd19ebc2c --target-url https://ninety-coral.vercel.app --wait
 ```
 
-**Green.** TestSprite run `9f238bd5-c205-4bab-9f5f-ef433ef73ac1`: **passed** ([execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/409ff79c-0737-4dac-97b4-0db733b6c9a0/test/9f238bd5-c205-4bab-9f5f-ef433ef73ac1)). Cost: 0.5 credits.
+**Green.** TestSprite run `9f238bd5-c205-4bab-9f5f-ef433ef73ac1`: **passed** (execution (TestSprite execution `409ff79c`)). Cost: 0.5 credits.

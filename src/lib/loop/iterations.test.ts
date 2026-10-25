@@ -16,7 +16,7 @@ describe("LOOP-ITERATIONS (generated from the GitHub API and TestSprite history)
   it("links each check to a TestSprite execution (a run that never started has none)", () => {
     for (const c of data.iterations.flatMap((i) => i.checks)) {
       if (c.execution === null) { expect(c.description).toMatch(/could not start/); continue; }
-      expect(c.execution).toMatch(/^https:\/\/www\.testsprite\.com\/dashboard-v3\/o\/[0-9a-f-]+\/projects\/[0-9a-f-]+\/execution\/[0-9a-f-]{36}$/);
+      expect(c.execution).toMatch(/^[0-9a-f-]{36}$/);
     }
   });
 

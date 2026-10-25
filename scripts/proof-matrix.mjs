@@ -17,7 +17,16 @@ const byShort = Object.fromEntries(Object.entries(ids).map(([plan, id]) => [plan
 const cache = new Map();
 function latest(id) {
   if (!cache.has(id)) {
-    const r = JSON.parse(execFileSync(BIN, ["test", "result", id, "--output", "json"], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }));
+    // PROOF_ENV=github-pr-70 pins the page to the newest run in that environment (a merged PR's final run),
+    // read from the run history; without it, the newest run anywhere.
+    const env = process.env.PROOF_ENV;
+    const r = env
+      ? (() => {
+          const h = JSON.parse(execFileSync(BIN, ["test", "result", id, "--history", "--output", "json"], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }));
+          const run = h.runs.find((x) => x.environment?.name === env);
+          return run ? { ...run, verdict: run.status, runIdIfAvailable: run.runId } : {};
+        })()
+      : JSON.parse(execFileSync(BIN, ["test", "result", id, "--output", "json"], { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }));
     // A test that has never run reports a non-terminal state such as "ready": record it as not run (null),
     // so the page neither counts it as passing nor as failing.
     const ran = r.startedAt && ["passed", "failed", "blocked"].includes(r.verdict);

@@ -22,7 +22,9 @@ describe("verified numbers on / and /proof", () => {
     expect(ci).toMatch(/FUZZ_RUNS[^\n]*5000/);
     expect(ci).toMatch(/REF_CASES[^\n]*1200/);
   });
-  it("mutation score matches the evidence file", () => {
+  it("mutation, deep parity and Vitest tiles match their sources", () => {
     expect(readFileSync("docs/evidence/mutation/summary.json", "utf8")).toContain("94.47");
+    expect(readFileSync("src/lib/schengen/deep/deep.test.ts", "utf8")).toContain(`${get("deep")} scenarios match`);
+    expect(readFileSync("README.md", "utf8")).toContain(`| Vitest | **${get("vitest")}** passing`);
   });
 });

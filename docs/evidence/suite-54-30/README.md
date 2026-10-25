@@ -30,7 +30,7 @@ Before these two, no backend test called `/api/v1/ees-reconcile` or `/api/v1/let
 
 ## First PR run of the 54 + 30 (PR #68, `db7776c`): red, causes found
 
-- **TestSprite V3: 52/54, 1 failed, 1 blocked** ([execution 22252c6d](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/22252c6d-540e-4963-9f23-f9cfc648cd18)).
+- **TestSprite V3: 52/54, 1 failed, 1 blocked** (execution 22252c6d).
   - **TS18 failed** (run `3e1e889a`): the letter evidence showed 0 days instead of 88. The failure bundle (`testsprite test artifact get`) shows the stored, healed code opened **the PR #67 preview by its full URL** (`ninety-git-ts03-stale-code-…`), not this PR's preview. That is a test defect: TS18 was not testing the PR it ran on. Fix: the stored code now uses the run's base URL (`VAR_{url}`) and is kept in [`TS18-letter-evidence.py`](../../../testsprite_tests/frontend/TS18-letter-evidence.py). Rerun on the PR #68 preview: passed (run `cd7adc80`).
   - **TS62 blocked** (run `9f1925fd`): "the browser viewport is desktop-sized and cannot be changed for this test". The plan now starts with an explicit "Set the browser viewport to 390 x 844" step (as TS39 does) and the code calls `set_viewport_size`. Rerun on the PR #68 preview: passed (run `4368bda2`).
 - **TestSprite backend: 30/30 "error", no test ran** ([run 40047453023](https://github.com/mohamedwael201193/ninety/actions/runs/40047453023)). Every trigger failed in about 1.4 s with no run id while the GitHub App had 54 frontend runs in flight; the CLI refuses triggers over the 50-run in-flight cap (exit 11, `testsprite test run --help`). [`backend-run.mjs`](../../../scripts/ci/backend-run.mjs) now retries exit 11 every 30 s and keeps the CLI's stderr line, and the triage comment labels exit 11 as rate limiting, not a test result. The [triage comment](https://github.com/mohamedwael201193/ninety/pull/68#issuecomment-6377849876) on this PR was the first one posted by a real red run.
@@ -44,13 +44,13 @@ Before these two, no backend test called `/api/v1/ees-reconcile` or `/api/v1/let
 
 ## Third PR run (`2803044`): green, merged as `51b1dd1`
 
-- **TestSprite V3: all 54 tests passed** ([execution 87678f09](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/87678f09-2ea3-40ec-bb9c-485ddd4e93aa)), TS42 and TS64 included.
+- **TestSprite V3: all 54 tests passed** (execution 87678f09), TS42 and TS64 included.
 - **TestSprite backend: 30/30 passed** ([run 40049174467](https://github.com/mohamedwael201193/ninety/actions/runs/40049174467)).
 - Lint/types/unit/property/fuzz, MCP end to end, Schemathesis and axe-core all passed. The required check on `main` is now `TestSprite backend (30 API tests)`.
 
 ## PR #69 first run (`73013f6`): 52/54, then TS39 moved and TS42 rewritten
 
-- [Execution bf116231](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/bf116231-929e-44c5-a8c5-8e6cbe123ad8): **TS39 failed**, "the 390 × 844 viewport requirement could not be verified because viewport resizing was unavailable"; **TS42 failed**, "Days used … remained blank after multiple waits".
+- Execution bf116231: **TS39 failed**, "the 390 × 844 viewport requirement could not be verified because viewport resizing was unavailable"; **TS42 failed**, "Days used … remained blank after multiple waits".
 - TestSprite's `test rerun --status failed` exists in the CLI, but it does not update the GitHub App's `TestSprite V3` check, so it cannot clear the gate.
 - **TS39** moved to the CLI-only phone project (`01cb7fe7`, passed: run `6daaf82b`) and runs nightly. Its App place went to **TS65** (`/parity`: the 12 hand-worked boundary cases all match): a copy expecting "61 left" failed (run `d165c529`), the real one passed (run `87da5992`).
 - **TS42** now reads the Latest legal exit tile (2024-11-23 on day 180, 2024-11-24 on day 181), a plain date, instead of the small "Days used" count beside the ring's rolling digits. A copy expecting 2024-11-23 on day 181 failed (run `243c59ca`), the real one passed (run `50cb9b5b`).

@@ -2,9 +2,13 @@
 
 Every TestSprite run link, screenshot and report gathered for Ninety is kept here and never deleted. One folder per PR or topic.
 
-## Latest: PR #68, 54/54 UI and 30/30 API → [`pr68/`](pr68/README.md)
+## Latest: PR #70, 54/54 UI, 30/30 API and the N/N gate → [`pr70/`](pr70/README.md)
 
-- PR [#68](https://github.com/mohamedwael201193/ninety/pull/68), merged as `51b1dd1`: 54/54 ([execution 87678f09](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/87678f09-2ea3-40ec-bb9c-485ddd4e93aa)) and 30/30 backend ([run](https://github.com/mohamedwael201193/ninety/actions/runs/40049174467)); two red commits before (TS18, TS42, TS62), fixed in the tests: [`suite-54-30/`](suite-54-30/README.md).
+- PR [#70](https://github.com/mohamedwael201193/ninety/pull/70), merged as `d787b01`: `TestSprite V3` "All 54 tests passed" on `c62fdd5`, backend 30/30 ([run](https://github.com/mohamedwael201193/ninety/actions/runs/40149772752)), `TestSprite N/N gate` green; 7 required checks; PR #71's first commit shows the gate failing on 52/54.
+
+## PR #68, 54/54 UI and 30/30 API → [`pr68/`](pr68/README.md)
+
+- PR [#68](https://github.com/mohamedwael201193/ninety/pull/68), merged as `51b1dd1`: 54/54 (execution 87678f09) and 30/30 backend ([run](https://github.com/mohamedwael201193/ninety/actions/runs/40049174467)); two red commits before (TS18, TS42, TS62), fixed in the tests: [`suite-54-30/`](suite-54-30/README.md).
 - Mutation testing: [`mutation/summary.json`](mutation/summary.json), 94.47% combined (full run 87.44%, then a targeted rerun).
 - TestSprite N/N gate (required check 7): what the `TestSprite V3` status reports on every PR, and the gate's design: [`../NN-GATE.md`](../NN-GATE.md), raw status list [`nn-gate/`](nn-gate/testsprite-v3-final-statuses.txt). Defect ledger: [`../DEFECTS.md`](../DEFECTS.md). Deep parity difference: [`../PARITY-399.md`](../PARITY-399.md).
 - PRs #65–#67 (nightly smoke, triage, required checks, TS03 `stale_code` red then green): [`pr65-67/`](pr65-67/README.md).
@@ -12,15 +16,15 @@ Every TestSprite run link, screenshot and report gathered for Ninety is kept her
 
 ## Before that: PRs #61 and #62, both gates required
 
-- PR [#61](https://github.com/mohamedwael201193/ninety/pull/61), merged as `392a265`: 43/43 ([execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/d5ce97c4-05b4-4d90-b30f-7b62d893514a)).
-- PR [#62](https://github.com/mohamedwael201193/ninety/pull/62), merged as `a777c3b`: 43/43 ([execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b43fc678-1b47-4f4f-9c4c-cd08eb76daac)); `TestSprite backend (28 API tests)` green on the PR ([run](https://github.com/mohamedwael201193/ninety/actions/runs/39519798095/job/118960558605)) and on `main` ([run](https://github.com/mohamedwael201193/ninety/actions/runs/39520342113/job/118962382936)). Since #62 both `TestSprite V3` and `TestSprite backend (28 API tests)` are required checks on `main`.
+- PR [#61](https://github.com/mohamedwael201193/ninety/pull/61), merged as `392a265`: 43/43 (execution (TestSprite execution `d5ce97c4`)).
+- PR [#62](https://github.com/mohamedwael201193/ninety/pull/62), merged as `a777c3b`: 43/43 (execution (TestSprite execution `b43fc678`)); `TestSprite backend (28 API tests)` green on the PR ([run](https://github.com/mohamedwael201193/ninety/actions/runs/39519798095/job/118960558605)) and on `main` ([run](https://github.com/mohamedwael201193/ninety/actions/runs/39520342113/job/118962382936)). Since #62 both `TestSprite V3` and `TestSprite backend (28 API tests)` are required checks on `main`.
 - The README screenshots are in [`docs/screens/`](../screens/). The hero, EES check, letter and parity shots were taken from a local production build of the PR #63 branch; the others from production.
 - [`fresh-band/`](fresh-band/): the `/?fresh=1` band showing the old count, reproduced and fixed in #62.
 - `receipts/final-vitest.txt`: Vitest after those changes (367 passed, 3 skipped; 397 as of 2026-10-24).
 
 ## Before that: PR #60 → [`testsprite/ts42-pr60/`](testsprite/ts42-pr60/)
 
-- PR [#60](https://github.com/mohamedwael201193/ninety/pull/60), merged as `9f781f6`. TS42 went red, 42/43 ([execution](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/1f423c16-9271-4530-bbd6-11c6ec403bef)), on a blank loading state: a UX problem, not a wrong number. After the fix the run passed 43/43 ([execution `eba1bf9c`](https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/eba1bf9c-2c9c-4a6a-8711-79b4955b870a)). The folder has the slowed-CPU timeline and the red and green Vitest output.
+- PR [#60](https://github.com/mohamedwael201193/ninety/pull/60), merged as `9f781f6`. TS42 went red, 42/43 (execution (TestSprite execution `1f423c16`)), on a blank loading state: a UX problem, not a wrong number. After the fix the run passed 43/43 (execution `eba1bf9c`). The folder has the slowed-CPU timeline and the red and green Vitest output.
 
 ## Before that: PR #57 and the backend suite → [`testsprite/`](testsprite/README.md)
 

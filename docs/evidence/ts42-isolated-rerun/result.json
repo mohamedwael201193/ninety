@@ -32,8 +32,8 @@
    "reason": "auto_heal_requested",
    "caveat": null
   },
-  "dashboardUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/test-cases/0e997467-fa2a-488c-bb30-60de02358bef",
-  "executionUrl": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e892b114-bb22-42f1-a218-35c45f1a992a/test/0c8f535f-664e-4a89-891a-7676ce7dde92",
+  "dashboardUrl": "testsprite-portal",
+  "executionUrl": "testsprite-execution:e892b114-bb22-42f1-a218-35c45f1a992a",
   "apiOutput": null,
   "trace": null
  },

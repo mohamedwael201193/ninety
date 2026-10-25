@@ -55,9 +55,9 @@ The second TestSprite project has 28 Python backend tests run against production
 | Screenshot | What it shows |
 |---|---|
 | ![](be-runs-list.png) | The project's run list: 5/5 (the first 5 tests, 22:30 UTC), 27/28 (22:35 UTC) and 1/1 (BE28 re-run, 22:38 UTC). |
-| ![](be-run-28-red-be28.png) | Run [`5071eab5`](https://www.testsprite.com/dashboard-v3/o/mohamed-waels-workspace-1b474b7a/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/execution/5071eab5-493e-4982-84fe-168a2133c981): 96%, 27 passed, 1 failed, 28 total. The failed row is BE28, "MCP: an error for an invalid request id still carries "id": null (JSON-RPC 2.0 section 5)". The verdict quotes production's answer: `{"jsonrpc":"2.0","error":{"code":-32600,...}}` with no `id`. |
+| ![](be-run-28-red-be28.png) | Run `5071eab5`: 96%, 27 passed, 1 failed, 28 total. The failed row is BE28, "MCP: an error for an invalid request id still carries "id": null (JSON-RPC 2.0 section 5)". The verdict quotes production's answer: `{"jsonrpc":"2.0","error":{"code":-32600,...}}` with no `id`. |
 | ![](be-be28-failure-detail.png) | BE28 opened in that run: the test code (`True`, `{"a": 1}` and `[1]` as ids, asserting `"id"` is present and null) and the error "error response has no id member". |
-| ![](be-be28-green-rerun.png) | Run [`ef7bc14a`](https://www.testsprite.com/dashboard-v3/o/mohamed-waels-workspace-1b474b7a/projects/790eba05-abdb-41c5-ae1a-4b2b0131b438/execution/ef7bc14a-8d5c-467f-bc24-60ce3801ec2e), after the fix reached production in `8c86d02`: BE28 alone, 1 passed, 100%. |
+| ![](be-be28-green-rerun.png) | Run `ef7bc14a`, after the fix reached production in `8c86d02`: BE28 alone, 1 passed, 100%. |
 
 The raw files are in [`backend/`](backend/):
 - the CLI summaries and JUnit for both suite runs (`run-5-first-*`, `run-28-red-*`);
