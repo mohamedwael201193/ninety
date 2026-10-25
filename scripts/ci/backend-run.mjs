@@ -80,6 +80,6 @@ const summary = [
   "",
 ].join("\n");
 if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
-writeFileSync("backend-results.json", JSON.stringify({ target, rows }, null, 2));
+writeFileSync("backend-results.json", JSON.stringify({ target, sha: process.env.SHA ?? null, rows }, null, 2));
 console.log(`${rows.length - failed.length}/${rows.length} passed against ${target}`);
 process.exit(failed.length ? 1 : 0);

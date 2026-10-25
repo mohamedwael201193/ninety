@@ -3,7 +3,7 @@ import re
 from playwright import async_api
 from playwright.async_api import expect
 
-# TS57-deep-parity: /parity shows the deep parity score 399/400 and names the one scenario outside the calculator
+# TS57-deep-parity: /parity shows the deep parity score 399/400 and says 12 inputs are outside the calculator, naming kom-1-4
 # Plan: testsprite_tests/plans/TS57-deep-parity.json. Stored with `testsprite test code put` (user-authored, replayed).
 
 
