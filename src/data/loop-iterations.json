@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T01:24:43.530Z",
+  "generatedAt": "2026-10-25T01:41:58.589Z",
   "source": "GitHub API + src/data/loop.json",
   "iterations": [
     {
@@ -74,7 +74,7 @@
           "message": "TestSprite suite: date-format test plan and a documented test index",
           "state": "success",
           "at": "2026-10-19T00:06:13Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/9b1c34fc-0ce7-48ae-a356-c9438256cc83",
+          "execution": "9b1c34fc-0ce7-48ae-a356-c9438256cc83",
           "description": "All 10 tests passed"
         },
         {
@@ -82,7 +82,7 @@
           "message": "TestSprite README: note the PR merge gate and test count",
           "state": "success",
           "at": "2026-10-19T00:09:04Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b3f93550-866a-49be-88ae-76d5f3c8ad09",
+          "execution": "b3f93550-866a-49be-88ae-76d5f3c8ad09",
           "description": "All 11 tests passed"
         }
       ],
@@ -116,7 +116,7 @@
           "message": "Refactor parity table rendering into a row component",
           "state": "failure",
           "at": "2026-10-19T00:13:17Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/462ee782-ffde-45b7-a89d-fc1edf82f45a",
+          "execution": "462ee782-ffde-45b7-a89d-fc1edf82f45a",
           "description": "9/11 passed · 2 failed"
         },
         {
@@ -124,7 +124,7 @@
           "message": "Vitest: automatic JSX runtime so component helpers can be unit-tested",
           "state": "success",
           "at": "2026-10-19T00:20:34Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/fcfeb4fe-ec50-4821-b04c-f28dd9427ab4",
+          "execution": "fcfeb4fe-ec50-4821-b04c-f28dd9427ab4",
           "description": "All 11 tests passed"
         }
       ],
@@ -161,7 +161,7 @@
           "message": "Leave stays that began before 10 April 2026 out of the EES comparison",
           "state": "success",
           "at": "2026-10-19T00:43:53Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/0dc2803b-8a5f-4ff1-a303-ba3f65b4e06b",
+          "execution": "0dc2803b-8a5f-4ff1-a303-ba3f65b4e06b",
           "description": "All 11 tests passed"
         },
         {
@@ -169,7 +169,7 @@
           "message": "Name the EES cutoff as its own finding and keep it out of the correction letter",
           "state": "success",
           "at": "2026-10-19T00:57:42Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/f94a993b-fe4e-437a-814f-bcfc78240263",
+          "execution": "f94a993b-fe4e-437a-814f-bcfc78240263",
           "description": "All 11 tests passed"
         }
       ],
@@ -203,7 +203,7 @@
           "message": "Give parity scenarios readable names and capitalise months",
           "state": "success",
           "at": "2026-10-19T00:44:46Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/deb4ea87-2bc4-4250-ae8b-b5fa8689a8ab",
+          "execution": "deb4ea87-2bc4-4250-ae8b-b5fa8689a8ab",
           "description": "All 11 tests passed"
         }
       ],
@@ -231,7 +231,7 @@
           "message": "Add property tests over random travel histories; fix false exit mismatch for trips sharing an entry date",
           "state": "success",
           "at": "2026-10-19T00:44:20Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e2792501-b434-490d-8f6b-2cbc6af91e71",
+          "execution": "e2792501-b434-490d-8f6b-2cbc6af91e71",
           "description": "All 11 tests passed"
         },
         {
@@ -239,7 +239,7 @@
           "message": "Merge main into property-tests",
           "state": "success",
           "at": "2026-10-19T01:11:18Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/68464ab2-6d2a-4e09-9a5f-47e6ebf15c47",
+          "execution": "68464ab2-6d2a-4e09-9a5f-47e6ebf15c47",
           "description": "All 11 tests passed"
         }
       ],
@@ -273,7 +273,7 @@
           "message": "README: show the TestSprite check gating pull requests",
           "state": "success",
           "at": "2026-10-19T00:43:29Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/7749bb4b-820d-4b87-8e44-65286f0bc39d",
+          "execution": "7749bb4b-820d-4b87-8e44-65286f0bc39d",
           "description": "All 11 tests passed"
         },
         {
@@ -297,7 +297,7 @@
           "message": "Merge main into readme-ci-in-action",
           "state": "success",
           "at": "2026-10-19T01:46:04Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/0dda45d5-9c38-4d57-999e-0722f2ad3463",
+          "execution": "0dda45d5-9c38-4d57-999e-0722f2ad3463",
           "description": "All 11 tests passed"
         }
       ],
@@ -331,7 +331,7 @@
           "message": "CI: run lint, types and the full Vitest suite on every PR, plus a nightly fuzz seed",
           "state": "success",
           "at": "2026-10-19T01:47:40Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/5a8de5be-0e69-4456-8d76-ce5c97de5821",
+          "execution": "5a8de5be-0e69-4456-8d76-ce5c97de5821",
           "description": "All 11 tests passed"
         }
       ],
@@ -359,7 +359,7 @@
           "message": "Trip form: an open stay always saves, and the submit button no longer shares the 'Add trip' label",
           "state": "success",
           "at": "2026-10-19T02:13:42Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/a9e16249-bb78-4da2-83d2-225062f88008",
+          "execution": "a9e16249-bb78-4da2-83d2-225062f88008",
           "description": "All 12 tests passed"
         }
       ],
@@ -387,7 +387,7 @@
           "message": "Trip form: read the fields on submit so autofilled or scripted values save, and an open stay ignores the exit field",
           "state": "success",
           "at": "2026-10-19T02:28:08Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/52e123c0-2de1-4b44-a60d-beac4d94d9f6",
+          "execution": "52e123c0-2de1-4b44-a60d-beac4d94d9f6",
           "description": "All 12 tests passed"
         }
       ],
@@ -415,7 +415,7 @@
           "message": "Scenario links: /?scenario=open-stay and friends load a named demo history without touching saved trips",
           "state": "success",
           "at": "2026-10-19T02:28:52Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/58efd029-c516-4ff9-8fdc-4572a2c6dff1",
+          "execution": "58efd029-c516-4ff9-8fdc-4572a2c6dff1",
           "description": "All 12 tests passed"
         }
       ],
@@ -443,7 +443,7 @@
           "message": "Test planned trips during an open stay (currently fails: the planner treats the days after today as absence)",
           "state": "failure",
           "at": "2026-10-19T01:57:37Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/8e2076fc-03b4-4ede-8db0-42304455f7c4",
+          "execution": "8e2076fc-03b4-4ede-8db0-42304455f7c4",
           "description": "12/14 passed · 2 failed"
         },
         {
@@ -451,7 +451,7 @@
           "message": "TestSprite TS09/TS10: create the open stay in atomic steps and assert it saved",
           "state": "failure",
           "at": "2026-10-19T02:20:06Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/18e30467-1d03-479e-bf9e-2cfbd6ec5ee6",
+          "execution": "18e30467-1d03-479e-bf9e-2cfbd6ec5ee6",
           "description": "12/14 passed · 2 failed"
         },
         {
@@ -459,7 +459,7 @@
           "message": "TestSprite TS09/TS10: start from /?scenario=open-stay and check only the planner verdict and latest exit",
           "state": "failure",
           "at": "2026-10-19T02:33:31Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/9f0a7f9b-ea9f-4b3d-92a3-03ad3a33993c",
+          "execution": "9f0a7f9b-ea9f-4b3d-92a3-03ad3a33993c",
           "description": "12/14 passed · 2 failed"
         },
         {
@@ -467,7 +467,7 @@
           "message": "Property test: a plan during an open stay agrees with the same dates as one stay",
           "state": "failure",
           "at": "2026-10-19T02:40:33Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/705563ad-0e71-41c5-bd8a-272239f8e92a",
+          "execution": "705563ad-0e71-41c5-bd8a-272239f8e92a",
           "description": "13/14 passed · 1 failed"
         },
         {
@@ -475,7 +475,7 @@
           "message": "Planner form: read the date fields on submit and update the verdict in place, so a changed exit never shows the old result",
           "state": "success",
           "at": "2026-10-19T02:45:34Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/9729a19e-dbab-4c24-9811-ec7d7236f060",
+          "execution": "9729a19e-dbab-4c24-9811-ec7d7236f060",
           "description": "All 14 tests passed"
         }
       ],
@@ -532,7 +532,7 @@
           "message": "Self-host the fonts so the build never depends on Google Fonts (the Vercel build of 336430b failed in next/font/google)",
           "state": "success",
           "at": "2026-10-19T03:31:52Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/8944ffe2-ca23-45d9-a13b-e61f50d56c68",
+          "execution": "8944ffe2-ca23-45d9-a13b-e61f50d56c68",
           "description": "All 14 tests passed"
         }
       ],
@@ -560,7 +560,7 @@
           "message": "CI: run on Node 22 (pdfjs-dist needs >=22.13; Node 20 is deprecated on Actions)",
           "state": "failure",
           "at": "2026-10-19T02:50:29Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/8346ca6e-a03f-4db0-8297-b75cf01770b3",
+          "execution": "8346ca6e-a03f-4db0-8297-b75cf01770b3",
           "description": "13/14 passed · 1 failed"
         },
         {
@@ -568,7 +568,7 @@
           "message": "Merge main into b-ci-node22",
           "state": "success",
           "at": "2026-10-19T03:37:15Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/471d71d4-e84e-43e1-9758-1c1eb0fe82bd",
+          "execution": "471d71d4-e84e-43e1-9758-1c1eb0fe82bd",
           "description": "All 14 tests passed"
         }
       ],
@@ -604,7 +604,7 @@
           "message": "Deps: Vitest 4.1.12 (fixes critical tinypool RCE and @vitest/mocker path traversal)",
           "state": "success",
           "at": "2026-10-19T03:52:11Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/80f82b0f-de12-4f74-8eed-af9b81962ec1",
+          "execution": "80f82b0f-de12-4f74-8eed-af9b81962ec1",
           "description": "All 14 tests passed"
         }
       ],
@@ -632,7 +632,7 @@
           "message": "TestSprite TS07: assert the visible verdict, not a data attribute; record current cloud test ids",
           "state": "success",
           "at": "2026-10-19T04:06:22Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/d438dac4-7edb-4e69-8d15-e51c79c20849",
+          "execution": "d438dac4-7edb-4e69-8d15-e51c79c20849",
           "description": "All 14 tests passed"
         }
       ],
@@ -660,7 +660,7 @@
           "message": "Deps: pin Next's bundled PostCSS to ^8.5.31 (fixes 4 high PostCSS advisories and the Next moderate)",
           "state": "failure",
           "at": "2026-10-19T03:56:26Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/ad3495e3-9953-489d-b69e-7c0084df7ae5",
+          "execution": "ad3495e3-9953-489d-b69e-7c0084df7ae5",
           "description": "13/14 passed · 1 failed"
         },
         {
@@ -668,7 +668,7 @@
           "message": "Merge main into b-audit-postcss",
           "state": "success",
           "at": "2026-10-19T04:10:27Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/333c44d6-9f07-423f-a09f-d4a891ce5078",
+          "execution": "333c44d6-9f07-423f-a09f-d4a891ce5078",
           "description": "All 14 tests passed"
         }
       ],
@@ -702,7 +702,7 @@
           "message": "Property tests for the EES cutoff; fix a day dropped from the comparison when trips overlap the cutoff",
           "state": "success",
           "at": "2026-10-19T04:14:50Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/caecc9b5-2ea0-4691-84ff-54947a2d9139",
+          "execution": "caecc9b5-2ea0-4691-84ff-54947a2d9139",
           "description": "All 14 tests passed"
         }
       ],
@@ -730,7 +730,7 @@
           "message": "EES cutoff: a same-day re-entry on or after 10 April 2026 is a new, comparable visit",
           "state": "success",
           "at": "2026-10-19T04:19:02Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/662fc7e4-3a6e-4086-8b63-325092a502b7",
+          "execution": "662fc7e4-3a6e-4086-8b63-325092a502b7",
           "description": "All 14 tests passed"
         }
       ],
@@ -758,7 +758,7 @@
           "message": "Letter: state Article 52(1) to 52(5) one clause at a time",
           "state": "success",
           "at": "2026-10-19T04:28:17Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/700e4492-1726-411a-ae71-2407d24e1406",
+          "execution": "700e4492-1726-411a-ae71-2407d24e1406",
           "description": "All 14 tests passed"
         }
       ],
@@ -786,7 +786,7 @@
           "message": "Letter: require a full reply email address",
           "state": "success",
           "at": "2026-10-19T04:41:39Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/380eb6e6-83d5-4225-a8f2-3537aa78e724",
+          "execution": "380eb6e6-83d5-4225-a8f2-3537aa78e724",
           "description": "All 14 tests passed"
         }
       ],
@@ -814,7 +814,7 @@
           "message": "EES: an earlier exit is an exit disagreement, not a missing entry",
           "state": "success",
           "at": "2026-10-19T04:51:20Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/3df89963-1f2a-4a2f-9fc1-c3c4986a1f11",
+          "execution": "3df89963-1f2a-4a2f-9fc1-c3c4986a1f11",
           "description": "All 14 tests passed"
         }
       ],
@@ -842,7 +842,7 @@
           "message": "Days ring: keep the label inside the ring on two lines, so 107/90 never touches the stroke",
           "state": "success",
           "at": "2026-10-19T04:44:20Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/defd0c9b-03ed-4f1e-8624-48228cf5ef2c",
+          "execution": "defd0c9b-03ed-4f1e-8624-48228cf5ef2c",
           "description": "All 14 tests passed"
         }
       ],
@@ -870,7 +870,7 @@
           "message": "Timeline: outline and label today's cell, so a counted day at the end reads as today",
           "state": "success",
           "at": "2026-10-19T04:46:47Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/ffe6b75c-ef73-4bcd-aa21-e58b461f3506",
+          "execution": "ffe6b75c-ef73-4bcd-aa21-e58b461f3506",
           "description": "All 14 tests passed"
         }
       ],
@@ -898,7 +898,7 @@
           "message": "Status: say 'No days left' and 'Not today' after an earlier overstay, instead of 'Over limit' next to 'No overstay'",
           "state": "success",
           "at": "2026-10-19T04:57:21Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/809fb363-be7e-4315-b874-cc289b7d26cc",
+          "execution": "809fb363-be7e-4315-b874-cc289b7d26cc",
           "description": "All 14 tests passed"
         }
       ],
@@ -932,7 +932,7 @@
           "message": "Docs: 14-test suite, PR-only trigger, honest #8 and #14 history; LICENSE and PR template",
           "state": "success",
           "at": "2026-10-19T04:57:59Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/a24d0209-8edc-49ee-958d-241b6a74971c",
+          "execution": "a24d0209-8edc-49ee-958d-241b6a74971c",
           "description": "All 14 tests passed"
         }
       ],
@@ -960,7 +960,7 @@
           "message": "TestSprite: deepen all 14 plans to exact values (TS02 checks every row's count)",
           "state": "failure",
           "at": "2026-10-19T05:05:46Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/61fd31b1-2a5f-4699-88d2-8a8fc407b70f",
+          "execution": "61fd31b1-2a5f-4699-88d2-8a8fc407b70f",
           "description": "13/14 passed · 1 failed"
         },
         {
@@ -968,7 +968,7 @@
           "message": "TS26: days left is 90, not 78 (the May days leave the window before day 90)",
           "state": "success",
           "at": "2026-10-19T05:09:44Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/a1692a81-cb01-473f-835a-9fbdc409979e",
+          "execution": "a1692a81-cb01-473f-835a-9fbdc409979e",
           "description": "All 14 tests passed"
         }
       ],
@@ -1004,7 +1004,7 @@
           "message": "Parity tests run offline against a stored, hashed Commission page; nightly job checks the live page for drift",
           "state": "success",
           "at": "2026-10-19T05:13:53Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/3262d65a-0c31-48c4-b20d-39e132c083b9",
+          "execution": "3262d65a-0c31-48c4-b20d-39e132c083b9",
           "description": "All 14 tests passed"
         }
       ],
@@ -1040,7 +1040,7 @@
           "message": "LOOP.md and loop.json generated from TestSprite run history (npm run loop:proof)",
           "state": "success",
           "at": "2026-10-19T05:14:56Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/a27d2510-9553-4389-967b-42d3edbe5f66",
+          "execution": "a27d2510-9553-4389-967b-42d3edbe5f66",
           "description": "All 14 tests passed"
         }
       ],
@@ -1076,7 +1076,7 @@
           "message": "TS16 (test first): a demo scenario opened on / must carry to /ees with the same numbers (fails today)",
           "state": "failure",
           "at": "2026-10-19T05:19:54Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/7fb48865-5e1e-4149-a4dd-afb4050f1462",
+          "execution": "7fb48865-5e1e-4149-a4dd-afb4050f1462",
           "description": "14/15 passed · 1 failed"
         },
         {
@@ -1084,7 +1084,7 @@
           "message": "Redeploy preview after the Vercel daily cap reset",
           "state": "success",
           "at": "2026-10-20T05:43:16Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/2a259b3e-9f21-4481-a76e-80c2b70ea1c1",
+          "execution": "2a259b3e-9f21-4481-a76e-80c2b70ea1c1",
           "description": "All 15 tests passed"
         }
       ],
@@ -1120,7 +1120,7 @@
           "message": "EES: a corrupt trip row no longer hides a match from the valid trips",
           "state": "success",
           "at": "2026-10-20T05:47:40Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/8d1a8adc-57ac-4d78-8ba9-8a2df3f19ea1",
+          "execution": "8d1a8adc-57ac-4d78-8ba9-8a2df3f19ea1",
           "description": "All 15 tests passed"
         }
       ],
@@ -1148,7 +1148,7 @@
           "message": "Evidence: run records for #39, #40, #41 and the letter PR, with an index",
           "state": "success",
           "at": "2026-10-20T06:00:56Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e7a4159c-fc42-4924-ae8b-bf4b02c2fca6",
+          "execution": "e7a4159c-fc42-4924-ae8b-bf4b02c2fca6",
           "description": "All 17 tests passed"
         },
         {
@@ -1156,7 +1156,7 @@
           "message": "Letter: evidence is a real accessible table (date, your dates, EES figure, difference); ?scenario=demo opens the demo history",
           "state": "success",
           "at": "2026-10-20T06:15:55Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/6d734ee2-5e0d-4e8b-9156-e8d6fccc3643",
+          "execution": "6d734ee2-5e0d-4e8b-9156-e8d6fccc3643",
           "description": "All 17 tests passed"
         }
       ],
@@ -1190,7 +1190,7 @@
           "message": "Not-covered notice on /, /ees and /letter: long-stay visas, residence permits, bilateral agreements, Ireland and Cyprus",
           "state": "failure",
           "at": "2026-10-20T05:53:05Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/d3b95b00-ab77-4d40-9a71-cf53c211b0be",
+          "execution": "d3b95b00-ab77-4d40-9a71-cf53c211b0be",
           "description": "14/15 passed · 1 failed"
         },
         {
@@ -1198,7 +1198,7 @@
           "message": "Merge remote-tracking branch 'origin/main' into b-landing",
           "state": "failure",
           "at": "2026-10-20T06:24:36Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/33ed3b0a-7019-4f8f-893a-30034a41cb1a",
+          "execution": "33ed3b0a-7019-4f8f-893a-30034a41cb1a",
           "description": "16/17 passed · 1 failed"
         },
         {
@@ -1206,7 +1206,7 @@
           "message": "?fresh=1 is consumed: clear trips once and drop the flag from the address, so a reload keeps new trips; #42 QA screenshots",
           "state": "failure",
           "at": "2026-10-20T06:31:04Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/029f8467-6cf1-4223-a498-dce441ca201f",
+          "execution": "029f8467-6cf1-4223-a498-dce441ca201f",
           "description": "16/17 passed · 1 failed"
         },
         {
@@ -1214,7 +1214,7 @@
           "message": "TS18: wait for the letter panel and read each evidence cell by test id (flake evidence: DOM had 2, screenshots at 4 widths)",
           "state": "failure",
           "at": "2026-10-20T06:36:30Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/a154dad3-ef13-4eeb-b0c8-430f61dafca3",
+          "execution": "a154dad3-ef13-4eeb-b0c8-430f61dafca3",
           "description": "16/17 passed · 1 failed"
         },
         {
@@ -1222,7 +1222,7 @@
           "message": "Letter evidence table: four column headers over four plain cells, so every reader pairs Difference with its value (TS18 red twice)",
           "state": "success",
           "at": "2026-10-20T06:41:54Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/62700579-5b62-45f6-a582-4601def93836",
+          "execution": "62700579-5b62-45f6-a582-4601def93836",
           "description": "All 17 tests passed"
         }
       ],
@@ -1282,7 +1282,7 @@
           "message": "EES findings: show each finding's code next to its label",
           "state": "success",
           "at": "2026-10-19T04:43:20Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/4a41007c-d3ba-4284-aaac-90bb60f73df2",
+          "execution": "4a41007c-d3ba-4284-aaac-90bb60f73df2",
           "description": "All 14 tests passed"
         },
         {
@@ -1290,7 +1290,7 @@
           "message": "EES code tags: 11px full-ink text for contrast (QA nit); QA evidence",
           "state": "success",
           "at": "2026-10-20T06:55:29Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/c84e6cda-2c3c-4a9e-adc6-48e85eca0a4e",
+          "execution": "c84e6cda-2c3c-4a9e-adc6-48e85eca0a4e",
           "description": "All 17 tests passed"
         }
       ],
@@ -1324,7 +1324,7 @@
           "message": "Letter box: always scroll with the mouse wheel (data-lenis-prevent)",
           "state": "success",
           "at": "2026-10-19T04:47:26Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/821ff5d3-9403-4da1-a2c5-f4b55deeff70",
+          "execution": "821ff5d3-9403-4da1-a2c5-f4b55deeff70",
           "description": "All 14 tests passed"
         },
         {
@@ -1332,7 +1332,7 @@
           "message": "Merge main into b-smooth-scroll-landing (keep the evidence table and data-lenis-prevent); QA evidence",
           "state": "failure",
           "at": "2026-10-20T07:00:19Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/f4cdf5a3-e8d5-48a6-a7d0-b98a7ea054e1",
+          "execution": "f4cdf5a3-e8d5-48a6-a7d0-b98a7ea054e1",
           "description": "15/17 passed · 2 failed"
         },
         {
@@ -1340,7 +1340,7 @@
           "message": "TestSprite plans: TC011 reloads with a real browser refresh; TS18 reads the evidence cells by test id plus the letter sentence",
           "state": "success",
           "at": "2026-10-20T07:06:20Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e5e073b9-bc93-4e43-b96c-61f7269a13bf",
+          "execution": "e5e073b9-bc93-4e43-b96c-61f7269a13bf",
           "description": "All 17 tests passed"
         }
       ],
@@ -1383,7 +1383,7 @@
           "message": "Hero phone: the EES card is in the first paint and the loop only runs while the phone is on screen",
           "state": "success",
           "at": "2026-10-19T04:57:19Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/7fbc606b-3508-4539-8a45-4b650170afc5",
+          "execution": "7fbc606b-3508-4539-8a45-4b650170afc5",
           "description": "All 14 tests passed"
         },
         {
@@ -1391,7 +1391,7 @@
           "message": "Watchdog fixes: demo letter prefills the EES side; hero note separates the illustration from 'Try an example'; no '0' beside 'Safe' on the phone",
           "state": "success",
           "at": "2026-10-20T06:50:07Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/1d157115-88fc-4f3c-a94f-a913f56a7a7b",
+          "execution": "1d157115-88fc-4f3c-a94f-a913f56a7a7b",
           "description": "All 17 tests passed"
         }
       ],
@@ -1431,7 +1431,7 @@
           "message": "Band counters show the real figure from the first paint, not 0 until scrolled into view",
           "state": "success",
           "at": "2026-10-20T07:11:37Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/d66e71a5-5887-43da-9384-2ed40f4742bd",
+          "execution": "d66e71a5-5887-43da-9384-2ed40f4742bd",
           "description": "All 17 tests passed"
         },
         {
@@ -1439,7 +1439,7 @@
           "message": "Band counters: drop the count-up, the real figures never dip to 0 on scroll-in",
           "state": "failure",
           "at": "2026-10-20T07:18:38Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/7cf3f5d1-d950-4b7b-884e-95b8a72ea9f6",
+          "execution": "7cf3f5d1-d950-4b7b-884e-95b8a72ea9f6",
           "description": "16/17 passed · 1 failed"
         },
         {
@@ -1447,7 +1447,7 @@
           "message": "Letter evidence cells name the unit: 88 days, 90 days, 2 days (TS18 step updated)",
           "state": "success",
           "at": "2026-10-20T07:24:16Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/6a8fed14-7b03-4289-87ba-9602de08a038",
+          "execution": "6a8fed14-7b03-4289-87ba-9602de08a038",
           "description": "All 17 tests passed"
         }
       ],
@@ -1489,7 +1489,7 @@
           "message": "Nightly TestSprite run is opt-in (TESTSPRITE_NIGHTLY=true); README receipts refreshed (17 cloud tests, 143 unit, 42 PRs, 5 red-to-green bugs); #43 QA screenshot",
           "state": "failure",
           "at": "2026-10-20T07:29:09Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/ce75b9ab-19e5-41b9-b00e-df47b8518ce7",
+          "execution": "ce75b9ab-19e5-41b9-b00e-df47b8518ce7",
           "description": "0/17 passed · 17 blocked"
         },
         {
@@ -1497,7 +1497,7 @@
           "message": "vercel.json: skip only production builds of CI/docs-only commits; previews always build for TestSprite",
           "state": "success",
           "at": "2026-10-20T07:34:18Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/5ed4e7c0-7c20-451e-9b81-776a18c207f4",
+          "execution": "5ed4e7c0-7c20-451e-9b81-776a18c207f4",
           "description": "All 17 tests passed"
         }
       ],
@@ -1549,7 +1549,7 @@
           "message": "Skip stored trips whose exit is before the entry",
           "state": "success",
           "at": "2026-10-20T07:38:59Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/4abc5d0a-f343-436c-849b-b26d88a485b9",
+          "execution": "4abc5d0a-f343-436c-849b-b26d88a485b9",
           "description": "All 17 tests passed"
         }
       ],
@@ -1577,7 +1577,7 @@
           "message": "Security headers on every route: no framing by other sites, no referrer, no plugins, nosniff, restricted permissions; header test",
           "state": "success",
           "at": "2026-10-20T07:45:01Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/851501fb-73ff-42e7-a22f-44398ce2e5d0",
+          "execution": "851501fb-73ff-42e7-a22f-44398ce2e5d0",
           "description": "All 17 tests passed"
         }
       ],
@@ -1605,7 +1605,7 @@
           "message": "EES and letter pages: the reference date appears only after mount, so the server's UTC date never flashes; server-render tests",
           "state": "success",
           "at": "2026-10-20T07:51:13Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/c7b0a7e0-be0c-4248-b727-9a0959a7c14c",
+          "execution": "c7b0a7e0-be0c-4248-b727-9a0959a7c14c",
           "description": "All 17 tests passed"
         }
       ],
@@ -1633,7 +1633,7 @@
           "message": "TestSprite: create the 10 EES and calculator cloud tests; ids recorded (suite 17 → 27)",
           "state": "success",
           "at": "2026-10-20T07:57:26Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/15eb85a6-f6d3-4826-87f2-5b2dbba84eb4",
+          "execution": "15eb85a6-f6d3-4826-87f2-5b2dbba84eb4",
           "description": "All 27 tests passed"
         }
       ],
@@ -1661,7 +1661,7 @@
           "message": "DateField: aria-describedby only names messages that exist",
           "state": "success",
           "at": "2026-10-20T08:04:03Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/40e653f7-fa09-411f-9c35-7a5b5446ddce",
+          "execution": "40e653f7-fa09-411f-9c35-7a5b5446ddce",
           "description": "All 27 tests passed"
         }
       ],
@@ -1689,7 +1689,7 @@
           "message": "Planned-trip verdict scrolls into view above the phone's bottom bar; TS36/TS37 cloud tests created (suite 29); evidence",
           "state": "success",
           "at": "2026-10-20T08:11:48Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/bb3418b8-3d88-4ae1-a3be-1a9ac55ae010",
+          "execution": "bb3418b8-3d88-4ae1-a3be-1a9ac55ae010",
           "description": "All 29 tests passed"
         },
         {
@@ -1697,7 +1697,7 @@
           "message": "Gallery: a card whose used and left exceed 90 says why (old days drop out of the window during a new stay)",
           "state": "success",
           "at": "2026-10-20T08:19:43Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/414b65f0-b089-469b-a793-5d581bfc4b65",
+          "execution": "414b65f0-b089-469b-a793-5d581bfc4b65",
           "description": "All 29 tests passed"
         }
       ],
@@ -1731,7 +1731,7 @@
           "message": "TestSprite: create TS38 cutoff card cloud test (suite 30)",
           "state": "success",
           "at": "2026-10-20T08:24:32Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/3c67752f-345a-4800-a6ee-562d47538166",
+          "execution": "3c67752f-345a-4800-a6ee-562d47538166",
           "description": "All 30 tests passed"
         }
       ],
@@ -1759,7 +1759,7 @@
           "message": "TestSprite: create TS40 404 cloud test (suite 31); #51 QA evidence",
           "state": "success",
           "at": "2026-10-20T08:31:40Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/fd325f19-da88-439a-9243-160837ede547",
+          "execution": "fd325f19-da88-439a-9243-160837ede547",
           "description": "All 31 tests passed"
         }
       ],
@@ -1787,7 +1787,7 @@
           "message": "TestSprite: create TS39 phone-nav cloud test (suite 32); #52 QA evidence",
           "state": "success",
           "at": "2026-10-20T08:38:56Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/8c9f2d28-dbdc-46a5-917d-a0677d26d1fb",
+          "execution": "8c9f2d28-dbdc-46a5-917d-a0677d26d1fb",
           "description": "All 32 tests passed"
         }
       ],
@@ -1815,7 +1815,7 @@
           "message": "/proof summary counts only tests that ran (matrix regenerated: 25/25 passed, github-pr-53); nav Check/Plan carry ?scenario=; evidence",
           "state": "success",
           "at": "2026-10-20T08:47:30Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/18bb1fb1-05f1-42c6-bb4d-a9d4755ba0ba",
+          "execution": "18bb1fb1-05f1-42c6-bb4d-a9d4755ba0ba",
           "description": "All 32 tests passed"
         }
       ],
@@ -1843,7 +1843,7 @@
           "message": "TestSprite: create TS21, TS41, TS42 (suite 35); proof generator treats never-run tests as not run; matrix regenerated; #54 QA evidence",
           "state": "failure",
           "at": "2026-10-20T08:54:37Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/0c017d10-c7fd-453d-9928-04c02c373516",
+          "execution": "0c017d10-c7fd-453d-9928-04c02c373516",
           "description": "34/35 passed · 1 failed"
         },
         {
@@ -1851,7 +1851,7 @@
           "message": "Fix: sheet captures the opener once per open, keeps onClose in a ref, restores focus after inert is removed (TS41 green)",
           "state": "failure",
           "at": "2026-10-20T09:01:56Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/06e10b14-0d90-4f37-9ef5-294abd39e5b3",
+          "execution": "06e10b14-0d90-4f37-9ef5-294abd39e5b3",
           "description": "32/35 passed · 2 failed · 1 blocked"
         },
         {
@@ -1859,7 +1859,7 @@
           "message": "Fix: the sheet tracks its opener with focusin, so an autofocused field or a remount can't replace it; focus returns after inert is removed (TS41)",
           "state": "failure",
           "at": "2026-10-20T09:14:50Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/6e03fb2b-035e-4213-b818-e80d186d7e93",
+          "execution": "6e03fb2b-035e-4213-b818-e80d186d7e93",
           "description": "32/35 passed · 3 failed"
         },
         {
@@ -1867,7 +1867,7 @@
           "message": "TestSprite plans: TS34/TS42 read the calculator's days-used tile (not the landing band) and must not add fresh=1; TS41 checks inert via DOM attributes; push-3 failure evidence",
           "state": "success",
           "at": "2026-10-20T11:58:57Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/2ad24d06-aac8-4aba-914c-a335b121894c",
+          "execution": "2ad24d06-aac8-4aba-914c-a335b121894c",
           "description": "All 35 tests passed"
         }
       ],
@@ -1923,7 +1923,7 @@
           "message": "README: 35 TestSprite tests, 35/35 on the latest run, bugs fixed in #39–#55; commit the portal report and run map to docs/evidence",
           "state": "success",
           "at": "2026-10-20T15:32:05Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/7159e613-a019-4680-9f36-a934cf3c8aa5",
+          "execution": "7159e613-a019-4680-9f36-a934cf3c8aa5",
           "description": "All 35 tests passed"
         }
       ],
@@ -1951,7 +1951,7 @@
           "message": "test(testsprite): TS45-TS52 plans for review bugs (bugs present, red on purpose)",
           "state": "failure",
           "at": "2026-10-20T21:59:21Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/c454e890-8648-4e1b-a723-dadde8f7a5c2",
+          "execution": "c454e890-8648-4e1b-a723-dadde8f7a5c2",
           "description": "34/43 passed · 8 failed · 1 blocked"
         },
         {
@@ -1959,7 +1959,7 @@
           "message": "parity: 412 scenarios against the vendored Commission script, 399/400 accepted inputs match on every printed field",
           "state": "failure",
           "at": "2026-10-20T22:05:16Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b7193abb-d3f1-4e7c-ad94-18f2f642a791",
+          "execution": "b7193abb-d3f1-4e7c-ad94-18f2f642a791",
           "description": "42/43 passed · 1 failed"
         },
         {
@@ -1967,7 +1967,7 @@
           "message": "parity: when the server cannot load the live Commission page as the calculator, use the hash-checked stored copy and say so (caught by TestSprite TS02 on PR #57 and production)",
           "state": "success",
           "at": "2026-10-20T22:12:10Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/0036443d-b4c7-413f-99ee-88a00a001036",
+          "execution": "0036443d-b4c7-413f-99ee-88a00a001036",
           "description": "All 43 tests passed"
         }
       ],
@@ -2019,7 +2019,7 @@
           "message": "Judge review fixes: main SHAs and UTC in README, honest /parity and hero wording, backend portal runs and screenshots, app-defect vs plan/CI split in the loop generators, workflow re-runs, evidence index, static /ees and /letter shell",
           "state": "failure",
           "at": "2026-10-20T23:04:31Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/1f423c16-9271-4530-bbd6-11c6ec403bef",
+          "execution": "1f423c16-9271-4530-bbd6-11c6ec403bef",
           "description": "42/43 passed · 1 failed"
         },
         {
@@ -2027,7 +2027,7 @@
           "message": "Days used is never blank before trips load (caught by TestSprite TS42 on this PR); LOOP note on the TS42 run",
           "state": "success",
           "at": "2026-10-20T23:18:44Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/eba1bf9c-2c9c-4a6a-8711-79b4955b870a",
+          "execution": "eba1bf9c-2c9c-4a6a-8711-79b4955b870a",
           "description": "All 43 tests passed"
         }
       ],
@@ -2063,7 +2063,7 @@
           "message": "Judge review 2: exact 11+1=12 wording, TS42 as a UX loading state (7 app bugs + 1), noscript note, backend TestSprite gate on previews, evidence index on #60",
           "state": "success",
           "at": "2026-10-20T23:46:35Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/d5ce97c4-05b4-4d90-b30f-7b62d893514a",
+          "execution": "d5ce97c4-05b4-4d90-b30f-7b62d893514a",
           "description": "All 43 tests passed"
         }
       ],
@@ -2091,7 +2091,7 @@
           "message": "Backend TestSprite gate waits on Vercel's commit status (deployment_status never fired); ?fresh=1 tells the landing band the saved trips are gone",
           "state": "success",
           "at": "2026-10-21T00:16:10Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/b43fc678-1b47-4f4f-9c4c-cd08eb76daac",
+          "execution": "b43fc678-1b47-4f4f-9c4c-cd08eb76daac",
           "description": "All 43 tests passed"
         }
       ],
@@ -2119,7 +2119,7 @@
           "message": "Final QA fixes, README rewrite and screenshots",
           "state": "failure",
           "at": "2026-10-21T00:50:09Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/e26baa18-c6da-452f-ae44-7f2a9d0a10ff",
+          "execution": "e26baa18-c6da-452f-ae44-7f2a9d0a10ff",
           "description": "41/43 passed · 2 failed"
         },
         {
@@ -2127,7 +2127,7 @@
           "message": "Show the finding code after its label, clearer TS42 plan, new hero shot",
           "state": "failure",
           "at": "2026-10-21T01:10:51Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/9fea50d8-d7b4-48ad-a708-b37aff1d34eb",
+          "execution": "9fea50d8-d7b4-48ad-a708-b37aff1d34eb",
           "description": "42/43 passed · 1 failed"
         }
       ],
@@ -2166,7 +2166,7 @@
           "message": "TestSprite gates: per-test nightly smoke, PR triage comment on red, docs-only skip, judge path",
           "state": "success",
           "at": "2026-10-23T22:45:54Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/575bb9d6-e365-4bb9-a1e2-ac54abca2552",
+          "execution": "575bb9d6-e365-4bb9-a1e2-ac54abca2552",
           "description": "All 43 tests passed"
         }
       ],
@@ -2194,7 +2194,7 @@
           "message": "TS03: stored TestSprite code matches its 7-step plan (stale_code red, then green)",
           "state": "success",
           "at": "2026-10-23T22:58:40Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/74ad0c32-90ed-48bd-aaea-5380447a0320",
+          "execution": "74ad0c32-90ed-48bd-aaea-5380447a0320",
           "description": "All 43 tests passed"
         }
       ],
@@ -2222,7 +2222,7 @@
           "message": "TestSprite suite 54 UI + 30 API, independent reference parity, 5,000-history fuzz, mutation testing 94.47%, evidence screenshots",
           "state": "failure",
           "at": "2026-10-24T01:00:33Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/22252c6d-540e-4963-9f23-f9cfc648cd18",
+          "execution": "22252c6d-540e-4963-9f23-f9cfc648cd18",
           "description": "52/54 passed · 1 failed · 1 blocked"
         },
         {
@@ -2230,7 +2230,7 @@
           "message": "TS39 sets and checks the 390 px phone viewport; README states the mutation score as combined",
           "state": "failure",
           "at": "2026-10-24T01:10:48Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/2697eafd-c8d5-4b44-9c46-1fdf64e16ee8",
+          "execution": "2697eafd-c8d5-4b44-9c46-1fdf64e16ee8",
           "description": "52/54 passed · 1 failed · 1 blocked"
         },
         {
@@ -2238,7 +2238,7 @@
           "message": "TestSprite: TS64 replaces TS62 in the App suite, TS62 runs nightly from a CLI-only phone project, TS42 waits for a number and asserts 0",
           "state": "success",
           "at": "2026-10-24T01:21:50Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/87678f09-2ea3-40ec-bb9c-485ddd4e93aa",
+          "execution": "87678f09-2ea3-40ec-bb9c-485ddd4e93aa",
           "description": "All 54 tests passed"
         }
       ],
@@ -2282,7 +2282,7 @@
           "message": "Final numbers: 54/54 UI and 30/30 API from PR #68 on /proof, the home page and README, red-then-green recounted (13), evidence screenshots",
           "state": "failure",
           "at": "2026-10-24T01:39:32Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/bf116231-929e-44c5-a8c5-8e6cbe123ad8",
+          "execution": "bf116231-929e-44c5-a8c5-8e6cbe123ad8",
           "description": "52/54 passed · 2 failed"
         },
         {
@@ -2290,7 +2290,7 @@
           "message": "TS39 to the CLI-only phone project (nightly), TS65 hand-worked parity cases in its App place, TS42 reads the latest legal exit date",
           "state": "success",
           "at": "2026-10-24T01:51:18Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/9a4573f7-0af4-4d09-a068-6981a7003295",
+          "execution": "9a4573f7-0af4-4d09-a068-6981a7003295",
           "description": "All 54 tests passed"
         }
       ],
@@ -2311,7 +2311,7 @@
           "message": "Fail-closed TestSprite N/N gate (required check 7), defect ledger, 399/400 explained, legal articles on /proof",
           "state": "success",
           "at": "2026-10-25T01:07:45Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/81fda154-23fe-4cb8-ab2d-824ba9f69fc7",
+          "execution": "81fda154-23fe-4cb8-ab2d-824ba9f69fc7",
           "description": "All 54 tests passed"
         },
         {
@@ -2319,7 +2319,7 @@
           "message": "TS57 name: 12 inputs are outside the calculator, not one",
           "state": "success",
           "at": "2026-10-25T01:16:21Z",
-          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/8763cd0d-cd1a-4ffe-8e1b-2cb4fe1c1b40",
+          "execution": "8763cd0d-cd1a-4ffe-8e1b-2cb4fe1c1b40",
           "description": "All 54 tests passed"
         }
       ],

@@ -18,7 +18,7 @@
     },
     {
       "type": "assertion",
-      "description": "In the calculator's status panel (data-testid=status-panel), read the 'Latest legal exit' tile (data-testid=latest-exit): it is exactly \"2024-11-23\" and the line under it reads \"23 November 2024\" (the 2024-02-29 day still counts on day 180). Do NOT use the landing band or the ring's rolling digits"
+      "description": "In the calculator's status panel (data-testid=status-panel), read the 'Latest legal exit' tile: the element data-testid=latest-exit has the text exactly \"2024-11-23\" and the element data-testid=latest-exit-hint, directly under it, has the text exactly \"23 November 2024\" (the 2024-02-29 day still counts on day 180). Read these two elements' text content; do not search the whole page, the landing band or the ring's rolling digits"
     },
     {
       "type": "action",
@@ -26,7 +26,7 @@
     },
     {
       "type": "assertion",
-      "description": "Wait until the 'Latest legal exit' tile (data-testid=latest-exit inside data-testid=status-panel) shows a date. It is exactly \"2024-11-24\" and the line under it reads \"24 November 2024\": the 2024-02-29 day has left the 180-day window on day 181, so the latest legal exit moves one day later. The trip row 2024-02-29 to 2024-02-29 is still listed"
+      "description": "Wait until data-testid=latest-exit inside data-testid=status-panel shows a date, then read the text content of two elements: data-testid=latest-exit is exactly \"2024-11-24\" and data-testid=latest-exit-hint is exactly \"24 November 2024\" (the 2024-02-29 day has left the 180-day window on day 181, so the latest legal exit moves one day later). Read these two elements, do not search the whole page. The trip row (data-testid=trip-row) 2024-02-29 to 2024-02-29 is still listed"
     }
   ]
 }

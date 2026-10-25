@@ -18,7 +18,7 @@
     },
     {
       "type": "assertion",
-      "description": "Check the DOM attributes (not the appearance): document.getElementById('calculator').closest('[inert]') is an element (the page section wrapping the calculator carries the inert attribute), and document.querySelector('[data-testid=trip-sheet]').closest('[inert]') is null"
+      "description": "Run this one JavaScript expression in the page and check that it returns the string \"true,true\": [document.getElementById('calculator').closest('[inert]') !== null, document.querySelector('[data-testid=trip-sheet]').closest('[inert]') === null].join(). (The section around the calculator is inert, the dialog is not. Check attributes only, do not walk the DOM tree by hand.)"
     },
     {
       "type": "action",
@@ -26,7 +26,7 @@
     },
     {
       "type": "assertion",
-      "description": "The trip sheet is closed; in the DOM, document.querySelectorAll('[inert]').length is 0; and document.activeElement is the add trip button (its data-testid is trip-add)"
+      "description": "Run this one JavaScript expression in the page and check that it returns the string \"true,0,trip-add\": [document.querySelector('[data-testid=trip-sheet]') === null, document.querySelectorAll('[inert]').length, document.activeElement.getAttribute('data-testid')].join() (the sheet is closed, nothing is inert, and focus is back on the add trip button)"
     }
   ]
 }

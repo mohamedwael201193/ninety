@@ -11,6 +11,11 @@ Fails closed on: no status yet after 45 minutes, a status not from `testsprite[b
 
 Code: [`scripts/ci/nn-gate.mjs`](../scripts/ci/nn-gate.mjs), job `gate` in [`testsprite-backend.yml`](../.github/workflows/testsprite-backend.yml). Tests: [`nn-gate.test.ts`](../src/lib/ci/nn-gate.test.ts).
 
+## On the record
+
+- [PR #70](https://github.com/mohamedwael201193/ninety/pull/70): `TestSprite V3` "All 54 tests passed" and backend 30/30 on `c62fdd5`, gate green, merged as `d787b01` ([checks](evidence/pr70/pr70-checks.png), [Actions run](evidence/pr70/pr70-actions-gate.png), [branch protection, 7 checks](evidence/pr70/branch-protection-7.png), [no bypass](evidence/pr70/branch-protection-no-bypass.png)).
+- [PR #71](https://github.com/mohamedwael201193/ninety/pull/71) first commit `1eb9044`: `TestSprite V3` `52/54 passed · 1 failed · 1 blocked`; every other check was green, the gate failed and the merge was blocked ([screenshot](evidence/pr70/pr71-gate-red.png)).
+
 ## What we found first: how `TestSprite V3` reports on this repo
 
 - It is a **commit status**, not a check run. `GET /repos/mohamedwael201193/ninety/commits/<sha>/check-runs` lists no TestSprite result (the one TestSprite check run on record, on #70's first commit `6a03f82`, is "Not enough credits", posted instead of a run); the count is only in the status `description` ([PR #57 red commit dae0081, public JSON](https://api.github.com/repos/mohamedwael201193/ninety/commits/dae00815749666ebcdce147abd640bb47e260eac/statuses)).

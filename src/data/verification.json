@@ -2,13 +2,65 @@
   "_note": "The verified numbers shown on / and /proof. Each links its source. verification.test.ts checks them against test-ids.json, backend-ids.json, loop-iterations.json and the workflows, so they cannot drift.",
   "asOf": "PR #70, merged 2026-10-25 as d787b01",
   "items": [
-    { "id": "ui", "value": "54/54", "label": "TestSprite end-to-end tests passed on the PR preview, a required check", "href": "https://github.com/mohamedwael201193/ninety/pull/70/checks" },
-    { "id": "api", "value": "30/30", "label": "TestSprite API and MCP tests passed, a required check", "href": "https://github.com/mohamedwael201193/ninety/actions/runs/40149772752" },
-    { "id": "checks", "value": "7", "label": "required checks before anything merges into main, admins included, one a fail-closed TestSprite N/N gate", "href": "https://github.com/mohamedwael201193/ninety/blob/main/docs/NN-GATE.md" },
-    { "id": "redgreen", "value": "14", "label": "pull requests that went red on TestSprite, then green (6 app defects, 1 UX, 7 test or CI)", "href": "https://github.com/mohamedwael201193/ninety/blob/main/docs/DEFECTS.md" },
-    { "id": "parity", "value": "14/14", "label": "scenarios match the European Commission calculator", "href": "/parity" },
-    { "id": "fuzz", "value": "5,000", "label": "random histories against the Commission script on every PR (20,000 nightly)", "href": "https://github.com/mohamedwael201193/ninety/blob/main/src/lib/schengen/differential.fuzz.test.ts" },
-    { "id": "reference", "value": "1,200", "label": "cases against an independent reference of the rule on every PR (20,000 nightly)", "href": "https://github.com/mohamedwael201193/ninety/blob/main/src/lib/schengen/reference-rule.test.ts" },
-    { "id": "mutation", "value": "94.47%", "label": "engine mutation score, combined: a full run (87.44%), then a targeted rerun", "href": "https://github.com/mohamedwael201193/ninety/blob/main/docs/evidence/mutation/summary.json" }
+    {
+      "id": "ui",
+      "value": "54/54",
+      "label": "TestSprite end-to-end tests passed on the PR preview, a required check",
+      "href": "https://github.com/mohamedwael201193/ninety/pull/70/checks"
+    },
+    {
+      "id": "api",
+      "value": "30/30",
+      "label": "TestSprite API and MCP tests passed, a required check",
+      "href": "https://github.com/mohamedwael201193/ninety/actions/runs/40149772752"
+    },
+    {
+      "id": "checks",
+      "value": "7",
+      "label": "required checks before anything merges into main, admins included, one a fail-closed TestSprite N/N gate",
+      "href": "https://github.com/mohamedwael201193/ninety/blob/main/docs/NN-GATE.md"
+    },
+    {
+      "id": "redgreen",
+      "value": "14",
+      "label": "pull requests that went red on TestSprite, then green (6 app defects, 1 UX, 7 test or CI)",
+      "href": "https://github.com/mohamedwael201193/ninety/blob/main/docs/DEFECTS.md"
+    },
+    {
+      "id": "parity",
+      "value": "14/14",
+      "label": "scenarios match the European Commission calculator",
+      "href": "/parity"
+    },
+    {
+      "id": "deep",
+      "value": "399/400",
+      "label": "stored inputs match the Commission script on every printed field (the one difference is documented)",
+      "href": "https://github.com/mohamedwael201193/ninety/blob/main/docs/PARITY-399.md"
+    },
+    {
+      "id": "fuzz",
+      "value": "5,000",
+      "label": "random histories against the Commission script on every PR (20,000 nightly)",
+      "href": "https://github.com/mohamedwael201193/ninety/blob/main/src/lib/schengen/differential.fuzz.test.ts"
+    },
+    {
+      "id": "reference",
+      "value": "1,200",
+      "label": "cases against an independent reference of the rule on every PR (20,000 nightly)",
+      "href": "https://github.com/mohamedwael201193/ninety/blob/main/src/lib/schengen/reference-rule.test.ts"
+    },
+    {
+      "id": "mutation",
+      "value": "94.47%",
+      "label": "engine mutation score, combined: a full run (87.44%), then a targeted rerun",
+      "href": "https://github.com/mohamedwael201193/ninety/blob/main/docs/evidence/mutation/summary.json"
+    },
+    {
+      "id": "vitest",
+      "value": "408",
+      "label": "Vitest unit, property and fuzz tests passing on every PR (3 more run only against the live Commission page)",
+      "href": "https://github.com/mohamedwael201193/ninety#running-locally"
+    }
   ]
 }

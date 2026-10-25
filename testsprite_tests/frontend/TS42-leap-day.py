@@ -28,13 +28,13 @@ async def run_test():
         await tid("trip-entry").fill("2024-02-29")
         await tid("trip-exit").fill("2024-02-29")
         await tid("trip-save").click()
-        await expect(exit_).to_contain_text("2024-11-23")
-        await expect(exit_.locator("xpath=..")).to_contain_text("23 November 2024")
+        await expect(exit_).to_have_text("2024-11-23")
+        await expect(tid("status-panel").get_by_test_id("latest-exit-hint")).to_have_text("23 November 2024")
 
         await page.goto(base + "/?today=2024-08-27")
         assert "fresh=1" not in page.url, page.url
-        await expect(exit_).to_contain_text("2024-11-24")
-        await expect(exit_.locator("xpath=..")).to_contain_text("24 November 2024")
+        await expect(exit_).to_have_text("2024-11-24")
+        await expect(tid("status-panel").get_by_test_id("latest-exit-hint")).to_have_text("24 November 2024")
         rows = tid("trip-row")
         await expect(rows).to_have_count(1)
         await expect(rows.nth(0)).to_contain_text("2024-02-29")

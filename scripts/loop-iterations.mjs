@@ -43,7 +43,7 @@ for (const pr of pulls) {
     const seen = new Map();
     for (const s of statuses) { const key = s.target_url ?? `${s.id}`; if (!seen.has(key)) seen.set(key, s); }
     for (const s of [...seen.values()].reverse()) {
-      checks.push({ sha: c.sha, message: c.commit.message.split("\n")[0], state: s.state, at: s.created_at, execution: s.target_url, description: s.description });
+      checks.push({ sha: c.sha, message: c.commit.message.split("\n")[0], state: s.state, at: s.created_at, execution: s.target_url ? s.target_url.split("/").pop() : null, description: s.description });
     }
   }
   const executions = loop.executions.filter((e) => e.pr === pr.number);
@@ -76,7 +76,7 @@ const short = (sha) => `[\`${sha.slice(0, 7)}\`](${WEB}/commit/${sha})`;
 const lines = [
   "# The loop, iteration by iteration",
   "",
-  `Generated ${new Date().toISOString()} by \`scripts/loop-iterations.mjs\`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status, which links the TestSprite execution. Test results come from TestSprite's run history (\`src/data/loop.json\`, see [LOOP.md](LOOP.md)). Do not edit by hand.`,
+  `Generated ${new Date().toISOString()} by \`scripts/loop-iterations.mjs\`. One iteration = one merged pull request, in merge order. Links come from the GitHub API: the PR, its commits, and each commit's "TestSprite V3" status (public JSON; the execution id is the last part of the status target URL, which opens only in the project owner's TestSprite account). Test results come from TestSprite's run history (\`src/data/loop.json\`, see [LOOP.md](LOOP.md)). Do not edit by hand.`,
   "",
   "Screenshots of the runs and the merge gate: [docs/evidence/testsprite](docs/evidence/testsprite/README.md).",
   "",
@@ -88,7 +88,7 @@ for (const it of iterations) {
   lines.push(`Merged ${it.mergedAt.replace("T", " ").slice(0, 16)} UTC as ${short(it.mergeCommit)}.`, "");
   if (it.checks.length) {
     lines.push("| Commit | TestSprite V3 | Execution |", "|---|---|---|");
-    for (const c of it.checks) lines.push(`| ${short(c.sha)} ${c.message.replace(/\|/g, "/").slice(0, 70)} | ${c.state}${c.description ? `: ${c.description.replace(/\|/g, "/")}` : ""} | ${c.execution ? `[run](${c.execution})` : "no execution (the run did not start)"} |`);
+    for (const c of it.checks) lines.push(`| ${short(c.sha)} ${c.message.replace(/\|/g, "/").slice(0, 70)} | ${c.state}${c.description ? `: ${c.description.replace(/\|/g, "/")}` : ""} | [status JSON](${API}/commits/${c.sha}/statuses)${c.execution ? ` · execution \`${c.execution.slice(0, 8)}\`` : " · no execution (the run did not start)"} |`);
     lines.push("");
   } else lines.push("No TestSprite V3 status on this PR's commits.", "");
   const red = it.executions.filter((e) => e.failed.length);
