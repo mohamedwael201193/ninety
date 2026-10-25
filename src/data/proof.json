@@ -1296,7 +1296,7 @@
     {
       "id": "TS57",
       "plan": "TS57-deep-parity",
-      "name": "/parity shows the deep parity score 399/400 and names the one scenario outside the calculator",
+      "name": "/parity shows the deep parity score 399/400 and says 12 inputs are outside the calculator, naming kom-1-4",
       "testId": "b2730c77-3076-41b7-a23a-da462c5c0497",
       "latest": {
         "verdict": "passed",
