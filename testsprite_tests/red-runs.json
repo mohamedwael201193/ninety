@@ -81,5 +81,9 @@
   "68": {
     "kind": "plan-ci",
     "why": "TS18's healed code had an older preview URL hardcoded and TS42's agent read a blank 'Days used' that the page never shows (both fixed in the test: stored code on the run URL, a wait for a number then exactly 0); TS62 was blocked because the GitHub App browser cannot be set to phone width (moved to a CLI-only project)"
+  },
+  "69": {
+    "kind": "plan-ci",
+    "why": "TS39 needs a 390 px viewport the App browser does not set, so it moved to the phone-width CLI project; TS42 now reads the latest legal exit date instead of a fixed one. No app code changed"
   }
 }

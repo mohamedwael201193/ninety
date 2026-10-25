@@ -51,7 +51,7 @@ export function ProofMatrix() {
         </div>
         <div className="card-soft p-4 text-sm">
           <h2 className="mb-1 text-base font-medium">Defect ledger</h2>
-          <p>All 13 pull requests that went red on TestSprite, then green, with the red and green status for each commit: 6 with app defects (7 real bugs), 1 UX, 6 test plan or CI. <a className="underline underline-offset-4" href={`${REPO}/blob/main/docs/DEFECTS.md`}>docs/DEFECTS.md</a>.</p>
+          <p>All 14 pull requests that went red on TestSprite, then green, with the red and green status for each commit: 6 with app defects (7 real bugs), 1 UX, 7 test plan or CI. <a className="underline underline-offset-4" href={`${REPO}/blob/main/docs/DEFECTS.md`}>docs/DEFECTS.md</a>.</p>
         </div>
         <div data-testid="proof-deep-diff" className="card-soft p-4 text-sm">
           <h2 className="mb-1 text-base font-medium">Deep parity 399/400: the one difference</h2>

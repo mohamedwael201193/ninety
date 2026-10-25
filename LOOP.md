@@ -6,7 +6,7 @@ Counts cover the tests listed in `testsprite_tests/test-ids.json`. Runs of tests
 
 ## Red, then green
 
-Red, green not yet: #63. 15 PRs have a red execution, then a green one, in the run history: 6 app defects (#8, #14, #39, #41, #55, #57), 1 UX loading state, not a wrong number (#60), 7 test plan or CI (#18, #32, #36, #37, #38, #43, #68), 1 blocked (#44). 12 of these 15 history rows also failed on the GitHub check; #37, #38, #44 did not. Adding #22, red on the GitHub check but missing from this history because its failing test was later replaced, gives 13: the red-then-green count in LOOP-ITERATIONS.md and the README.
+Red, green not yet: #63. 15 PRs have a red execution, then a green one, in the run history: 6 app defects (#8, #14, #39, #41, #55, #57), 1 UX loading state, not a wrong number (#60), 7 test plan or CI (#18, #32, #36, #37, #38, #43, #68), 1 blocked (#44). 12 of these 15 history rows also failed on the GitHub check; #37, #38, #44 did not. Adding #22, red on the GitHub check but missing from this history because its failing test was later replaced, and #69 (test plan, 52/54 on the GitHub check, then 54/54), which ran after this history was last read, gives 14: the red-then-green count in LOOP-ITERATIONS.md and the README.
 
 The two counts differ for a reason: the "Red run" fraction is from the run history and counts only the tests still in `test-ids.json`; the "GitHub check" column quotes the PR's `TestSprite V3` status word for word, which counted every test the run had. The README quotes the GitHub check.
 

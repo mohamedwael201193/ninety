@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T01:30:57.064Z",
+  "generatedAt": "2026-10-25T01:24:43.530Z",
   "source": "GitHub API + src/data/loop.json",
   "iterations": [
     {
@@ -2170,7 +2170,14 @@
           "description": "All 43 tests passed"
         }
       ],
-      "executions": [],
+      "executions": [
+        {
+          "start": "2026-10-23T22:43:47.449Z",
+          "passed": 43,
+          "tests": 43,
+          "failed": []
+        }
+      ],
       "redThenGreen": false,
       "kind": null,
       "stoppedThenGreen": false
@@ -2191,7 +2198,14 @@
           "description": "All 43 tests passed"
         }
       ],
-      "executions": [],
+      "executions": [
+        {
+          "start": "2026-10-23T22:55:27.008Z",
+          "passed": 43,
+          "tests": 43,
+          "failed": []
+        }
+      ],
       "redThenGreen": false,
       "kind": null,
       "stoppedThenGreen": false
@@ -2228,9 +2242,90 @@
           "description": "All 54 tests passed"
         }
       ],
+      "executions": [
+        {
+          "start": "2026-10-24T00:57:35.597Z",
+          "passed": 52,
+          "tests": 53,
+          "failed": [
+            "TS18"
+          ]
+        },
+        {
+          "start": "2026-10-24T01:07:28.886Z",
+          "passed": 52,
+          "tests": 53,
+          "failed": [
+            "TS42"
+          ]
+        },
+        {
+          "start": "2026-10-24T01:18:54.592Z",
+          "passed": 54,
+          "tests": 54,
+          "failed": []
+        }
+      ],
+      "redThenGreen": true,
+      "kind": "plan-ci",
+      "stoppedThenGreen": false
+    },
+    {
+      "n": 63,
+      "pr": 69,
+      "title": "Final numbers: 54/54 UI, 30/30 API, 13 red-then-green, on README, /proof and the home page",
+      "mergedAt": "2026-10-24T01:51:31Z",
+      "mergeCommit": "29390bcddf90c8a925bd27893a91bc87a0dd6628",
+      "checks": [
+        {
+          "sha": "73013f6a76ba537d3554390fd9bf8c44baca69d0",
+          "message": "Final numbers: 54/54 UI and 30/30 API from PR #68 on /proof, the home page and README, red-then-green recounted (13), evidence screenshots",
+          "state": "failure",
+          "at": "2026-10-24T01:39:32Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/bf116231-929e-44c5-a8c5-8e6cbe123ad8",
+          "description": "52/54 passed · 2 failed"
+        },
+        {
+          "sha": "1e49ceaea091e04ed19790b77e145084da67b953",
+          "message": "TS39 to the CLI-only phone project (nightly), TS65 hand-worked parity cases in its App place, TS42 reads the latest legal exit date",
+          "state": "success",
+          "at": "2026-10-24T01:51:18Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/9a4573f7-0af4-4d09-a068-6981a7003295",
+          "description": "All 54 tests passed"
+        }
+      ],
       "executions": [],
       "redThenGreen": true,
       "kind": "plan-ci",
+      "stoppedThenGreen": false
+    },
+    {
+      "n": 64,
+      "pr": 70,
+      "title": "Fail-closed TestSprite N/N gate (required check 7), defect ledger, 399/400 explained, legal articles on /proof",
+      "mergedAt": "2026-10-25T01:17:25Z",
+      "mergeCommit": "d787b01a438bb46e7094a5b38f0128fe4a3cb842",
+      "checks": [
+        {
+          "sha": "6a03f82258d6fdd74284f143822d6b31bebf8112",
+          "message": "Fail-closed TestSprite N/N gate (required check 7), defect ledger, 399/400 explained, legal articles on /proof",
+          "state": "success",
+          "at": "2026-10-25T01:07:45Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/81fda154-23fe-4cb8-ab2d-824ba9f69fc7",
+          "description": "All 54 tests passed"
+        },
+        {
+          "sha": "c62fdd521760e445fec4a6d107fab1c6430ae19b",
+          "message": "TS57 name: 12 inputs are outside the calculator, not one",
+          "state": "success",
+          "at": "2026-10-25T01:16:21Z",
+          "execution": "https://www.testsprite.com/dashboard-v3/o/1b474b7a-30a8-51f3-9b61-fd8a3c733650/projects/bd039118-0c25-4707-b018-b25619a37fce/execution/8763cd0d-cd1a-4ffe-8e1b-2cb4fe1c1b40",
+          "description": "All 54 tests passed"
+        }
+      ],
+      "executions": [],
+      "redThenGreen": false,
+      "kind": null,
       "stoppedThenGreen": false
     }
   ]
